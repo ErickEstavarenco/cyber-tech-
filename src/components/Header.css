@@ -1,6 +1,6 @@
 .site-header {
     width: 100%;
-    background-color: #bab8b864;
+    background-color: #6361f8;
     border-bottom: 1px solid #e0e0e0;
     padding: 1rem 0;
 }
@@ -18,7 +18,7 @@
 .logo {
     font-size: 1.5rem;
     font-weight: 900;
-    color: #333;
+    color: #ffffff;
     text-decoration: none;
 }
 
@@ -26,11 +26,11 @@
     margin-left: 1.5rem;
     font-size: 1rem;
     font-weight: 800;
-    color: #555;
+    color: #ffffff;
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 .main-nav a:hover {
-    color: #007bff;
+    color: #85a2f1;
 }
