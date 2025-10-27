@@ -19,7 +19,7 @@ function App() {
           {/* Rotas principais */}
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/cadastro" element={<Cadastro />} /> {/* <-- ADICIONE ESTA LINHA */}
+          <Route path="/cadastro" element={<Cadastro />} />
 
           {/* Rotas de placeholder para o menu funcionar */}
           <Route path="/blog" element={<h1>Página do Blog</h1>} />
