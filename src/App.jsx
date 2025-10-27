@@ -4,8 +4,8 @@ import { Routes, Route } from 'react-router-dom';
 // 1. Importe os componentes
 import Header from './components/Header';
 import Home from './pages/Home/Home'; 
-import Login from './pages/Login/Login'; 
-import Cadastro from './pages/Cadastro/Cadastro'; // <-- ADICIONE ESTA LINHA
+import Login from './pages/Login/Login'; // <-- IMPORTAÇÃO CORRETA DA NOVA PASTA
+import Cadastro from './pages/Cadastro/Cadastro'; 
 
 // import Footer from './components/Footer'; 
 
@@ -18,7 +18,7 @@ function App() {
         <Routes>
           {/* Rotas principais */}
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login />} /> {/* <-- ROTA AGORA APONTA PARA O COMPONENTE Login.jsx */}
           <Route path="/cadastro" element={<Cadastro />} />
 
           {/* Rotas de placeholder para o menu funcionar */}
