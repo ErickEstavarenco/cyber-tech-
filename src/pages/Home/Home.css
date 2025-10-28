@@ -2,24 +2,26 @@
     margin-bottom: 3rem;
 }
 
+/* 1. ESTILOS DE TÍTULO ATUALIZADOS */
 .section-title {
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 0.25rem;
+    color: #003380; /* Cor do título mais escura */
 }
 
 .section-subtitle {
     font-size: 1.125rem;
-    color: #555;
+    color: #0040a0; /* Cor do subtítulo mais escura */
     margin-bottom: 1.5rem;
 }
+
+/* 2. O RESTO DO ARQUIVO ORIGINAL (QUE FOI APAGADO) */
 
 /* Card Amarelo (Blog) */
 .blog-card {
     background-color: #fffbeb;
-    /* Amarelo claro */
     border: 1px solid #fde68a;
-    /* Borda amarela */
     border-radius: 8px;
     padding: 1.5rem;
     display: flex;
@@ -32,7 +34,6 @@
 
 .icon-placeholder {
     font-size: 3rem;
-    /* Tamanho do ícone */
     display: block;
     background-color: #fef3c7;
     padding: 0.5rem;
@@ -52,7 +53,6 @@
 
 .card-button {
     background-color: #60a5fa;
-    /* Azul */
     color: #fff;
     padding: 0.5rem 1rem;
     border-radius: 6px;
@@ -63,14 +63,12 @@
 
 .card-button:hover {
     background-color: #3b82f6;
-    /* Azul mais escuro */
 }
 
 /* Grid de Desafios */
 .challenge-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    /* 3 colunas */
     gap: 1.5rem;
 }
 
@@ -101,8 +99,8 @@
 
 /* Cores dos Cards de Desafio (do JSON) */
 .challenge-card.blue {
-    background-color: #fffbeb;
-    border-color: #fde68a;
+    background-color: #fff7ed;
+   border-color: #fed7aa;
 }
 
 .challenge-card.orange {
