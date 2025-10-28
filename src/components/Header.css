@@ -1,6 +1,6 @@
 .site-header {
     width: 100%;
-    background-color: #6361f8;
+    background: linear-gradient(to top, rgb(80, 80, 247), rgb(58, 58, 252), rgb(13, 13, 252));
     border-bottom: 1px solid #e0e0e0;
     padding: 1rem 0;
 }
