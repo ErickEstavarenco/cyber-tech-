@@ -2,16 +2,19 @@
   width: 100%;
   padding: 1rem 0;
   
-  /* 1. Seu gradiente azul */
-  background-image: linear-gradient(to right, #3b82f6, #1d4ed8); 
+  /* 1. Remove o gradiente próprio */
+  background: none; 
+  
+  /* 2. Remove a sombra */
+  box-shadow: none;
+  
+  /* 3. Adiciona uma linha sutil para separar */
+  border-bottom: 1px solid #3b82f6; /* Azul claro do gradiente */
   
   color: white; 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-bottom: none;
 }
 
 .header-content {
-  /* Estilos originais que já tínhamos */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,28 +23,21 @@
 }
 
 .logo {
-  /* Estilos originais que já tínhamos */
   font-size: 1.5rem;
   font-weight: 900; 
-  text-decoration: none;
-  
-  /* 2. Cor do logo para branco */
   color: #ffffff; 
+  text-decoration: none;
 }
 
 .main-nav a {
-  /* Estilos originais que já tínhamos */
   margin-left: 1.5rem;
   font-size: 1rem;
   font-weight: 800;
+  color: #e0e7ff; 
   text-decoration: none;
   transition: color 0.2s ease;
-  
-  /* 3. Cor dos links para branco suave */
-  color: #e0e7ff; 
 }
 
 .main-nav a:hover {
-  /* 4. Cor do hover branco total */
   color: #ffffff; 
 }

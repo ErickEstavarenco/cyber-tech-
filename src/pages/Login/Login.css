@@ -1,12 +1,16 @@
 /* src/pages/Login/Login.css */
 
+/* src/pages/Login/Login.css */
+
 .login-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 90vh; /* Ocupa quase a tela toda, centralizando */
-    background-color: #f8f9fa; /* Um cinza bem claro, como na Home */
-  }
+    min-height: 90vh; 
+    /* background-color: #f8f9fa;  <-- REMOVA ESTA LINHA */
+}
+
+/* ... (o resto do arquivo continua igual) ... */
   
   .login-card {
     background: #fff7ed;

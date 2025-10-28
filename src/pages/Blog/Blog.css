@@ -8,16 +8,16 @@
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
+  color: #ffffff; /* Cor do título BRANCA */
 }
 
 .page-subtitle {
   font-size: 1.25rem;
-  color: #666;
+  color: #e0e7ff; /* Cor do subtítulo branco-azulado */
   margin-bottom: 2.5rem;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #3b82f6; /* Borda azul mais clara */
   padding-bottom: 1.5rem;
 }
-
 /* Estilo do Card do Post */
 .post-card {
   background-color: #ffffff;
