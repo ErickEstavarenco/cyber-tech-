@@ -1,46 +1,19 @@
 // src/pages/Login/Login.jsx
 
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import './Login.css';
-
-// CORREÇÃO AQUI 👇👇👇 (caminho para a raiz do projeto)
-import { auth } from '../../../FirebaseConfig.js';
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { Link } from 'react-router-dom'; // Mantemos o Link para o cadastro
+import './Login.css'; // O CSS continua o mesmo
 
 const Login = () => {
+  // Estados para guardar os valores dos inputs
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const navigate = useNavigate();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(null);
-    setLoading(true);
-
-    try {
-      // Tenta fazer o login com o Firebase Auth
-      await signInWithEmailAndPassword(auth, email, password);
-      
-      setLoading(false);
-      
-      // Redireciona para a home/dashboard após o login
-      navigate('/'); 
-
-    } catch (err) {
-      setLoading(false);
-      
-      if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
-        setError('E-mail ou senha inválidos.');
-      } else {
-        setError('Ocorreu um erro ao tentar fazer login.');
-      }
-      console.error("Erro no login:", err);
-    }
+  // Função chamada ao enviar o formulário (agora só impede o refresh)
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Impede o recarregamento da página
+    console.log('Tentativa de login com:', { email, password });
+    // Futuramente, a lógica do Firebase virá aqui
   };
 
   return (
@@ -60,7 +33,6 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="seu.email@exemplo.com"
               required
-              disabled={loading}
             />
           </div>
 
@@ -73,18 +45,16 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Sua senha"
               required
-              disabled={loading}
             />
           </div>
 
-          {error && <p className="error-message">{error}</p>}
+          {/* O espaço para a mensagem de erro pode ficar aqui,
+              ou pode ser removido por enquanto.
+              <p className="error-message">Mensagem de erro</p> 
+          */}
 
-          <button 
-            type="submit" 
-            className="login-button" 
-            disabled={loading}
-          >
-            {loading ? 'Entrando...' : 'Entrar'}
+          <button type="submit" className="login-button">
+            Entrar
           </button>
 
         </form>
@@ -97,4 +67,5 @@ const Login = () => {
     </div>
   );
 };
+
 export default Login;

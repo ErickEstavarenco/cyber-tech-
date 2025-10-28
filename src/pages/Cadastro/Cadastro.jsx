@@ -1,65 +1,32 @@
 // src/pages/Cadastro/Cadastro.jsx
 
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import '../Login/Login.css'; // Reutilizando o CSS
-
-// CORREÇÃO AQUI 👇👇👇 (caminho para a raiz do projeto)
-import { auth, db } from '../../../FirebaseConfig.js'; 
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { Link } from 'react-router-dom';
+import '../Login/Login.css'; // <-- IMPORTANTE: Reutilizando o CSS do Login
 
 const Cadastro = () => {
+  // Estados para guardar os valores dos inputs
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  // Função chamada ao enviar o formulário
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Impede o recarregamento da página
 
-  const navigate = useNavigate();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(null); 
-
+    // Lógica de validação simples (apenas visual por enquanto)
     if (password !== confirmPassword) {
-      setError("As senhas não conferem!");
+      alert("As senhas não conferem!"); // Usamos 'alert' por simplicidade
       return;
     }
 
-    setLoading(true);
-
-    try {
-      // ETAPA 1: Criar o usuário na Autenticação
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-
-      // ETAPA 2: Salvar os dados adicionais no Firestore
-      const userDocRef = doc(db, "users", user.uid);
-
-      await setDoc(userDocRef, {
-        uid: user.uid,
-        name: nome,
-        email: email,
-        role: "student",
-        createdAt: serverTimestamp() 
-      });
-
-      setLoading(false);
-      
-      // ETAPA 3: Redirecionar o usuário
-      navigate('/'); 
-
-    } catch (err) {
-      setLoading(false);
-      setError(err.message);
-      console.error("Erro no cadastro:", err);
-    }
+    console.log('Tentativa de cadastro com:', { nome, email, password });
+    // Futuramente, a lógica do Firebase virá aqui
   };
 
   return (
+    // Reutilizamos as classes do Login para manter o padrão
     <div className="login-container"> 
       <div className="login-card">
         <h2>Crie sua conta</h2>
@@ -76,7 +43,6 @@ const Cadastro = () => {
               onChange={(e) => setNome(e.target.value)}
               placeholder="Seu nome"
               required
-              disabled={loading}
             />
           </div>
           
@@ -89,7 +55,6 @@ const Cadastro = () => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="seu.email@exemplo.com"
               required
-              disabled={loading}
             />
           </div>
 
@@ -102,7 +67,6 @@ const Cadastro = () => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Crie uma senha forte"
               required
-              disabled={loading}
             />
           </div>
 
@@ -115,18 +79,11 @@ const Cadastro = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Repita a senha"
               required
-              disabled={loading}
             />
           </div>
 
-          {error && <p className="error-message">{error}</p>}
-
-          <button 
-            type="submit" 
-            className="login-button" 
-            disabled={loading}
-          >
-            {loading ? 'Cadastrando...' : 'Cadastrar'}
+          <button type="submit" className="login-button">
+            Cadastrar
           </button>
 
         </form>
