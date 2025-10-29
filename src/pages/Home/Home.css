@@ -1,116 +1,211 @@
-.home-section {
-  margin-bottom: 3rem;
+/* Estilos para o novo design da Home */
+:root {
+    --color-primary: #1a73e8; 
+    --color-dark-blue: #1A237E; 
+    --color-light-yellow: #fffde7; 
+    --color-text-light: #f0f0f0;
+    --color-text-dark: #333;
+
+    /* Cores pálidas (da imagem de referência) */
+    --color-text-pale-blue: #c0ccff; 
+    --color-text-bright: #ffffff;
 }
 
-/* 1. TÍTULOS ATUALIZADOS PARA O FUNDO ESCURO */
-.section-title {
-  font-size: 2rem;
+/* --- Seção 1: Header da Home (Banner) --- */
+.home-header {
+    color: white;
+    
+    /* MUDANÇA: Remove padding-top alto. O .container em globals.css já empurrou o conteúdo. */
+    padding-top: 15px; /* Espaço interno da faixa do topo */
+    padding-bottom: 20px; 
+    
+    /* MUDANÇA: Espaço mínimo abaixo do banner */
+    margin-bottom: 25px; 
+}
+
+/* Estilo "BEM VINDO!" */
+.welcome-text {
+  font-size: 0.9rem; 
   font-weight: 700;
-  margin-bottom: 0.25rem;
-  color: #ffffff; /* Cor do título BRANCA */
+  color: var(--color-text-pale-blue);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 6px; /* Mais compacto */
 }
 
-.section-subtitle {
-  font-size: 1.125rem;
-  color: #e0e7ff; /* Cor do subtítulo branco-azulado */
-  margin-bottom: 1.5rem;
-}
-
-/* 2. CARDS COM TEXTO CORRIGIDO PARA PRETO */
-
-/* Card Amarelo (Blog) */
-.blog-card {
-  background-color: #fffbeb;
-  border: 1px solid #fde68a;
-  border-radius: 8px;
-  padding: 1.5rem;
-  display: flex;
-  align-items: center;
-  color: #333; /* <-- FIX: Força o texto do card a ser escuro */
-}
-
-.card-icon-area {
-  margin-right: 1.5rem;
-}
-
-.icon-placeholder {
-  font-size: 3rem;
-  display: block;
-  background-color: #fef3c7;
-  padding: 0.5rem;
-  border-radius: 8px;
-}
-
-.card-content-area h3 {
-  font-size: 1.5rem;
+/* Estilo "Aprenda programação" */
+.home-header h1 {
+  font-size: 3.0rem; /* Título ligeiramente menor */
+  color: var(--color-text-bright);
+  margin-bottom: 8px; /* Mais compacto */
   font-weight: 700;
-  color: #333; /* <-- FIX: Força o texto do H3 a ser escuro */
+  line-height: 1.2;
 }
 
-.card-content-area p {
-  font-size: 1rem;
-  color: #333; /* Este já era escuro, mas garantimos */
-  margin-bottom: 1rem;
+/* Estilo "Conceitos básicos..." */
+.home-subtitle {
+  font-size: 1.05rem;
+  color: var(--color-text-pale-blue);
+  font-weight: 400;
+  max-width: 600px;
+  line-height: 1.5;
 }
 
-.card-button {
-  background-color: #60a5fa;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: background-color 0.2s ease;
+/* Container do conteúdo principal */
+.home-main-content {
+  padding-top: 0;
+  padding-bottom: 3rem; /* Um pouco menos de padding inferior */
 }
 
-.card-button:hover {
-  background-color: #3b82f6;
+
+/* --- Seção 2: O que é um algoritmo? --- */
+.algorithm-section {
+    /* MUDANÇA: Menos margin-bottom */
+    margin-bottom: 20px; 
 }
 
-/* Grid de Desafios */
-.challenge-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+.info-card {
+    background-color: var(--color-light-yellow);
+    border: 1px solid #fdd835;
+    border-radius: 8px;
+    padding: 18px; /* Menos padding */
+    display: flex;
+    align-items: center; 
+    gap: 15px; /* Menos espaço entre o ícone e o texto */
+    max-width: 750px;
+    margin: 0 auto; 
+    color: var(--color-text-dark); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.info-card-icon {
+  width: 60px; /* Ícone menor */
+  height: 60px;
+  object-fit: contain; 
+  flex-shrink: 0;
+}
+
+
+.info-text h3 {
+    font-size: 1.3em;
+    margin-top: 0;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+.info-text p {
+    font-size: 1.0em;
+    color: #555;
+    margin-bottom: 12px;
+}
+
+.btn-secondary {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 7px 15px; /* Botão menor */
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    font-size: 0.95em;
+}
+
+.btn-secondary:hover {
+    background-color: #1565c0;
+}
+
+/* --- Seção 3: Desafios Práticos --- */
+.challenges-section {
+    margin-bottom: 25px; /* Menos margem */
+}
+
+.challenges-section h2 {
+    font-size: 2.1em; 
+    color: var(--color-text-bright); 
+    margin-bottom: 6px;
+    text-align: center;
+}
+
+.challenges-section p {
+    font-size: 0.95em;
+    color: var(--color-text-pale-blue); 
+    margin-bottom: 15px; /* Menos margem */
+    text-align: center;
+}
+
+.challenge-cards-list {
+    display: flex;
+    gap: 12px; /* Menos gap entre cards */
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .challenge-card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 1.5rem;
-  text-align: center;
-  text-decoration: none;
-  color: #333; /* <-- FIX: Força o texto do card a ser escuro */
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 200px; /* Cards menores */
+    background-color: var(--color-light-yellow); 
+    padding: 18px;
+    border-radius: 8px;
+    border: 1px solid #fdd835;
+    text-align: center;
+    text-decoration: none;
+    color: var(--color-text-dark);
+    transition: all 0.3s;
 }
 
 .challenge-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.challenge-card h4 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-top: 1rem;
+.challenge-card-icon {
+    width: 50px; 
+    height: 50px;
+    margin-bottom: 8px;
 }
 
-.icon-placeholder.large {
-  font-size: 3.5rem;
+.challenge-card p {
+    font-size: 0.95em;
+    font-weight: bold;
+    color: var(--color-text-dark);
+    margin: 0;
 }
 
-/* Cores dos Cards de Desafio (do JSON) */
-.challenge-card.blue {
-  background-color: #fff7ed;
-  border-color: #bae6fd;
-}
+/* --- Responsividade para Mobile --- */
+@media (max-width: 768px) {
+  .home-header {
+    padding-top: 60px; 
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+  }
+  
+  .home-header h1 {
+    font-size: 1.8rem; 
+  }
 
-.challenge-card.orange {
-  background-color: #fff7ed;
-  border-color: #fed7aa;
-}
+  .home-subtitle {
+    font-size: 0.85rem;
+  }
 
-.challenge-card.yellow {
-  background-color: #fffbeb;
-  border-color: #fde68a;
+  .info-card {
+    flex-direction: column; 
+    text-align: center;
+    padding: 15px 10px;
+  }
+  
+  .info-text {
+    text-align: center;
+  }
+  
+  .info-card-icon {
+    margin-bottom: 10px;
+  }
+  
+  .challenges-section h2 {
+    font-size: 1.6em;
+  }
+  
+  .challenge-card {
+    width: 100%; 
+    max-width: none;
+  }
 }

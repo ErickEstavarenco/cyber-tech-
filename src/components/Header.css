@@ -1,43 +1,108 @@
 .site-header {
+  /* 1. CONFIGURAÇÃO FIXA */
+  position: fixed; 
+  top: 0;
+  left: 0;
   width: 100%;
-  padding: 1rem 0;
+  z-index: 1000;
+  /* MUDANÇA: Cor sólida do gradiente para parecer parte dele */
+  background-color: #1A237E; 
+
+  /* MUDANÇA: Remove bordas desnecessárias */
+  border-bottom: none; 
   
-  /* 1. Remove o gradiente próprio */
-  background: none; 
-  
-  /* 2. Remove a sombra */
-  box-shadow: none;
-  
-  /* 3. Adiciona uma linha sutil para separar */
-  border-bottom: 1px solid #3b82f6; /* Azul claro do gradiente */
-  
+  padding: 0.5rem 0; /* Espaçamento padrão */
   color: white; 
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3); /* Sombra para destacá-lo */
 }
 
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 0;
-  padding-bottom: 0;
+.header-container {
+    /* Novo nome da classe para ser consistente com a implementação do hambúrguer */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .logo {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: 900; 
   color: #ffffff; 
   text-decoration: none;
 }
 
 .main-nav a {
-  margin-left: 1.5rem;
-  font-size: 1rem;
-  font-weight: 800;
-  color: #e0e7ff; 
+  margin-left: 25px;
+  color: #c0ccff; /* Cor dos links ligeiramente mais clara */
   text-decoration: none;
-  transition: color 0.2s ease;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: color 0.3s ease;
 }
 
 .main-nav a:hover {
-  color: #ffffff; 
+  color: #fff;
+}
+
+/* --- Estilos do Menu Hambúrguer --- */
+.hamburger-menu {
+  display: none; 
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  position: relative;
+  z-index: 1001;
+}
+
+.hamburger-menu .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  margin: 5px auto;
+  transition: all 0.3s ease-in-out;
+  border-radius: 2px;
+}
+
+/* Responsividade - Mostrar hambúrguer e esconder nav em telas pequenas */
+@media (max-width: 768px) { 
+  .hamburger-menu {
+    display: block; 
+  }
+
+  .main-nav {
+    display: flex;
+    flex-direction: column;
+    position: fixed; /* MUDANÇA: Usa fixed em vez de absolute para garantir que ele cubra a tela */
+    top: 0;
+    right: -100%; 
+    width: 70%; 
+    height: 100vh; 
+    background-color: #1A237E; /* Cor do fundo do menu */
+    box-shadow: -5px 0 15px rgba(0,0,0,0.4);
+    transition: right 0.3s ease-in-out;
+    padding-top: 80px; 
+    z-index: 999; 
+  }
+
+  .main-nav.open {
+    right: 0; 
+  }
+
+  .main-nav a {
+    margin: 15px 20px; 
+    text-align: left;
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1); 
+    padding-bottom: 10px;
+    padding-top: 5px;
+    color: #fff;
+  }
+  
+  .main-nav a:last-child {
+      border-bottom: none; 
+  }
 }

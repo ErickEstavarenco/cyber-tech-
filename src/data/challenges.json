@@ -1,23 +1,81 @@
 [
-    {
-        "id": 1,
-        "slug": "estudar-ou-descansar",
-        "title": "Estudar ou descansar?",
-        "icon": "person",
-        "color": "blue"
-    },
-    {
-        "id": 2,
-        "slug": "comer-ou-dormir",
-        "title": "Comer ou dormir?",
-        "icon": "food",
-        "color": "orange"
-    },
-    {
-        "id": 3,
-        "slug": "dia-ou-noite",
-        "title": "Dia ou noite?",
-        "icon": "sun-moon",
-        "color": "yellow"
+  {
+    "id": 1,
+    "title": "Estudar ou Descasar?",
+    "slug": "estudar-ou-descansar",
+    "concept": "Estrutura Condicional (If/Else)",
+    "description": "Você precisa decidir se estuda ou descansa baseado no seu cronograma.",
+    "daily_life_context": "Tomar decisões sobre prioridades e tempo.",
+    "type": "condition",
+    "icon": "person",
+    "condition": "Tenho prova amanhã?",
+    "options": [
+      { "id": 1, "text": "Estudar", "isCorrect": true, "conditionValue": true },
+      { "id": 2, "text": "Descansar", "isCorrect": true, "conditionValue": false }
+    ],
+    "feedback": {
+      "success": "Correto! Você aplicou a lógica condicional: SE (tenho prova) ENTÃO (estudar) SENÃO (descansar).",
+      "error": "Pense bem: o que acontece se você não estudar para a prova? A lógica condicional garante a ação correta para cada situação."
     }
+  },
+  {
+    "id": 2,
+    "title": "Comer ou Dormir?",
+    "slug": "comer-ou-dormir",
+    "concept": "Estrutura Condicional (If/Else)",
+    "description": "Você precisa decidir se come ou dorme com base na hora.",
+    "daily_life_context": "Tomar decisões sobre necessidades básicas.",
+    "type": "condition",
+    "icon": "food",
+    "condition": "Estou com fome?",
+    "options": [
+      { "id": 1, "text": "Comer", "isCorrect": true, "conditionValue": true },
+      { "id": 2, "text": "Dormir", "isCorrect": true, "conditionValue": false }
+    ],
+    "feedback": {
+      "success": "Correto! Você aplicou a lógica condicional: SE (estou com fome) ENTÃO (comer) SENÃO (dormir).",
+      "error": "Pense bem: o que acontece se você não comer quando está com fome? A lógica condicional garante a ação correta para cada situação."
+    }
+  },
+  {
+    "id": 3,
+    "title": "Dia ou Noite?",
+    "slug": "dia-ou-noite",
+    "concept": "Estrutura Condicional (If/Else)",
+    "description": "Você precisa decidir se acende a luz ou não com base na hora do dia.",
+    "daily_life_context": "Tomar decisões baseadas em condições de luminosidade.",
+    "type": "condition",
+    "icon": "sun-moon",
+    "condition": "Está de dia?",
+    "options": [
+      { "id": 1, "text": "Manter a luz apagada", "isCorrect": true, "conditionValue": true },
+      { "id": 2, "text": "Acender a luz", "isCorrect": true, "conditionValue": false }
+    ],
+    "feedback": {
+      "success": "Correto! Você aplicou a lógica condicional: SE (está de dia) ENTÃO (manter luz apagada) SENÃO (acender a luz).",
+      "error": "Pense bem: você acenderia a luz se estivesse sol? A lógica condicional garante a ação correta para cada situação."
+    }
+  },
+  {
+    "id": 4,
+    "title": "Minha Rotina Matinal",
+    "slug": "rotina-matinal",
+    "concept": "Sequência e Algoritmo",
+    "description": "Sua rotina matinal é um algoritmo! Coloque as ações na ordem correta para se preparar para a escola.",
+    "daily_life_context": "Acordar, escovar os dentes, tomar café, vestir o uniforme, sair de casa.",
+    "type": "sequence",
+    "icon": "algoritmo",
+    "steps": [
+      { "id": 1, "text": "Acordar e sair da cama" },
+      { "id": 2, "text": "Escovar os dentes" },
+      { "id": 3, "text": "Tomar café da manhã" },
+      { "id": 4, "text": "Vestir o uniforme" },
+      { "id": 5, "text": "Pegar a mochila e sair de casa" }
+    ],
+    "correct_order": [1, 2, 3, 4, 5],
+    "feedback": {
+      "success": "Parabéns! Você executou seu algoritmo matinal com sucesso. Na programação, a ordem das instruções é fundamental.",
+      "error": "Ops! A ordem não está correta. Tente imaginar o que aconteceria se você vestisse o uniforme antes de tomar café."
+    }
+  }
 ]

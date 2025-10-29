@@ -9,24 +9,29 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   line-height: 1.6;
   
-  /* 1. SEU NOVO GRADIENTE HORIZONTAL */
-  /* De Azul Escuro (#001a4d) para Azul Claro (#3b82f6) */
-  background-image: linear-gradient(to right, #001a4d, #3b82f6);
-  
-  /* 2. O gradiente fica "fixo" e não rola com a página */
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  
-  /* 3. Cor de texto padrão para BRANCO (para ler no fundo escuro) */
-  color: #ffffff; 
-  
-  /* 4. Garante que o fundo cubra a tela toda, mesmo com pouco conteúdo */
+  color: #ffffff; /* Texto branco padrão */
+}
+
+/* MUDANÇA: Novo container global para o gradiente */
+.app-container {
+  /* O gradiente agora define o fundo de toda a aplicação */
+  background: linear-gradient(180deg, #1A237E 0%, #3F51B5 100%);
   min-height: 100vh;
 }
 
-/* O container continua igual */
+/* Container que centraliza o conteúdo */
 .container {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 2rem 20px; 
+  padding: 0 20px; /* Apenas padding lateral */
+  
+  /* MUDANÇA: Reduzido de 45px para 35px para compactar o topo */
+  padding-top: 35px; 
+  padding-bottom: 2rem;
+}
+
+/* Estilos de Elementos Comuns (Opcional, mas mantém a consistência) */
+a {
+  text-decoration: none;
+  color: inherit;
 }
