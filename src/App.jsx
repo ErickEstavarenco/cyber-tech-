@@ -1,10 +1,9 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-// Importe todos os seus componentes de navegação
-// ATENÇÃO: Corrigi o caminho de importação do Header para tentar resolver o erro.
-// Se o seu arquivo for 'src/components/Header/Header.jsx', esta linha está correta:
-import Header from './components/Header/Header'; 
+// CORREÇÃO ESSENCIAL DO ERRO: 
+// O caminho foi alterado de './components/Header/Header' para './components/Header.jsx'
+import Header from './components/Header.jsx'; 
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login'; 
 import Cadastro from './pages/Cadastro/Cadastro'; 

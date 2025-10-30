@@ -6,8 +6,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 90vh; 
-    /* background-color: #f8f9fa;  <-- REMOVA ESTA LINHA */
+    
+    /* MUDANÇA 1: Garante que ele ocupe 100% da área, e não apenas 90% */
+    min-height: 100vh; 
+
+    /* MUDANÇA 2: ESSENCIAL. Empurra o card para baixo.
+       (O cabeçalho tem cerca de 60px de altura). 
+    */
+    padding-top: 70px; /* <<< Adiciona o espaço para o cabeçalho */
+
+    /* MUDANÇA 3: Empurra o restante do conteúdo para o centro visual */
+    padding-bottom: 70px;
+    
+    /* REMOVA o background-color se ainda existir, o gradiente já vem do App.jsx */
+}
+
+/* O resto do Login.css deve ser mantido */
+.login-card {
+    /* ... (restante do código do login-card) ... */
 }
 
 /* ... (o resto do arquivo continua igual) ... */
@@ -111,3 +127,6 @@
   .switch-auth a:hover {
     text-decoration: underline;
   }
+  .page-content {
+  padding-top: 90px; /* ajuste conforme a altura real do header */
+}

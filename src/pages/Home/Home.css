@@ -1,4 +1,4 @@
-/* Estilos para o novo design da Home */
+/* src/pages/Home/Home.css - MAIS COMPACTO */
 :root {
     --color-primary: #1a73e8; 
     --color-dark-blue: #1A237E; 
@@ -13,54 +13,49 @@
 
 /* --- Seção 1: Header da Home (Banner) --- */
 .home-header {
-    color: white;
+    /* ... outras regras ... */
     
-    /* MUDANÇA: Remove padding-top alto. O .container em globals.css já empurrou o conteúdo. */
-    padding-top: 15px; /* Espaço interno da faixa do topo */
-    padding-bottom: 20px; 
+    /* MUDANÇA: O valor deve ser compensar a altura do Header fixo (aprox. 40px) 
+       mais o padding desejado para o "BEM VINDO!" (20px).
+       Vamos usar 65px (45px do Header + 20px de margem).
+    */
+    padding-top: 65px; /* <<< AJUSTADO! */
     
-    /* MUDANÇA: Espaço mínimo abaixo do banner */
-    margin-bottom: 25px; 
+    padding-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 /* Estilo "BEM VINDO!" */
 .welcome-text {
-  font-size: 0.9rem; 
+  font-size: 0.85rem; 
   font-weight: 700;
   color: var(--color-text-pale-blue);
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin-bottom: 6px; /* Mais compacto */
+  margin-bottom: 4px; /* Mais compacto */
 }
 
 /* Estilo "Aprenda programação" */
 .home-header h1 {
-  font-size: 3.0rem; /* Título ligeiramente menor */
+  font-size: 2.8rem; /* Título menor */
   color: var(--color-text-bright);
-  margin-bottom: 8px; /* Mais compacto */
+  margin-bottom: 6px; /* Mais compacto */
   font-weight: 700;
   line-height: 1.2;
 }
 
 /* Estilo "Conceitos básicos..." */
 .home-subtitle {
-  font-size: 1.05rem;
+  font-size: 1.0rem; 
   color: var(--color-text-pale-blue);
   font-weight: 400;
   max-width: 600px;
   line-height: 1.5;
 }
 
-/* Container do conteúdo principal */
-.home-main-content {
-  padding-top: 0;
-  padding-bottom: 3rem; /* Um pouco menos de padding inferior */
-}
-
 
 /* --- Seção 2: O que é um algoritmo? --- */
 .algorithm-section {
-    /* MUDANÇA: Menos margin-bottom */
     margin-bottom: 20px; 
 }
 
@@ -68,10 +63,10 @@
     background-color: var(--color-light-yellow);
     border: 1px solid #fdd835;
     border-radius: 8px;
-    padding: 18px; /* Menos padding */
+    padding: 15px; /* Mais fino */
     display: flex;
     align-items: center; 
-    gap: 15px; /* Menos espaço entre o ícone e o texto */
+    gap: 12px; 
     max-width: 750px;
     margin: 0 auto; 
     color: var(--color-text-dark); 
@@ -79,35 +74,35 @@
 }
 
 .info-card-icon {
-  width: 60px; /* Ícone menor */
-  height: 60px;
+  width: 50px; 
+  height: 50px;
   object-fit: contain; 
   flex-shrink: 0;
 }
 
 
 .info-text h3 {
-    font-size: 1.3em;
+    font-size: 1.2em; 
     margin-top: 0;
-    margin-bottom: 6px;
+    margin-bottom: 4px; 
     color: #333;
 }
 
 .info-text p {
-    font-size: 1.0em;
+    font-size: 0.95em; 
     color: #555;
-    margin-bottom: 12px;
+    margin-bottom: 10px; 
 }
 
 .btn-secondary {
     background-color: var(--color-primary);
     color: white;
-    padding: 7px 15px; /* Botão menor */
+    padding: 6px 12px; /* Botão menor */
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
     transition: background-color 0.3s;
-    font-size: 0.95em;
+    font-size: 0.9em; 
 }
 
 .btn-secondary:hover {
@@ -116,34 +111,34 @@
 
 /* --- Seção 3: Desafios Práticos --- */
 .challenges-section {
-    margin-bottom: 25px; /* Menos margem */
+    margin-bottom: 25px; 
 }
 
 .challenges-section h2 {
-    font-size: 2.1em; 
+    font-size: 2.0em; 
     color: var(--color-text-bright); 
-    margin-bottom: 6px;
+    margin-bottom: 5px; 
     text-align: center;
 }
 
 .challenges-section p {
-    font-size: 0.95em;
+    font-size: 0.9em; 
     color: var(--color-text-pale-blue); 
-    margin-bottom: 15px; /* Menos margem */
+    margin-bottom: 12px; 
     text-align: center;
 }
 
 .challenge-cards-list {
     display: flex;
-    gap: 12px; /* Menos gap entre cards */
+    gap: 10px; /* Mais apertado */
     flex-wrap: wrap;
     justify-content: center;
 }
 
 .challenge-card {
-    width: 200px; /* Cards menores */
+    width: 180px; /* Cards menores */
     background-color: var(--color-light-yellow); 
-    padding: 18px;
+    padding: 15px; /* Reduzido */
     border-radius: 8px;
     border: 1px solid #fdd835;
     text-align: center;
@@ -158,50 +153,55 @@
 }
 
 .challenge-card-icon {
-    width: 50px; 
-    height: 50px;
-    margin-bottom: 8px;
+    width: 40px; 
+    height: 40px;
+    margin-bottom: 6px;
 }
 
 .challenge-card p {
-    font-size: 0.95em;
+    font-size: 0.9em; 
     font-weight: bold;
     color: var(--color-text-dark);
     margin: 0;
 }
 
-/* --- Responsividade para Mobile --- */
+/* --- Responsividade (Mantendo a compactação) --- */
 @media (max-width: 768px) {
   .home-header {
-    padding-top: 60px; 
-    padding-bottom: 30px;
-    margin-bottom: 30px;
+    padding-top: 20px; 
+    padding-bottom: 20px;
+    margin-bottom: 20px;
   }
   
   .home-header h1 {
-    font-size: 1.8rem; 
+    font-size: 1.6rem; 
   }
 
   .home-subtitle {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
 
   .info-card {
     flex-direction: column; 
     text-align: center;
-    padding: 15px 10px;
-  }
-  
-  .info-text {
-    text-align: center;
+    gap: 10px;
+    padding: 10px 10px;
   }
   
   .info-card-icon {
-    margin-bottom: 10px;
+    margin-bottom: 0px;
+  }
+  
+  .info-text h3 {
+    font-size: 1.1em;
+  }
+  
+  .info-text p {
+    margin-bottom: 8px;
   }
   
   .challenges-section h2 {
-    font-size: 1.6em;
+    font-size: 1.4em;
   }
   
   .challenge-card {

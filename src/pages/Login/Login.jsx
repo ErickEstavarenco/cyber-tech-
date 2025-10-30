@@ -16,11 +16,13 @@ const Login = () => {
     // Futuramente, a lógica do Firebase virá aqui
   };
 
-  return (
+ return (
     <div className="login-container">
       <div className="login-card">
-        <h2>Acesse sua conta</h2>
+        {/* REMOVA TODOS OS <br /> AQUI! */}
+        <h2>Acesse sua conta</h2> 
         <p className="login-subtitle">Bem-vindo de volta! Insira seus dados.</p>
+        {/* ... (formulário) ... */}
 
         <form onSubmit={handleSubmit}>
           

@@ -23,10 +23,12 @@ body {
 .container {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0 20px; /* Apenas padding lateral */
+  padding: 0 20px; 
   
-  /* MUDANÇA: Reduzido de 45px para 35px para compactar o topo */
-  padding-top: 35px; 
+  /* CORREÇÃO FINAL DA SOBREPOSIÇÃO: 
+     O valor ajustado para 70px deve compensar o cabeçalho mais fino (0.5rem).
+  */
+  padding-top: 70px; /* <<< AJUSTADO! Este é o valor mais seguro. */
   padding-bottom: 2rem;
 }
 

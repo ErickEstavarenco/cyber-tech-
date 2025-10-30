@@ -49,7 +49,7 @@ function Home() {
 
   return (
     <div className="home-content"> 
-      
+      <br /> <br /> <br /> <br /> <br />
       {/* Seção 1 (Banner) */}
       <div className="home-header">
         <div className="container">
