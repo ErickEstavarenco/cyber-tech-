@@ -34,3 +34,22 @@
 .main-nav a:hover {
     color: #85a2f1;
 }
+
+/* Em Header.css */
+.logoff-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff; /* ou a cor do seu texto de navegação */
+  font-weight: 800;
+  font-size: 1rem; /* ou o tamanho da fonte da navegação */
+  text-decoration: none;
+  padding: 0;
+  margin-left: 20px; /* ou o margin dos seus links */
+  font-family: inherit; /* Garante a mesma fonte */
+}
+
+.logoff-button:hover {
+  text-decoration: none; /* ou seu efeito hover */
+  color: #f35a5a;
+}
