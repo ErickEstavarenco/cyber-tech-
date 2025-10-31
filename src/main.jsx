@@ -1,14 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App.jsx';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App.jsx"; // <-- CORREÇÃO 1: Adicionado .jsx
 
-// 1. Importe seu CSS global (ao invés do App.css)
-import './styles/globals.css';
+// CORREÇÃO 2: Importando seu tema global (o 'index.css' foi removido)
+import "./styles/globals.css"; 
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    {/* 2. Envolva o App com o BrowserRouter */}
     <BrowserRouter>
       <App />
     </BrowserRouter>

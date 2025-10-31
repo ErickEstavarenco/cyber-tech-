@@ -1,28 +1,27 @@
 /* src/components/Header.css */
 
 .site-header {
-  /* 1. CONFIGURAÇÃO FIXA (ESSENCIAL) */
-  position: fixed; 
+  position: relative; 
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
-  background-color: #1a237e; /* Fundo azul escuro sólido */
-
-  /* MUDANÇA: O padding está bem reduzido para deixar o header menor */
-  padding: 0.25rem 0; /* << Mais fino! */
   
- border-bottom: 1px solid #3b82f6; 
-  /* ... (o resto do código do .site-header) ... */
+  /* MUDANÇA 1: Cor sólida mais escura para diferenciar do gradiente da Home */
+  background-color: #0d112b; /* Um azul quase preto */
+
+  /* MUDANÇA 2: Mais compacto (8px de padding vertical) */
+  padding: 0.5rem 0; 
+  
+  border-bottom: 1px solid #3b82f6; 
 }
 
 .header-content {
-  /* O container de 1100px */
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 20px; 
   display: flex;
-  justify-content: space-between; /* ESSENCIAL: Mantém logo na esquerda e nav na direita */
+  justify-content: space-between; 
   align-items: center;
 }
 
@@ -31,20 +30,16 @@
   font-weight: 900; 
   color: #ffffff; 
   text-decoration: none;
-  /* Garante que o logo não seja esmagado */
   flex-shrink: 0; 
 }
 
 .main-nav {
-  /* Apenas para garantir que o container NAV não ocupe espaço desnecessário */
   display: flex;
-  gap: 1.5rem; /* Novo: Use gap no flexbox em vez de margin-left */
+  gap: 1.5rem; 
   align-items: center;
 }
 
-/* 3. Ajuste nos links da navegação */
 .main-nav a {
-  /* REMOVEMOS o margin-left e usamos GAP no .main-nav para espaçar */
   margin-left: 0; 
   font-size: 1rem;
   font-weight: 800;
@@ -54,5 +49,8 @@
 }
 
 .main-nav a:hover {
-  color: #ffffff; /* Branco puro no hover */
+  color: #ffffff; 
+}
+body {
+  padding-top: 60px; /* Ajuste conforme a altura do header */
 }

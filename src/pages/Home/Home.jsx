@@ -1,104 +1,78 @@
 import React from 'react';
-import './Home.css';
 import { Link } from 'react-router-dom';
-
-// Importa os dados
+import styles from './Home.module.css'; 
 import challenges from '../../data/challenges.json';
-// MUDANÇA: 'blogPosts' foi removido
 
 // Importa os ícones
-import iconAlgoritmo from '../../assets/icons/icon-algoritmo.png';
-import iconPerson from '../../assets/icons/icon-person.png';
-import iconFood from '../../assets/icons/icon-food.png';
-import iconSunMoon from '../../assets/icons/icon-sun-moon.png';
+import iconAlgoritmo from '../../assets/icons/icon-algoritmo.png'; 
+import iconPerson from '../../assets/icons/icon-person.png';     
+import iconFood from '../../assets/icons/icon-food.png';       
+import iconSunMoon from '../../assets/icons/icon-sun-moon.png';  
 
-// Componente do ícone do card "O que é um algoritmo?"
 const AlgorithmIcon = () => (
-  <img src={iconAlgoritmo} alt="Ícone de algoritmo" className="info-card-icon" />
+  <img src={iconAlgoritmo} alt="Ícone de algoritmo" className={styles.infoCardIcon} />
 );
 
-// Componente para ícones dos desafios
-const ChallengeIcon = ({ iconName, altText }) => {
-  let iconSrc;
-  switch (iconName) {
-    case 'person':
-      iconSrc = iconPerson;
-      break;
-    case 'food':
-      iconSrc = iconFood;
-      break;
-    case 'sun-moon':
-      iconSrc = iconSunMoon;
-      break;
-    case 'algoritmo': // Adicionado caso o "Minha Rotina Matinal" usasse
-      iconSrc = iconAlgoritmo;
-      break;
-    default:
-      iconSrc = iconAlgoritmo; // Ícone padrão
-  }
-  return <img src={iconSrc} alt={altText} className="challenge-card-icon" />;
-};
-
+const ChallengeCardIcon = ({ iconSrc, altText }) => (
+  <img src={iconSrc} alt={altText} className={styles.challengeCardIcon} />
+);
 
 function Home() {
+  const iconMap = {
+    person: iconPerson,
+    food: iconFood,
+    'sun-moon': iconSunMoon,
+    algoritmo: iconAlgoritmo,
+  };
 
-  // MUDANÇA: Filtra o desafio "Minha rotina matinal"
-  const filteredChallenges = challenges.filter(
-    (challenge) => challenge.title !== "Minha Rotina Matinal"
-  );
+  // MUDANÇA: Filtramos o desafio "o-que-e-algoritmo" da lista de desafios práticos
+  // e pegamos os 3 seguintes (incluindo o "sol e lua").
+  const featuredChallenges = challenges
+    .filter(challenge => challenge.slug !== "o-que-e-algoritmo")
+    .slice(0, 3); 
 
   return (
-    <div className="home-content"> 
-      <br /> <br /> <br /> <br /> <br />
-      {/* Seção 1 (Banner) */}
-      <div className="home-header">
+    <div className={styles.home}>
+      
+      <section className={styles.heroSection}>
         <div className="container">
-          <p className="welcome-text">BEM VINDO!</p>
-          <h1>Aprenda programação</h1>
-          <p className="home-subtitle">
-            Conceitos básicos de lógica de programação para iniciantes
-          </p>
+          <p className={styles.welcomeText}>BEM VINDO!</p>
+          <h1 className={styles.mainTitle}>Aprenda programação</h1>
+          <h2 className={styles.subtitle}>Conceitos básicos de lógica de programação para iniciantes</h2>
         </div>
-      </div>
+      </section>
 
-      {/* Conteúdo principal centralizado */}
-      <div className="container home-main-content">
-
-        {/* Seção 2: O que é um algoritmo? */}
-        <section className="algorithm-section">
-          <div className="info-card">
-            <AlgorithmIcon /> {/* <-- Ícone aqui */}
-            <div className="info-text">
+      <div className="container">
+        {/* Seção 1: O que é um algoritmo? (Card de Informação) */}
+        <section className={styles.algorithmSection}>
+          <div className={styles.infoCard}>
+            <AlgorithmIcon />
+            <div className={styles.infoText}>
               <h3>O que é um algoritmo?</h3>
-              <p>Um algoritmo é uma maneira de resolver problemas ou realizar tarefas.</p>
-              <Link to="/blog" className="btn-secondary">Ler mais</Link>
+              <p>Um algoritmo é uma maneira de resolver problemas ou realizar tarefas de forma sequencial.</p>
+              <Link to="/blog" className="btn-primary">Ler mais</Link>
             </div>
           </div>
         </section>
 
-        {/* Seção 3: Desafios práticos (agora com filtro) */}
-        <section className="challenges-section">
+        {/* Seção 2: Desafios práticos (agora filtrados) */}
+        <section className={styles.challengesSection}>
           <h2>Desafios práticos</h2>
           <p>Experimente o funcionamento de if/else por meio de exercícios</p>
           
-          <div className="challenge-cards-list">
-            
-            {/* Mapeia os desafios FILTRADOS */}
-            {filteredChallenges.map(challenge => (
-              <Link key={challenge.id} to={`/desafios/${challenge.slug}`} className="challenge-card">
-                <ChallengeIcon iconName={challenge.icon} altText={challenge.title} />
+          <div className={styles.challengeCardsList}>
+            {featuredChallenges.map(challenge => (
+              <Link key={challenge.id} to={`/desafios/${challenge.slug}`} className={styles.challengeCard}>
+                <ChallengeCardIcon 
+                  iconSrc={iconMap[challenge.icon]} 
+                  altText={challenge.title} 
+                />
                 <p>{challenge.title}</p>
               </Link>
             ))}
-
           </div>
         </section>
-
-        {/* MUDANÇA: Seção 4 (Blog) foi REMOVIDA 
-        */}
-        
-      </div> {/* Fim do novo container .home-main-content */}
-
+      </div>
     </div>
   );
 }

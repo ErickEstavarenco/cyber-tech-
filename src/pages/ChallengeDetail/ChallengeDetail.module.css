@@ -1,0 +1,16 @@
+/* src/pages/ChallengeDetail/ChallengeDetail.module.css */
+
+/* Este arquivo agora é usado para estilizar os detalhes *dentro* do card */
+
+.detailSubtitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  margin-bottom: 1rem;
+}
+
+.detailText {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.7;
+}

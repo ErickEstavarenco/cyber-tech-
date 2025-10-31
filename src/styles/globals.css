@@ -1,39 +1,75 @@
-/* Reset básico */
+/* src/styles/globals.css */
+
+:root {
+    /* Cores do Tema Azul Gradiente */
+    --color-primary-start: #1E90FF; /* Azul Claro */
+    --color-primary-end: #0057D8;   /* Azul Escuro */
+    
+    /* MUDANÇA: Gradiente agora é Escuro (top) -> Claro (bottom) */
+    --color-primary-gradient: linear-gradient(180deg, var(--color-primary-end) 0%, var(--color-primary-start) 100%);
+    
+    /* Cores Neutras */
+    --color-surface: #FFFFFF;    /* Superfície de Cards (Branco) */
+    --color-text-dark: #212529;  /* Texto Principal (Preto) */
+    --color-text-light: #F8F9FA; /* Texto em Fundo Escuro (Branco) */
+    --color-shadow: rgba(0, 0, 0, 0.1);
+    
+    /* Tipografia (Usando Roboto) */
+    --font-family-primary: 'Roboto', 'Open Sans', sans-serif;
+    --font-size-base: 16px;
+    
+    /* Layout */
+    --header-height: 60px; /* Altura do header compacto */
+}
+
+/* Reset Básico */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  line-height: 1.6;
-  
-  color: #ffffff; /* Texto branco padrão */
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    color: var(--color-text-light); /* Cor do texto padrão (Branco) */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+    /* Aplica o gradiente no body para o fundo da página */
+    background: var(--color-primary-gradient);
+    min-height: 100vh;
+    
+    /* ESSENCIAL: Espaço para o header fixo */
+    padding-top: var(--header-height); 
 }
 
-/* MUDANÇA: Novo container global para o gradiente */
-.app-container {
-  /* O gradiente agora define o fundo de toda a aplicação */
-  background: linear-gradient(180deg, #1A237E 0%, #3F51B5 100%);
-  min-height: 100vh;
-}
-
-/* Container que centraliza o conteúdo */
+/* Container genérico para centralizar conteúdo */
 .container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 20px; 
-  
-  /* CORREÇÃO FINAL DA SOBREPOSIÇÃO: 
-     O valor ajustado para 70px deve compensar o cabeçalho mais fino (0.5rem).
-  */
-  padding-top: 70px; /* <<< AJUSTADO! Este é o valor mais seguro. */
-  padding-bottom: 2rem;
+    width: 100%;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
-/* Estilos de Elementos Comuns (Opcional, mas mantém a consistência) */
-a {
-  text-decoration: none;
-  color: inherit;
+/* Botão Primário Padrão */
+.btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #FFF;
+    background-color: var(--color-primary-start);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-end);
 }

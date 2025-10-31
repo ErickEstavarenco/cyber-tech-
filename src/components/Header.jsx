@@ -1,32 +1,38 @@
-// src/components/Header.jsx
-
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Header.css';
+import styles from './Header.module.css'; // Usando CSS Modules
 
 function Header() {
-    return (
-        // A classe 'site-header' tem 'position: fixed'
-        <header className="site-header">
-            {/* O 'container header-content' garante a largura máxima e centralização */}
-            <div className="container header-content">
-                
-                {/* O logo sempre aponta para a Home ("/") */}
-                <Link to="/" className="logo">
-                    Cyber-Tech
-                </Link>
-                
-                <nav className="main-nav">
-                    {/* NOVO: Link para a página inicial (Início) */}
-                    <Link to="/">Início</Link>
-                    
-                    <Link to="/blog">Blog</Link>
-                    <Link to="/desafios">Desafios</Link>
-                    <Link to="/login">Login</Link>
-                </nav>
-            </div>
-        </header>
-    );
+  return (
+    <header className={styles.header}>
+      <div className={`container ${styles.navContainer}`}>
+        
+        {/* O Logo continua linkando para a Home */}
+        <Link to="/" className={styles.logo}>
+          Cyber Tech
+        </Link>
+        
+        {/* NAVEGAÇÃO (DIREITA) */}
+        <nav className={styles.nav}>
+          
+          {/* MUDANÇA: Botão "Início" adicionado aqui */}
+          <Link to="/" className={styles.navLink}>
+            Início
+          </Link>
+
+          <Link to="/blog" className={styles.navLink}>
+            Blog
+          </Link>
+          <Link to="/desafios" className={styles.navLink}>
+            Desafios
+          </Link>
+          <Link to="/login" className={styles.navLink}>
+            Login
+          </Link>
+        </nav>
+      </div>
+    </header>
+  );
 }
 
 export default Header;

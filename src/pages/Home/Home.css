@@ -1,52 +1,44 @@
-/* src/pages/Home/Home.css - MAIS COMPACTO */
+/* src/pages/Home/Home.css */
 :root {
     --color-primary: #1a73e8; 
     --color-dark-blue: #1A237E; 
     --color-light-yellow: #fffde7; 
     --color-text-light: #f0f0f0;
     --color-text-dark: #333;
-
-    /* Cores pálidas (da imagem de referência) */
     --color-text-pale-blue: #c0ccff; 
     --color-text-bright: #ffffff;
 }
 
 /* --- Seção 1: Header da Home (Banner) --- */
 .home-header {
-    /* ... outras regras ... */
+  padding-top: 2.5rem; /* 40px */
+  padding-bottom: 2.5rem; /* 40px */
+  margin-bottom: 2rem; /* 32px */
     
-    /* MUDANÇA: O valor deve ser compensar a altura do Header fixo (aprox. 40px) 
-       mais o padding desejado para o "BEM VINDO!" (20px).
-       Vamos usar 65px (45px do Header + 20px de margem).
-    */
-    padding-top: 65px; /* <<< AJUSTADO! */
-    
-    padding-bottom: 30px;
-    margin-bottom: 40px;
+  /* MUDANÇA 1: Fundo em gradiente, diferente do Header */
+  background: linear-gradient(180deg, #1a237e 0%, #2a3ebf 100%); 
 }
 
-/* Estilo "BEM VINDO!" */
+/* MUDANÇA 2: Ajustes de proporção de fonte */
 .welcome-text {
-  font-size: 0.85rem; 
+  font-size: 1rem; /* Aumentado (era 0.85rem) */
   font-weight: 700;
   color: var(--color-text-pale-blue);
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin-bottom: 4px; /* Mais compacto */
+  margin-bottom: 8px; /* Ajustado */
 }
 
-/* Estilo "Aprenda programação" */
 .home-header h1 {
-  font-size: 2.8rem; /* Título menor */
+  font-size: 2.5rem; /* Diminuído (era 2.8rem) */
   color: var(--color-text-bright);
-  margin-bottom: 6px; /* Mais compacto */
+  margin-bottom: 12px; /* Ajustado */
   font-weight: 700;
   line-height: 1.2;
 }
 
-/* Estilo "Conceitos básicos..." */
 .home-subtitle {
-  font-size: 1.0rem; 
+  font-size: 1.1rem; /* Aumentado (era 1.0rem) */
   color: var(--color-text-pale-blue);
   font-weight: 400;
   max-width: 600px;
@@ -56,14 +48,14 @@
 
 /* --- Seção 2: O que é um algoritmo? --- */
 .algorithm-section {
-    margin-bottom: 20px; 
+    margin-bottom: 1.5rem; 
 }
 
 .info-card {
     background-color: var(--color-light-yellow);
     border: 1px solid #fdd835;
     border-radius: 8px;
-    padding: 15px; /* Mais fino */
+    padding: 15px; 
     display: flex;
     align-items: center; 
     gap: 12px; 
@@ -79,7 +71,6 @@
   object-fit: contain; 
   flex-shrink: 0;
 }
-
 
 .info-text h3 {
     font-size: 1.2em; 
@@ -97,7 +88,7 @@
 .btn-secondary {
     background-color: var(--color-primary);
     color: white;
-    padding: 6px 12px; /* Botão menor */
+    padding: 6px 12px; 
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
@@ -111,7 +102,7 @@
 
 /* --- Seção 3: Desafios Práticos --- */
 .challenges-section {
-    margin-bottom: 25px; 
+    margin-bottom: 2.5rem; 
 }
 
 .challenges-section h2 {
@@ -130,15 +121,15 @@
 
 .challenge-cards-list {
     display: flex;
-    gap: 10px; /* Mais apertado */
+    gap: 10px; 
     flex-wrap: wrap;
     justify-content: center;
 }
 
 .challenge-card {
-    width: 180px; /* Cards menores */
+    width: 180px; 
     background-color: var(--color-light-yellow); 
-    padding: 15px; /* Reduzido */
+    padding: 15px; 
     border-radius: 8px;
     border: 1px solid #fdd835;
     text-align: center;
@@ -165,12 +156,12 @@
     margin: 0;
 }
 
-/* --- Responsividade (Mantendo a compactação) --- */
+/* --- Responsividade --- */
 @media (max-width: 768px) {
   .home-header {
-    padding-top: 20px; 
-    padding-bottom: 20px;
-    margin-bottom: 20px;
+    padding-top: 1.5rem; /* 24px */
+    padding-bottom: 1.5rem; /* 24px */
+    margin-bottom: 1.5rem; /* 24px */
   }
   
   .home-header h1 {
