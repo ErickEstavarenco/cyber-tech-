@@ -1,3 +1,5 @@
+/* src/components/Header.css (Completo) */
+
 .site-header {
     width: 100%;
     background: linear-gradient(to top, rgb(80, 80, 247), rgb(58, 58, 252), rgb(13, 13, 252));
@@ -8,9 +10,7 @@
 .header-content {
     display: flex;
     justify-content: space-between;
-    /* LOGO de um lado, nav do outro */
     align-items: center;
-    /* Remove o padding padrão do container para o header */
     padding-top: 0;
     padding-bottom: 0;
 }
@@ -22,7 +22,26 @@
     text-decoration: none;
 }
 
-.main-nav a {
+/* * REGRA ATUALIZADA (REGRA PRINCIPAL)
+ *
+ * Esta regra aplica-se a:
+ * 1. .main-nav a (o link 'Login')
+ * 2. .nav-button (os botões 'Blog' e 'Desafios')
+ * 3. .logoff-button (o botão 'Logoff')
+ *
+ * Ela faz todos parecerem links idênticos.
+*/
+.main-nav a,
+.nav-button,
+.logoff-button {
+    /* Estilos para resetar os botões e fazê-los parecer links */
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit; /* Garante a mesma fonte dos links */
+    padding: 0;
+
+    /* Seus estilos de link originais */
     margin-left: 1.5rem;
     font-size: 1rem;
     font-weight: 800;
@@ -31,25 +50,21 @@
     transition: color 0.2s ease;
 }
 
-.main-nav a:hover {
+
+/* * HOVER ATUALIZADO 
+ *
+ * Hover padrão (azul claro) para 'Login', 'Blog' e 'Desafios'.
+*/
+.main-nav a:hover,
+.nav-button:hover {
     color: #85a2f1;
 }
 
-/* Em Header.css */
-.logoff-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #fff; /* ou a cor do seu texto de navegação */
-  font-weight: 800;
-  font-size: 1rem; /* ou o tamanho da fonte da navegação */
-  text-decoration: none;
-  padding: 0;
-  margin-left: 20px; /* ou o margin dos seus links */
-  font-family: inherit; /* Garante a mesma fonte */
-}
-
+/* * HOVER ATUALIZADO 
+ *
+ * Hover especial (vermelho) apenas para o 'Logoff',
+ * como você definiu no seu CSS original.
+*/
 .logoff-button:hover {
-  text-decoration: none; /* ou seu efeito hover */
-  color: #f35a5a;
+    color: #f35a5a;
 }
