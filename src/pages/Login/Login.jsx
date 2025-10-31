@@ -4,17 +4,17 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 
-// CORREÇÃO AQUI 👇👇👇 (caminho para a raiz do projeto)
+// 1. Remova 'sendPasswordResetEmail' daqui
 import { auth } from '../../../FirebaseConfig.js';
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth"; 
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  // 2. Remova o estado 'success'
+  
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -23,17 +23,11 @@ const Login = () => {
     setLoading(true);
 
     try {
-      // Tenta fazer o login com o Firebase Auth
       await signInWithEmailAndPassword(auth, email, password);
-      
       setLoading(false);
-      
-      // Redireciona para a home/dashboard após o login
       navigate('/'); 
-
     } catch (err) {
       setLoading(false);
-      
       if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
         setError('E-mail ou senha inválidos.');
       } else {
@@ -42,6 +36,8 @@ const Login = () => {
       console.error("Erro no login:", err);
     }
   };
+
+  // 3. A função 'handlePasswordReset' foi removida
 
   return (
     <div className="login-container">
@@ -76,7 +72,8 @@ const Login = () => {
               disabled={loading}
             />
           </div>
-
+          
+          {/* 4. Mensagem de sucesso removida */}
           {error && <p className="error-message">{error}</p>}
 
           <button 
@@ -92,9 +89,17 @@ const Login = () => {
         <div className="switch-auth">
           <p>Não tem uma conta? <Link to="/cadastro">Cadastre-se</Link></p>
         </div>
+
+        {/* 5. Alterado de 'button' para 'Link' */}
+        <div className="password-reset">
+          <Link to="/esqueci-minha-senha" className="password-reset-link">
+            Esqueci minha senha
+          </Link>
+        </div>
         
       </div>
     </div>
   );
 };
+
 export default Login;
