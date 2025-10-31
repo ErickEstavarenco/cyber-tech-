@@ -107,3 +107,60 @@
 .switch-auth a:hover {
   text-decoration: underline;
 }
+
+/* Em Login.css */
+
+/* ... (seus estilos de .error-message) ... */
+
+/* Estilo para a mensagem de sucesso (verde) */
+.success-message {
+  color: #0b875b; /* Um tom de verde */
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* Div para o link de redefinição */
+.password-reset {
+  margin-top: 10px; /* Espaçamento */
+  text-align: center;
+}
+
+/* Estilo para o botão de redefinição parecer um link */
+.password-reset-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  
+  color: #007bff; /* Azul padrão de link */
+  font-size: 0.9rem; /* Mesmo tamanho do 'Cadastre-se' */
+  font-family: inherit;
+  padding: 0;
+}
+
+.password-reset-button:hover {
+  text-decoration: underline;
+}
+
+/* Em Login.css */
+
+/* ... (seus estilos de .error-message e .success-message) ... */
+
+/* Div para o link de redefinição (pode manter) */
+.password-reset {
+  margin-top: 10px; 
+  text-align: center;
+}
+
+/* * ATUALIZE: Mude de '.password-reset-button' 
+ * para '.password-reset-link' 
+ */
+.password-reset-link {
+  color: #007bff; /* Azul padrão de link */
+  font-size: 0.9rem; 
+  text-decoration: none; /* Links padrão têm sublinhado, vamos tirar */
+}
+
+.password-reset-link:hover {
+  text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+}
