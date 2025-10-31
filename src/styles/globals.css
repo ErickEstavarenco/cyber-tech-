@@ -1,11 +1,9 @@
 /* src/styles/globals.css */
 
 :root {
-    /* Cores do Tema Azul Gradiente */
+    /* Cores do Tema Azul Gradiente (Escuro -> Claro) */
     --color-primary-start: #1E90FF; /* Azul Claro */
     --color-primary-end: #0057D8;   /* Azul Escuro */
-    
-    /* MUDANÇA: Gradiente agora é Escuro (top) -> Claro (bottom) */
     --color-primary-gradient: linear-gradient(180deg, var(--color-primary-end) 0%, var(--color-primary-start) 100%);
     
     /* Cores Neutras */
@@ -14,7 +12,7 @@
     --color-text-light: #F8F9FA; /* Texto em Fundo Escuro (Branco) */
     --color-shadow: rgba(0, 0, 0, 0.1);
     
-    /* Tipografia (Usando Roboto) */
+    /* Tipografia */
     --font-family-primary: 'Roboto', 'Open Sans', sans-serif;
     --font-size-base: 16px;
     
@@ -33,19 +31,28 @@ body {
     font-family: var(--font-family-primary);
     font-size: var(--font-size-base);
     line-height: 1.6;
-    color: var(--color-text-light); /* Cor do texto padrão (Branco) */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    
-    /* Aplica o gradiente no body para o fundo da página */
+    color: var(--color-text-light); 
     background: var(--color-primary-gradient);
     min-height: 100vh;
     
     /* ESSENCIAL: Espaço para o header fixo */
     padding-top: var(--header-height); 
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/* Container genérico para centralizar conteúdo */
+/* CORREÇÃO 1: "Sticky Footer"
+  Transforma o app-layout (do App.jsx) em um container flex
+*/
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  /* Garante que o layout ocupe no mínimo a altura 
+     da tela (menos o padding que já demos ao body) */
+  min-height: calc(100vh - var(--header-height));
+}
+
+/* Container genérico */
 .container {
     width: 100%;
     max-width: 1100px;
@@ -72,4 +79,24 @@ body {
 
 .btn-primary:hover {
     background-color: var(--color-primary-end);
+}
+
+/* CORREÇÃO 2: Animação e "Sticky Footer"
+*/
+main {
+  animation: fadeIn 0.5s ease-out;
+  /* Esta linha "mágica" faz o <main> crescer e empurrar o Footer para baixo */
+  flex-grow: 1; 
+}
+
+/* Animação de fade-in suave para o conteúdo */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

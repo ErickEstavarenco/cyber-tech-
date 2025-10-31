@@ -4,10 +4,11 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './styles/globals.css'; 
 
-// CORREÇÃO: O caminho para o Header não tem a pasta extra "Header"
+// Componentes principais
 import Header from './components/Header.jsx'; 
+import Footer from './components/Footer.jsx'; // 1. IMPORTA O FOOTER
 
-// Caminhos para as Páginas
+// Páginas
 import Home from './pages/Home/Home.jsx';
 import Login from './pages/Login/Login.jsx';
 import Cadastro from './pages/Cadastro/Cadastro.jsx';
@@ -23,14 +24,19 @@ function App() {
 
       <main>
         <Routes>
+          {/* Rotas principais */}
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
+
+          {/* Rotas de navegação */}
           <Route path="/blog" element={<Blog />} />
           <Route path="/desafios" element={<ChallengeList />} />
           <Route path="/desafios/:slug" element={<ChallengeDetail />} />
         </Routes>
       </main>
+
+      <Footer /> {/* 2. RENDERIZA O FOOTER AQUI */}
     </div>
   );
 }
