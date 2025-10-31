@@ -13,6 +13,7 @@ import Home from './pages/Home/Home.jsx';
 import Login from './pages/Login/Login.jsx';
 import Cadastro from './pages/Cadastro/Cadastro.jsx';
 import Blog from './pages/Blog/Blog.jsx';
+import Desafios from './pages/Desafios/Desafios'; // ✅ Importação correta
 import ChallengeList from './pages/ChallengeList/ChallengeList.jsx';
 import ChallengeDetail from './pages/ChallengeDetail/ChallengeDetail.jsx';
 
@@ -32,7 +33,7 @@ function App() {
           {/* Rotas de navegação */}
           <Route path="/blog" element={<Blog />} />
           <Route path="/desafios" element={<ChallengeList />} />
-          <Route path="/desafios/:slug" element={<ChallengeDetail />} />
+          <Route path="/desafios" element={<ChallengeDetail />} />
         </Routes>
       </main>
 
