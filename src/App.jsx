@@ -8,6 +8,8 @@ import Header from './components/Header';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Cadastro from './pages/Cadastro/Cadastro';
+import Blog from './pages/Blog/Blog'; 
+
 // 1. Importe o novo componente
 import EsqueciSenha from './pages/EsqueciSenha/EsqueciSenha'; 
 
@@ -33,7 +35,7 @@ function App() {
             path="/blog" 
             element={
               <ProtectedRoute>
-                <h1>Página do Blog</h1>
+                <Blog />
               </ProtectedRoute>
             } 
           />
