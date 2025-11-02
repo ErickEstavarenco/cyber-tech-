@@ -1,70 +1,77 @@
-/* src/components/Header.css (Completo) */
+/* src/components/Header.css (Resolvido) */
 
 .site-header {
-    width: 100%;
-    background: linear-gradient(to top, rgb(80, 80, 247), rgb(58, 58, 252), rgb(13, 13, 252));
-    border-bottom: 1px solid #e0e0e0;
-    padding: 1rem 0;
+  width: 100%;
+
+  /* 1. Mudança da pagina-blog: Remove o gradiente */
+  background: none;
+
+  /* 2. Mudança da pagina-blog: Usa a nova borda azul */
+  border-bottom: 1px solid #3b82f6;
+
+  padding: 1rem 0;
+  color: white;
+  /* Adicionado da pagina-blog */
 }
 
 .header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 0;
-    padding-bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: #ffffff;
-    text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #ffffff;
+  text-decoration: none;
 }
 
 /* * REGRA ATUALIZADA (REGRA PRINCIPAL)
- *
- * Esta regra aplica-se a:
- * 1. .main-nav a (o link 'Login')
- * 2. .nav-button (os botões 'Blog' e 'Desafios')
- * 3. .logoff-button (o botão 'Logoff')
- *
- * Ela faz todos parecerem links idênticos.
+ *
+ * Mantivemos sua regra combinada para todos os botões/links
+ * (essencial para a UI de autenticação)
 */
 .main-nav a,
 .nav-button,
 .logoff-button {
-    /* Estilos para resetar os botões e fazê-los parecer links */
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: inherit; /* Garante a mesma fonte dos links */
-    padding: 0;
+  /* Estilos para resetar os botões e fazê-los parecer links */
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0;
 
-    /* Seus estilos de link originais */
-    margin-left: 1.5rem;
-    font-size: 1rem;
-    font-weight: 800;
-    color: #ffffff;
-    text-decoration: none;
-    transition: color 0.2s ease;
+  /* Seus estilos de link originais */
+  margin-left: 1.5rem;
+  font-size: 1rem;
+  font-weight: 800;
+
+  /* 3. Mudança da pagina-blog: Cor base do link */
+  color: #e0e7ff;
+
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 
 /* * HOVER ATUALIZADO 
- *
- * Hover padrão (azul claro) para 'Login', 'Blog' e 'Desafios'.
+ *
+ * Hover padrão (branco), conforme definido pela pagina-blog
 */
 .main-nav a:hover,
 .nav-button:hover {
-    color: #85a2f1;
+  /* 4. Mudança da pagina-blog: Cor do hover */
+  color: #ffffff;
 }
 
 /* * HOVER ATUALIZADO 
- *
- * Hover especial (vermelho) apenas para o 'Logoff',
- * como você definiu no seu CSS original.
+ *
+ * Mantivemos seu hover especial (vermelho) apenas para o 'Logoff',
+ * que não estava em conflito.
 */
 .logoff-button:hover {
-    color: #f35a5a;
+  color: #f35a5a;
 }
