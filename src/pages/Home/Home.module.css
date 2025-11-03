@@ -1,0 +1,111 @@
+/* src/pages/Home/Home.module.css */
+
+.home {
+    color: var(--color-text-light);
+}
+
+/* --- Seção Hero --- */
+.heroSection {
+    padding: 30px 0; 
+    text-align: center;
+    margin-bottom: 40px;
+}
+.welcomeText {
+    font-size: 0.9em;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+.mainTitle {
+    font-size: 2.8rem;
+    margin-bottom: 5px;
+}
+.subtitle {
+    font-size: 1.1rem;
+    font-weight: 300; 
+    margin-bottom: 0;
+    opacity: 0.9;
+}
+
+/* --- Seção Algoritmo (Card Escuro) --- */
+.algorithmSection {
+    margin-bottom: 60px;
+}
+.infoCard {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.15); 
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.infoCardIcon {
+    /* MUDANÇA: Ícone maior */
+    width: 90px;  /* Aumentado de 80px */
+    height: 90px; /* Aumentado de 80px */
+    margin-right: 30px; /* Mais espaço */
+    flex-shrink: 0;
+    object-fit: contain;
+}
+
+.infoText h3 {
+    font-size: 1.8rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+.infoText p {
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+/* --- Seção Desafios Práticos --- */
+.challengesSection {
+    text-align: center;
+    padding-bottom: 40px;
+}
+.challengesSection h2 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+.challengesSection p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 30px;
+}
+.challengeCardsList {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.challengeCard {
+    flex: 1;
+    min-width: 220px;
+    max-width: 280px;
+    background-color: rgba(0, 0, 0, 0.15);
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    transition: transform 0.3s, background-color 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--color-text-light);
+    text-decoration: none;
+}
+.challengeCard:hover {
+    transform: translateY(-5px);
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.challengeCardIcon {
+    /* MUDANÇA: Ícone maior (incluindo o "Fome"/"Estudar") */
+    width: 100px;  /* Aumentado de 70px */
+    height: 100px; /* Aumentado de 70px */
+    margin-bottom: 20px; 
+    object-fit: contain;
+}
+
+.challengeCard p {
+    font-size: 1.1rem;
+    font-weight: 500;
+}

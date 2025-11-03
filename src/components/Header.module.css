@@ -1,0 +1,63 @@
+/* src/components/Header.module.css */
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    
+    /* Gradiente sutil (pode ser cor sólida se preferir) */
+    background: linear-gradient(90deg, var(--color-primary-start) 0%, var(--color-primary-end) 100%);
+    box-shadow: 0 2px 4px var(--color-shadow);
+    height: var(--header-height); /* Altura compacta (60px) */
+    display: flex;
+    align-items: center;
+}
+
+.navContainer {
+    display: flex;
+    justify-content: space-between; /* Logo na esquerda, nav na direita */
+    align-items: center;
+    height: 100%;
+}
+
+.logo {
+    color: var(--color-text-light);
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+.logo:hover {
+    opacity: 0.8;
+}
+
+.nav {
+    display: flex;
+    gap: 20px;
+}
+
+.navLink {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 5px 0;
+    transition: all 0.2s;
+    text-decoration: none;
+    border-bottom: 2px solid transparent; /* Espaço reservado para a borda ativa */
+    opacity: 0.8;
+}
+
+.navLink:hover {
+    opacity: 1;
+}
+
+/* MUDANÇA: Novo estilo para o link da página ativa */
+.activeLink {
+  color: #FFFFFF;
+  opacity: 1;
+  font-weight: 700;
+  /* Uma pequena linha sutil embaixo */
+  border-bottom-color: var(--color-text-light);
+}

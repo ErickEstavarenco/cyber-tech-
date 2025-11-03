@@ -1,23 +1,30 @@
 [
-    {
-        "id": 1,
-        "slug": "estudar-ou-descansar",
-        "title": "Estudar ou descansar?",
-        "icon": "person",
-        "color": "blue"
-    },
-    {
-        "id": 2,
-        "slug": "comer-ou-dormir",
-        "title": "Comer ou dormir?",
-        "icon": "food",
-        "color": "orange"
-    },
-    {
-        "id": 3,
-        "slug": "dia-ou-noite",
-        "title": "Dia ou noite?",
-        "icon": "sun-moon",
-        "color": "yellow"
-    }
+  {
+    "id": 1,
+    "slug": "o-que-e-algoritmo",
+    "title": "O que é um algoritmo?",
+    "concept": "Entenda o conceito fundamental.",
+    "icon": "algoritmo"
+  },
+  {
+    "id": 2,
+    "slug": "estudar-ou-descansar",
+    "title": "Estudar ou descansar?",
+    "concept": "Use 'if/else' aninhado para decidir.",
+    "icon": "person"
+  },
+  {
+    "id": 3,
+    "slug": "fome",
+    "title": "Fome",
+    "concept": "Escolha sua refeição baseado no horário.",
+    "icon": "food"
+  },
+  {
+    "id": 4,
+    "slug": "dia-ou-noite",
+    "title": "Dia ou Noite?",
+    "concept": "Determine a rotina baseado no período.",
+    "icon": "sun-moon"
+  }
 ]
