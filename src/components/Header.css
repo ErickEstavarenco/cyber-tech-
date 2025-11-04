@@ -1,56 +1,77 @@
-/* src/components/Header.css */
+/* src/components/Header.css (Resolvido) */
 
 .site-header {
-  position: relative; 
-  top: 0;
-  left: 0;
   width: 100%;
-  z-index: 1000;
-  
-  /* MUDANÇA 1: Cor sólida mais escura para diferenciar do gradiente da Home */
-  background-color: #0d112b; /* Um azul quase preto */
 
-  /* MUDANÇA 2: Mais compacto (8px de padding vertical) */
-  padding: 0.5rem 0; 
-  
-  border-bottom: 1px solid #3b82f6; 
+  /* 1. Mudança da pagina-blog: Remove o gradiente */
+  background: none;
+
+  /* 2. Mudança da pagina-blog: Usa a nova borda azul */
+  border-bottom: 1px solid #3b82f6;
+
+  padding: 1rem 0;
+  color: white;
+  /* Adicionado da pagina-blog */
 }
 
 .header-content {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 20px; 
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .logo {
   font-size: 1.5rem;
-  font-weight: 900; 
-  color: #ffffff; 
+  font-weight: 900;
+  color: #ffffff;
   text-decoration: none;
-  flex-shrink: 0; 
 }
 
-.main-nav {
-  display: flex;
-  gap: 1.5rem; 
-  align-items: center;
-}
+/* * REGRA ATUALIZADA (REGRA PRINCIPAL)
+ *
+ * Mantivemos sua regra combinada para todos os botões/links
+ * (essencial para a UI de autenticação)
+*/
+.main-nav a,
+.nav-button,
+.logoff-button {
+  /* Estilos para resetar os botões e fazê-los parecer links */
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0;
 
-.main-nav a {
-  margin-left: 0; 
+  /* Seus estilos de link originais */
+  margin-left: 1.5rem;
   font-size: 1rem;
   font-weight: 800;
-  color: #e0e7ff; 
+
+  /* 3. Mudança da pagina-blog: Cor base do link */
+  color: #e0e7ff;
+
   text-decoration: none;
-  transition: color 0.3s;
+  transition: color 0.2s ease;
 }
 
-.main-nav a:hover {
-  color: #ffffff; 
+
+/* * HOVER ATUALIZADO 
+ *
+ * Hover padrão (branco), conforme definido pela pagina-blog
+*/
+.main-nav a:hover,
+.nav-button:hover {
+  /* 4. Mudança da pagina-blog: Cor do hover */
+  color: #ffffff;
 }
-body {
-  padding-top: 60px; /* Ajuste conforme a altura do header */
+
+/* * HOVER ATUALIZADO 
+ *
+ * Mantivemos seu hover especial (vermelho) apenas para o 'Logoff',
+ * que não estava em conflito.
+*/
+.logoff-button:hover {
+  color: #f35a5a;
 }
