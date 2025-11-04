@@ -15,6 +15,8 @@ import Cadastro from './pages/Cadastro/Cadastro.jsx';
 import Blog from './pages/Blog/Blog.jsx';
 import ChallengeList from './pages/ChallengeList/ChallengeList.jsx';
 import ChallengeDetail from './pages/ChallengeDetail/ChallengeDetail.jsx';
+import Algoritmo from "./pages/Blog/Algoritmo";
+import Variavel from "./pages/Blog/Variavel.jsx"
 
 
 function App() {
@@ -31,6 +33,10 @@ function App() {
 
           {/* Rotas de navegação */}
           <Route path="/blog" element={<Blog />} />
+          <Route path="/algoritmo" element={<Algoritmo />} />
+          <Route path="/variavel" element={<Variavel />} />
+         
+
           <Route path="/desafios" element={<ChallengeList />} />
           <Route path="/desafios/:slug" element={<ChallengeDetail />} />
         </Routes>
