@@ -6,10 +6,11 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../../FirebaseConfig.js'; // Ajuste o caminho se necessário
 
 function Header() {
-    const { currentUser } = useAuth();
-    const navigate = useNavigate();
+    const { currentUser } = useAuth(); //
+    const navigate = useNavigate(); //
 
-    const handleLogoff = async () => {
+    // Sua função de logoff (Mantida)
+    const handleLogoff = async () => { //
         try {
             await signOut(auth);
             navigate('/login');
@@ -18,13 +19,15 @@ function Header() {
         }
     };
 
-    const getFirstName = (fullName) => {
+    // Sua função para pegar o primeiro nome (Mantida)
+    const getFirstName = (fullName) => { //
         if (!fullName) return '';
         const firstName = fullName.split(' ')[0];
         return firstName.charAt(0).toUpperCase() + firstName.slice(1);
     };
 
-    const handleNavigation = (path) => {
+    // Sua função de navegação protegida (Mantida)
+    const handleNavigation = (path) => { //
         if (currentUser) {
             // Se o usuário estiver logado, navega normalmente
             navigate(path);
@@ -36,28 +39,42 @@ function Header() {
     };
 
     return (
-        <header className={styles.siteHeader}>
-            <div className={`container ${styles.headerContent}`}>
-                <Link to="/" className={styles.logo}>
+        // 1. CORREÇÃO: Era 'styles.siteHeader', mudou para 'styles.header'
+        <header className={styles.header}> {/* */}
+            
+            {/* 2. CORREÇÃO: Era 'styles.headerContent', mudou para 'styles.navContainer' */}
+            <div className={`container ${styles.navContainer}`}> {/* */}
+                
+                {/* 3. CORREÇÃO: 'styles.logo' está correto em ambos os arquivos */}
+                <Link to="/" className={styles.logo}> {/* */}
                     {currentUser ? `BEM VINDO, ${getFirstName(currentUser.name)}!` : "BEM VINDO!"}
                 </Link>
 
-                <nav className={styles.mainNav}>
-                    {/* Navegação: Botões usando CSS Modules */}
-                    <button onClick={() => handleNavigation('/blog')} className={styles.navButton}>
+                {/* 4. CORREÇÃO: Era 'styles.mainNav', mudou para 'styles.nav' */}
+                <nav className={styles.nav}> {/* */}
+                    
+                    {/* 5. CORREÇÃO: O novo CSS não tem '.navButton'. 
+                       Usamos '.navLink' para todos os itens terem o mesmo estilo. 
+                    */}
+                    <Link to='/' className={styles.navLink}>
+                        Início
+                    </Link>
+                    <button onClick={() => handleNavigation('/blog')} className={styles.navLink}> {/* */}
                         Blog
                     </button>
-                    <button onClick={() => handleNavigation('/desafios')} className={styles.navButton}>
+                    <button onClick={() => handleNavigation('/desafios')} className={styles.navLink}> {/* */}
                         Desafios
                     </button>
 
                     {/* Lógica de Login/Logoff */}
                     {currentUser ? (
-                        <button onClick={handleLogoff} className={styles.logoffButton}>
+                        // 6. CORREÇÃO: O novo CSS não tem '.logoffButton'. Usamos '.navLink'.
+                        <button onClick={handleLogoff} className={styles.navLinkOut}> {/* */}
                             Sair
                         </button>
                     ) : (
-                        <Link to="/login" className={styles.navLink}>
+                        // 7. CORREÇÃO: 'styles.navLink' está correto em ambos os arquivos
+                        <Link to="/login" className={styles.navLink}> {/* */}
                             Login
                         </Link>
                     )}

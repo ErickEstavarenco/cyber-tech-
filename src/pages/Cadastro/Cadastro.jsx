@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-// MUDANÇA: Reutilizando o CSS Module do Login
-import styles from '../Login/Login.module.css'; 
+// MUDANÇA: Importando seu próprio CSS Module
+import styles from './Cadastro.module.css'; 
 
 const Cadastro = () => {
   const [nome, setNome] = useState('');

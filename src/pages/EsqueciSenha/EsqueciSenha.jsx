@@ -6,7 +6,7 @@ import { sendPasswordResetEmail } from "firebase/auth";
 // Ajuste o caminho para seu FirebaseConfig na raiz
 import { auth } from '../../../FirebaseConfig.js'; 
 // Reutiliza o CSS da página de Login
-import '../Login/Login.css'; 
+import '../Login/Login.module.css'; 
 
 const EsqueciSenha = () => {
   const [email, setEmail] = useState('');

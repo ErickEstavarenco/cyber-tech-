@@ -5,6 +5,7 @@ import './styles/globals.css';
 
 // Componentes e Páginas
 import Header from './components/Header';
+import Footer from './components/Footer.jsx'
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Cadastro from './pages/Cadastro/Cadastro'; 
@@ -52,6 +53,7 @@ function App() {
           />
         </Routes>
       </main>
+      <Footer />
     </div>
   );
 }
