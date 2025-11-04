@@ -1,18 +1,16 @@
-// main.jsx
-
+// src/main.jsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
-import './styles/globals.css';
 
-// 1. Importe o AuthProvider que você acabou de criar
-import { AuthProvider } from './context/AuthContext'; // Ajuste o caminho se necessário
+// MUDANÇA 1: Importar o Provedor de Autenticação do Victor
+import { AuthProvider } from './context/AuthContext.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      {/* 2. Envolva o <App /> com o <AuthProvider /> */}
+      {/* MUDANÇA 2: Envolver o <App /> com o Provedor */}
       <AuthProvider>
         <App />
       </AuthProvider>
