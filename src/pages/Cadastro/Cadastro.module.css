@@ -108,3 +108,12 @@
 .passwordResetLink:hover {
   text-decoration: underline;
 }
+
+/* Adicione no final de Cadastro.module.css */
+
+.errorMessage {
+  color: #dc3545; /* Vermelho para erro */
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}

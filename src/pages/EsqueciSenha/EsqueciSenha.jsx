@@ -1,12 +1,12 @@
-// src/pages/EsqueciSenha/EsqueciSenha.jsx
+// src/pages/EsqueciSenha/EsqueciSenha.jsx (Corrigido)
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { sendPasswordResetEmail } from "firebase/auth";
-// Ajuste o caminho para seu FirebaseConfig na raiz
 import { auth } from '../../../FirebaseConfig.js'; 
-// Reutiliza o CSS da página de Login
-import '../Login/Login.module.css'; 
+
+// 1. CORREÇÃO: Importe o CSS Module como 'styles'
+import styles from '../Login/Login.module.css'; 
 
 const EsqueciSenha = () => {
   const [email, setEmail] = useState('');
@@ -15,6 +15,7 @@ const EsqueciSenha = () => {
   const [success, setSuccess] = useState(null);
 
   const handleSubmit = async (e) => {
+    // ... (Sua lógica de handleSubmit está PERFEITA, não mude nada nela) ...
     e.preventDefault();
     setError(null);
     setSuccess(null);
@@ -24,7 +25,7 @@ const EsqueciSenha = () => {
       await sendPasswordResetEmail(auth, email);
       setLoading(false);
       setSuccess('E-mail de redefinição enviado! Verifique sua caixa de entrada (e spam).');
-      setEmail(''); // Limpa o campo após o sucesso
+      setEmail(''); 
     } catch (err) {
       setLoading(false);
       if (err.code === 'auth/user-not-found') {
@@ -37,16 +38,15 @@ const EsqueciSenha = () => {
   };
 
   return (
-    // Reutilizamos a estrutura e classes do Login para manter o padrão
-    <div className="login-container">
-      <div className="login-card">
+    // 2. CORREÇÃO: Use {styles.nomeDaClasse} para tudo
+    <div className={styles.loginContainer}>
+      <div className={styles.loginCard}>
         <h2>Esqueceu sua senha?</h2>
-        <p className="login-subtitle">Sem problemas. Insira seu e-mail abaixo e enviaremos um link para redefini-la.</p>
+        <p className={styles.loginSubtitle}>Sem problemas. Insira seu e-mail abaixo e enviaremos um link para redefini-la.</p>
 
-        {/* Se a mensagem de sucesso foi enviada, escondemos o formulário */}
         {!success ? (
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
+            <div className={styles.formGroup}>
               <label htmlFor="email">E-mail</label>
               <input
                 type="email"
@@ -59,22 +59,24 @@ const EsqueciSenha = () => {
               />
             </div>
 
-            {error && <p className="error-message">{error}</p>}
+            {/* 3. CORREÇÃO: Use {styles.errorMessage} */}
+            {error && <p className={styles.errorMessage}>{error}</p>}
 
             <button 
               type="submit" 
-              className="login-button" 
+              className={styles.loginButton} // 4. CORREÇÃO
               disabled={loading}
             >
               {loading ? 'Enviando...' : 'Enviar link de redefinição'}
             </button>
           </form>
         ) : (
-          <p className="success-message">{success}</p>
+          // 5. CORREÇÃO: Use {styles.successMessage}
+          <p className={styles.successMessage}>{success}</p>
         )}
 
-        {/* Link para voltar ao Login */}
-        <div className="switch-auth" style={{ marginTop: '20px' }}>
+        {/* 6. CORREÇÃO: Use {styles.switchAuth} */}
+        <div className={styles.switchAuth} style={{ marginTop: '20px' }}>
           <p><Link to="/login">Voltar para o Login</Link></p>
         </div>
         
