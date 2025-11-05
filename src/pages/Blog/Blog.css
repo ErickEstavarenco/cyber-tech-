@@ -252,9 +252,7 @@
   transition: transform 0.3s ease;
 }
 
-.post-img:hover {
-  transform: scale(1.03);
-}
+
 
 .back-link {
   display: inline-block;
@@ -296,7 +294,7 @@
 }
 
 .pense {
-  background-color: #ffffff;
+  background-color: #f1f3ff;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   padding: 1.5rem;
@@ -436,7 +434,8 @@
 }
 
 .back-link {
-  display: block;
+   gap: 20px; /* espaçamento entre eles */
+
   margin-top: 20px;
   color: #007bff;
   text-decoration: none;
@@ -446,4 +445,13 @@
 
 .back-link:hover {
   text-decoration: underline;
+}
+.nav-links {
+  display: flex;
+  justify-content: space-between; /* coloca um de cada lado */
+  align-items: center;
+  gap: 20px; /* espaçamento entre eles */
+}
+.variavel strong {
+  color: #000;
 }

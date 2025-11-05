@@ -14,7 +14,7 @@ import Blog from "./pages/Blog/Blog.jsx";
 // --- Posts do Blog ---
 import Variavel from "./pages/Blog/Variavel.jsx";
 import Algoritmo from "./pages/Blog/Algoritmo.jsx";
-import Tipo from "./pages/Blog/Tipo.jsx"; // Corrigido: nome e export padrão
+import Tipo from "./pages/Blog/Tipo.jsx";
 
 // --- Desafios ---
 import ChallengeList from "./pages/ChallengeList/ChallengeList.jsx";
@@ -39,6 +39,7 @@ function NotFound() {
   );
 }
 
+
 function App() {
   return (
     <div className="app-layout">
@@ -47,12 +48,17 @@ function App() {
         <Routes>
           {/* --- Páginas principais --- */}
           <Route path="/" element={<Home />} />
+          
+          {/* --- Blog --- */}
           <Route path="/blog" element={<Blog />} />
-
-          {/* --- Posts individuais --- */}
           <Route path="/blog/variavel" element={<Variavel />} />
           <Route path="/blog/algoritmo" element={<Algoritmo />} />
           <Route path="/blog/tipos-de-dados" element={<Tipo />} />
+          
+          {/* Rotas alternativas para compatibilidade */}
+          <Route path="/tipo" element={<Tipo />} />
+          <Route path="/algoritmo" element={<Algoritmo />} />
+          <Route path="/variavel" element={<Variavel />} />
 
           {/* --- Desafios --- */}
           <Route path="/desafios" element={<ChallengeList />} />

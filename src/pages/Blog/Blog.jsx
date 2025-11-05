@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import posts from '../../data/blog-posts.json';
-// MUDANÇA: Importando o CSS global do blog
-import './Blog.css'; 
+import './Blog.css';
 
 function Blog() {
   const [mostrarMais, setMostrarMais] = useState(false);
@@ -23,24 +22,21 @@ function Blog() {
             <p>Do pensamento à ação: o poder dos algoritmos</p>
           </Link>
         </div>
+        
+        <div className="post-card">
+          <Link to="/blog/tipos-de-dados" className="read-more-link">
+            <h2>Tipos de Dados</h2>
+            <img src="/tipodedados.png" alt="Imagem sobre Tipos de dados" className="post-img" />
+            <p>Aprenda o que são e para que servem os tipos básicos de dados na programação</p>
+          </Link>
+        </div>
 
         {/* Card 2: Variáveis */}
         <div className="post-card">
-          {/* MUDANÇA: Link corrigido para /blog/variavel */}
           <Link to="/blog/variavel" className="read-more-link">
             <h2>Variáveis</h2>
             <img src="/variaveis.png" alt="Imagem sobre Variável" className="post-img" />
             <p>Entenda onde os dados vivem dentro do computador</p>
-          </Link>
-        </div>
-        
-        {/* Card 3: Tipos de Dados (Exemplo) */}
-        <div className="post-card">
-          {/* MUDANÇA: Link corrigido para /blog/tipos-de-dados */}
-          <Link to="/blog/tipos-de-dados" className="read-more-link">
-            <h2>Tipos de Dados</h2>
-            <img src="/tipodedados.png" alt="Imagem sobre Tipos de Dados" className="post-img" />
-            <p>Conheça os diferentes tipos de informação que um computador entende.</p>
           </Link>
         </div>
       </div>
