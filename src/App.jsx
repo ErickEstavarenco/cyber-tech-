@@ -1,61 +1,24 @@
-// src/App.jsx
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import './styles/globals.css'; 
+import styles from './Blog.module.css'; // Reutilizando os estilos
 
-// Layout Components (from Isabella/HEAD)
-import Header from './components/Header.jsx'; 
-import Footer from './components/Footer.jsx'; 
-
-// Page Imports (from Isabella/HEAD)
-import Home from './pages/Home/Home.jsx';
-import Blog from './pages/Blog/Blog.jsx';
-import ChallengeList from './pages/ChallengeList/ChallengeList.jsx';
-import ChallengeDetail from './pages/ChallengeDetail/ChallengeDetail.jsx';
-
-// Auth Page Imports (from Victor/Incoming)
-import Login from './pages/Login/Login.jsx';
-import Cadastro from './pages/Cadastro/Cadastro.jsx';
-import EsqueciSenha from './pages/EsqueciSenha/EsqueciSenha.jsx';
-import Admin from './admin/Admin.jsx';
-
-// Auth Util (from Victor/Incoming)
-import ProtectedRoute from './context/ProtectedRoute.jsx';
-
-// NOTA: O AuthProvider (do AuthContext) está sendo
-// usado no 'main.jsx', o que é a prática correta.
-
-function App() {
+export default function Variavel() {
   return (
-    <div className="app-layout">
-      <Header />
-      <main>
-        <Routes>
-          {/* --- Rotas Públicas (de Isabella) --- */}
-          <Route path="/" element={<Home />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/desafios" element={<ChallengeList />} />
-          <Route path="/desafios/:slug" element={<ChallengeDetail />} />
-          
-          {/* --- Rotas de Autenticação (de Victor) --- */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/cadastro" element={<Cadastro />} />
-          <Route path="/esqueci-senha" element={<EsqueciSenha />} />
+    <div className={`container ${styles.postDetailContainer}`}>
+      <h1 className={styles.detailTitle}>Variáveis na Programação</h1>
+      <div className={styles.postContent}>
+        <p>As variáveis são a espinha dorsal de qualquer programa de computador. Pense nelas como caixas rotuladas que você usa para armazenar informações na memória do computador.</p>
+        
+        <h2 className={styles.contentSubtitle}>O Que Armazenam?</h2>
+        <p>Uma variável pode armazenar qualquer tipo de dado, como números inteiros, textos (strings), valores de verdadeiro ou falso (booleanos), e até mesmo estruturas mais complexas como listas ou objetos.</p>
+        
+        <h2 className={styles.contentSubtitle}>Exemplo Prático</h2>
+        <p>Em linguagens como JavaScript, declarar uma variável é simples:</p>
+        <pre className={styles.codeBlock}>
+          {`let idade = 25; // Armazenando um número\nconst nome = "CyberTech"; // Armazenando um texto\nlet isStudent = true; // Armazenando um booleano`}
+        </pre>
 
-          {/* --- Rotas Protegidas (de Victor) --- */}
-          <Route 
-            path="/admin" 
-            element={
-              <ProtectedRoute>
-                <Admin />
-              </ProtectedRoute>
-            } 
-          />
-        </Routes>
-      </main>
-      <Footer /> 
+        <p>Ao entender as variáveis, você dá o primeiro passo para construir qualquer lógica de programação.</p>
+      </div>
     </div>
   );
 }
-
-export default App;
