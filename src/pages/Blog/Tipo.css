@@ -1,0 +1,75 @@
+.blog-page-dados {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0;
+  padding-bottom: 2rem;
+}
+
+
+.posts-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+/* Cada card ocupa 48% para caber 2 por linha */
+.post-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  flex: 1 1 calc(48% - 1.5rem);
+  box-sizing: border-box;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+.post-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+
+.post-card h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.post-card p {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+.posta-img {
+  width: 450px;
+  height: auto;
+  margin-bottom: 1rem; /* espaço entre a imagem e o texto */
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+.borda{
+  border-left: 6px solid rgb(9, 0, 128);
+  padding-left: 18px;
+  padding-right: 3px;
+  color: #333;
+
+}
+
+.postar-img {
+  display: block;          /* transforma a imagem em bloco */
+  margin: 0 auto;          /* centraliza horizontalmente */
+  width: 450px;
+  height: auto;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.tipo {
+    text-align: center;
+    color: #333;
+}

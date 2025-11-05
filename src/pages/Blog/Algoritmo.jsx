@@ -14,6 +14,8 @@ const Algoritmo = () => {
     <div className="blog-page">
       <h1 className="page-title">Algoritmo</h1> <br></br>
       <div className="pense">
+      <h3 className="borda">Entendendo o Conceito de Algoritmos</h3>
+
         <p>
           Um <strong>algoritmo</strong> é um conjunto de{" "}
           <strong>instruções lógicas e ordenadas</strong> usadas para resolver
@@ -98,11 +100,11 @@ const Algoritmo = () => {
           passo — como início, operação, decisão e fim — ajudando a compreender
           a lógica do processo de forma organizada e visual.
         </p>
-
+ 
         <a href="/blog" className="back-link">
           ← Voltar
         </a>
-        &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;
          <a href="/variavel" className="back-link">
           Próximo →
         </a>

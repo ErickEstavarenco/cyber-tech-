@@ -8,6 +8,7 @@ const Variavel = () => {
       <br />
 
       <div className="variavel">
+           <h3 className="borda">O que é uma variável?</h3>
         <p>
           Uma <strong>variável</strong> é como uma <strong>caixa nomeada</strong> dentro da
           memória do computador usada para <strong>armazenar informações temporariamente</strong>.
@@ -29,7 +30,7 @@ const Variavel = () => {
 
         <br />
 
-        <strong>Exemplo em Python:</strong>
+        <strong>Exemplo em Python:</strong> <br></br> <br></br>
         <img src="/variavelex1.png" alt="Imagem sobre Variável" className="pos-img" />
 
         <p>Nesse exemplo:</p>
@@ -47,6 +48,10 @@ const Variavel = () => {
         </p>
 
         <a href="/blog" className="back-link">← Voltar</a>
+        &nbsp;&nbsp;&nbsp;
+         <a href="/tipo" className="back-link">
+          Próximo →
+        </a>
       </div>
     </div>
   );

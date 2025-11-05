@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import posts from '../../data/blog-posts.json';
 import './Blog.css';
 
-
 function Blog() {
   const [mostrarMais, setMostrarMais] = useState(false);
 
@@ -53,11 +52,13 @@ function Blog() {
           </div>
          </div>
             <div className="post-card">
+        <Link to="/tipo" className="read-more-link">
+
           <h2>Tipos de Dados</h2>
           <img src="/tipodedados.png" alt="Imagem sobre Tipos de dados" className="post-img" />
 
-          <p>Existem diferentes tipos de dados que você pode usar para armazenar valores.
-            Os tipos básicos incluem:</p>
+          <p>Aprenda o que são e para que servem os tipos básicos de dados na programação</p>
+            </Link>
            
              
                 

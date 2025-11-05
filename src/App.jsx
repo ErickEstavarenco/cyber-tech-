@@ -12,11 +12,13 @@ import Footer from './components/Footer.jsx'; // 1. IMPORTA O FOOTER
 import Home from './pages/Home/Home.jsx';
 import Login from './pages/Login/Login.jsx';
 import Cadastro from './pages/Cadastro/Cadastro.jsx';
+import Tipo from './pages/Blog/Tipo.jsx'
 import Blog from './pages/Blog/Blog.jsx';
 import ChallengeList from './pages/ChallengeList/ChallengeList.jsx';
 import ChallengeDetail from './pages/ChallengeDetail/ChallengeDetail.jsx';
 import Algoritmo from "./pages/Blog/Algoritmo";
 import Variavel from "./pages/Blog/Variavel.jsx"
+
 
 
 function App() {
@@ -32,9 +34,11 @@ function App() {
           <Route path="/cadastro" element={<Cadastro />} />
 
           {/* Rotas de navegação */}
+          <Route path="/tipo" element={<Tipo />}/>
           <Route path="/blog" element={<Blog />} />
           <Route path="/algoritmo" element={<Algoritmo />} />
           <Route path="/variavel" element={<Variavel />} />
+          
          
 
           <Route path="/desafios" element={<ChallengeList />} />
