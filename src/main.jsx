@@ -1,15 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import App from "./App.jsx"; // <-- CORREÇÃO 1: Adicionado .jsx
+import App from "./App.jsx";
+import ErrorBoundary from "./components/ErrorBoundary.jsx";
 
-// CORREÇÃO 2: Importando seu tema global (o 'index.css' foi removido)
 import "./styles/globals.css"; 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ErrorBoundary>
   </React.StrictMode>
 );

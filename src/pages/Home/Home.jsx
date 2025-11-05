@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Home.module.css'; 
 import challenges from '../../data/challenges.json';
@@ -9,32 +9,49 @@ import iconPerson from '../../assets/icons/icon-person.png';
 import iconFood from '../../assets/icons/icon-food.png';       
 import iconSunMoon from '../../assets/icons/icon-sun-moon.png';  
 
-const AlgorithmIcon = () => (
-  <img src={iconAlgoritmo} alt="Ícone de algoritmo" className={styles.infoCardIcon} />
-);
+const AlgorithmIcon = React.memo(() => (
+  <img 
+    src={iconAlgoritmo} 
+    alt="Ícone de algoritmo" 
+    className={styles.infoCardIcon}
+    loading="lazy"
+  />
+));
 
-const ChallengeCardIcon = ({ iconSrc, altText }) => (
-  <img src={iconSrc} alt={altText} className={styles.challengeCardIcon} />
-);
+AlgorithmIcon.displayName = 'AlgorithmIcon';
+
+const ChallengeCardIcon = React.memo(({ iconSrc, altText }) => (
+  <img 
+    src={iconSrc} 
+    alt={altText} 
+    className={styles.challengeCardIcon}
+    loading="lazy"
+  />
+));
+
+ChallengeCardIcon.displayName = 'ChallengeCardIcon';
 
 function Home() {
-  const iconMap = {
+  const iconMap = useMemo(() => ({
     person: iconPerson,
     food: iconFood,
     'sun-moon': iconSunMoon,
     algoritmo: iconAlgoritmo,
-  };
+  }), []);
 
-  // MUDANÇA: Filtramos o desafio "o-que-e-algoritmo" da lista de desafios práticos
+  // Filtramos o desafio "o-que-e-algoritmo" da lista de desafios práticos
   // e pegamos os 3 seguintes (incluindo o "sol e lua").
-  const featuredChallenges = challenges
-    .filter(challenge => challenge.slug !== "o-que-e-algoritmo")
-    .slice(0, 3); 
+  const featuredChallenges = useMemo(() => 
+    challenges
+      .filter(challenge => challenge.slug !== "o-que-e-algoritmo")
+      .slice(0, 3),
+    []
+  ); 
 
   return (
     <div className={styles.home}>
       
-      <section className={styles.heroSection}>
+      <section className={styles.heroSection} aria-label="Hero section">
         <div className="container">
           <p className={styles.welcomeText}>BEM VINDO!</p>
           <h1 className={styles.mainTitle}>Aprenda programação</h1>
@@ -56,7 +73,7 @@ function Home() {
         </section>
 
         {/* Seção 2: Desafios práticos (agora filtrados) */}
-        <section className={styles.challengesSection}>
+        <section className={styles.challengesSection} aria-label="Desafios práticos">
           <h2>Desafios práticos</h2>
           <p>Experimente o funcionamento de if/else por meio de exercícios</p>
           

@@ -1,0 +1,68 @@
+/* src/components/ErrorBoundary.module.css */
+.errorBoundaryContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: 40px 20px;
+}
+
+.errorBoundaryContent {
+  text-align: center;
+  max-width: 500px;
+}
+
+.errorTitle {
+  font-size: 2rem;
+  color: var(--color-text-light);
+  margin-bottom: 16px;
+}
+
+.errorMessage {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.resetButton {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #FFF;
+  background-color: var(--color-primary-start);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.resetButton:hover {
+  background-color: var(--color-primary-end);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.errorDetails {
+  margin-top: 32px;
+  text-align: left;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 16px;
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.errorDetails summary {
+  cursor: pointer;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.errorDetails pre {
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
