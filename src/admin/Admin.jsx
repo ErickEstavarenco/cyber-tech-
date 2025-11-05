@@ -1,18 +1,15 @@
 // src/admin/Admin.jsx
 import React from 'react';
+// Importa o CSS que veio da branch do Victor
+import styles from './Admin.css'; 
 
-// MUDANÇA CRÍTICA:
-// Mude a importação de 'styles from...' para uma importação direta.
-// O 'Admin.css' não é um CSS Module.
-import './Admin.css'; 
-
+// MUDANÇA: Usando 'export default'
 export default function Admin() {
   return (
-    // O resto do código (usando classes globais) está correto
     <div className="container">
       <h1>Painel de Administração</h1>
       <p>Esta é uma rota protegida.</p>
-      <p>O conteúdo da administração virá aqui.</p>
+      <p>O conteúdo da administração (provavelmente do Victor) virá aqui.</p>
     </div>
   );
 }
