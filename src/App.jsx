@@ -1,24 +1,73 @@
+// src/App.jsx
 import React from 'react';
-import styles from './Blog.module.css'; // Reutilizando os estilos
+import { Routes, Route } from 'react-router-dom';
+import './styles/globals.css'; // Estilos globais
 
-export default function Variavel() {
+// Layout Components
+import Header from './components/Header.jsx'; 
+import Footer from './components/Footer.jsx'; 
+
+// --- Imports de Páginas ---
+import Home from './pages/Home/Home.jsx';
+import Blog from './pages/Blog/Blog.jsx';
+
+// Imports dos posts individuais (Usado no modelo de rota estática)
+import Variavel from './pages/Blog/Variavel.jsx';
+import Algoritmo from './pages/Blog/Algoritmo.jsx';
+import TipoDeDados from './pages/Blog/Tipo.jsx'; // (Assumindo que você tem este arquivo)
+
+// Imports de Desafios
+import ChallengeList from './pages/ChallengeList/ChallengeList.jsx';
+import ChallengeDetail from './pages/ChallengeDetail/ChallengeDetail.jsx';
+
+// Imports de Autenticação
+import Login from './pages/Login/Login.jsx';
+import Cadastro from './pages/Cadastro/Cadastro.jsx';
+import EsqueciSenha from './pages/EsqueciSenha/EsqueciSenha.jsx';
+import Admin from './admin/Admin.jsx';
+import ProtectedRoute from './context/ProtectedRoute.jsx';
+
+
+function App() {
   return (
-    <div className={`container ${styles.postDetailContainer}`}>
-      <h1 className={styles.detailTitle}>Variáveis na Programação</h1>
-      <div className={styles.postContent}>
-        <p>As variáveis são a espinha dorsal de qualquer programa de computador. Pense nelas como caixas rotuladas que você usa para armazenar informações na memória do computador.</p>
-        
-        <h2 className={styles.contentSubtitle}>O Que Armazenam?</h2>
-        <p>Uma variável pode armazenar qualquer tipo de dado, como números inteiros, textos (strings), valores de verdadeiro ou falso (booleanos), e até mesmo estruturas mais complexas como listas ou objetos.</p>
-        
-        <h2 className={styles.contentSubtitle}>Exemplo Prático</h2>
-        <p>Em linguagens como JavaScript, declarar uma variável é simples:</p>
-        <pre className={styles.codeBlock}>
-          {`let idade = 25; // Armazenando um número\nconst nome = "CyberTech"; // Armazenando um texto\nlet isStudent = true; // Armazenando um booleano`}
-        </pre>
+    <div className="app-layout">
+      <Header />
+      <main>
+        <Routes>
+          {/* --- Rotas Públicas Principais --- */}
+          <Route path="/" element={<Home />} />
+          
+          {/* --- Rotas de Blog (Lista e Posts Estáticos) --- */}
+          <Route path="/blog" element={<Blog />} />
+          
+          {/* Rotas estáticas para os posts: */}
+          <Route path="/blog/variavel" element={<Variavel />} />
+          <Route path="/blog/algoritmo" element={<Algoritmo />} />
+          <Route path="/blog/tipos-de-dados" element={<TipoDeDados />} /> 
+          
+          {/* --- Rotas de Desafios --- */}
+          <Route path="/desafios" element={<ChallengeList />} />
+          <Route path="/desafios/:slug" element={<ChallengeDetail />} />
+          
+          {/* --- Rotas de Autenticação --- */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/cadastro" element={<Cadastro />} />
+          <Route path="/esqueci-senha" element={<EsqueciSenha />} />
 
-        <p>Ao entender as variáveis, você dá o primeiro passo para construir qualquer lógica de programação.</p>
-      </div>
+          {/* --- Rotas Protegidas --- */}
+          <Route 
+            path="/admin" 
+            element={
+              <ProtectedRoute>
+                <Admin />
+              </ProtectedRoute>
+            } 
+          />
+        </Routes>
+      </main>
+      <Footer /> 
     </div>
   );
 }
+
+export default App;
