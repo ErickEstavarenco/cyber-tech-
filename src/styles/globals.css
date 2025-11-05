@@ -1,102 +1,143 @@
-/* src/styles/globals.css */
+/* ===== globals.css ===== */
 
-:root {
-    /* Cores do Tema Azul Gradiente (Escuro -> Claro) */
-    --color-primary-start: #1E90FF; /* Azul Claro */
-    --color-primary-end: #0057D8;   /* Azul Escuro */
-    --color-primary-gradient: linear-gradient(180deg, var(--color-primary-end) 0%, var(--color-primary-start) 100%);
-    
-    /* Cores Neutras */
-    --color-surface: #FFFFFF;    /* Superfície de Cards (Branco) */
-    --color-text-dark: #212529;  /* Texto Principal (Preto) */
-    --color-text-light: #F8F9FA; /* Texto em Fundo Escuro (Branco) */
-    --color-shadow: rgba(0, 0, 0, 0.1);
-    
-    /* Tipografia */
-    --font-family-primary: 'Roboto', 'Open Sans', sans-serif;
-    --font-size-base: 16px;
-    
-    /* Layout */
-    --header-height: 60px; /* Altura do header compacto */
-}
-
-/* Reset Básico */
+/* ===== RESET BÁSICO ===== */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
 }
 
+/* ===== VARIÁVEIS DE TEMA ===== */
+:root {
+  --color-primary: #0d6efd;           /* Azul padrão */
+  --color-primary-light: #3b9dff;     /* Azul claro */
+  --color-gradient-start: #0d6efd;    /* Gradiente início */
+  --color-gradient-end: #3b9dff;      /* Gradiente final */
+  --color-bg-light: #f4f9ff;          /* Fundo claro */
+  --color-text-dark: #1e293b;         /* Texto principal */
+  --color-text-light: #ffffff;        /* Texto claro */
+}
+
+/* ===== FUNDO GERAL ===== */
 body {
-    font-family: var(--font-family-primary);
-    font-size: var(--font-size-base);
-    line-height: 1.6;
-    color: var(--color-text-light); 
-    background: var(--color-primary-gradient);
-    min-height: 100vh;
-    
-    /* ESSENCIAL: Espaço para o header fixo */
-    padding-top: var(--header-height); 
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
+  color: var(--color-text-dark);
+  min-height: 100vh;
+  line-height: 1.6;
 }
 
-/* CORREÇÃO 1: "Sticky Footer"
-  Transforma o app-layout (do App.jsx) em um container flex
-*/
-.app-layout {
+/* ===== LINKS ===== */
+a {
+  color: var(--color-text-light);
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+a:hover {
+  color: var(--color-primary-light);
+  text-decoration: underline;
+}
+
+/* ===== BOTÕES GLOBAIS ===== */
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: var(--color-primary);
+  color: var(--color-text-light);
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: var(--color-primary-light);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* ===== CABEÇALHO FIXO ===== */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to right, var(--color-gradient-start), var(--color-gradient-end));
+  color: var(--color-text-light);
+  padding: 14px 40px;
   display: flex;
-  flex-direction: column;
-  /* Garante que o layout ocupe no mínimo a altura 
-     da tela (menos o padding que já demos ao body) */
-  min-height: calc(100vh - var(--header-height));
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
 }
 
-/* Container genérico */
-.container {
-    width: 100%;
-    max-width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-/* Botão Primário Padrão */
-.btn-primary {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: #FFF;
-    background-color: var(--color-primary-start);
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background-color 0.3s;
-}
-
-.btn-primary:hover {
-    background-color: var(--color-primary-end);
-}
-
-/* CORREÇÃO 2: Animação e "Sticky Footer"
-*/
+/* ===== EVITAR SOBREPOSIÇÃO DO CONTEÚDO ===== */
 main {
-  animation: fadeIn 0.5s ease-out;
-  /* Esta linha "mágica" faz o <main> crescer e empurrar o Footer para baixo */
-  flex-grow: 1; 
+  padding-top: 90px; /* compensação do header fixo */
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* Animação de fade-in suave para o conteúdo */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
+/* ===== NAVEGAÇÃO À DIREITA ===== */
+.nav-right {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-right a,
+.nav-right button {
+  background: transparent;
+  color: var(--color-text-light);
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.nav-right a:hover,
+.nav-right button:hover {
+  color: #dce9ff;
+}
+
+/* ===== RODAPÉ ===== */
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #f1f5f9;
+  background: linear-gradient(to right, var(--color-gradient-end), var(--color-gradient-start));
+  font-size: 0.9rem;
+  margin-top: 40px;
+}
+
+/* ===== CONTAINERS ===== */
+.container {
+  padding: 2rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 16px;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .nav-right {
+    margin-top: 10px;
+  }
+
+  main {
+    padding-top: 120px;
   }
 }

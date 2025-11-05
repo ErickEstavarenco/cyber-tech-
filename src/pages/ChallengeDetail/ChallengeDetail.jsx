@@ -3,8 +3,6 @@ import React from "react";
 import { useParams } from 'react-router-dom';
 import challenges from '../../data/challenges.json';
 // MUDANÇA: Importando o CSS Module
-import styles from './ChallengeDetail.module.css';
-import pageStyles from '../Blog/Blog.module.css'; // Reutilizando título
 
 export default function ChallengeDetail() {
   const { slug } = useParams();

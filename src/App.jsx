@@ -1,32 +1,43 @@
 // src/App.jsx
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import './styles/globals.css'; // Estilos globais
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import "./styles/globals.css";
 
-// Layout Components
-import Header from './components/Header.jsx'; 
-import Footer from './components/Footer.jsx'; 
+// Layout
+import Header from "./components/Header.jsx";
+import Footer from "./components/Footer.jsx";
 
-// --- Imports de Páginas ---
-import Home from './pages/Home/Home.jsx';
-import Blog from './pages/Blog/Blog.jsx';
+// --- Páginas principais ---
+import Home from "./pages/Home/Home.jsx";
+import Blog from "./pages/Blog/Blog.jsx";
 
-// Imports dos posts individuais (Usado no modelo de rota estática)
-import Variavel from './pages/Blog/Variavel.jsx';
-import Algoritmo from './pages/Blog/Algoritmo.jsx';
-import TipoDeDados from './pages/Blog/Tipo.jsx'; // (Assumindo que você tem este arquivo)
+// --- Posts do Blog ---
+import Variavel from "./pages/Blog/Variavel.jsx";
+import Algoritmo from "./pages/Blog/Algoritmo.jsx";
+import Tipo from "./pages/Blog/Tipo.jsx"; // Corrigido: nome e export padrão
 
-// Imports de Desafios
-import ChallengeList from './pages/ChallengeList/ChallengeList.jsx';
-import ChallengeDetail from './pages/ChallengeDetail/ChallengeDetail.jsx';
+// --- Desafios ---
+import ChallengeList from "./pages/ChallengeList/ChallengeList.jsx";
+import ChallengeDetail from "./pages/ChallengeDetail/ChallengeDetail.jsx";
 
-// Imports de Autenticação
-import Login from './pages/Login/Login.jsx';
-import Cadastro from './pages/Cadastro/Cadastro.jsx';
-import EsqueciSenha from './pages/EsqueciSenha/EsqueciSenha.jsx';
-import Admin from './admin/Admin.jsx';
-import ProtectedRoute from './context/ProtectedRoute.jsx';
+// --- Autenticação ---
+import Login from "./pages/Login/Login.jsx";
+import Cadastro from "./pages/Cadastro/Cadastro.jsx";
+import EsqueciSenha from "./pages/EsqueciSenha/EsqueciSenha.jsx";
 
+// --- Administração ---
+import Admin from "./admin/Admin.jsx";
+import ProtectedRoute from "./context/ProtectedRoute.jsx";
+
+// --- Página 404 ---
+function NotFound() {
+  return (
+    <div style={{ textAlign: "center", padding: "80px" }}>
+      <h1>404</h1>
+      <p>Página não encontrada 😢</p>
+    </div>
+  );
+}
 
 function App() {
   return (
@@ -34,38 +45,39 @@ function App() {
       <Header />
       <main>
         <Routes>
-          {/* --- Rotas Públicas Principais --- */}
+          {/* --- Páginas principais --- */}
           <Route path="/" element={<Home />} />
-          
-          {/* --- Rotas de Blog (Lista e Posts Estáticos) --- */}
           <Route path="/blog" element={<Blog />} />
-          
-          {/* Rotas estáticas para os posts: */}
+
+          {/* --- Posts individuais --- */}
           <Route path="/blog/variavel" element={<Variavel />} />
           <Route path="/blog/algoritmo" element={<Algoritmo />} />
-          <Route path="/blog/tipos-de-dados" element={<TipoDeDados />} /> 
-          
-          {/* --- Rotas de Desafios --- */}
+          <Route path="/blog/tipos-de-dados" element={<Tipo />} />
+
+          {/* --- Desafios --- */}
           <Route path="/desafios" element={<ChallengeList />} />
           <Route path="/desafios/:slug" element={<ChallengeDetail />} />
-          
-          {/* --- Rotas de Autenticação --- */}
+
+          {/* --- Autenticação --- */}
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/esqueci-senha" element={<EsqueciSenha />} />
 
-          {/* --- Rotas Protegidas --- */}
-          <Route 
-            path="/admin" 
+          {/* --- Administração (rota protegida) --- */}
+          <Route
+            path="/admin"
             element={
               <ProtectedRoute>
                 <Admin />
               </ProtectedRoute>
-            } 
+            }
           />
+
+          {/* --- Rota 404 --- */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-      <Footer /> 
+      <Footer />
     </div>
   );
 }

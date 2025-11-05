@@ -109,3 +109,51 @@
     font-size: 1.1rem;
     font-weight: 500;
 }
+/* Estilos específicos para a página de lista de desafios */
+.challengeListContainer {
+  padding: 2rem;
+  text-align: center;
+}
+
+.pageTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #1e3a8a; /* Azul escuro */
+}
+
+.pageSubtitle {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: #475569; /* Cinza suave */
+}
+
+.challengeCardsList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.challengeCard {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 1rem;
+  width: 220px;
+  text-align: center;
+  text-decoration: none;
+  color: #1e293b;
+  transition: all 0.2s ease-in-out;
+}
+
+.challengeCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.challengeCardIcon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 0.8rem;
+}
