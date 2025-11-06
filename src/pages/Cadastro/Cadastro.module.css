@@ -140,3 +140,18 @@
   box-shadow: 0 2px 8px rgba(220, 38, 38, 0.1);
   text-align: center;
 }
+
+/* Adicione isto ao final de src/pages/Login/Login.module.css */
+.errorMessage {
+  color: #dc3545; 
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.successMessage {
+  color: #0b875b; 
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 15px;
+}

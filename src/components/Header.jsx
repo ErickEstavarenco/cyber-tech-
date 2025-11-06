@@ -1,9 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react"; // 1. Importe useEffect
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
 import { useAuth } from "../context/AuthContext";
 import { auth } from "../../FirebaseConfig";
 import { signOut } from "firebase/auth";
+
+// 2. Readicione a função auxiliar para pegar o primeiro nome
+const getFirstName = (fullName) => {
+  if (!fullName) return '';
+  const firstName = fullName.split(' ')[0];
+  return firstName.charAt(0).toUpperCase() + firstName.slice(1);
+};
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -17,10 +24,22 @@ export default function Header() {
     navigate("/login");
   };
 
+  // 3. (OPCIONAL, mas resolve seu exemplo) Atualiza o TÍTULO da página
+  useEffect(() => {
+    if (currentUser && currentUser.name) {
+      document.title = `CyberTech | ${getFirstName(currentUser.name)}`;
+    } else {
+      document.title = "CyberTech";
+    }
+  }, [currentUser]); // Atualiza o título quando o usuário mudar
+
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
-        <Link to="/">CyberTech</Link>
+        {/* 4. Altere o logo para exibir o nome de usuário */}
+        <Link to="/">
+          {currentUser ? `Olá, ${getFirstName(currentUser.name)}!` : "CyberTech"}
+        </Link>
       </div>
 
       {/* Navegação */}
