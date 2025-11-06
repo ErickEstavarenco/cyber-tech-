@@ -39,7 +39,7 @@ const Variavel = () => {
 
         <br />
 
-        <img src="/variavelex2.png" alt="Imagem sobre Variável" className="post-img" />
+        <img src="/variavelex2.png" alt="Imagem sobre Variável" className="postar-img" />
         <p>
           A imagem mostra uma representação visual de uma variável, parecida com uma caixa nomeada onde um valor é guardado.
           No exemplo, a “caixa” tem o nome da variável (<strong>idade</strong>) e dentro dela está o valor (<strong>25</strong>).

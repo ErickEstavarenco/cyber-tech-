@@ -1,0 +1,41 @@
+
+.posta-img {
+  width: 450px;
+  height: auto;
+  margin-bottom: 1rem; /* espaço entre a imagem e o texto */
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+.borda{
+  border-left: 6px solid rgb(9, 0, 128);
+  padding-left: 18px;
+  padding-right: 3px;
+  color: #333;
+
+}
+
+.postar-img {
+  display: block;          /* transforma a imagem em bloco */
+  margin: 0 auto;          /* centraliza horizontalmente */
+  width: 450px;
+  height: auto;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.tipo {
+    text-align: center;
+    color: #333;
+}
+.back-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}

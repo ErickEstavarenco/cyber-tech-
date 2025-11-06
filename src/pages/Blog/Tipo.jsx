@@ -68,20 +68,16 @@ const Tipo = () => {
             Isso ilustra como o computador <strong>organiza e reconhece diferentes tipos de informações </strong>, permitindo que cada uma seja usada de forma correta em operações específicas.
            </p>
 
-    
+      <a href="/blog" className="back-link">← Voltar</a>
+        &nbsp;&nbsp;&nbsp;
+         <a href="/condicionais" className="back-link">
+          Próximo →
+        </a>
         </div>
 
 
         
-        <div>
-        <a href="/blog" className="back-link">
-          ← Voltar
-        </a>
-        &nbsp;&nbsp;&nbsp;
-         <a href="/variavel" className="back-link">
-          Próximo →
-        </a>
-      </div>
+        
     </div>
   );
 };

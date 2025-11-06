@@ -66,16 +66,17 @@ function Blog() {
 
 
         <div className="post-card">
+          <Link to="/condicionais" className="read-more-link">
+
           <h2>Condicionais (If, Else, Elif)</h2>
+
               <img src="/condicionais.png" alt="Imagem sobre condicionais" className="post-img" />
           
        
-          <p>As Condicionais permitem que o computador
-             tome decisões com base em determinadas situações.
-             Se uma condição for verdadeira, um bloco de código é executado;
-             caso contrário, outro pode ser executado.
+          <p>
+            Quando o 'se' muda tudo na programação
          </p>
-        
+        </Link>
           
         </div>
 
