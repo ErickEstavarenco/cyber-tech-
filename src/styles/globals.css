@@ -18,65 +18,33 @@
   --color-bg-light: #f4f9ff;          /* Fundo claro */
   --color-text-dark: #1e293b;         /* Texto principal */
   --color-text-light: #ffffff;        /* Texto claro */
-  --header-height: 60px;               /* Altura do header */
-  
-  /* Variáveis para compatibilidade com Header.module.css */
-  --color-primary-start: #0d6efd;
-  --color-primary-end: #3b9dff;
-  --color-shadow: rgba(0, 0, 0, 0.1);
+  --header-height: 90px;              /* Cabeçalho maior */
+  --color-shadow: rgba(0, 0, 0, 0.15);
 }
 
 /* ===== FUNDO GERAL ===== */
-html {
+html,
+body {
   width: 100%;
   height: 100%;
   overflow-x: hidden;
-  margin: 0;
-  padding: 0;
 }
 
 body {
-  /* gradiente horizontal mais sutil e moderno */
   background: linear-gradient(90deg, var(--color-gradient-start) 0%, var(--color-gradient-end) 100%);
   color: var(--color-text-dark);
   min-height: 100vh;
-  height: 100%;
   line-height: 1.6;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
   display: flex;
   flex-direction: column;
 }
 
-#root {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  padding: 0;
-}
-
+#root,
 .app-layout {
   width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.app-layout main {
-  flex: 1; /* Faz o main ocupar todo o espaço disponível */
-  padding-bottom: 0 !important; /* Remove padding inferior */
-  margin-bottom: 0 !important;
-}
-
-.app-layout footer {
-  margin-top: auto !important;
-  margin-bottom: 0 !important;
 }
 
 /* ===== LINKS ===== */
@@ -112,74 +80,45 @@ button:active {
   transform: scale(0.97);
 }
 
-/* ===== CABEÇALHO FIXO ===== */
-/* Nota: O header está sendo estilizado pelo Header.module.css */
-/* Este estilo global serve apenas como fallback */
-
-/* ===== EVITAR SOBREPOSIÇÃO DO CONTEÚDO ===== */
+/* ===== MAIN (Conteúdo) ===== */
 main {
-  padding-top: 90px; /* compensação do header fixo */
+  flex: 1;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  margin-bottom: 0 !important;
-  flex: 1; /* Ocupa todo o espaço disponível */
-  padding-bottom: 0 !important;
+  padding-top: var(--header-height);
+  padding-bottom: 40px;
 }
 
-/* ===== NAVEGAÇÃO À DIREITA ===== */
-.nav-right {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-}
-
-.nav-right a,
-.nav-right button {
-  background: transparent;
-  color: var(--color-text-light);
-  font-weight: 500;
-  border: none;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.nav-right a:hover,
-.nav-right button:hover {
-  color: #dce9ff;
+/* ===== CONTAINER ===== */
+.container {
+  padding: 1.25rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  color: var(--color-text-dark);
 }
 
 /* ===== RODAPÉ ===== */
-/* Nota: O footer está sendo estilizado pelo Footer.module.css */
-/* Este estilo global serve apenas como fallback */
-
-/* ===== CONTAINERS ===== */
-.container {
-  padding: 1.25rem; /* compact */
-  padding-bottom: 0; /* Remove padding inferior para evitar espaço antes do footer */
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.06); /* leve sobreposição para destaque sobre o gradiente */
-  backdrop-filter: blur(4px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-}
-
-/* Container específico para última seção - sem padding inferior */
-.container:last-child {
-  padding-bottom: 0;
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #ffffff;
+  background: rgba(13, 110, 253, 0.2);
+  backdrop-filter: blur(8px);
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 /* ===== RESPONSIVIDADE ===== */
 @media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    padding: 16px;
-  }
-
-  .nav-right {
-    margin-top: 10px;
-  }
-
   main {
-    padding-top: 120px;
+    padding-top: 110px; /* compensa o header maior */
+    padding-bottom: 30px;
+  }
+
+  .container {
+    padding: 1rem;
   }
 }

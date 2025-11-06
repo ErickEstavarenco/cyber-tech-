@@ -1,390 +1,122 @@
 /* src/components/Header.module.css */
-
+/* ===== CABEÇALHO ===== */
 .header {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    z-index: 1000 !important;
-    background: linear-gradient(90deg, var(--color-primary-start) 0%, var(--color-primary-end) 100%) !important;
-    box-shadow: 0 2px 4px var(--color-shadow);
-    height: var(--header-height, 60px);
-    display: flex !important;
-    align-items: center !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    box-sizing: border-box !important;
-    overflow: visible;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: linear-gradient(90deg, #1e88e5, #1565c0);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilos do hamburguer */
+/* ===== LOGO ===== */
+.logo a {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+}
+
+/* ===== SEÇÃO DIREITA (menu + botões) ===== */
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+/* ===== BOTÃO HAMBURGUER ===== */
 .hamburger {
-    display: none;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    position: relative;
-    z-index: 1002;
-    width: 30px;
-    height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  gap: 6px;
+  z-index: 2001;
 }
 
 .hamburger span {
-    display: block;
-    width: 100%;
-    height: 3px;
-    background-color: white;
-    margin: 6px 0;
-    transition: all 0.3s ease-in-out;
-    border-radius: 3px;
+  width: 26px;
+  height: 3px;
+  background-color: white;
+  border-radius: 2px;
+  transition: 0.3s;
 }
 
-/* Animação do hamburguer */
+/* Animação do ícone */
 .hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(7px, 7px);
+  transform: rotate(45deg) translateY(8px);
 }
-
 .hamburger.active span:nth-child(2) {
-    opacity: 0;
+  opacity: 0;
 }
-
 .hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
+  transform: rotate(-45deg) translateY(-8px);
 }
 
-.navContainer {
-    display: flex;
-    justify-content: space-between; /* Logo na esquerda, nav na direita */
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.logo {
-    color: var(--color-text-light);
-    font-size: 1.4rem;
-    font-weight: bold;
-    text-decoration: none;
-    transition: opacity 0.2s;
-}
-.logo:hover {
-    opacity: 0.8;
-}
-
+/* ===== NAVEGAÇÃO ===== */
 .nav {
-    display: flex;
-    gap: 20px;
-    align-items: center;
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  position: absolute;
+  right: 60px; /* 🔹 fica ao lado esquerdo do botão hamburguer */
+  top: 50%;
+  transform: translateY(-50%) translateX(30px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s ease;
+  z-index: 1001; /* camada padrão para nav */
 }
 
-@media screen and (max-width: 768px) {
-    .hamburger {
-        display: block;
-    }
+  /* Quando o menu é aberto */
+ .nav.open {
+   opacity: 1;
+   pointer-events: auto;
+  /* aumenta o afastamento para garantir espaço extra (ajuste fino) */
+  transform: translateY(-50%) translateX(-24px);
+  z-index: 2002; /* acima do botão hamburguer para evitar ser coberto */
+ }
 
-    .nav {
-        position: fixed;
-        top: 0;
-        right: -280px;
-        width: 250px;
-        height: 100vh;
-        background: linear-gradient(180deg, var(--color-primary-start) 0%, var(--color-primary-end) 100%);
-        flex-direction: column;
-        padding: 80px 20px 20px;
-        transition: 0.3s ease-in-out;
-        z-index: 1001;
-    }
-
-    .nav::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        opacity: 0;
-        visibility: hidden;
-        transition: 0.3s ease-in-out;
-        z-index: -1;
-    }
-
-    .navOpen {
-        right: 0;
-        box-shadow: -4px 0 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .navOpen::before {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    .navLink,
-    .navLinkOut {
-        width: 100%;
-        padding: 15px;
-        text-align: left;
-        border-radius: 8px;
-        margin: 5px 0;
-    }
-
-    .navLink:hover,
-    .navLinkOut:hover {
-        background: rgba(255, 255, 255, 0.1);
-    }
+/* ===== LINKS ===== */
+.nav a {
+  color: white;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
+  transform: translateY(-10px);
+  opacity: 0;
 }
 
-/* Estilos para o botão do menu mobile */
-.menuButton {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    margin-left: auto;
-    z-index: 1001;
-    position: relative;
-}
-
-@media screen and (max-width: 768px) {
-    .menuButton {
-        display: block !important;
-        position: absolute;
-        right: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-}
-
-.menuContainer {
-    display: none;
-}
-
-.menuIcon {
-    width: 25px;
-    height: 3px;
-    background-color: #ffffff;
-    margin: 4px 0;
-    transition: all 0.3s ease-in-out;
-}
-
-@media screen and (max-width: 768px) {
-    .menuContainer {
-        display: block;
-        position: absolute;
-        right: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 1001;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .nav {
-        display: none;
-    }
-    
-    .nav.navOpen {
-        display: flex;
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 250px;
-        height: 100vh;
-        background: var(--color-primary-start);
-        flex-direction: column;
-        padding: 60px 20px;
-        z-index: 1000;
-    }
-}
-
-.menuIcon::before,
-.menuIcon::after {
-    content: '';
-    position: absolute;
-    width: 25px;
-    height: 3px;
-    background-color: #ffffff;
-    transition: all 0.3s ease-in-out;
-    left: 0;
-}
-
-.menuIcon::before {
-    transform: translateY(-8px);
-}
-
-.menuIcon::after {
-    transform: translateY(8px);
-}
-
-/* Botão de fechar */
-.closeButton {
-    display: none;
-}
-
-@media screen and (max-width: 768px) {
-    .closeButton {
-        display: block;
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        width: 30px;
-        height: 30px;
-        border: none;
-        background: none;
-        cursor: pointer;
-    }
-
-    .closeButton::before,
-    .closeButton::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background-color: var(--color-text-light);
-    }
-
-    .closeButton::before {
-        transform: rotate(45deg);
-    }
-
-    .closeButton::after {
-        transform: rotate(-45deg);
-    }
-}
-
-/* Media query para dispositivos móveis */
-@media screen and (max-width: 768px) {
-    .menuButton {
-        display: block;
-    }
-
-    .nav {
-        position: fixed;
-        top: 0;
-        right: -250px; /* Começa fora da tela */
-        width: 250px;
-        height: 100vh;
-        background: linear-gradient(180deg, var(--color-primary-start) 0%, var(--color-primary-end) 100%);
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 80px 20px 20px;
-        gap: 15px;
-        transition: all 0.3s ease-in-out;
-        z-index: 1000;
-        box-shadow: none;
-    }
-
-    .navOpen {
-        right: 0; /* Move para dentro da tela */
-        box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .navLink,
-    .navLinkOut {
-        width: 100%;
-        text-align: left;
-        padding: 12px 15px;
-        border-radius: 4px;
-        transition: background-color 0.2s;
-    }
-
-    .navLink:hover,
-    .navLinkOut:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-    }
-
-    /* Estilo do menu hamburguer animado */
-    .menuButton.active .menuIcon {
-        background-color: transparent;
-    }
-
-    .menuButton.active .menuIcon::before {
-        transform: rotate(45deg);
-        top: 0;
-    }
-
-    .menuButton.active .menuIcon::after {
-        transform: rotate(-45deg);
-        top: 0;
-    }
-
-    /* Overlay escuro quando o menu está aberto */
-    .nav::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease-in-out;
-        z-index: -1;
-    }
-
-    .navOpen::before {
-        opacity: 1;
-        visibility: visible;
-    }
-}
-
-.navLink {
-    color: var(--color-text-light);
-    font-size: 0.95rem;
-    font-weight: 500;
-    padding: 5px 0;
-    transition: all 0.2s;
-    text-decoration: none;
-    border-bottom: 2px solid transparent; /* Espaço reservado para a borda ativa */
-    opacity: 0.8;
-    
-    /* --- Adições para funcionar com botões --- */
-    /* Isso faz com que os <button> pareçam links */
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: inherit; /* Garante a mesma fonte */
-}
-.navLinkOut {
-    color: var(--color-text-light);
-    font-size: 0.95rem;
-    font-weight: 500;
-    padding: 5px 0;
-    transition: all 0.2s;
-    text-decoration: none;
-    border-bottom: 2px solid transparent; /* Espaço reservado para a borda ativa */
-    opacity: 0.8;
-    
-    /* --- Adições para funcionar com botões --- */
-    /* Isso faz com que os <button> pareçam links */
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: inherit; /* Garante a mesma fonte */
-}
-
-.navLink:hover {
-    opacity: 1;
-}
-.navLinkOut:hover{
-    opacity: 1;
-    color: rgb(235, 104, 104);
-}
-
-/* MUDANÇA: Novo estilo para o link da página ativa */
-.activeLink {
-  color: #FFFFFF;
+.nav.open a {
+  transform: translateY(0);
   opacity: 1;
-  font-weight: 700;
-  /* Uma pequena linha sutil embaixo */
-  border-bottom-color: var(--color-text-light);
+}
+
+.nav a:hover {
+  color: #dce9ff;
+}
+
+/* ===== DESKTOP ===== */
+@media (min-width: 769px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav {
+    right: 60px;
+    gap: 18px;
+  }
 }
