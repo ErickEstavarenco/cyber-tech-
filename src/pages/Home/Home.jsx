@@ -35,11 +35,8 @@ function Home() {
     <div className={styles.home}>
       
       <section className={styles.heroSection}>
-        <div className="container">
-          <p className={styles.welcomeText}>BEM VINDO!</p>
-          <h1 className={styles.mainTitle}>Aprenda programação</h1>
-          <h2 className={styles.subtitle}>Conceitos básicos de lógica de programação para iniciantes</h2>
-        </div>
+        <h1 className={styles.mainTitle}>Aprenda programação</h1>
+        <h2 className={styles.subtitle}>Conceitos básicos de lógica de programação para iniciantes</h2>
       </section>
 
       <div className="container">

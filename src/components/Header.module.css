@@ -1,18 +1,57 @@
 /* src/components/Header.module.css */
 
 .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    
-    /* Gradiente sutil (pode ser cor sólida se preferir) */
-    background: linear-gradient(90deg, var(--color-primary-start) 0%, var(--color-primary-end) 100%);
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 1000 !important;
+    background: linear-gradient(90deg, var(--color-primary-start) 0%, var(--color-primary-end) 100%) !important;
     box-shadow: 0 2px 4px var(--color-shadow);
-    height: var(--header-height); /* Altura compacta (60px) */
-    display: flex;
-    align-items: center;
+    height: var(--header-height, 60px);
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    overflow: visible;
+}
+
+/* Estilos do hamburguer */
+.hamburger {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    position: relative;
+    z-index: 1002;
+    width: 30px;
+    height: 30px;
+}
+
+.hamburger span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    margin: 6px 0;
+    transition: all 0.3s ease-in-out;
+    border-radius: 3px;
+}
+
+/* Animação do hamburguer */
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
 }
 
 .navContainer {
@@ -20,6 +59,10 @@
     justify-content: space-between; /* Logo na esquerda, nav na direita */
     align-items: center;
     height: 100%;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .logo {
@@ -36,6 +79,262 @@
 .nav {
     display: flex;
     gap: 20px;
+    align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav {
+        position: fixed;
+        top: 0;
+        right: -280px;
+        width: 250px;
+        height: 100vh;
+        background: linear-gradient(180deg, var(--color-primary-start) 0%, var(--color-primary-end) 100%);
+        flex-direction: column;
+        padding: 80px 20px 20px;
+        transition: 0.3s ease-in-out;
+        z-index: 1001;
+    }
+
+    .nav::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s ease-in-out;
+        z-index: -1;
+    }
+
+    .navOpen {
+        right: 0;
+        box-shadow: -4px 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .navOpen::before {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .navLink,
+    .navLinkOut {
+        width: 100%;
+        padding: 15px;
+        text-align: left;
+        border-radius: 8px;
+        margin: 5px 0;
+    }
+
+    .navLink:hover,
+    .navLinkOut:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* Estilos para o botão do menu mobile */
+.menuButton {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    margin-left: auto;
+    z-index: 1001;
+    position: relative;
+}
+
+@media screen and (max-width: 768px) {
+    .menuButton {
+        display: block !important;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
+.menuContainer {
+    display: none;
+}
+
+.menuIcon {
+    width: 25px;
+    height: 3px;
+    background-color: #ffffff;
+    margin: 4px 0;
+    transition: all 0.3s ease-in-out;
+}
+
+@media screen and (max-width: 768px) {
+    .menuContainer {
+        display: block;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1001;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .nav {
+        display: none;
+    }
+    
+    .nav.navOpen {
+        display: flex;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 250px;
+        height: 100vh;
+        background: var(--color-primary-start);
+        flex-direction: column;
+        padding: 60px 20px;
+        z-index: 1000;
+    }
+}
+
+.menuIcon::before,
+.menuIcon::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 3px;
+    background-color: #ffffff;
+    transition: all 0.3s ease-in-out;
+    left: 0;
+}
+
+.menuIcon::before {
+    transform: translateY(-8px);
+}
+
+.menuIcon::after {
+    transform: translateY(8px);
+}
+
+/* Botão de fechar */
+.closeButton {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .closeButton {
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 30px;
+        height: 30px;
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+
+    .closeButton::before,
+    .closeButton::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--color-text-light);
+    }
+
+    .closeButton::before {
+        transform: rotate(45deg);
+    }
+
+    .closeButton::after {
+        transform: rotate(-45deg);
+    }
+}
+
+/* Media query para dispositivos móveis */
+@media screen and (max-width: 768px) {
+    .menuButton {
+        display: block;
+    }
+
+    .nav {
+        position: fixed;
+        top: 0;
+        right: -250px; /* Começa fora da tela */
+        width: 250px;
+        height: 100vh;
+        background: linear-gradient(180deg, var(--color-primary-start) 0%, var(--color-primary-end) 100%);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 80px 20px 20px;
+        gap: 15px;
+        transition: all 0.3s ease-in-out;
+        z-index: 1000;
+        box-shadow: none;
+    }
+
+    .navOpen {
+        right: 0; /* Move para dentro da tela */
+        box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .navLink,
+    .navLinkOut {
+        width: 100%;
+        text-align: left;
+        padding: 12px 15px;
+        border-radius: 4px;
+        transition: background-color 0.2s;
+    }
+
+    .navLink:hover,
+    .navLinkOut:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Estilo do menu hamburguer animado */
+    .menuButton.active .menuIcon {
+        background-color: transparent;
+    }
+
+    .menuButton.active .menuIcon::before {
+        transform: rotate(45deg);
+        top: 0;
+    }
+
+    .menuButton.active .menuIcon::after {
+        transform: rotate(-45deg);
+        top: 0;
+    }
+
+    /* Overlay escuro quando o menu está aberto */
+    .nav::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease-in-out;
+        z-index: -1;
+    }
+
+    .navOpen::before {
+        opacity: 1;
+        visibility: visible;
+    }
 }
 
 .navLink {

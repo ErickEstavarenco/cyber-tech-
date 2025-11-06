@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import styles from './Header.module.css'; // Usando CSS Modules
-import { useAuth } from '../context/AuthContext'; // Ajuste o caminho se necessário
+import styles from './Header.module.css';
+import { useAuth } from '../context/AuthContext';
 import { signOut } from 'firebase/auth';
-import { auth } from '../../FirebaseConfig.js'; // Ajuste o caminho se necessário
+import { auth } from '../../FirebaseConfig.js';
 
 function Header() {
-    const { currentUser } = useAuth(); //
-    const navigate = useNavigate(); //
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { currentUser } = useAuth();
+    const navigate = useNavigate();
 
     // Sua função de logoff (Mantida)
     const handleLogoff = async () => { //
@@ -38,43 +39,89 @@ function Header() {
         }
     };
 
+    // Fechar menu ao clicar fora
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            const nav = document.querySelector(`.${styles.nav}`);
+            const menuButton = document.querySelector(`.${styles.hamburger}`);
+            if (isMenuOpen && nav && !nav.contains(event.target) && !menuButton.contains(event.target)) {
+                setIsMenuOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [isMenuOpen]);
+
     return (
-        // 1. CORREÇÃO: Era 'styles.siteHeader', mudou para 'styles.header'
-        <header className={styles.header}> {/* */}
-            
-            {/* 2. CORREÇÃO: Era 'styles.headerContent', mudou para 'styles.navContainer' */}
-            <div className={`container ${styles.navContainer}`}> {/* */}
-                
-                {/* 3. CORREÇÃO: 'styles.logo' está correto em ambos os arquivos */}
-                <Link to="/" className={styles.logo}> {/* */}
+        <header className={styles.header}>
+            <div className={styles.navContainer}>
+                <Link to="/" className={styles.logo}>
                     {currentUser ? `BEM VINDO, ${getFirstName(currentUser.name)}!` : "BEM VINDO!"}
                 </Link>
+                
+                <button 
+                    className={`${styles.hamburger} ${isMenuOpen ? styles.active : ''}`}
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    aria-label="Menu"
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
 
                 {/* 4. CORREÇÃO: Era 'styles.mainNav', mudou para 'styles.nav' */}
-                <nav className={styles.nav}> {/* */}
-                    
-                    {/* 5. CORREÇÃO: O novo CSS não tem '.navButton'. 
-                       Usamos '.navLink' para todos os itens terem o mesmo estilo. 
-                    */}
-                    <Link to='/' className={styles.navLink}>
+                <div className={styles.menuContainer}>
+                    <button 
+                        className={`${styles.menuButton} ${isMenuOpen ? styles.active : ''}`}
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        aria-label="Menu"
+                    >
+                        <div className={styles.menuIcon}></div>
+                        <div className={styles.menuIcon}></div>
+                        <div className={styles.menuIcon}></div>
+                    </button>
+                </div>
+
+                <nav className={`${styles.nav} ${isMenuOpen ? styles.navOpen : ''}`}>
+                    <Link to='/' className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
                         Início
                     </Link>
-                    <button onClick={() => handleNavigation('/blog')} className={styles.navLink}> {/* */}
+                    <button 
+                        onClick={() => {
+                            handleNavigation('/blog');
+                            setIsMenuOpen(false);
+                        }} 
+                        className={styles.navLink}
+                    >
                         Blog
                     </button>
-                    <button onClick={() => handleNavigation('/desafios')} className={styles.navLink}> {/* */}
+                    <button 
+                        onClick={() => {
+                            handleNavigation('/desafios');
+                            setIsMenuOpen(false);
+                        }} 
+                        className={styles.navLink}
+                    >
                         Desafios
                     </button>
 
-                    {/* Lógica de Login/Logoff */}
                     {currentUser ? (
-                        // 6. CORREÇÃO: O novo CSS não tem '.logoffButton'. Usamos '.navLink'.
-                        <button onClick={handleLogoff} className={styles.navLinkOut}> {/* */}
+                        <button 
+                            onClick={() => {
+                                handleLogoff();
+                                setIsMenuOpen(false);
+                            }} 
+                            className={styles.navLinkOut}
+                        >
                             Sair
                         </button>
                     ) : (
-                        // 7. CORREÇÃO: 'styles.navLink' está correto em ambos os arquivos
-                        <Link to="/login" className={styles.navLink}> {/* */}
+                        <Link 
+                            to="/login" 
+                            className={styles.navLink}
+                            onClick={() => setIsMenuOpen(false)}
+                        >
                             Login
                         </Link>
                     )}
