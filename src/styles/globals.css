@@ -1,102 +1,124 @@
-/* src/styles/globals.css */
+/* ===== globals.css ===== */
 
-:root {
-    /* Cores do Tema Azul Gradiente (Escuro -> Claro) */
-    --color-primary-start: #1E90FF; /* Azul Claro */
-    --color-primary-end: #0057D8;   /* Azul Escuro */
-    --color-primary-gradient: linear-gradient(180deg, var(--color-primary-end) 0%, var(--color-primary-start) 100%);
-    
-    /* Cores Neutras */
-    --color-surface: #FFFFFF;    /* Superfície de Cards (Branco) */
-    --color-text-dark: #212529;  /* Texto Principal (Preto) */
-    --color-text-light: #F8F9FA; /* Texto em Fundo Escuro (Branco) */
-    --color-shadow: rgba(0, 0, 0, 0.1);
-    
-    /* Tipografia */
-    --font-family-primary: 'Roboto', 'Open Sans', sans-serif;
-    --font-size-base: 16px;
-    
-    /* Layout */
-    --header-height: 60px; /* Altura do header compacto */
+/* ===== RESET BÁSICO ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
 }
 
-/* Reset Básico */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ===== VARIÁVEIS DE TEMA ===== */
+:root {
+  --color-primary: #0d6efd;           /* Azul padrão */
+  --color-primary-light: #3b9dff;     /* Azul claro */
+  --color-gradient-start: #1e88e5;    /* Gradiente início (azul) */
+  --color-gradient-end: #1565c0;      /* Gradiente final (azul escuro) */
+  --color-bg-light: #f4f9ff;          /* Fundo claro */
+  --color-text-dark: #1e293b;         /* Texto principal */
+  --color-text-light: #ffffff;        /* Texto claro */
+  --header-height: 90px;              /* Cabeçalho maior */
+  --color-shadow: rgba(0, 0, 0, 0.15);
+}
+
+/* ===== FUNDO GERAL ===== */
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
 }
 
 body {
-    font-family: var(--font-family-primary);
-    font-size: var(--font-size-base);
-    line-height: 1.6;
-    color: var(--color-text-light); 
-    background: var(--color-primary-gradient);
-    min-height: 100vh;
-    
-    /* ESSENCIAL: Espaço para o header fixo */
-    padding-top: var(--header-height); 
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-/* CORREÇÃO 1: "Sticky Footer"
-  Transforma o app-layout (do App.jsx) em um container flex
-*/
-.app-layout {
+  background: linear-gradient(90deg, var(--color-gradient-start) 0%, var(--color-gradient-end) 100%);
+  color: var(--color-text-dark);
+  min-height: 100vh;
+  line-height: 1.6;
   display: flex;
   flex-direction: column;
-  /* Garante que o layout ocupe no mínimo a altura 
-     da tela (menos o padding que já demos ao body) */
-  min-height: calc(100vh - var(--header-height));
 }
 
-/* Container genérico */
-.container {
-    width: 100%;
-    max-width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 20px;
-    padding-right: 20px;
+#root,
+.app-layout {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Botão Primário Padrão */
-.btn-primary {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: #FFF;
-    background-color: var(--color-primary-start);
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background-color 0.3s;
+/* ===== LINKS ===== */
+a {
+  color: var(--color-text-light);
+  text-decoration: none;
+  transition: 0.2s;
 }
 
-.btn-primary:hover {
-    background-color: var(--color-primary-end);
+a:hover {
+  color: var(--color-primary-light);
+  text-decoration: underline;
 }
 
-/* CORREÇÃO 2: Animação e "Sticky Footer"
-*/
+/* ===== BOTÕES GLOBAIS ===== */
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: var(--color-primary);
+  color: var(--color-text-light);
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: var(--color-primary-light);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* ===== MAIN (Conteúdo) ===== */
 main {
-  animation: fadeIn 0.5s ease-out;
-  /* Esta linha "mágica" faz o <main> crescer e empurrar o Footer para baixo */
-  flex-grow: 1; 
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: var(--header-height);
+  padding-bottom: 40px;
 }
 
-/* Animação de fade-in suave para o conteúdo */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
+/* ===== CONTAINER ===== */
+.container {
+  padding: 1.25rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  color: var(--color-text-dark);
+}
+
+/* ===== RODAPÉ ===== */
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #ffffff;
+  background: rgba(13, 110, 253, 0.2);
+  backdrop-filter: blur(8px);
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+  main {
+    padding-top: 110px; /* compensa o header maior */
+    padding-bottom: 30px;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .container {
+    padding: 1rem;
   }
 }

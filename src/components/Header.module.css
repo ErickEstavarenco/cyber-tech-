@@ -1,91 +1,157 @@
-/* src/components/Header.module.css */
-
+/* ===== CABEÇALHO ===== */
 .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    
-    /* Gradiente sutil (pode ser cor sólida se preferir) */
-    background: linear-gradient(90deg, var(--color-primary-start) 0%, var(--color-primary-end) 100%);
-    box-shadow: 0 2px 4px var(--color-shadow);
-    height: var(--header-height); /* Altura compacta (60px) */
-    display: flex;
-    align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: linear-gradient(90deg, #1e88e5, #1565c0);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-.navContainer {
-    display: flex;
-    justify-content: space-between; /* Logo na esquerda, nav na direita */
-    align-items: center;
-    height: 100%;
-}
-
-.logo {
-    color: var(--color-text-light);
-    font-size: 1.4rem;
-    font-weight: bold;
-    text-decoration: none;
-    transition: opacity 0.2s;
-}
-.logo:hover {
-    opacity: 0.8;
-}
-
-.nav {
-    display: flex;
-    gap: 20px;
-}
-
-.navLink {
-    color: var(--color-text-light);
-    font-size: 0.95rem;
-    font-weight: 500;
-    padding: 5px 0;
-    transition: all 0.2s;
-    text-decoration: none;
-    border-bottom: 2px solid transparent; /* Espaço reservado para a borda ativa */
-    opacity: 0.8;
-    
-    /* --- Adições para funcionar com botões --- */
-    /* Isso faz com que os <button> pareçam links */
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: inherit; /* Garante a mesma fonte */
-}
-.navLinkOut {
-    color: var(--color-text-light);
-    font-size: 0.95rem;
-    font-weight: 500;
-    padding: 5px 0;
-    transition: all 0.2s;
-    text-decoration: none;
-    border-bottom: 2px solid transparent; /* Espaço reservado para a borda ativa */
-    opacity: 0.8;
-    
-    /* --- Adições para funcionar com botões --- */
-    /* Isso faz com que os <button> pareçam links */
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: inherit; /* Garante a mesma fonte */
-}
-
-.navLink:hover {
-    opacity: 1;
-}
-.navLinkOut:hover{
-    opacity: 1;
-    color: rgb(235, 104, 104);
-}
-
-/* MUDANÇA: Novo estilo para o link da página ativa */
-.activeLink {
-  color: #FFFFFF;
-  opacity: 1;
+/* ===== LOGO ===== */
+.logo a {
+  font-size: 1.6rem;
   font-weight: 700;
-  /* Uma pequena linha sutil embaixo */
-  border-bottom-color: var(--color-text-light);
+  color: white;
+  text-decoration: none;
+}
+
+/* ===== SEÇÃO DIREITA (menu + botões) ===== */
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+/* ===== BOTÃO HAMBURGUER ===== */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  gap: 6px;
+  z-index: 2001;
+}
+
+.hamburger span {
+  width: 26px;
+  height: 3px;
+  background-color: white;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* Animação do ícone */
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translateY(10px);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-43deg) translateY(-13px);
+}
+
+/* ===== NAVEGAÇÃO ===== */
+.nav {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  position: absolute;
+  right: 60px; /* ao lado esquerdo do botão hamburguer */
+  top: 50%;
+  transform: translateY(-50%) translateX(30px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s ease;
+  z-index: 1001;
+}
+
+/* Quando o menu é aberto */
+.nav.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%) translateX(-24px);
+  z-index: 2002;
+}
+
+/* ===== LINKS ===== */
+.nav a {
+  color: white;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  background: transparent;
+  transition: all 0.3s ease;
+  transform: translateY(-10px);
+  opacity: 0;
+}
+
+.nav.open a {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.nav a:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #e3f2fd;
+}
+
+/* ===== BOTÃO SAIR (vermelho) ===== */
+.logoutButton {
+  background-color: #e53935;
+  color: white !important;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.logoutButton:hover {
+  background-color: #c62828;
+  transform: scale(1.05);
+}
+
+/* ===== BOTÃO PERFIL ===== */
+.profileButton {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.profileButton:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+}
+
+/* ===== DESKTOP ===== */
+@media (min-width: 769px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav {
+    right: 60px;
+    gap: 18px;
+  }
 }

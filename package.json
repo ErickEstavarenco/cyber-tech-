@@ -9,10 +9,11 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
- "dependencies": {
+  "dependencies": {
     "axios": "^1.12.2",
-    "lucide-react": "^0.548.0",
     "firebase": "^12.4.0",
+    "framer-motion": "^12.23.24",
+    "lucide-react": "^0.548.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.4"

@@ -1,77 +1,117 @@
-/* src/components/Header.css (Resolvido) */
-
-.site-header {
+/* ====== HEADER ====== */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-
-  /* 1. Mudança da pagina-blog: Remove o gradiente */
-  background: none;
-
-  /* 2. Mudança da pagina-blog: Usa a nova borda azul */
-  border-bottom: 1px solid #3b82f6;
-
-  padding: 1rem 0;
+  height: 90px;
+  background: linear-gradient(
+    to right,
+    rgba(13, 110, 253, 0.9),
+    rgba(59, 157, 255, 0.9)
+  );
+  backdrop-filter: blur(8px);
   color: white;
-  /* Adicionado da pagina-blog */
-}
-
-.header-content {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding-top: 0;
-  padding-bottom: 0;
+  justify-content: space-between;
+  padding: 0 40px;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
-.logo {
-  font-size: 1.5rem;
-  font-weight: 900;
-  color: #ffffff;
+/* ====== LOGO ====== */
+.logo a {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: white;
   text-decoration: none;
 }
 
-/* * REGRA ATUALIZADA (REGRA PRINCIPAL)
- *
- * Mantivemos sua regra combinada para todos os botões/links
- * (essencial para a UI de autenticação)
-*/
-.main-nav a,
-.nav-button,
-.logoff-button {
-  /* Estilos para resetar os botões e fazê-los parecer links */
-  background: none;
+.logo span {
+  color: #dce9ff;
+}
+
+/* ====== NAVEGAÇÃO ====== */
+.nav-right {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  transition: all 0.4s ease;
+}
+
+.nav-right a {
+  color: white;
+  font-weight: 500;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.nav-right a:hover {
+  color: #dce9ff;
+}
+
+/* ====== MENU HAMBURGUER ====== */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 28px;
+  background: transparent;
   border: none;
   cursor: pointer;
-  font-family: inherit;
   padding: 0;
-
-  /* Seus estilos de link originais */
-  margin-left: 1.5rem;
-  font-size: 1rem;
-  font-weight: 800;
-
-  /* 3. Mudança da pagina-blog: Cor base do link */
-  color: #e0e7ff;
-
-  text-decoration: none;
-  transition: color 0.2s ease;
+  z-index: 150;
 }
 
-
-/* * HOVER ATUALIZADO 
- *
- * Hover padrão (branco), conforme definido pela pagina-blog
-*/
-.main-nav a:hover,
-.nav-button:hover {
-  /* 4. Mudança da pagina-blog: Cor do hover */
-  color: #ffffff;
+.bar {
+  width: 100%;
+  height: 3px;
+  background-color: white;
+  margin: 4px 0;
+  border-radius: 3px;
+  transition: all 0.4s ease;
 }
 
-/* * HOVER ATUALIZADO 
- *
- * Mantivemos seu hover especial (vermelho) apenas para o 'Logoff',
- * que não estava em conflito.
-*/
-.logoff-button:hover {
-  color: #f35a5a;
+.bar.open:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 6px);
+}
+
+.bar.open:nth-child(2) {
+  opacity: 0;
+}
+
+.bar.open:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* ====== RESPONSIVIDADE ====== */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-right {
+    position: absolute;
+    top: 90px;
+    left: 0;
+    width: 100%;
+    background: rgba(13, 110, 253, 0.95);
+    flex-direction: row; /* 🔹 menu horizontal expansivo */
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    gap: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+  }
+
+  .nav-right.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./Blog.css";
+import "./Blog.css"; 
 
-const Algoritmo = () => {
+export default function Algoritmo() {
   const [a, setA] = useState(0);
   const [b, setB] = useState(0);
   const [resultado, setResultado] = useState(null);
@@ -11,19 +11,17 @@ const Algoritmo = () => {
   };
 
   return (
-    <div className="blog-page">
-      <h1 className="page-title">Algoritmo</h1> <br></br>
+    <div className="container blog-page">
+      <h1 className="page-title">Algoritmo</h1> <br />
+
       <div className="pense">
+        <h3 className="borda">Entendendo o Conceito de Algoritmos</h3>
+
         <p>
-          Um <strong>algoritmo</strong> é um conjunto de{" "}
-          <strong>instruções lógicas e ordenadas</strong> usadas para resolver
-          um problema ou realizar uma tarefa. Ele define{" "}
-          <strong>passo a passo o que deve ser feito</strong> para alcançar um
-          resultado. Os algoritmos são a base da{" "}
-          <strong>programação</strong>, pois indicam ao computador as ações a
-          serem executadas de forma clara e precisa.
+          Um <strong>algoritmo</strong> é um conjunto de <strong>instruções lógicas e ordenadas</strong> usadas para resolver
+          um problema ou realizar uma tarefa.
         </p>
-         <br></br>
+        <br />
         <p>Um bom algoritmo deve ser:</p>
         <p>
           <strong>- Lógico:</strong> segue uma sequência coerente de passos.
@@ -40,18 +38,18 @@ const Algoritmo = () => {
           <div className="codigo-exemplo">
             <h4>Exemplo de algoritmo em Python:</h4>
             <img
-          src="/algex1.png"
-          alt="Imagem sobre Exemplo"
-          className="pos-img"
-        />
+              src="/algex1.png"
+              alt="Imagem sobre Exemplo"
+              className="pos-img"
+            />
             <br />
             
-    <div className="descricao-exemplo">
-      <p>Esse pequeno programa segue o algoritmo:</p>
-      <p>- Pegue dois números (A e B).</p>
-      <p>- Some os dois números.</p>
-      <p>- Mostre o resultado.</p>
-    </div>
+            <div className="descricao-exemplo">
+              <p>Esse pequeno programa segue o algoritmo:</p>
+              <p>- Pegue dois números (A e B).</p>
+              <p>- Some os dois números.</p>
+              <p>- Mostre o resultado.</p>
+            </div>
           </div>
 
           <div className="algoritmo-form">
@@ -102,14 +100,11 @@ const Algoritmo = () => {
         <a href="/blog" className="back-link">
           ← Voltar
         </a>
-        &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-         <a href="/variavel" className="back-link">
+        &nbsp;&nbsp;&nbsp;
+        <a href="/variavel" className="back-link">
           Próximo →
         </a>
       </div>
     </div>
   );
-};
-
-export default Algoritmo;
-
+}
