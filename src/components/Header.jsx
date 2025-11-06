@@ -19,9 +19,22 @@ export default function Header() {
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
+ // src/components/Header.jsx
+  
+  // src/components/Header.jsx
+  
   const handleLogout = async () => {
-    await signOut(auth);
+    // 1. NAVEGUE para a página de login PRIMEIRO.
+    // Isso "desarma" o ProtectedRoute, pois não estamos mais em uma rota protegida.
     navigate("/login");
+    
+    // 2. SÓ DEPOIS, faça o signOut.
+    // O usuário não verá o alerta, pois o ProtectedRoute não está mais ativo.
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error("Erro ao fazer logout:", error);
+    }
   };
 
   // 3. (OPCIONAL, mas resolve seu exemplo) Atualiza o TÍTULO da página
@@ -58,6 +71,7 @@ export default function Header() {
             </button>
           </>
         ) : (
+          
           <Link to="/login">Login</Link>
         )}
       </nav>
