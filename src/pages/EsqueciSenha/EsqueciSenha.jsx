@@ -1,0 +1,88 @@
+// src/pages/EsqueciSenha/EsqueciSenha.jsx (Corrigido)
+
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from '../../../FirebaseConfig.js'; 
+
+// 1. CORREÇÃO: Importe o CSS Module como 'styles'
+import styles from '../Login/Login.module.css'; 
+
+const EsqueciSenha = () => {
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+
+  const handleSubmit = async (e) => {
+    // ... (Sua lógica de handleSubmit está PERFEITA, não mude nada nela) ...
+    e.preventDefault();
+    setError(null);
+    setSuccess(null);
+    setLoading(true);
+
+    try {
+      await sendPasswordResetEmail(auth, email);
+      setLoading(false);
+      setSuccess('E-mail de redefinição enviado! Verifique sua caixa de entrada (e spam).');
+      setEmail(''); 
+    } catch (err) {
+      setLoading(false);
+      if (err.code === 'auth/user-not-found') {
+        setError('E-mail não encontrado em nosso sistema.');
+      } else {
+        setError('Ocorreu um erro ao enviar o e-mail de redefinição.');
+      }
+      console.error("Erro na redefinição de senha:", err);
+    }
+  };
+
+  return (
+    // 2. CORREÇÃO: Use {styles.nomeDaClasse} para tudo
+    <div className={styles.loginContainer}>
+      <div className={styles.loginCard}>
+        <h2>Esqueceu sua senha?</h2>
+        <p className={styles.loginSubtitle}>Sem problemas. Insira seu e-mail abaixo e enviaremos um link para redefini-la.</p>
+
+        {!success ? (
+          <form onSubmit={handleSubmit}>
+            <div className={styles.formGroup}>
+              <label htmlFor="email">E-mail</label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="seu.email@exemplo.com"
+                required
+                disabled={loading}
+              />
+            </div>
+
+            {/* 3. CORREÇÃO: Use {styles.errorMessage} */}
+            {error && <p className={styles.errorMessage}>{error}</p>}
+
+            <button 
+              type="submit" 
+              className={styles.loginButton} // 4. CORREÇÃO
+              disabled={loading}
+            >
+              {loading ? 'Enviando...' : 'Enviar link de redefinição'}
+            </button>
+          </form>
+        ) : (
+          // 5. CORREÇÃO: Use {styles.successMessage}
+          <p className={styles.successMessage}>{success}</p>
+        )}
+
+        {/* 6. CORREÇÃO: Use {styles.switchAuth} */}
+        <div className={styles.switchAuth} style={{ marginTop: '20px' }}>
+          <p><Link to="/login">Voltar para o Login</Link></p>
+        </div>
+        
+      </div>
+    </div>
+  );
+};
+
+export default EsqueciSenha;

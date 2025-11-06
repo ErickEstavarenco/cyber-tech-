@@ -1,16 +1,23 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import App from "./App.jsx";
-import ErrorBoundary from "./components/ErrorBoundary.jsx";
+// src/main.jsx
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App.jsx';
+import ErrorBoundary from "./components/ErrorBoundary.jsx"; // Importado do seu lado
 
-import "./styles/globals.css"; 
+// MUDANÇA 1: Importar o Provedor de Autenticação (do lado remoto)
+import { AuthProvider } from './context/AuthContext.jsx'; 
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+import "./styles/globals.css"; // Importado do seu lado
+
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ErrorBoundary>
+    <ErrorBoundary> {/* Envolve todo o aplicativo com a Boundary */}
       <BrowserRouter>
-        <App />
+        {/* Envolve o App com o Provedor de Autenticação (para login/cadastro) */}
+        <AuthProvider> 
+          <App />
+        </AuthProvider>
       </BrowserRouter>
     </ErrorBoundary>
   </React.StrictMode>

@@ -1,0 +1,119 @@
+/* src/pages/Login/Login.module.css (Atualizado) */
+
+.loginContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem; /* Espaçamento para o card não grudar no header/footer */
+    width: 100%;
+    box-sizing: border-box;
+}
+  
+.loginCard {
+  background: var(--color-surface); /* Fundo BRANCO */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 2.5rem 2rem;
+  border-radius: 8px; 
+  box-shadow: 0 4px 12px var(--color-shadow); 
+  width: 100%;
+  max-width: 400px;
+  text-align: left;
+  box-sizing: border-box; 
+}
+
+.loginCard h2 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--color-text-dark); /* Texto ESCURO */
+}
+
+.loginSubtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--color-text-dark);
+}
+
+.formGroup input {
+  width: 100%;
+  padding: 0.75rem 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box; 
+  transition: all 0.2s;
+  color: var(--color-text-dark);
+}
+
+.formGroup input:focus {
+  border-color: var(--color-primary-start); 
+  box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.25);
+  outline: none;
+}
+
+.loginButton {
+  width: 100%;
+  padding: 0.85rem;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--color-primary-start); 
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.loginButton:hover {
+  background-color: var(--color-primary-end); 
+}
+
+.switchAuth {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #555;
+}
+
+.switchAuth a {
+  color: var(--color-primary-start); 
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* --- SEÇÃO ATUALIZADA --- */
+/* Estilos migrados do Login.css antigo */
+
+.passwordReset{
+  margin-top: 10px;
+  text-align: center;
+}
+
+.passwordResetLink {
+  /* Estilos do Login.css, adaptados para as variáveis do front-end */
+  color: var(--color-primary-start); /* Cor primária do front-end */
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.passwordResetLink:hover {
+  text-decoration: underline;
+}
+
+/* Adicione no final de Cadastro.module.css */
+
+.errorMessage {
+  color: #dc3545; /* Vermelho para erro */
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}

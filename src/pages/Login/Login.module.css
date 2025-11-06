@@ -1,4 +1,4 @@
-/* src/pages/Login/Login.module.css */
+/* src/pages/Login/Login.module.css (Atualizado e Mesclado) */
 
 .loginContainer {
     display: flex;
@@ -9,7 +9,7 @@
     min-height: calc(100vh - var(--header-height) - 150px);
     box-sizing: border-box;
 }
-  
+ 
 .loginCard {
   background: var(--color-surface);
   border: none;
@@ -200,6 +200,7 @@
   font-size: 0.85rem;
   margin-top: 0.5rem;
   font-weight: 500;
+  /* Estilos adicionais do seu lado (HEAD) para ícone de erro */
   display: flex;
   align-items: center;
   gap: 0.25rem;
@@ -228,7 +229,25 @@
   box-shadow: 0 2px 8px rgba(30, 144, 255, 0.2) !important;
 }
 
-/* Responsividade */
+/* --- SEÇÃO ATUALIZADA - Link de Redefinição de Senha (Remoto) --- */
+
+.passwordReset{
+  margin-top: 10px;
+  text-align: center;
+}
+
+.passwordResetLink {
+  /* Estilos do Login.css, adaptados para as variáveis do front-end */
+  color: var(--color-primary-start); /* Cor primária do front-end */
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.passwordResetLink:hover {
+  text-decoration: underline;
+}
+
+/* Responsividade (Seu lado - HEAD) */
 @media (max-width: 480px) {
   .loginCard {
     padding: 2rem 1.5rem;
