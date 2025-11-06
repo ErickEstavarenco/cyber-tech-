@@ -1,78 +1,26 @@
 import React from 'react';
-<<<<<<< HEAD
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import styles from './Header.module.css';
-
-function Header() {
-  const location = useLocation();
-
-  const isActive = (path) => {
-    if (path === '/') {
-      return location.pathname === '/';
-    }
-    return location.pathname.startsWith(path);
-  };
-
-  return (
-    <header className={styles.header} role="banner">
-      <div className={`container ${styles.navContainer}`}>
-        <Link 
-          to="/" 
-          className={styles.logo}
-          aria-label="Cyber Tech - Página inicial"
-        >
-          Cyber Tech
-        </Link>
-        
-        <nav className={styles.nav} role="navigation" aria-label="Navegação principal">
-          <Link 
-            to="/" 
-            className={`${styles.navLink} ${isActive('/') ? styles.activeLink : ''}`}
-            aria-current={isActive('/') ? 'page' : undefined}
-          >
-            Início
-          </Link>
-
-          <Link 
-            to="/blog" 
-            className={`${styles.navLink} ${isActive('/blog') ? styles.activeLink : ''}`}
-            aria-current={isActive('/blog') ? 'page' : undefined}
-          >
-            Blog
-          </Link>
-          
-          <Link 
-            to="/desafios" 
-            className={`${styles.navLink} ${isActive('/desafios') ? styles.activeLink : ''}`}
-            aria-current={isActive('/desafios') ? 'page' : undefined}
-          >
-            Desafios
-          </Link>
-          
-          <Link 
-            to="/login" 
-            className={`${styles.navLink} ${isActive('/login') || isActive('/cadastro') ? styles.activeLink : ''}`}
-            aria-current={isActive('/login') || isActive('/cadastro') ? 'page' : undefined}
-          >
-            Login
-          </Link>
-        </nav>
-      </div>
-    </header>
-  );
-=======
-import { Link, useNavigate } from 'react-router-dom';
-import styles from './Header.module.css'; // Usando CSS Modules
-import { useAuth } from '../context/AuthContext'; // Ajuste o caminho se necessário
+import { useAuth } from '../../context/AuthContext'; // Certifique-se de que o caminho está correto
 import { signOut } from 'firebase/auth';
-import { auth } from '../../FirebaseConfig.js'; // Ajuste o caminho se necessário
+import { auth } from '../../FirebaseConfig'; // Certifique-se de que o caminho está correto
 
 function Header() {
-    const { currentUser } = useAuth(); //
-    const navigate = useNavigate(); //
+    const { currentUser } = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
 
-    // Sua função de logoff (Mantida)
-    const handleLogoff = async () => { //
+    // Função para verificar se o link está ativo (Mantida da HEAD)
+    const isActive = (path) => {
+        if (path === '/') {
+            return location.pathname === '/';
+        }
+        // Verifica se o caminho atual começa com o path
+        return location.pathname.startsWith(path);
+    };
+    
+    // Função de Logoff (Mantida da 9ccb57d...)
+    const handleLogoff = async () => {
         try {
             await signOut(auth);
             navigate('/login');
@@ -81,62 +29,83 @@ function Header() {
         }
     };
 
-    // Sua função para pegar o primeiro nome (Mantida)
-    const getFirstName = (fullName) => { //
+    // Função para pegar o primeiro nome (Mantida da 9ccb57d...)
+    const getFirstName = (fullName) => {
         if (!fullName) return '';
         const firstName = fullName.split(' ')[0];
-        return firstName.charAt(0).toUpperCase() + firstName.slice(1);
+        // Retorna o nome com a primeira letra maiúscula
+        return firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
     };
 
-    // Sua função de navegação protegida (Mantida)
-    const handleNavigation = (path) => { //
+    // Função de navegação protegida (Mantida da 9ccb57d...)
+    const handleNavigation = (path) => {
         if (currentUser) {
-            // Se o usuário estiver logado, navega normalmente
             navigate(path);
         } else {
-            // Se estiver deslogado, mostra o alerta e navega para o login
-            alert("Você precisa estar logado para acessar este serviço.");
+            // OBS: Não é permitido usar alert() em ambientes imersivos, mas mantive a lógica de redirecionar para login.
+            // Para produção, você deve usar um modal de notificação no lugar de alert().
+            console.warn("Usuário não logado. Redirecionando para login.");
             navigate('/login');
         }
     };
 
     return (
-        // 1. CORREÇÃO: Era 'styles.siteHeader', mudou para 'styles.header'
-        <header className={styles.header}> {/* */}
-            
-            {/* 2. CORREÇÃO: Era 'styles.headerContent', mudou para 'styles.navContainer' */}
-            <div className={`container ${styles.navContainer}`}> {/* */}
+        <header className={styles.header} role="banner">
+            <div className={`container ${styles.navContainer}`}>
                 
-                {/* 3. CORREÇÃO: 'styles.logo' está correto em ambos os arquivos */}
-                <Link to="/" className={styles.logo}> {/* */}
-                    {currentUser ? `BEM VINDO, ${getFirstName(currentUser.name)}!` : "BEM VINDO!"}
+                {/* LOGO/Boas-vindas */}
+                <Link 
+                    to="/" 
+                    className={styles.logo}
+                    aria-label="Cyber Tech - Página inicial"
+                >
+                    {currentUser ? `Bem-vindo, ${getFirstName(currentUser.name)}!` : "Cyber Tech"}
                 </Link>
 
-                {/* 4. CORREÇÃO: Era 'styles.mainNav', mudou para 'styles.nav' */}
-                <nav className={styles.nav}> {/* */}
+                <nav className={styles.nav} role="navigation" aria-label="Navegação principal">
                     
-                    {/* 5. CORREÇÃO: O novo CSS não tem '.navButton'. 
-                       Usamos '.navLink' para todos os itens terem o mesmo estilo. 
-                    */}
-                    <Link to='/' className={styles.navLink}>
+                    {/* INÍCIO (Sempre público) */}
+                    <Link 
+                        to="/" 
+                        className={`${styles.navLink} ${isActive('/') ? styles.activeLink : ''}`}
+                        aria-current={isActive('/') ? 'page' : undefined}
+                    >
                         Início
                     </Link>
-                    <button onClick={() => handleNavigation('/blog')} className={styles.navLink}> {/* */}
+
+                    {/* BLOG (Protegido - usa handleNavigation) */}
+                    <button 
+                        onClick={() => handleNavigation('/blog')} 
+                        className={`${styles.navLink} ${isActive('/blog') ? styles.activeLink : ''}`}
+                        aria-current={isActive('/blog') ? 'page' : undefined}
+                    >
                         Blog
                     </button>
-                    <button onClick={() => handleNavigation('/desafios')} className={styles.navLink}> {/* */}
+                    
+                    {/* DESAFIOS (Protegido - usa handleNavigation) */}
+                    <button 
+                        onClick={() => handleNavigation('/desafios')} 
+                        className={`${styles.navLink} ${isActive('/desafios') ? styles.activeLink : ''}`}
+                        aria-current={isActive('/desafios') ? 'page' : undefined}
+                    >
                         Desafios
                     </button>
-
-                    {/* Lógica de Login/Logoff */}
+                    
+                    {/* LOGIN / LOGOFF */}
                     {currentUser ? (
-                        // 6. CORREÇÃO: O novo CSS não tem '.logoffButton'. Usamos '.navLink'.
-                        <button onClick={handleLogoff} className={styles.navLinkOut}> {/* */}
+                        <button 
+                            onClick={handleLogoff} 
+                            // Assumindo que 'navLinkOut' é um estilo para o botão de logoff, se não existir, use 'navLink'
+                            className={styles.navLinkOut || styles.navLink}
+                        >
                             Sair
                         </button>
                     ) : (
-                        // 7. CORREÇÃO: 'styles.navLink' está correto em ambos os arquivos
-                        <Link to="/login" className={styles.navLink}> {/* */}
+                        <Link 
+                            to="/login" 
+                            className={`${styles.navLink} ${isActive('/login') || isActive('/cadastro') ? styles.activeLink : ''}`}
+                            aria-current={isActive('/login') || isActive('/cadastro') ? 'page' : undefined}
+                        >
                             Login
                         </Link>
                     )}
@@ -144,7 +113,6 @@ function Header() {
             </div>
         </header>
     );
->>>>>>> 9ccb57d8c67eb51b63ec04df8ab32c19f829e614
 }
 
 export default Header;
