@@ -1,0 +1,188 @@
+:root {
+  --bg-gradient: radial-gradient(circle at 20% 20%, #1565c0, #0d47a1);
+  --card-glass: rgba(255, 255, 255, 0.08);
+  --card-border: rgba(255, 255, 255, 0.15);
+  --accent: #42a5f5;
+  --danger: #ef5350;
+  --text: #f8fbff;
+  --muted: rgba(255, 255, 255, 0.7);
+}
+
+/* ===== CONTAINER GERAL ===== */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: calc(100vh - 120px);
+  padding: 100px 20px 60px;
+  background: var(--bg-gradient);
+  color: var(--text);
+}
+
+/* ===== CABEÇALHO ===== */
+.headerCard {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.headerCard h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+/* ===== CARD DE PERFIL ===== */
+.profileCard {
+  width: 100%;
+  max-width: 600px;
+  background: var(--card-glass);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(16px);
+  border-radius: 16px;
+  padding: 32px 36px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+  transition: 0.3s ease;
+}
+
+.profileCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== DADOS EM VISUALIZAÇÃO ===== */
+.row {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+.label {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 4px;
+  font-size: 0.95rem;
+}
+
+.value {
+  font-size: 1rem;
+  color: white;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* ===== CAMPOS DE EDIÇÃO ===== */
+.formRow {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.formRow label {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.formRow input {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.25s ease;
+}
+
+.formRow input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 8px rgba(66, 165, 245, 0.4);
+}
+
+.formRow input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ===== BOTÕES ===== */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 26px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+  border: none;
+  transition: 0.3s ease;
+  min-width: 130px;
+}
+
+.btn.primary {
+  background: var(--accent);
+  color: white;
+}
+
+.btn.primary:hover {
+  filter: brightness(1.15);
+  transform: translateY(-2px);
+}
+
+.btn.ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: white;
+}
+
+.btn.ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.btn.danger {
+  background: var(--danger);
+  color: white;
+}
+
+.btn.danger:hover {
+  filter: brightness(1.15);
+  transform: translateY(-2px);
+}
+
+/* ===== MENSAGEM QUANDO NÃO LOGADO ===== */
+.messageCard {
+  max-width: 600px;
+  margin: 100px auto;
+  padding: 36px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  text-align: center;
+  color: white;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 600px) {
+  .profileCard {
+    padding: 26px 24px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}

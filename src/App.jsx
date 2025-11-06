@@ -1,87 +1,49 @@
 // src/App.jsx
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import "./styles/globals.css";
+import React, { Suspense } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 
-// Layout
-import Header from "./components/Header.jsx";
-import Footer from "./components/Footer.jsx";
+// Componentes Globais
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
-// --- Páginas principais ---
-import Home from "./pages/Home/Home.jsx";
-import Blog from "./pages/Blog/Blog.jsx";
-
-// --- Posts do Blog ---
-import Variavel from "./pages/Blog/Variavel.jsx";
-import Algoritmo from "./pages/Blog/Algoritmo.jsx";
-import Tipo from "./pages/Blog/Tipo.jsx";
-
-// --- Desafios ---
-import ChallengeList from "./pages/ChallengeList/ChallengeList.jsx";
-import ChallengeDetail from "./pages/ChallengeDetail/ChallengeDetail.jsx";
-
-// --- Autenticação ---
-import Login from "./pages/Login/Login.jsx";
-import Cadastro from "./pages/Cadastro/Cadastro.jsx";
-import EsqueciSenha from "./pages/EsqueciSenha/EsqueciSenha.jsx";
-
-// --- Administração ---
-import Admin from "./admin/Admin.jsx";
-import ProtectedRoute from "./context/ProtectedRoute.jsx";
-
-// --- Página 404 ---
-function NotFound() {
-  return (
-    <div style={{ textAlign: "center", padding: "80px" }}>
-      <h1>404</h1>
-      <p>Página não encontrada 😢</p>
-    </div>
-  );
-}
-
+// Lazy Loading das Páginas
+const Home = React.lazy(() => import("./pages/Home/Home"));
+const Blog = React.lazy(() => import("./pages/Blog/Blog"));
+const Login = React.lazy(() => import("./pages/Login/Login"));
+const Admin = React.lazy(() => import("./admin/Admin"));
+const ChallengeList = React.lazy(() => import("./pages/ChallengeList/ChallengeList"));
+const ChallengeDetail = React.lazy(() => import("./pages/ChallengeDetail/ChallengeDetail"));
+// Import explícito incluindo extensão para evitar problema de resolução
+const Perfil = React.lazy(() => import("./pages/Perfil/Perfil.jsx"));
 
 function App() {
+  const location = useLocation();
+
+  const pageTransition = {
+    initial: { opacity: 0, y: 30 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -30 },
+    transition: { duration: 0.45, ease: "easeOut" },
+  };
+
   return (
     <div className="app-layout">
       <Header />
       <main>
-        <Routes>
-          {/* --- Páginas principais --- */}
-          <Route path="/" element={<Home />} />
-          
-          {/* --- Blog --- */}
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/variavel" element={<Variavel />} />
-          <Route path="/blog/algoritmo" element={<Algoritmo />} />
-          <Route path="/blog/tipos-de-dados" element={<Tipo />} />
-          
-          {/* Rotas alternativas para compatibilidade */}
-          <Route path="/tipo" element={<Tipo />} />
-          <Route path="/algoritmo" element={<Algoritmo />} />
-          <Route path="/variavel" element={<Variavel />} />
-
-          {/* --- Desafios --- */}
-          <Route path="/desafios" element={<ChallengeList />} />
-          <Route path="/desafios/:slug" element={<ChallengeDetail />} />
-
-          {/* --- Autenticação --- */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/cadastro" element={<Cadastro />} />
-          <Route path="/esqueci-senha" element={<EsqueciSenha />} />
-
-          {/* --- Administração (rota protegida) --- */}
-          <Route
-            path="/admin"
-            element={
-              <ProtectedRoute>
-                <Admin />
-              </ProtectedRoute>
-            }
-          />
-
-          {/* --- Rota 404 --- */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Suspense fallback={<div className="loading">Carregando...</div>}>
+          <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
+              <Route path="/" element={<motion.div {...pageTransition}><Home /></motion.div>} />
+              <Route path="/blog" element={<motion.div {...pageTransition}><Blog /></motion.div>} />
+              <Route path="/desafios" element={<motion.div {...pageTransition}><ChallengeList /></motion.div>} />
+              <Route path="/desafios/:slug" element={<motion.div {...pageTransition}><ChallengeDetail /></motion.div>} />
+              <Route path="/login" element={<motion.div {...pageTransition}><Login /></motion.div>} />
+              <Route path="/perfil" element={<motion.div {...pageTransition}><Perfil /></motion.div>} />
+              <Route path="/admin" element={<motion.div {...pageTransition}><Admin /></motion.div>} />
+            </Routes>
+          </AnimatePresence>
+        </Suspense>
       </main>
       <Footer />
     </div>

@@ -1,4 +1,3 @@
-/* src/components/Header.module.css */
 /* ===== CABEÇALHO ===== */
 .header {
   position: fixed;
@@ -72,30 +71,32 @@
   gap: 18px;
   align-items: center;
   position: absolute;
-  right: 60px; /* 🔹 fica ao lado esquerdo do botão hamburguer */
+  right: 60px; /* ao lado esquerdo do botão hamburguer */
   top: 50%;
   transform: translateY(-50%) translateX(30px);
   opacity: 0;
   pointer-events: none;
   transition: all 0.4s ease;
-  z-index: 1001; /* camada padrão para nav */
+  z-index: 1001;
 }
 
-  /* Quando o menu é aberto */
- .nav.open {
-   opacity: 1;
-   pointer-events: auto;
-  /* aumenta o afastamento para garantir espaço extra (ajuste fino) */
+/* Quando o menu é aberto */
+.nav.open {
+  opacity: 1;
+  pointer-events: auto;
   transform: translateY(-50%) translateX(-24px);
-  z-index: 2002; /* acima do botão hamburguer para evitar ser coberto */
- }
+  z-index: 2002;
+}
 
 /* ===== LINKS ===== */
 .nav a {
   color: white;
   font-weight: 500;
   text-decoration: none;
-  transition: color 0.3s ease, transform 0.3s ease;
+  padding: 8px 14px;
+  border-radius: 6px;
+  background: transparent;
+  transition: all 0.3s ease;
   transform: translateY(-10px);
   opacity: 0;
 }
@@ -106,7 +107,41 @@
 }
 
 .nav a:hover {
-  color: #dce9ff;
+  background: rgba(255, 255, 255, 0.15);
+  color: #e3f2fd;
+}
+
+/* ===== BOTÃO SAIR (vermelho) ===== */
+.logoutButton {
+  background-color: #e53935;
+  color: white !important;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.logoutButton:hover {
+  background-color: #c62828;
+  transform: scale(1.05);
+}
+
+/* ===== BOTÃO PERFIL ===== */
+.profileButton {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.profileButton:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
 }
 
 /* ===== DESKTOP ===== */
