@@ -38,7 +38,7 @@ export default function Condicionais() {
        
        <a href="/blog" className="back-link">← Voltar</a>
         &nbsp;&nbsp;&nbsp;
-         <a href="/condicionais" className="back-link">
+         <a href="/funcoes" className="back-link">
           Próximo →
         </a>
        

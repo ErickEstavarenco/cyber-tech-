@@ -6,13 +6,10 @@
   left: 0;
   width: 100%;
   z-index: 1000;
-  
   /* MUDANÇA 1: Cor sólida mais escura para diferenciar do gradiente da Home */
   background-color: #0d112b; /* Um azul quase preto */
-
   /* MUDANÇA 2: Mais compacto (8px de padding vertical) */
   padding: 0.5rem 0; 
-  
   border-bottom: 1px solid #3b82f6; 
 }
 

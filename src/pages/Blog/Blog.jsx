@@ -77,23 +77,31 @@ function Blog() {
             Quando o 'se' muda tudo na programação
          </p>
         </Link>
+        
           
         </div>
 
 
         <div className="post-card">
+          <Link to="/funcoes" className="read-more-link">
+            
           <h2>Funções</h2>
               <img src="/funcao.png" alt="Imagem sobre Funções" className="post-img" />
-          <p>São blocos de código criados para realizar uma tarefa específica.
-            Elas ajudam a organizar e reutilizar o código, evitando repetições.
+          <p>
+            Aprenda o que são funções e por que elas tornam a programação mais simples
          </p>
+         </Link>
           
         </div>
         <div className="post-card">
+        <Link to="/operacao" className="read-more-link">
+
           <h2>Operações</h2>
               <img src="/operacao.png" alt="Imagem sobre operação" className="post-img" />
-          <p>Operadores são símbolos usados para
-            realizar ações com os dados, como fazer cálculos ou comparar valores.</p>
+          <p>
+            Entenda o papel dos operadores na manipulação de dados e expressões lógicas
+          </p>
+          </Link>
            
                </div>
 

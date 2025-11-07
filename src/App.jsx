@@ -20,6 +20,7 @@ import Algoritmo from "./pages/Blog/Algoritmo";
 import Variavel from "./pages/Blog/Variavel.jsx";
 import Condicionais from "./pages/Blog/Condicionais.jsx";
 import Funcoes from"./pages/Blog/Funcoes.jsx";
+import Operacao from"./pages/Blog/Operacao.jsx";
 
 
 
@@ -42,6 +43,8 @@ function App() {
           <Route path="/variavel" element={<Variavel />} />
           <Route path="/condicionais" element={<Condicionais />} />
           <Route path="/funcoes" element={<Funcoes />} />
+          <Route path="/operacao" element={<Operacao />} />
+
           
          
 
