@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import styles from './Login.module.css';
-import { auth } from '../../../FirebaseConfig.js';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import styles from "./Login.module.css";
+
+// ✅ Caminho corrigido — o FirebaseConfig está fora da pasta src
+import { auth } from "../../../FirebaseConfig.js";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -19,17 +20,21 @@ const Login = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      setLoading(false);
-      navigate('/');
+      navigate("/");
     } catch (err) {
-      setLoading(false);
-      const code = err?.code || '';
-      if (code.includes('user-not-found') || code.includes('wrong-password') || code.includes('invalid-credential')) {
-        setError('E-mail ou senha inválidos.');
+      console.error("Erro detalhado no login:", err);
+      const code = err?.code || "";
+      if (
+        code.includes("user-not-found") ||
+        code.includes("wrong-password") ||
+        code.includes("invalid-credential")
+      ) {
+        setError("E-mail ou senha inválidos.");
       } else {
-        setError('Ocorreu um erro ao tentar fazer login.');
+        setError("Ocorreu um erro ao tentar fazer login.");
       }
-      console.error('Erro no login:', err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -45,12 +50,10 @@ const Login = () => {
             <input
               type="email"
               id="email"
-              name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="seu.email@exemplo.com"
               required
-              aria-label="E-mail"
             />
           </div>
 
@@ -59,23 +62,17 @@ const Login = () => {
             <input
               type="password"
               id="password"
-              name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Sua senha"
               required
-              aria-label="Senha"
             />
           </div>
 
-          {error && (
-            <div className={styles.errorMessage} role="alert">
-              {error}
-            </div>
-          )}
+          {error && <div className={styles.errorMessage}>{error}</div>}
 
-          <button type="submit" className={styles.loginButton} disabled={loading} aria-busy={loading}>
-            {loading ? 'Entrando...' : 'Entrar'}
+          <button type="submit" className={styles.loginButton} disabled={loading}>
+            {loading ? "Entrando..." : "Entrar"}
           </button>
         </form>
 
