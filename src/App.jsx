@@ -3,37 +3,44 @@ import React from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import './styles/globals.css'; 
 
-// Layout Components (from Isabella/HEAD)
+// Componentes de Layout
 import Header from './components/Header.jsx'; 
 import Footer from './components/Footer.jsx'; 
 
-// Page Imports (from Isabella/HEAD)
+// Páginas Principais e do Blog (da Isabella)
 import Home from './pages/Home/Home.jsx';
 import Blog from './pages/Blog/Blog.jsx';
 import ChallengeList from './pages/ChallengeList/ChallengeList.jsx';
-import ChallengeDetail from './pages/ChallengeDetail/ChallengeDetail.jsx';
+// O 'ChallengeDetail.jsx' foi removido pois foi substituído pelos desafios específicos
+// import ChallengeDetail from './pages/ChallengeDetail/ChallengeDetail.jsx'; 
 import Algoritmo from "./pages/Blog/Algoritmo";
 import Variavel from "./pages/Blog/Variavel.jsx";
 import Condicionais from "./pages/Blog/Condicionais.jsx";
 import Funcoes from "./pages/Blog/Funcoes.jsx";
 import Operacao from "./pages/Blog/Operacao.jsx";
 
-// Auth Page Imports (from Victor/Incoming)
+// Páginas de Autenticação (do Victor)
 import Login from './pages/Login/Login.jsx';
 import Cadastro from './pages/Cadastro/Cadastro.jsx';
 import EsqueciSenha from './pages/EsqueciSenha/EsqueciSenha.jsx';
 import Admin from './admin/Admin.jsx';
+import Perfil from './pages/Perfil/Perfil.jsx';
 
-// Auth Util (from Victor/Incoming)
+// Utilitário de Autenticação (do Victor)
 import ProtectedRoute from './context/ProtectedRoute.jsx';
 
-// NOTA: O AuthProvider (do AuthContext) está sendo
-// usado no 'main.jsx', o que é a prática correta.
+// NOVAS PÁGINAS DE DESAFIO (do seu colega)
+import Desafio1 from './pages/Desafios/Desafio1.jsx';
+import Desafio2 from './pages/Desafios/Desafio2.jsx';
+import Desafio3 from './pages/Desafios/Desafio3.jsx';
+import Desafio4 from './pages/Desafios/Desafio4.jsx';
 
+// O AuthProvider (do AuthContext) deve estar no 'main.jsx'
+// A animação (useLocation) é mantida da 'main'
 function App() {
   const location = useLocation();
 
-  const pageTransition = {
+  const pageVariants = {
     initial: { opacity: 0, y: 30 },
     animate: { opacity: 1, y: 0 },
     exit: { opacity: 0, y: -30 },
@@ -44,8 +51,10 @@ function App() {
     <div className="app-layout">
       <Header />
       <main>
+        {/* A estrutura de animação da 'main' é mantida */}
         <Routes location={location} key={location.pathname}>
-          {/* --- Rotas Públicas (de Isabella) --- */}
+          
+          {/* --- Rotas Públicas (Blog, Home, etc.) --- */}
           <Route path="/" element={<Home />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/algoritmo" element={<Algoritmo />} />
@@ -53,15 +62,22 @@ function App() {
           <Route path="/condicionais" element={<Condicionais />} />
           <Route path="/funcoes" element={<Funcoes />} />
           <Route path="/operacao" element={<Operacao />} />
-          <Route path="/desafios" element={<ChallengeList />} />
-          <Route path="/desafios/:slug" element={<ChallengeDetail />} />
           
-          {/* --- Rotas de Autenticação (de Victor) --- */}
+          {/* --- ROTAS DE DESAFIOS (ATUALIZADAS) --- */}
+          <Route path="/desafios" element={<ChallengeList />} />
+          {/* A rota genérica '/desafios/:slug' foi removida... */}
+          {/* ...e substituída pelas novas rotas específicas: */}
+          <Route path="/desafios/desafio1" element={<Desafio1 />} />
+          <Route path="/desafios/desafio2" element={<Desafio2 />} />
+          <Route path="/desafios/desafio3" element={<Desafio3 />} />
+          <Route path="/desafios/desafio4" element={<Desafio4 />} />
+          
+          {/* --- Rotas de Autenticação (Login, Cadastro) --- */}
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/esqueci-senha" element={<EsqueciSenha />} />
 
-          {/* --- Rotas Protegidas (de Victor) --- */}
+          {/* --- Rotas Protegidas (Admin, Perfil) --- */}
           <Route 
             path="/admin" 
             element={
@@ -70,9 +86,19 @@ function App() {
               </ProtectedRoute>
             } 
           />
+          <Route 
+            path="/perfil" 
+            element={
+              <ProtectedRoute>
+                <Perfil />
+              </ProtectedRoute>
+            } 
+          />
+          
+          {/* <Route path="*" element={<NotFound />} /> */} {/* Se você tiver uma página NotFound, pode reativar */}
         </Routes>
       </main>
-      <Footer /> 
+      <Footer />
     </div>
   );
 }

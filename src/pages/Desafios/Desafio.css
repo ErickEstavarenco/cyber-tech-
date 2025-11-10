@@ -1,0 +1,172 @@
+:root {
+  --bg: #f1f1f1;
+  --card: #ffffff;
+  --text: #1b1b1b;
+  --primary: #007bff;
+  --radius: 10px;
+}
+
+/* ===== ESTILOS GERAIS ===== */
+.pagina-desafios {
+  font-family: "Poppins", sans-serif;
+  color: var(--text);
+  margin: 0;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1, h2 {
+  color: var(--primary);
+}
+h1 {
+  color: var(--text);
+}
+
+.subtitle {
+  color: var(--text);
+  margin-bottom: 2rem;
+}
+
+/* ===== PLACAR FIXO (ABAIXADO) ===== */
+.scoreboard {
+  position: fixed;
+  top: 4.5rem; /* antes era 1rem — agora abaixado para não colidir com a navbar */
+  right: 1rem;
+  background: #1b1b1b;
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  z-index: 10;
+}
+
+/* ===== CONTAINER DOS DESAFIOS ===== */
+.challenge-container {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+/* ===== BLOCO DE CÓDIGO ===== */
+pre {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: var(--radius);
+  overflow-x: auto;
+}
+
+/* ===== SELECTS ===== */
+select {
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0.3rem 0.5rem;
+  font-family: monospace;
+  font-size: 1rem;
+}
+
+select[disabled] {
+  background: #eee;
+  cursor: not-allowed;
+}
+
+/* ===== FEEDBACK ===== */
+.feedback {
+  margin-top: 1rem;
+  font-weight: 600;
+}
+.correct {
+  color: green;
+}
+.incorrect {
+  color: red;
+}
+
+.alternativas {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.alternativa-btn {
+  background: var(--bg);
+  color: #000000;
+  border: 2px solid transparent;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.alternativa-btn:hover {
+  background: #ccc;
+  border-color: #00bcd4;
+}
+
+.alternativa-btn.selecionada {
+  border-color: #00bcd4;
+  background: var(--bg);
+}
+
+.alternativa-btn.bloqueada {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.feedback.correct {
+  color: #4caf50;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.feedback.incorrect {
+  color: #f44336;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.final-score {
+  margin-top: 20px;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+
+/* ===== PONTUAÇÃO FINAL (versão antiga + melhor espaçamento) ===== */
+.final-score {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--card);
+  border: 2px solid var(--primary);
+  padding: 0.8rem 2rem;
+  border-radius: var(--radius);
+  margin-top: 3rem; /* antes era 2rem — agora mais abaixo */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== BOTÃO ===== */
+.btn-verificar {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.btn-verificar:hover {
+  background: #0056c7;
+}
+
