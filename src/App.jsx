@@ -12,6 +12,11 @@ import Home from './pages/Home/Home.jsx';
 import Blog from './pages/Blog/Blog.jsx';
 import ChallengeList from './pages/ChallengeList/ChallengeList.jsx';
 import ChallengeDetail from './pages/ChallengeDetail/ChallengeDetail.jsx';
+import Algoritmo from "./pages/Blog/Algoritmo";
+import Variavel from "./pages/Blog/Variavel.jsx";
+import Condicionais from "./pages/Blog/Condicionais.jsx";
+import Funcoes from "./pages/Blog/Funcoes.jsx";
+import Operacao from "./pages/Blog/Operacao.jsx";
 
 // Auth Page Imports (from Victor/Incoming)
 import Login from './pages/Login/Login.jsx';
@@ -43,6 +48,11 @@ function App() {
           {/* --- Rotas Públicas (de Isabella) --- */}
           <Route path="/" element={<Home />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/algoritmo" element={<Algoritmo />} />
+          <Route path="/variavel" element={<Variavel />} />
+          <Route path="/condicionais" element={<Condicionais />} />
+          <Route path="/funcoes" element={<Funcoes />} />
+          <Route path="/operacao" element={<Operacao />} />
           <Route path="/desafios" element={<ChallengeList />} />
           <Route path="/desafios/:slug" element={<ChallengeDetail />} />
           
