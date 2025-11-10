@@ -13,31 +13,40 @@ function Blog() {
      <br></br>
 
 
-      <div className="posts-container">
-        <div className="post-card">
-             <Link to="/algoritmo" className="read-more-link">
-            
-              <h2>O que é um Algoritmo?</h2>
-             <img src="/algoritmo.png" alt="Imagem sobre Algoritmos" className="post-img" />
+      <div className="post-container-blog">
+       <div className="post-card-alg">
+    <Link to="/algoritmo" className="read-more-link">
+      <div className="post-image">
+        <img src="/algoritmo.png" alt="Imagem sobre Algoritmos" className="post-img-blog" />
+      </div>
 
-                 <p>
-           Do pensamento à ação: o poder dos algoritmos
-        </p>
-        </Link>
-        <div>
-         
+      <div className="post-info">
+        <h3 className="post-title">Do pensamento à ação: o poder dos algoritmos</h3>
+        <div className="post-meta">
+          <p><i className="fa fa-user"><img src='/user.png' className='user'></img></i> Lidiane Fonesca</p>
+          <p><i className="fa fa-calendar"></i> <img src='calendar.png' alt="user"></img> 10/10/2023</p>
+<p>
+  <i className="fa fa-clock"></i> 
+  <img src='/time-left.png' className='user' alt="Tempo restante" /> 10 min
+</p>
+        </div>
+      </div>
+    </Link>
+  </div>
+  
+         <div>
            
          
        
-        </div>
+        
          
         </div>
 
 
-        <div className="post-card">
+        <div className="post-card-alg">
             <Link to="/variavel" className="read-more-link">
-          <h2>Variáveis</h2>
-          <img src="/variaveis.png" alt="Imagem sobre Variável" className="post-img" />
+      
+          <img src="/variaveis.png" alt="Imagem sobre Variável" className="post-img-blog" />
 
           <p>
             Entenda onde os dados vivem dentro do computador

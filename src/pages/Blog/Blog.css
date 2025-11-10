@@ -231,7 +231,7 @@
 }
 
 .post-img {
-     float: left; /* Faz a imagem ir para a esquerda */
+  float: left; /* Faz a imagem ir para a esquerda */
   transform: scale(0.8); /* 80% do tamanho */
   margin: 10px; /* Margem em torno da imagem */
   transition: transform 0.3s ease;
@@ -479,16 +479,17 @@ ul{
     background-color: #d9e0f8fb;
     border-radius: 8px;
     padding: 16px;
-    max-width: 320px;
+    max-width: 330px;
     width: 100%;
     text-align: center;
     box-shadow: 5px 5px 0px #c9d6fffb;
-
+   height: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 10px 0px;
+    
   }
 
   .card-title {
@@ -499,8 +500,73 @@ ul{
 
  .card img {
   height: auto;
+  width: 100%;
 }
     
   
 
 
+.post-container-blog{
+   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 2%;
+}
+
+
+
+
+.post-img-blog {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+
+}
+
+.post-info {
+  background-color: #cfd8ff;
+  padding: 15px 20px;
+  color: #1a1a1a;
+}
+
+.post-title {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.post-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 0.9rem;
+  color: #2a2a2a93;
+}
+
+.post-meta i {
+  margin-right: 8px;
+  color: #2a2a7f;
+}
+
+
+.post-card-alg {
+  background-color: #f9f9ff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.post-card:hover {
+  transform: scale(1.03);
+}
+.user {
+  width: 16px;   /* 👈 ajusta a largura */
+  height: 16px;  /* 👈 ajusta a altura */
+  border-radius: 50%; /* opcional — deixa redondo, estilo avatar */
+  margin-right: 8px;  /* espaço entre a imagem e o texto */
+  object-fit: cover;
+}
