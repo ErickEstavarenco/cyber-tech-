@@ -1,7 +1,7 @@
 /* src/components/Footer.module.css */
 .footer {
   /* Fundo escuro semi-transparente para combinar com o gradiente */
-  background-color: rgba(0, 0, 0, 0.2);
+  background: #054161;
   color: var(--color-text-light);
   padding: 1.5rem 0;
   margin-top: 3rem; /* Empurra o rodapé para baixo do conteúdo */

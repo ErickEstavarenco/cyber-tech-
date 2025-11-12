@@ -2,8 +2,8 @@
 
 :root {
     /* Cores do Tema Azul Gradiente (Escuro -> Claro) */
-    --color-primary-start: #1E90FF; /* Azul Claro */
-    --color-primary-end: #0057D8;   /* Azul Escuro */
+    --color-primary-start: #F0F0EC; /* Azul Claro */
+    --color-primary-end: #F0F0EC;   /* Azul Escuro */
     --color-primary-gradient: linear-gradient(180deg, var(--color-primary-end) 0%, var(--color-primary-start) 100%);
     
     /* Cores Neutras */

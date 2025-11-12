@@ -9,22 +9,20 @@ function Blog() {
 
   return (
     <div className="blog-page">
-      <h1 className="page-title">Blog</h1>
-     <br></br>
-
+      <div className='hero-section'></div>
 
       <div className="post-container-blog">
        <div className="post-card-alg">
     <Link to="/algoritmo" className="read-more-link">
       <div className="post-image">
-        <img src="/algoritmo.png" alt="Imagem sobre Algoritmos" className="post-img-blog" />
+        <img src="/algex23.png" alt="Imagem sobre Algoritmos" className="post-img-blog" />
       </div>
 
       <div className="post-info">
         <h3 className="post-title">Do pensamento à ação: o poder dos algoritmos</h3>
         <div className="post-meta">
-          <p><i className="fa fa-user"><img src='/user.png' className='user'></img></i> Lidiane Fonesca</p>
-          <p><i className="fa fa-calendar"></i> <img src='calendar.png' alt="user"></img> 10/10/2023</p>
+          <p><i className="fa fa-user"></i> <img src='/user.png' className='user'></img>Lidiane Fonesca</p>
+          <p><i className="fa fa-calendar"></i> <img src='calendar.png' alt="" className='user'></img> 10/10/2023</p>
 <p>
   <i className="fa fa-clock"></i> 
   <img src='/time-left.png' className='user' alt="Tempo restante" /> 10 min
@@ -34,85 +32,109 @@ function Blog() {
     </Link>
   </div>
   
-         <div>
-           
-         
-       
-        
-         
+   <div className="post-card-alg">
+    <Link to="/variavel" className="read-more-link">
+      <div className="post-image">
+        <img src="/variblog.png" alt="Imagem sobre Algoritmos" className="post-img-blog" />
+      </div>
+
+      <div className="post-info">
+        <h3 className="post-title">  Entenda onde os dados vivem dentro do computador</h3>
+        <div className="post-meta">
+          <p><i className="fa fa-user"></i> <img src='/user.png' className='user'></img>Augusto da Silva</p>
+          <p><i className="fa fa-calendar"></i> <img src='calendar.png' alt="" className='user'></img> 12/04/2020</p>
+<p>
+  <i className="fa fa-clock"></i> 
+  <img src='/time-left.png' className='user' alt="Tempo restante" /> 10 min
+</p>
         </div>
+      </div>
+    </Link>
+  </div>
+         
+         <div className="post-card-alg">
+    <Link to="/tipo" className="read-more-link">
+      <div className="post-image">
+        <img src="/tipoblog.png" alt="Imagem sobre Algoritmos" className="post-img-blog" />
+      </div>
 
-
+      <div className="post-info">
+        <h3 className="post-title"> Aprenda o que são e para que servem os tipos básicos de dados na programação</h3>
+        <div className="post-meta">
+          <p><i className="fa fa-user"></i> <img src='/user.png' className='user'></img>Julia Mariana Reinalda</p>
+          <p><i className="fa fa-calendar"></i> <img src='calendar.png' alt="" className='user'></img> 20/06/2022</p>
+<p>
+  <i className="fa fa-clock"></i> 
+  <img src='/time-left.png' className='user' alt="Tempo restante" /> 10 min
+</p>
+        </div>
+      </div>
+    </Link>
+  </div>
         <div className="post-card-alg">
-            <Link to="/variavel" className="read-more-link">
+    <Link to="/condicionais" className="read-more-link">
+      <div className="post-image">
+        <img src="/condblog.png" alt="Imagem sobre Algoritmos" className="post-img-blog" />
+      </div>
+
+      <div className="post-info">
+        <h3 className="post-title">    Quando o 'se' muda tudo <br></br>na programação</h3>
+        <div className="post-meta">
+          <p><i className="fa fa-user"></i> <img src='/user.png' className='user'></img>Luiz Inácio de Almeida</p>
+          <p><i className="fa fa-calendar"></i> <img src='calendar.png' alt="" className='user'></img> 17/06/2019</p>
+<p>
+  <i className="fa fa-clock"></i> 
+  <img src='/time-left.png' className='user' alt="Tempo restante" /> 10 min
+</p>
+        </div>
+      </div>
+    </Link>
+  </div>
+            <div className="post-card-alg">
+    <Link to="/funcoes" className="read-more-link">
+      <div className="post-image">
+        <img src="/funblog.png" alt="Imagem sobre Algoritmos" className="post-img-blog" />
+      </div>
+
+      <div className="post-info">
+        <h3 className="post-title">          Aprenda o que são funções e por que elas<br></br> tornam a programação mais simples</h3>
+        <div className="post-meta">
+          <p><i className="fa fa-user"></i> <img src='/user.png' className='user'></img>Roberto Souza</p>
+          <p><i className="fa fa-calendar"></i> <img src='calendar.png' alt="" className='user'></img> 09/11/2024</p>
+<p>
+  <i className="fa fa-clock"></i> 
+  <img src='/time-left.png' className='user' alt="Tempo restante" /> 10 min
+</p>
+        </div>
+      </div>
+    </Link>
+  </div>
+
+            <div className="post-card-alg">
+    <Link to="/operacao" className="read-more-link">
+      <div className="post-image">
+        <img src="/operablog.png" alt="Imagem sobre Algoritmos" className="post-img-blog" />
+      </div>
+
+      <div className="post-info">
+        <h3 className="post-title">   Entenda o papel dos operadores na manipulação de dados e expressões lógicas</h3>
+        <div className="post-meta">
+          <p><i className="fa fa-user"></i> <img src='/user.png' className='user'></img>Paulo Ferreira</p>
+          <p><i className="fa fa-calendar"></i> <img src='calendar.png' alt="" className='user'></img> 14/01/2021</p>
+<p>
+  <i className="fa fa-clock"></i> 
+  <img src='/time-left.png' className='user' alt="Tempo restante" /> 10 min
+</p>
+        </div>
+      </div>
+    </Link>
+  </div>
+
+
       
-          <img src="/variaveis.png" alt="Imagem sobre Variável" className="post-img-blog" />
-
-          <p>
-            Entenda onde os dados vivem dentro do computador
-         </p>
-               
-          </Link>
-          <div>
-            
-           
-          
-            
-          </div>
-         </div>
-            <div className="post-card">
-        <Link to="/tipo" className="read-more-link">
-
-          <h2>Tipos de Dados</h2>
-          <img src="/tipodedados.png" alt="Imagem sobre Tipos de dados" className="post-img" />
-
-          <p>Aprenda o que são e para que servem os tipos básicos de dados na programação</p>
-            </Link>
-           
-             
-                
-         </div>
 
 
-        <div className="post-card">
-          <Link to="/condicionais" className="read-more-link">
-
-          <h2>Condicionais (If, Else, Elif)</h2>
-
-              <img src="/condicionais.png" alt="Imagem sobre condicionais" className="post-img" />
-          
-       
-          <p>
-            Quando o 'se' muda tudo na programação
-         </p>
-        </Link>
-        
-          
-        </div>
-
-
-        <div className="post-card">
-          <Link to="/funcoes" className="read-more-link">
-            
-          <h2>Funções</h2>
-              <img src="/funcao.png" alt="Imagem sobre Funções" className="post-img" />
-          <p>
-            Aprenda o que são funções e por que elas tornam a programação mais simples
-         </p>
-         </Link>
-          
-        </div>
-        <div className="post-card">
-        <Link to="/operacao" className="read-more-link">
-
-          <h2>Operações</h2>
-              <img src="/operacao.png" alt="Imagem sobre operação" className="post-img" />
-          <p>
-            Entenda o papel dos operadores na manipulação de dados e expressões lógicas
-          </p>
-          </Link>
-           
-               </div>
+      
 
         <div className="post-card">
           <h2>Curiosidades sobre Python</h2>

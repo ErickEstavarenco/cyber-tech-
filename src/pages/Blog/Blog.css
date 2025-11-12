@@ -1,7 +1,7 @@
 .blog-page {
   display: flex;
   flex-direction: column;
-  padding-top: 0;
+ 
   padding-bottom: 2rem;
 }
 
@@ -37,6 +37,7 @@
   margin-top: 0;
   margin-bottom: 0.5rem;
   text-align: center;
+  color:#233568;
 }
 
 .post-card p {
@@ -58,10 +59,11 @@
 }
 .page-title{
   text-align: center;
+  color: #233568;
 }
 
 .btn-ver-mais {
-  background-color: #3b82f6;
+  background-color: #51f63b;
   color: white;
   border: none;
   border-radius: 6px;
@@ -73,11 +75,13 @@
 }
 
 .btn-ver-mais:hover {
-  background-color: #2563eb;
+  background-color: #25eb56;
   transform: translateY(-2px);
 }
 
 .conteudo-extra {
+   
+
   margin-top: 1rem;
   color: #333;
   line-height: 1.6;
@@ -112,7 +116,7 @@
 
 /* Cada card ocupa 48% para caber 2 por linha */
 .post-card {
-  background-color: #d9e0f8fb;
+  background-color: #c0dcee;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   padding: 1rem; /* Reduzindo o padding interno */
@@ -161,10 +165,11 @@
 }
 .page-title{
   text-align: center;
+  color: #233568;
 }
 
 .btn-ver-mais {
-  background-color: #3b82f6;
+  background-color: #6aa2c5 ;
   color: white;
   border: none;
   border-radius: 6px;
@@ -176,7 +181,7 @@
 }
 
 .btn-ver-mais:hover {
-  background-color: #2563eb;
+  background-color: #233568 ;
   transform: translateY(-2px);
 }
 
@@ -294,7 +299,7 @@
 }
 
 .pense {
-  background-color: #f1f3ff;
+  background-color: #c0dcee ;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   padding: 1.5rem;
@@ -319,7 +324,7 @@
 .codigo-exemplo,
 .algoritmo-form {
   flex: 1;
-  background-color: #f1f3ff;
+  background-color: #99b5c788 ;
   border-radius: 8px;
   padding: 15px;
   min-width: 250px;
@@ -396,7 +401,7 @@
 }
 
 .variavel {
-  background-color: #d9e0f8fb;
+  background-color: #c0dcee ;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   padding: 1.5rem;
@@ -511,7 +516,7 @@ ul{
   flex-wrap: wrap;
   justify-content: center;
   gap: 1.5rem;
-  padding: 2%;
+  padding-top: 19%;
 }
 
 
@@ -519,16 +524,16 @@ ul{
 
 .post-img-blog {
   width: 100%;
-  height: 200px;
+  aspect-ratio: 16 / 9;  /* mantém proporção igual em todas */
   object-fit: cover;
   display: block;
-
 }
 
 .post-info {
-  background-color: #cfd8ff;
+  background-color: #c0dcee;
   padding: 15px 20px;
-  color: #1a1a1a;
+  color: #233568;
+  height: 200px;
 }
 
 .post-title {
@@ -551,14 +556,17 @@ ul{
   color: #2a2a7f;
 }
 
-
 .post-card-alg {
-  background-color: #f9f9ff;
+  background-color: #c0dcee;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
+    width: 300px;     /* largura igual */
+  height: auto;    /* altura igual */
 }
+
+
 
 .post-card:hover {
   transform: scale(1.03);
@@ -566,7 +574,25 @@ ul{
 .user {
   width: 16px;   /* 👈 ajusta a largura */
   height: 16px;  /* 👈 ajusta a altura */
-  border-radius: 50%; /* opcional — deixa redondo, estilo avatar */
+  /* opcional — deixa redondo, estilo avatar */
   margin-right: 8px;  /* espaço entre a imagem e o texto */
   object-fit: cover;
+  align: center;
 }
+.post-image{
+   width: 100%;
+  aspect-ratio: 16 / 9;  /* mantém proporção igual em todas */
+  object-fit: cover;
+  display: block;
+}
+
+.hero-section {
+  background: linear-gradient(to bottom, #054161, #0541617c ), url('../../public/Desing-blog.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 450px;
+}
+
+
