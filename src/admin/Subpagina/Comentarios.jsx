@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom"; // 👈 importa o roteador
-import styles from "./Admin.module.css";
+import styles from "../Admin.module.css";
 
-export default function Admin({ username = "Alexandre", stats = {} }) {
+export default function Admin({ username = "Victor", stats = {} }) {
   const { media = "8.5/10", posts = 15, drafts = 3, pendingComments = 23 } = stats;
   const navigate = useNavigate(); // 👈 permite redirecionar via código
 

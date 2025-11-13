@@ -2,7 +2,7 @@
 
 /* ---------- Cores base ---------- */
 :root {
-    --primary-blue: #0057ff;
+    --primary-blue: #095e8b;
     --dark-blue: #003bb5;
     --light-blue: #e8f0ff;
     --text-color: #222;
@@ -10,21 +10,24 @@
   
   /* ---------- Página ---------- */
   .home {
-    background-color: #fff;
+   
     color: var(--text-color);
     min-height: 100vh;
     padding-bottom: 4rem;
   }
   
   /* ---------- Seção Hero ---------- */
-  .heroSection {
+.heroSection {
+    padding: 0;
     text-align: center;
-    padding: 4rem 1rem 3rem;
-    background: linear-gradient(180deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
-    color: #fff;
-    border-radius: 0 0 30px 30px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  }
+    margin: 0 auto 30px;
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 24px;
+}
   
   .mainTitle {
     font-size: 2.8rem;
@@ -33,6 +36,7 @@
   }
   
   .subtitle {
+    color: var(--primary-blue);
     font-size: 1.2rem;
     opacity: 0.9;
   }

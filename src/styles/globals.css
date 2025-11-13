@@ -7,16 +7,19 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   scroll-behavior: smooth;
+  color: #095e8b;
 }
 
 /* ===== VARIÁVEIS DE TEMA ===== */
 :root {
-  --color-primary: #0d47a1; /* Azul escuro */
-  --color-primary-light: #1976d2; /* Azul mais claro */
-  --color-accent: #64b5f6; /* Azul de destaque */
-  --color-bg: #ffffff; /* Fundo branco */
-  --color-text-dark: #1e293b; /* Texto principal */
-  --color-text-light: #ffffff; /* Texto claro */
+  --color-primary: #0d6efd;           /* Azul padrão */
+  --color-primary-light: #3b9dff;     /* Azul claro */
+  --color-gradient-start: #F0F0EC;    /* Gradiente início (azul) */
+  --color-gradient-end: #1565c0;      /* Gradiente final (azul escuro) */
+  --color-bg-light: #f4f9ff;          /* Fundo claro */
+  --color-text-dark: #ffffff;         /* Texto principal */
+  --color-text-light: #000000;        /* Texto claro */
+  --header-height: 90px;              /* Cabeçalho maior */
   --color-shadow: rgba(0, 0, 0, 0.15);
   --header-height: 80px;
 }
@@ -30,7 +33,7 @@ body {
 }
 
 body {
-  background-color: var(--color-bg);
+  background:var(--color-gradient-start);
   color: var(--color-text-dark);
   display: flex;
   flex-direction: column;
@@ -79,10 +82,12 @@ button:hover {
 
 /* ===== CONTAINER ===== */
 .container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
+  padding: 1.25rem;
+  border-radius: 12px;
+  background: #c0dcee;/* ===========================AQUI*=========================*/
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  
 }
 
 /* ===== HEADER ===== */
