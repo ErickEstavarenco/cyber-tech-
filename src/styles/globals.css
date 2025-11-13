@@ -1,6 +1,6 @@
 /* ===== globals.css ===== */
 
-/* ===== RESET BÁSICO ===== */
+/* ===== RESET ===== */
 * {
   margin: 0;
   padding: 0;
@@ -11,18 +11,17 @@
 
 /* ===== VARIÁVEIS DE TEMA ===== */
 :root {
-  --color-primary: #0d6efd;           /* Azul padrão */
-  --color-primary-light: #3b9dff;     /* Azul claro */
-  --color-gradient-start: #1e88e5;    /* Gradiente início (azul) */
-  --color-gradient-end: #1565c0;      /* Gradiente final (azul escuro) */
-  --color-bg-light: #f4f9ff;          /* Fundo claro */
-  --color-text-dark: #1e293b;         /* Texto principal */
-  --color-text-light: #ffffff;        /* Texto claro */
-  --header-height: 90px;              /* Cabeçalho maior */
+  --color-primary: #0d47a1; /* Azul escuro */
+  --color-primary-light: #1976d2; /* Azul mais claro */
+  --color-accent: #64b5f6; /* Azul de destaque */
+  --color-bg: #ffffff; /* Fundo branco */
+  --color-text-dark: #1e293b; /* Texto principal */
+  --color-text-light: #ffffff; /* Texto claro */
   --color-shadow: rgba(0, 0, 0, 0.15);
+  --header-height: 80px;
 }
 
-/* ===== FUNDO GERAL ===== */
+/* ===== BASE ===== */
 html,
 body {
   width: 100%;
@@ -31,35 +30,24 @@ body {
 }
 
 body {
-  background: linear-gradient(90deg, var(--color-gradient-start) 0%, var(--color-gradient-end) 100%);
+  background-color: var(--color-bg);
   color: var(--color-text-dark);
-  min-height: 100vh;
-  line-height: 1.6;
   display: flex;
   flex-direction: column;
-}
-
-#root,
-.app-layout {
-  width: 100%;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
 }
 
 /* ===== LINKS ===== */
 a {
-  color: var(--color-text-light);
+  color: var(--color-primary);
   text-decoration: none;
-  transition: 0.2s;
+  transition: color 0.2s ease;
 }
-
 a:hover {
   color: var(--color-primary-light);
-  text-decoration: underline;
 }
 
-/* ===== BOTÕES GLOBAIS ===== */
+/* ===== BOTÕES ===== */
 button {
   cursor: pointer;
   border: none;
@@ -67,57 +55,71 @@ button {
   background: var(--color-primary);
   color: var(--color-text-light);
   padding: 10px 20px;
-  border-radius: 6px;
+  border-radius: 8px;
   font-weight: 500;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: all 0.3s ease;
 }
-
 button:hover {
-  background-color: var(--color-primary-light);
+  background: var(--color-primary-light);
+  transform: scale(1.03);
 }
 
-button:active {
-  transform: scale(0.97);
+/* ===== CARDS ===== */
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
 }
-
-/* ===== MAIN (Conteúdo) ===== */
-main {
-  flex: 1;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-top: var(--header-height);
-  padding-bottom: 40px;
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 /* ===== CONTAINER ===== */
 .container {
-  padding: 1.25rem;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(6px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  color: var(--color-text-dark);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
-/* ===== RODAPÉ ===== */
+/* ===== HEADER ===== */
+header {
+  background: linear-gradient(90deg, #0d47a1, #1976d2);
+  color: white;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* ===== MAIN ===== */
+main {
+  flex: 1;
+  padding-top: calc(var(--header-height) + 2rem);
+  padding-bottom: 2rem;
+}
+
+/* ===== FOOTER ===== */
 footer {
+  background: linear-gradient(90deg, #0d47a1, #1976d2);
+  color: var(--color-text-light);
   text-align: center;
-  padding: 20px;
-  color: #ffffff;
-  background: rgba(13, 110, 253, 0.2);
-  backdrop-filter: blur(8px);
+  padding: 1.2rem 0;
   font-size: 0.9rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* ===== RESPONSIVIDADE ===== */
 @media (max-width: 768px) {
-  main {
-    padding-top: 110px; /* compensa o header maior */
-    padding-bottom: 30px;
-  }
-
   .container {
     padding: 1rem;
   }

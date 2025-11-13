@@ -1,22 +1,25 @@
-/* src/components/Footer.module.css */
+/* ===== FOOTER ===== */
 .footer {
-  /* Mesma cor EXATA do cabeçalho - gradiente azul */
-  background: linear-gradient(90deg, #0d6efd 0%, #3b9dff 100%) !important;
-  color: var(--color-text-light);
-  padding: 1.5rem 0 !important;
-  margin: 0 !important;
-  margin-top: auto !important; /* Empurra o rodapé para baixo quando há pouco conteúdo */
-  border: none !important;
-  width: 100% !important;
-  flex-shrink: 0; /* Impede que o footer encolha */
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #0d47a1; /* Azul escuro sólido */
+  color: #ffffff;
+  padding: 1.5rem 0;
+  margin: 0;
+  margin-top: auto;
+  width: 100%;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.3s ease;
 }
 
+/* ===== CONTAINER ===== */
 .footerContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap; /* Para telas menores */
+  flex-wrap: wrap;
   gap: 1rem;
   width: 100%;
   max-width: 1100px;
@@ -25,33 +28,44 @@
   box-sizing: border-box;
 }
 
+/* ===== TEXTO ===== */
 .footerContainer p {
   margin: 0;
-  font-size: 0.9rem;
-  opacity: 0.8;
+  font-size: 0.95rem;
+  opacity: 0.9;
+  letter-spacing: 0.3px;
 }
 
+/* ===== LINKS ===== */
 .footerLinks {
   display: flex;
   gap: 1.5rem;
 }
 
 .footerLinks a {
-  font-size: 0.9rem;
-  color: var(--color-text-light);
+  color: #bbdefb; /* Azul claro para contraste */
+  font-size: 0.95rem;
   text-decoration: none;
-  opacity: 0.8;
-  transition: opacity 0.2s;
+  opacity: 0.9;
+  transition: opacity 0.3s ease, color 0.3s ease;
 }
 
 .footerLinks a:hover {
   opacity: 1;
+  color: #ffffff;
+  text-decoration: underline;
 }
 
-/* Responsividade simples */
+/* ===== RESPONSIVIDADE ===== */
 @media (max-width: 768px) {
   .footerContainer {
     flex-direction: column;
     text-align: center;
+    gap: 0.8rem;
+  }
+
+  .footerLinks {
+    justify-content: center;
+    flex-wrap: wrap;
   }
 }

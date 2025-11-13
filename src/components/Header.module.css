@@ -1,134 +1,58 @@
-/* ===== CABEÇALHO ===== */
+/* ===== HEADER ===== */
 .header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 70px;
-  background: linear-gradient(90deg, #1e88e5, #1565c0);
+  background: linear-gradient(90deg, #0d47a1, #1976d2);
   color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 30px;
+  padding: 0 40px;
   z-index: 1000;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
 }
 
 /* ===== LOGO ===== */
 .logo a {
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   font-weight: 700;
   color: white;
   text-decoration: none;
+  letter-spacing: 0.5px;
 }
 
-/* ===== SEÇÃO DIREITA (menu + botões) ===== */
-.rightSection {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  position: relative;
+.logo a:hover {
+  opacity: 0.9;
 }
 
-/* ===== BOTÃO HAMBURGUER ===== */
-.hamburger {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  gap: 6px;
-  z-index: 2001;
-}
-
-.hamburger span {
-  width: 26px;
-  height: 3px;
-  background-color: white;
-  border-radius: 2px;
-  transition: 0.3s;
-}
-
-/* Animação do ícone */
-.hamburger.active span:nth-child(1) {
-  transform: rotate(45deg) translateY(10px);
-}
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-.hamburger.active span:nth-child(3) {
-  transform: rotate(-43deg) translateY(-13px);
-}
-
-/* ===== NAVEGAÇÃO ===== */
+/* ===== NAVBAR ===== */
 .nav {
   display: flex;
-  gap: 18px;
+  gap: 24px;
   align-items: center;
-  position: absolute;
-  right: 60px; /* ao lado esquerdo do botão hamburguer */
-  top: 50%;
-  transform: translateY(-50%) translateX(30px);
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.4s ease;
-  z-index: 1001;
+  transition: all 0.3s ease;
 }
 
-/* Quando o menu é aberto */
-.nav.open {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(-50%) translateX(-24px);
-  z-index: 2002;
-}
-
-/* ===== LINKS ===== */
 .nav a {
-  color: white;
-  font-weight: 500;
+  color: #e3f2fd;
   text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
   padding: 8px 14px;
   border-radius: 6px;
-  background: transparent;
   transition: all 0.3s ease;
-  transform: translateY(-10px);
-  opacity: 0;
-}
-
-.nav.open a {
-  transform: translateY(0);
-  opacity: 1;
 }
 
 .nav a:hover {
-  background: rgba(255, 255, 255, 0.15);
-  color: #e3f2fd;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #fff;
 }
 
-/* ===== BOTÃO SAIR (vermelho) ===== */
-.logoutButton {
-  background-color: #e53935;
-  color: white !important;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.logoutButton:hover {
-  background-color: #c62828;
-  transform: scale(1.05);
-}
-
-/* ===== BOTÃO PERFIL ===== */
+/* ===== BOTÕES ===== */
 .profileButton {
   background: rgba(255, 255, 255, 0.15);
   color: white;
@@ -144,14 +68,80 @@
   transform: scale(1.05);
 }
 
-/* ===== DESKTOP ===== */
-@media (min-width: 769px) {
+.logoutButton {
+  background-color: #e53935;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.logoutButton:hover {
+  background-color: #c62828;
+  transform: scale(1.05);
+}
+
+/* ===== HAMBURGUER ===== */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  gap: 5px;
+  z-index: 2001;
+}
+
+.hamburger span {
+  width: 26px;
+  height: 3px;
+  background-color: white;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* ===== MOBILE MENU ===== */
+@media (max-width: 768px) {
   .hamburger {
     display: flex;
   }
 
   .nav {
-    right: 60px;
-    gap: 18px;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #0d47a1, #1976d2);
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 0;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20px);
+  }
+
+  .nav.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .nav a {
+    font-size: 1.1rem;
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+
+  .nav.open a {
+    transform: translateY(0);
+    opacity: 1;
   }
 }

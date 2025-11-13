@@ -1,43 +1,50 @@
-/* src/pages/Cadastro/Cadastro.module.css */
-
+/* ===== CADASTRO PAGE ===== */
 .loginContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 1rem;
-    width: 100%;
-    box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #ffffff;
 }
-  
+
+/* ===== CARD ===== */
 .loginCard {
-  background: #FFFFFF !important; /* Fundo BRANCO sólido para contraste */
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: #0d47a1; /* Azul escuro sólido */
+  color: #ffffff;
+  border: none;
   padding: 2.5rem 2rem;
-  border-radius: 12px; 
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2), 
-              0 2px 8px rgba(0, 0, 0, 0.1); 
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
   width: 100%;
   max-width: 450px;
   text-align: left;
   box-sizing: border-box;
+  transition: transform 0.3s ease;
 }
 
+.loginCard:hover {
+  transform: translateY(-3px);
+}
+
+/* ===== TÍTULOS ===== */
 .loginCard h2 {
   text-align: center;
   margin-bottom: 0.75rem;
   font-weight: 700;
   font-size: 1.875rem;
-  color: #1e293b; /* Texto ESCURO para contraste */
-  letter-spacing: -0.02em;
+  color: #ffffff;
 }
 
 .loginSubtitle {
   text-align: center;
-  color: #64748b; /* Cinza mais escuro para melhor legibilidade */
+  color: #e3f2fd;
   margin-bottom: 2rem;
   font-size: 0.95rem;
 }
 
+/* ===== CAMPOS ===== */
 .formGroup {
   margin-bottom: 1.5rem;
 }
@@ -46,111 +53,80 @@
   display: block;
   margin-bottom: 0.625rem;
   font-weight: 600;
-  color: #1e293b; /* Texto escuro */
+  color: #e3f2fd;
   font-size: 0.9rem;
-  letter-spacing: 0.01em;
 }
 
 .formGroup input {
   width: 100%;
   padding: 0.875rem 1rem;
-  border: 2px solid #e2e8f0;
+  border: none;
   border-radius: 8px;
-  box-sizing: border-box; 
-  transition: all 0.3s;
-  color: #1e293b; /* Texto escuro */
-  background-color: #ffffff; /* Fundo branco sólido */
+  background-color: #ffffff;
+  color: #0d47a1;
   font-size: 1rem;
-}
-
-.formGroup input:hover {
-  border-color: #cbd5e1;
-  background-color: #f8fafc;
-}
-
-.formGroup input::placeholder {
-  color: #94a3b8;
+  transition: all 0.3s;
 }
 
 .formGroup input:focus {
-  border-color: #0d6efd; 
-  background-color: #ffffff;
-  box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.1),
-              0 0 0 1px #0d6efd;
-  outline: none;
-  transform: translateY(-1px);
+  outline: 3px solid #1565c0;
 }
 
+/* ===== BOTÃO CADASTRAR ===== */
 .loginButton {
   width: 100%;
   padding: 1rem;
   border: none;
   border-radius: 10px;
-  background: linear-gradient(135deg, #0d6efd 0%, #3b9dff 100%);
+  background-color: #1565c0;
   color: white;
   font-size: 1.05rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
-  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
   margin-top: 0.5rem;
 }
 
 .loginButton:hover {
+  background-color: #1976d2;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(13, 110, 253, 0.4);
 }
 
-.loginButton:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-  transform: none;
-}
-
+/* ===== LINKS ===== */
 .switchAuth {
   text-align: center;
   margin-top: 2rem;
   padding-top: 2rem;
-  border-top: 1px solid #e5e7eb;
-  color: #64748b; /* Cinza mais escuro */
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  color: #e3f2fd;
   font-size: 0.9rem;
 }
 
 .switchAuth a {
-  color: #0d6efd; /* Azul mais vibrante */
+  color: #bbdefb;
   text-decoration: none;
   font-weight: 600;
   transition: color 0.2s;
 }
 
 .switchAuth a:hover {
-  color: #3b9dff;
+  color: #ffffff;
   text-decoration: underline;
 }
 
-/* Estilos para mensagens de erro */
+/* ===== MENSAGENS ===== */
 .errorMessage {
-  background: linear-gradient(135deg, #fee 0%, #fdd 100%);
-  color: #dc2626;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ff8a80;
   padding: 1rem;
   border-radius: 8px;
   margin-bottom: 1.5rem;
   font-size: 0.9rem;
-  border: 2px solid #fecaca;
-  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.1);
   text-align: center;
-}
-
-/* Adicione isto ao final de src/pages/Login/Login.module.css */
-.errorMessage {
-  color: #dc3545; 
-  text-align: center;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
 }
 
 .successMessage {
-  color: #0b875b; 
+  color: #a5d6a7;
   font-size: 0.9rem;
   text-align: center;
   margin-bottom: 15px;

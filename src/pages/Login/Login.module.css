@@ -1,43 +1,50 @@
-/* src/pages/Login/Login.module.css (Atualizado) */
-
+/* ===== LOGIN PAGE ===== */
 .loginContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 1rem; /* Espaçamento para o card não grudar no header/footer */
-    width: 100%;
-    box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #ffffff; /* Fundo geral branco */
 }
-  
+
+/* ===== LOGIN CARD ===== */
 .loginCard {
-  background: #FFFFFF !important; /* Fundo BRANCO sólido para contraste */
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: #0d47a1; /* Azul escuro sólido */
+  color: #ffffff;
+  border: none;
   padding: 2.5rem 2rem;
-  border-radius: 12px; 
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2), 
-              0 2px 8px rgba(0, 0, 0, 0.1); 
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
   width: 100%;
   max-width: 450px;
   text-align: left;
   box-sizing: border-box;
+  transition: transform 0.3s ease;
 }
 
+.loginCard:hover {
+  transform: translateY(-3px);
+}
+
+/* ===== TÍTULOS ===== */
 .loginCard h2 {
   text-align: center;
   margin-bottom: 0.75rem;
   font-weight: 700;
   font-size: 1.875rem;
-  color: #1e293b; /* Texto ESCURO para contraste */
-  letter-spacing: -0.02em;
+  color: #ffffff;
 }
 
 .loginSubtitle {
   text-align: center;
-  color: #64748b; /* Cinza mais escuro para melhor legibilidade */
+  color: #e3f2fd;
   margin-bottom: 2rem;
   font-size: 0.95rem;
 }
 
+/* ===== CAMPOS ===== */
 .formGroup {
   margin-bottom: 1.5rem;
 }
@@ -46,111 +53,95 @@
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 500;
-  color: var(--color-text-dark);
+  color: #e3f2fd;
 }
 
 .formGroup input {
   width: 100%;
   padding: 0.875rem 1rem;
-  border: 2px solid #e2e8f0;
+  border: none;
   border-radius: 8px;
-  box-sizing: border-box; 
-  transition: all 0.3s;
-  color: #1e293b; /* Texto escuro */
-  background-color: #ffffff; /* Fundo branco sólido */
+  background-color: #ffffff;
+  color: #0d47a1;
   font-size: 1rem;
-}
-
-.formGroup input:hover {
-  border-color: #cbd5e1;
-  background-color: #f8fafc;
-}
-
-.formGroup input::placeholder {
-  color: #94a3b8;
+  transition: all 0.3s;
 }
 
 .formGroup input:focus {
-  border-color: var(--color-primary-start); 
-  box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.25);
-  outline: none;
+  outline: 3px solid #1565c0;
 }
 
+/* ===== BOTÃO LOGIN ===== */
 .loginButton {
   width: 100%;
   padding: 1rem;
   border: none;
   border-radius: 10px;
-  background: linear-gradient(135deg, #0d6efd 0%, #3b9dff 100%);
-  color: white;
+  background-color: #1565c0;
+  color: #ffffff;
   font-size: 1.05rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
-  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
   margin-top: 0.5rem;
 }
 
 .loginButton:hover {
+  background-color: #1976d2;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(13, 110, 253, 0.4);
 }
 
-.loginButton:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-  transform: none;
-}
-
+/* ===== LINKS ===== */
 .switchAuth {
   text-align: center;
   margin-top: 2rem;
   padding-top: 2rem;
-  border-top: 1px solid #e5e7eb;
-  color: #64748b; /* Cinza mais escuro */
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  color: #e3f2fd;
   font-size: 0.9rem;
 }
 
 .switchAuth a {
-  color: #0d6efd; /* Azul mais vibrante */
+  color: #bbdefb;
   text-decoration: none;
   font-weight: 600;
   transition: color 0.2s;
 }
 
 .switchAuth a:hover {
-  color: #3b9dff;
+  color: #ffffff;
   text-decoration: underline;
 }
 
-/* --- SEÇÃO ATUALIZADA --- */
-/* Estilos migrados do Login.css antigo */
+/* ===== MENSAGENS ===== */
+.errorMessage {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ff8a80;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
 
-.passwordReset{
+.successMessage {
+  color: #a5d6a7;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.passwordReset {
   margin-top: 10px;
   text-align: center;
 }
 
 .passwordResetLink {
-  /* Estilos do Login.css, adaptados para as variáveis do front-end */
-  color: var(--color-primary-start); /* Cor primária do front-end */
+  color: #bbdefb;
   font-size: 0.9rem;
   text-decoration: none;
 }
 
 .passwordResetLink:hover {
   text-decoration: underline;
-}
-
-/* Estilos para mensagens de erro */
-.errorMessage {
-  background: linear-gradient(135deg, #fee 0%, #fdd 100%);
-  color: #dc2626;
-  padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
-  font-size: 0.9rem;
-  border: 2px solid #fecaca;
-  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.1);
-  text-align: center;
 }
