@@ -10,7 +10,7 @@
 }
   
 .loginCard {
-  background: #FFFFFF !important; /* Fundo BRANCO sólido para contraste */
+  background: #095e8b !important; /* Fundo BRANCO sólido para contraste */
   border: 1px solid rgba(0, 0, 0, 0.15);
   padding: 2.5rem 2rem;
   border-radius: 12px; 
@@ -27,13 +27,13 @@
   margin-bottom: 0.75rem;
   font-weight: 700;
   font-size: 1.875rem;
-  color: #1e293b; /* Texto ESCURO para contraste */
+  color: #ffffff; /* Texto ESCURO para contraste */
   letter-spacing: -0.02em;
 }
 
 .loginSubtitle {
   text-align: center;
-  color: #64748b; /* Cinza mais escuro para melhor legibilidade */
+  color: #ffffff; /* Cinza mais escuro para melhor legibilidade */
   margin-bottom: 2rem;
   font-size: 0.95rem;
 }
@@ -62,9 +62,10 @@
 }
 
 .formGroup input:hover {
-  border-color: #cbd5e1;
-  background-color: #f8fafc;
+   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
+
 
 .formGroup input::placeholder {
   color: #94a3b8;
@@ -93,7 +94,7 @@
 
 .loginButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(13, 110, 253, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 .loginButton:disabled {
@@ -107,12 +108,12 @@
   margin-top: 2rem;
   padding-top: 2rem;
   border-top: 1px solid #e5e7eb;
-  color: #64748b; /* Cinza mais escuro */
+  color: #ffffff; /* Cinza mais escuro */
   font-size: 0.9rem;
 }
 
 .switchAuth a {
-  color: #0d6efd; /* Azul mais vibrante */
+  color: #0d6efd; /* Azul Cadastre-se */
   text-decoration: none;
   font-weight: 600;
   transition: color 0.2s;

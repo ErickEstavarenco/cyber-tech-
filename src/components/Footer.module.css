@@ -1,7 +1,7 @@
 /* src/components/Footer.module.css */
 .footer {
   /* Mesma cor EXATA do cabeçalho - gradiente azul */
-  background: linear-gradient(90deg, #0d6efd 0%, #3b9dff 100%) !important;
+  background: #095e8b;
   color: var(--color-text-light);
   padding: 1.5rem 0 !important;
   margin: 0 !important;
@@ -26,9 +26,9 @@
 }
 
 .footerContainer p {
+  color: #ffffff;
   margin: 0;
   font-size: 0.9rem;
-  opacity: 0.8;
 }
 
 .footerLinks {
@@ -38,7 +38,7 @@
 
 .footerLinks a {
   font-size: 0.9rem;
-  color: var(--color-text-light);
+  color: #ffffff;
   text-decoration: none;
   opacity: 0.8;
   transition: opacity 0.2s;
