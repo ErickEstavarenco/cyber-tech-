@@ -1,44 +1,45 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom"; // 👈 importa o roteador
+import { Link, useNavigate, Outlet, useLocation } from "react-router-dom";
 import styles from "./Admin.module.css";
+// import { useAuth } from "../context/AuthContext"; // Ajuste o caminho se precisar
 
-export default function Admin({ username = "Alexandre", stats = {} }) {
-  const { media = "8.5/10", posts = 15, drafts = 3, pendingComments = 23 } = stats;
-  const navigate = useNavigate(); // 👈 permite redirecionar via código
+export default function Admin() {
+  const navigate = useNavigate();
+  const location = useLocation(); 
 
-  // Funções agora navegam para rotas reais
-  function gerirNotas() {
-    navigate("/admin/notas");
-  }
+  // const { currentUser } = useAuth();
+  // const username = currentUser?.nome || "Admin";
 
-  function gerirBlog() {
-    navigate("/blog");
-  }
-
-  function moderar() {
-    navigate("/admin/comentarios");
-  }
+  const isLinkActive = (path) => {
+    // Lógica para destacar o link ativo
+    if (path === '/admin' && location.pathname === '/admin') return true;
+    if (path !== '/admin' && location.pathname.startsWith(path)) return true;
+    return false;
+  };
 
   return (
     <div className={styles.container}>
-      {/* Sidebar */}
+      {/* Sidebar (agora é persistente) */}
       <aside className={styles.sidebar}>
         <h2>Admin Panel</h2>
+        {/* <h4>Olá, {username}</h4> */}
         <ul>
-          <li className={styles.active}>
-            <span>📊</span> Dashboard
+          <li className={isLinkActive('/admin') ? styles.active : ''}>
+            <Link to="/admin">
+              <span>📊</span> Dashboard
+            </Link>
           </li>
-          <li>
+          <li className={isLinkActive('/admin/notas') ? styles.active : ''}>
             <Link to="/admin/notas">
               <span>⭐</span> Notas
             </Link>
           </li>
-          <li>
-            <Link to="/admin/newblog">
+          <li className={isLinkActive('/admin/new-blog') ? styles.active : ''}>
+            <Link to="/admin/new-blog">
               <span>📝</span> Blog
             </Link>
           </li>
-          <li>
+          <li className={isLinkActive('/admin/comentarios') ? styles.active : ''}>
             <Link to="/admin/comentarios">
               <span>💬</span> Comentários
             </Link>
@@ -46,34 +47,9 @@ export default function Admin({ username = "Alexandre", stats = {} }) {
         </ul>
       </aside>
 
-      {/* Conteúdo Principal */}
+      {/* O React Router vai renderizar a sub-página (Dashboard, Notas, etc.) aqui */}
       <main className={styles.main}>
-        <h1>
-          Bem-vindo, <span>{username}!</span>
-        </h1>
-
-        <div className={styles.cards}>
-          <div className={styles.card}>
-            <h3>Gestão de Notas</h3>
-            <p>Média geral: <strong>{media}</strong></p>
-            <p>Últimas notas submetidas hoje.</p>
-            <button onClick={gerirNotas}>Gerir Notas</button>
-          </div>
-
-          <div className={styles.card}>
-            <h3>Gestão de Blog</h3>
-            <p>Total de <strong>{posts} posts</strong></p>
-            <p>{drafts} rascunhos por publicar.</p>
-            <button onClick={gerirBlog}>Gerir Blog</button>
-          </div>
-
-          <div className={styles.card}>
-            <h3>Moderação de Comentários</h3>
-            <p><strong>{pendingComments}</strong> comentários pendentes</p>
-            <p className={styles.warning}>Moderação necessária.</p>
-            <button className={styles.red} onClick={moderar}>Moderar</button>
-          </div>
-        </div>
+        <Outlet />
       </main>
     </div>
   );

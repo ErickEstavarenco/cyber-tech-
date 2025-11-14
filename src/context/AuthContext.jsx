@@ -1,10 +1,8 @@
-// src/context/AuthContext.jsx
-// (Substitua todo o seu arquivo por este)
-
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
-import { auth, db } from "../../FirebaseConfig"; // Corrigi o caminho, o seu estava errado
+// Lembre-se de verificar este caminho de import:
+import { auth, db } from "../../FirebaseConfig.js"; 
 
 // 🔹 Criação do contexto
 const AuthContext = createContext();
@@ -12,32 +10,37 @@ const AuthContext = createContext();
 // 🔹 Provedor global
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(false); // 👈 NOVO ESTADO
+  const [isAdmin, setIsAdmin] = useState(false); // O estado de admin
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         try {
+          // 1. Defina as referências para os dois documentos
           const userDocRef = doc(db, "users", user.uid);
-          const docSnap = await getDoc(userDocRef);
+          const adminDocRef = doc(db, "admins", user.uid); // Coleção "admins"
 
-          if (docSnap.exists()) {
-            const userData = docSnap.data();
-            // Define o usuário completo
-            setCurrentUser({ uid: user.uid, ...userData });
+          // 2. Busque os dois documentos em paralelo
+          const [userDocSnap, adminDocSnap] = await Promise.all([
+            getDoc(userDocRef),
+            getDoc(adminDocRef)
+          ]);
 
-            // 👈 LÓGICA DE ADMIN ADICIONADA
-            if (userData.role === "admin") {
-              setIsAdmin(true);
-            } else {
-              setIsAdmin(false);
-            }
+          // 3. Verifique a permissão de Admin
+          if (adminDocSnap.exists()) {
+            setIsAdmin(true);
           } else {
-            // Usuário do Auth existe, mas não do Firestore
-            setCurrentUser({ uid: user.uid, email: user.email });
-            setIsAdmin(false); // Não é admin
+            setIsAdmin(false);
           }
+
+          // 4. Defina os dados do usuário
+          if (userDocSnap.exists()) {
+            setCurrentUser({ uid: user.uid, ...userDocSnap.data() });
+          } else {
+            setCurrentUser({ uid: user.uid, email: user.email });
+          }
+
         } catch (error) {
           console.error("Erro ao buscar dados do usuário:", error);
           setCurrentUser({ uid: user.uid, email: user.email });
@@ -46,7 +49,7 @@ export const AuthProvider = ({ children }) => {
       } else {
         // Usuário deslogado
         setCurrentUser(null);
-        setIsAdmin(false); // 👈 Garante que deslogou o admin
+        setIsAdmin(false);
       }
       setLoading(false);
     });
@@ -55,14 +58,13 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    // 👇 Adicione "isAdmin" ao valor do provedor
     <AuthContext.Provider value={{ currentUser, isAdmin, loading }}>
       {!loading && children}
     </AuthContext.Provider>
   );
 };
 
-// 🔹 Hook customizado (para importar com facilidade)
+// 🔹 Hook customizado
 export const useAuth = () => {
   return useContext(AuthContext);
 };
