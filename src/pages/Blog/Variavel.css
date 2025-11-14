@@ -27,6 +27,7 @@
 
 .column-right {
     flex: 1; /* Ocupa menos espaço (representação visual) */
+    min-height: 100vh;
 }
 
 .topic-box {
@@ -103,6 +104,13 @@
     border-radius: 12px;
     border: 1px solid var(--color-box-border);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    position: sticky; 
+    
+    /* Define o ponto onde ele para de rolar (neste caso, o topo da viewport) */
+    top: 0; 
+    
+    /* Opcional: Garante que ele fique acima de outros elementos durante a rolagem */
+    z-index: 100;
 }
 
 .visual-title {
