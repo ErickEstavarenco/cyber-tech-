@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from "react"; // 1. Importe useEffect
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
-import { useAuth } from "../context/AuthContext";
+
+import { useAuth } from "@/context/AuthContext";
+
+// FirebaseConfig está FORA do src → usar caminho relativo
 import { auth } from "../../FirebaseConfig";
+
 import { signOut } from "firebase/auth";
 
-// 2. Readicione a função auxiliar para pegar o primeiro nome
 const getFirstName = (fullName) => {
-  if (!fullName) return '';
-  const firstName = fullName.split(' ')[0];
-  return firstName.charAt(0).toUpperCase() + firstName.slice(1);
+  if (!fullName) return "";
+  const n = fullName.split(" ")[0];
+  return n.charAt(0).toUpperCase() + n.slice(1);
 };
 
 export default function Header() {
@@ -19,43 +22,32 @@ export default function Header() {
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
- // src/components/Header.jsx
-  
-  // src/components/Header.jsx
-  
   const handleLogout = async () => {
-    // 1. NAVEGUE para a página de login PRIMEIRO.
-    // Isso "desarma" o ProtectedRoute, pois não estamos mais em uma rota protegida.
     navigate("/login");
-    
-    // 2. SÓ DEPOIS, faça o signOut.
-    // O usuário não verá o alerta, pois o ProtectedRoute não está mais ativo.
+
     try {
       await signOut(auth);
-    } catch (error) {
-      console.error("Erro ao fazer logout:", error);
+    } catch (err) {
+      console.error("Erro ao sair:", err);
     }
   };
 
-  // 3. (OPCIONAL, mas resolve seu exemplo) Atualiza o TÍTULO da página
   useEffect(() => {
-    if (currentUser && currentUser.name) {
+    if (currentUser?.name) {
       document.title = `CyberTech | ${getFirstName(currentUser.name)}`;
     } else {
       document.title = "CyberTech";
     }
-  }, [currentUser]); // Atualiza o título quando o usuário mudar
+  }, [currentUser]);
 
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
-        {/* 4. Altere o logo para exibir o nome de usuário */}
         <Link to="/">
           {currentUser ? `Olá, ${getFirstName(currentUser.name)}!` : "CyberTech"}
         </Link>
       </div>
 
-      {/* Navegação */}
       <nav className={`${styles.nav} ${menuOpen ? styles.open : ""}`}>
         <Link to="/">Início</Link>
         <Link to="/blog">Blog</Link>
@@ -71,16 +63,13 @@ export default function Header() {
             </button>
           </>
         ) : (
-          
           <Link to="/login">Login</Link>
         )}
       </nav>
 
-      {/* Botão hamburguer */}
       <button
         className={`${styles.hamburger} ${menuOpen ? styles.active : ""}`}
         onClick={toggleMenu}
-        aria-label="Abrir menu"
       >
         <span></span>
         <span></span>
