@@ -1,99 +1,6 @@
-.blog-page {
-  display: flex;
-  flex-direction: column;
-  padding-top: 0;
-  padding-bottom: 2rem;
-}
-
-
-.posts-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.5rem;
-}
-
-/* Cada card ocupa 48% para caber 2 por linha */
-.post-card {
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  flex: 1 1 calc(48% - 1.5rem);
-  box-sizing: border-box;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-.post-card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-
-.post-card h2 {
-  font-size: 1.75rem;
-  font-weight: 600;
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-  text-align: center;
-}
-
-.post-card p {
-  font-size: 1rem;
-  color: #333;
-  margin-bottom: 1rem;
-}
-
-
-/* Responsividade — em telas menores, vira 1 coluna */
-@media (max-width: 768px) {
-  .post-card {
-    flex: 1 1 100%;
-  }
-}
-.post-card {
- 
-  color: #000000;
-}
-.page-title{
-  text-align: center;
-}
-
-.btn-ver-mais {
-  background-color: #3b82f6;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  padding: 0.5rem 1rem;
-  margin-top: 1rem;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.btn-ver-mais:hover {
-  background-color: #2563eb;
-  transform: translateY(-2px);
-}
-
-.conteudo-extra {
-  margin-top: 1rem;
-  color: #333;
-  line-height: 1.6;
-  animation: aparecer 0.4s ease;
-}
-
-@keyframes aparecer {
-  from {
-    opacity: 0;
-    transform: translateY(-5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/* ============================
+   PÁGINA DO BLOG
+============================ */
 
 .blog-page {
   display: flex;
@@ -102,6 +9,17 @@
   padding-bottom: 2rem;
 }
 
+.page-title {
+  text-align: center;
+  color: #000; /* Preto como solicitado */
+  font-weight: 800;
+  font-size: 2.4rem;
+}
+
+
+/* ============================
+   LISTA DE POSTS / CARDS
+============================ */
 
 .posts-container {
   display: flex;
@@ -110,16 +28,16 @@
   gap: 1.5rem;
 }
 
-/* Cada card ocupa 48% para caber 2 por linha */
 .post-card {
   background-color: #d9e0f8fb;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
-  padding: 1rem; /* Reduzindo o padding interno */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  flex: 1 1 calc(25% - 1rem); /* Reduzindo a largura dos cards */
+  padding: 1rem;
+  flex: 1 1 calc(25% - 1rem);
   box-sizing: border-box;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .post-card:hover {
@@ -128,7 +46,7 @@
 }
 
 .post-card h2 {
-  font-size: 1.5rem; /* Diminui o tamanho do título */
+  font-size: 1.5rem;
   font-weight: 600;
   margin-top: 0;
   margin-bottom: 0.5rem;
@@ -136,32 +54,23 @@
 }
 
 .post-card p {
-  font-size: 0.9rem; /* Diminui o tamanho do texto */
+  font-size: 0.9rem;
   color: #333;
   margin-bottom: 1rem;
 }
 
-@media (max-width: 768px) {
-  .post-card {
-    flex: 1 1 100%; /* Em telas menores, os cards ocupam 100% da largura */
-    padding: 0.8rem; /* Reduz o padding para dispositivos móveis */
-  }
-}
-
-
-/* Responsividade — em telas menores, vira 1 coluna */
+/* Responsividade */
 @media (max-width: 768px) {
   .post-card {
     flex: 1 1 100%;
+    padding: 0.8rem;
   }
 }
-.post-card {
- 
-  color: #000000;
-}
-.page-title{
-  text-align: center;
-}
+
+
+/* ============================
+   BOTÃO "VER MAIS"
+============================ */
 
 .btn-ver-mais {
   background-color: #3b82f6;
@@ -198,81 +107,16 @@
   }
 }
 
-.read-more-link {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.3s;
-}
 
-.read-more-link:hover {
-  color: #0056b3;
-  text-decoration: underline;
-}
-
-.code-block {
-  background-color: #f5f5f5;
-  color: #000;
-  padding: 1rem;
-  border-radius: 8px;
-  overflow-x: auto;
-}
-
-.back-link {
-  display: inline-block;
-  margin-top: 1.5rem;
-  color: #3b82f6;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.back-link:hover {
-  text-decoration: underline;
-}
-
-.post-img {
-     float: left; /* Faz a imagem ir para a esquerda */
-  transform: scale(0.8); /* 80% do tamanho */
-  margin: 10px; /* Margem em torno da imagem */
-  transition: transform 0.3s ease;
-  width: 100%; /* Ajuste a largura da imagem para caber no lado esquerdo */
-}
-
-.post-img:hover {
-  transform: scale(0.9); /* aumenta levemente ao passar o mouse */
-}
-/* ======== PÁGINA DE DETALHES (ALGORTIMO) ======== */
-
-.post-img {
-  width: 60%;
-  display: block;
-  margin: 2rem auto;
-  border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
-}
-
-
-
-.back-link {
-  display: inline-block;
-  margin-top: 20px;
-  color: #007bff;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.back-link:hover {
-  text-decoration: underline;
-}
-
-/* ======== PÁGINA DE DETALHES (ALGORTIMO) ======== */
+/* ============================
+   PÁGINA DE DETALHES
+============================ */
 
 .post-img {
   width: 70%;
   display: block;
-  margin: 2rem auto;
-  border-radius: 10px;
+  margin: 15px auto;
+  border-radius: 8px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease;
 }
@@ -287,20 +131,33 @@
   color: #007bff;
   font-weight: bold;
   text-decoration: none;
+  text-align: center;
 }
 
 .back-link:hover {
   text-decoration: underline;
 }
+
+.nav-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+
+/* ============================
+   SEÇÃO "PENSE"
+============================ */
 
 .pense {
   background-color: #f1f3ff;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   padding: 1.5rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   width: 85%;
   margin: 0 auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -308,6 +165,15 @@
   transform: scale(1.01);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
+
+.pense p {
+  color: #000;
+}
+
+
+/* ============================
+   CÓDIGOS E FORMULÁRIOS
+============================ */
 
 .codigo-algoritmo {
   display: flex;
@@ -324,6 +190,19 @@
   padding: 15px;
   min-width: 250px;
   color: #000;
+  text-align: center;
+}
+
+.pos-img {
+  width: 250px;
+  height: auto;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.pos-img:hover {
+  transform: scale(1.03);
 }
 
 .algoritmo-box {
@@ -367,44 +246,20 @@
   color: #000;
 }
 
-.pense p {
-  color:#000;
-}
 
-.descricao-exemplo {
-  font-size: 1rem;
-  color: #333;
-  line-height: 1.5;
-}
-.codigo-exemplo {
-  display: flex;
-  flex-direction: column; /* organiza tudo em coluna */
-  align-items: center;    /* centraliza horizontalmente */
-  text-align: center;
-}
-
-.pos-img {
-  width: 250px;
-  height: auto;
-  margin-bottom: 1rem; /* espaço entre a imagem e o texto */
-  border-radius: 10px;
-  transition: transform 0.3s ease;
-}
-
-.pos-img:hover {
-  transform: scale(1.03);
-}
+/* ============================
+   CARD DE VARIÁVEIS
+============================ */
 
 .variavel {
   background-color: #d9e0f8fb;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   padding: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   width: 80%;
-  box-sizing: border-box;
+  margin: auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin: 0 auto; /* centraliza o card */
 }
 
 .variavel:hover {
@@ -415,92 +270,75 @@
 .variavel h2 {
   font-size: 1.75rem;
   font-weight: 600;
-  margin-top: 0;
-  margin-bottom: 0.5rem;
   text-align: center;
 }
 
-.variavel p {
-  font-size: 1rem;
-  color: #000000;
-  margin-bottom: 1rem;
-}
-
-.post-img {
-  width: 70%;
-  display: block;
-  margin: 15px auto;
-  border-radius: 8px;
-}
-
-.back-link {
-   gap: 20px; /* espaçamento entre eles */
-
-  margin-top: 20px;
-  color: #007bff;
-  text-decoration: none;
-  font-weight: bold;
-  text-align: center;
-}
-
-.back-link:hover {
-  text-decoration: underline;
-}
-.nav-links {
-  display: flex;
-  justify-content: space-between; /* coloca um de cada lado */
-  align-items: center;
-  gap: 20px; /* espaçamento entre eles */
-}
+.variavel p,
 .variavel strong {
   color: #000;
 }
-h4{
-  color:#000;
-}
-ul{
+
+
+/* ============================
+   LISTAS
+============================ */
+
+ul {
   color: #000;
   width: 60%;
   text-align: left;
   margin: auto;
-  
-
 }
 
-  .exemplos {
-    display: flex;            /* coloca os elementos lado a lado */
-    gap: 20px;                /* espaço entre os cards */
-    justify-content: center;  /* centraliza horizontalmente */
-    align-items: center;
-    flex-wrap: wrap;          /* permite quebrar linha em telas menores */
-  }
 
-  .card {
-    background-color: #d9e0f8fb;
-    border-radius: 8px;
-    padding: 16px;
-    max-width: 320px;
-    width: 100%;
-    text-align: center;
-    box-shadow: 5px 5px 0px #c9d6fffb;
+/* ============================
+   EXEMPLOS (CARDS LADO A LADO)
+============================ */
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px 0px;
-  }
+.exemplos {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
 
-  .card-title {
-    text-transform: uppercase;
-    font-size: 16px;
-    color: #2b4563;
-  }
+.card {
+  background-color: #d9e0f8fb;
+  border-radius: 8px;
+  padding: 16px;
+  max-width: 320px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 5px 5px 0px #c9d6fffb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
 
- .card img {
+.card-title {
+  text-transform: uppercase;
+  font-size: 16px;
+  color: #2b4563;
+}
+
+.card img {
   height: auto;
 }
-    
-  
 
 
+/* ============================
+   LINKS
+============================ */
+
+.read-more-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.read-more-link:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
