@@ -515,7 +515,7 @@ ul{
   flex-wrap: wrap;
   justify-content: center;
   gap: 1.5rem;
-  padding-top: 19%;
+  padding-top: 5%;
 }
 
 
@@ -591,7 +591,7 @@ ul{
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  height: 450px;
+  height: 250px;
 }
 
 

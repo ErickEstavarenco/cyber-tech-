@@ -18,8 +18,8 @@ const Tipo = () => {
             <div class="header">
                 <h1 class="page-title">Introdução aos Tipos de Dados em Python</h1>
                 <p>
-
-Aqui estão os tipos de dados fundamentais em <strong>Python</strong>. Cada seção abaixo fornece uma descrição detalhada de como utilizar os <strong>Inteiros, Pontos Flutuantes, Cadeias e Booleanos</strong>.</p>
+                 Aqui estão os tipos de dados fundamentais em <strong>Python</strong>. Cada seção abaixo fornece uma descrição detalhada de como utilizar os <strong>Inteiros, Pontos Flutuantes, Cadeias e Booleanos</strong>.
+                 </p>
             </div>
 
             <section id="int-section" class="data-type-section">
