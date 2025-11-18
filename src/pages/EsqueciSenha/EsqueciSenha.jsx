@@ -57,3 +57,5 @@ const EsqueciSenha = () => {
 };
 
 export default EsqueciSenha;
+
+//foi realizado testes para confirmação de funcionalidade.
