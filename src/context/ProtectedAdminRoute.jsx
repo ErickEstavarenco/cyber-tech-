@@ -1,25 +1,23 @@
 import React, { useEffect, useRef } from 'react';
-// 1. Importe o Outlet
-import { useLocation, useNavigate, Outlet } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 
-// Removido 'children' dos props
-const ProtectedAdminRoute = () => { 
-  const { currentUser, isAdmin, loading } = useAuth();
+// ATENÇÃO: Recebemos 'children' novamente para renderizar o componente filho
+const ProtectedAdminRoute = ({ children }) => { 
+  const { currentUser, loading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-
   const alertFiredRef = useRef(false);
 
-  useEffect(() => {
-    if (loading) {
-      return; // Ainda carregando
-    }
-    if (currentUser && isAdmin) {
-      return; // É admin, não faz nada, deixa renderizar
-    }
+  // Defina o UID do Admin
+  const ADMIN_UID = "SswilmG3ZQPAfIfCaA4NohaKZzM2"; 
 
-    // --- Lógica de Redirecionamento ---
+  const isAuthorized = currentUser && currentUser.uid === ADMIN_UID;
+
+  useEffect(() => {
+    if (loading) return;
+    if (isAuthorized) return;
+
     if (!alertFiredRef.current) {
       alertFiredRef.current = true;
       
@@ -27,26 +25,21 @@ const ProtectedAdminRoute = () => {
         alert("Você precisa realizar o Login antes!");
         navigate('/login', { state: { from: location }, replace: true });
       } else {
-        // Está logado, mas não é admin
-        alert("Você não tem permissão para acessar esta área.");
+        alert("Acesso Negado: Esta área é restrita para administradores.");
         navigate('/', { replace: true }); 
       }
     }
-  }, [loading, currentUser, isAdmin, navigate, location]);
+  }, [loading, currentUser, isAuthorized, navigate, location]);
 
-
-  // --- Lógica de Renderização ---
   if (loading) {
     return <div className="loading">Carregando...</div>;
   }
 
-  // 2. A MUDANÇA PRINCIPAL
-  // Se for admin, renderiza o <Outlet /> (que vai carregar o <Admin /> layout)
-  if (currentUser && isAdmin) {
-    return <Outlet />;
+  // SE AUTORIZADO, RENDERIZA O FILHO (<Admin />, <Newblog />, etc.)
+  if (isAuthorized) {
+    return children;
   }
 
-  // Se não for, o useEffect está tratando o redirect
   return <div className="loading">Redirecionando...</div>;
 };
 

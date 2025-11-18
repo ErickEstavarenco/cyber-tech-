@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from "framer-motion"; // 1. Importação Adicionada
 import './styles/globals.css'; 
 
 // Componentes de Layout
@@ -29,8 +30,8 @@ import Comentarios from './admin/Subpagina/Comentarios.jsx';
 import Notas from './admin/Subpagina/Notas.jsx';
 
 // Protetores de Rota
-import ProtectedRoute from './context/ProtectedRoute.jsx'; // Para usuários logados
-import ProtectedAdminRoute from './context/ProtectedAdminRoute.jsx'; // Para admins
+import ProtectedRoute from './context/ProtectedRoute.jsx'; 
+import ProtectedAdminRoute from './context/ProtectedAdminRoute.jsx'; 
 
 // Páginas de Desafio
 import Desafio1 from './pages/Desafios/Desafio1.jsx';
@@ -48,50 +49,87 @@ function App() {
     transition: { duration: 0.45, ease: "easeOut" },
   };
 
+  // Função auxiliar para animar e proteger (opcional, mas limpa o código)
+  const AnimatedPage = ({ children }) => (
+    <motion.div {...pageVariants}>
+      {children}
+    </motion.div>
+  );
+
   return (
     <div className="app-layout">
       <Header />
       <main>
-        <Routes location={location} key={location.pathname}>
-          
-          {/* --- Rotas Públicas --- */}
-          {/* Somente Home e as páginas de autenticação são públicas agora */}
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/cadastro" element={<Cadastro />} />
-          <Route path="/esqueci-senha" element={<EsqueciSenha />} />
-
-          
-          {/* --- Rotas Protegidas para USUÁRIOS LOGADOS --- */}
-          {/* /blog, /desafios e /perfil agora exigem login */}
-          <Route element={<ProtectedRoute />}>
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/algoritmo" element={<Algoritmo />} />
-            <Route path="/variavel" element={<Variavel />} />
-            <Route path="/condicionais" element={<Condicionais />} />
-            <Route path="/funcoes" element={<Funcoes />} />
-            <Route path="/operacao" element={<Operacao />} />
+        {/* 2. Adicionado AnimatePresence para as transições */}
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
             
-            <Route path="/desafios" element={<ChallengeList />} />
-            <Route path="/desafios/desafio1" element={<Desafio1 />} />
-            <Route path="/desafios/desafio2" element={<Desafio2 />} />
-            <Route path="/desafios/desafio3" element={<Desafio3 />} />
-            <Route path="/desafios/desafio4" element={<Desafio4 />} />
+            {/* --- Rotas Públicas --- */}
+            <Route path="/" element={<AnimatedPage><Home /></AnimatedPage>} />
+            <Route path="/login" element={<AnimatedPage><Login /></AnimatedPage>} />
+            <Route path="/cadastro" element={<AnimatedPage><Cadastro /></AnimatedPage>} />
+            {/* 3. Corrigido para /esqueci-minha-senha para bater com o erro anterior */}
+            <Route path="/esqueci-minha-senha" element={<AnimatedPage><EsqueciSenha /></AnimatedPage>} />
 
-            <Route path="/perfil" element={<Perfil />} />
-          </Route>
+            
+            {/* --- Rotas Protegidas para USUÁRIOS LOGADOS --- */}
+            {/* Ajustado para envolver cada componente com ProtectedRoute */}
+            
+            <Route path="/blog" element={
+              <ProtectedRoute><AnimatedPage><Blog /></AnimatedPage></ProtectedRoute>
+            } />
+            <Route path="/algoritmo" element={
+              <ProtectedRoute><AnimatedPage><Algoritmo /></AnimatedPage></ProtectedRoute>
+            } />
+            <Route path="/variavel" element={
+              <ProtectedRoute><AnimatedPage><Variavel /></AnimatedPage></ProtectedRoute>
+            } />
+            <Route path="/condicionais" element={
+              <ProtectedRoute><AnimatedPage><Condicionais /></AnimatedPage></ProtectedRoute>
+            } />
+            <Route path="/funcoes" element={
+              <ProtectedRoute><AnimatedPage><Funcoes /></AnimatedPage></ProtectedRoute>
+            } />
+            <Route path="/operacao" element={
+              <ProtectedRoute><AnimatedPage><Operacao /></AnimatedPage></ProtectedRoute>
+            } />
+            
+            <Route path="/desafios" element={
+              <ProtectedRoute><AnimatedPage><ChallengeList /></AnimatedPage></ProtectedRoute>
+            } />
+            <Route path="/desafios/desafio1" element={
+              <ProtectedRoute><AnimatedPage><Desafio1 /></AnimatedPage></ProtectedRoute>
+            } />
+            <Route path="/desafios/desafio2" element={
+              <ProtectedRoute><AnimatedPage><Desafio2 /></AnimatedPage></ProtectedRoute>
+            } />
+            <Route path="/desafios/desafio3" element={
+              <ProtectedRoute><AnimatedPage><Desafio3 /></AnimatedPage></ProtectedRoute>
+            } />
+            <Route path="/desafios/desafio4" element={
+              <ProtectedRoute><AnimatedPage><Desafio4 /></AnimatedPage></ProtectedRoute>
+            } />
 
-          {/* --- Rotas Protegidas de ADMIN --- */}
-          {/* Esta seção permanece a mesma */}
-          <Route element={<ProtectedAdminRoute />}>
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/admin/new-blog" element={<Newblog />} />
-            <Route path="/admin/comentarios" element={<Comentarios />} />
-            <Route path="/admin/notas" element={<Notas />} />
-          </Route>
-          
+            <Route path="/perfil" element={
+              <ProtectedRoute><AnimatedPage><Perfil /></AnimatedPage></ProtectedRoute>
+            } />
 
-        </Routes>
+            {/* --- Rotas Protegidas de ADMIN --- */}
+            <Route path="/admin" element={
+              <ProtectedAdminRoute><AnimatedPage><Admin /></AnimatedPage></ProtectedAdminRoute>
+            } />
+            <Route path="/admin/new-blog" element={
+              <ProtectedAdminRoute><AnimatedPage><Newblog /></AnimatedPage></ProtectedAdminRoute>
+            } />
+            <Route path="/admin/comentarios" element={
+              <ProtectedAdminRoute><AnimatedPage><Comentarios /></AnimatedPage></ProtectedAdminRoute>
+            } />
+            <Route path="/admin/notas" element={
+              <ProtectedAdminRoute><AnimatedPage><Notas /></AnimatedPage></ProtectedAdminRoute>
+            } />
+            
+          </Routes>
+        </AnimatePresence>
       </main>
       <Footer />
     </div>

@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react"; // 1. Importe useEffect
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
 import { useAuth } from "../context/AuthContext";
-import { auth } from "../../FirebaseConfig";
+import { auth, db } from "../../FirebaseConfig"; 
 import { signOut } from "firebase/auth";
+// MUDANÇA: Importamos 'onSnapshot' em vez de 'getDoc' para atualizações em tempo real
+import { doc, onSnapshot } from "firebase/firestore"; 
 
-// 2. Readicione a função auxiliar para pegar o primeiro nome
 const getFirstName = (fullName) => {
   if (!fullName) return '';
   const firstName = fullName.split(' ')[0];
@@ -14,22 +15,14 @@ const getFirstName = (fullName) => {
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [userName, setUserName] = useState(""); 
   const { currentUser } = useAuth();
   const navigate = useNavigate();
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
- // src/components/Header.jsx
-  
-  // src/components/Header.jsx
-  
   const handleLogout = async () => {
-    // 1. NAVEGUE para a página de login PRIMEIRO.
-    // Isso "desarma" o ProtectedRoute, pois não estamos mais em uma rota protegida.
     navigate("/login");
-    
-    // 2. SÓ DEPOIS, faça o signOut.
-    // O usuário não verá o alerta, pois o ProtectedRoute não está mais ativo.
     try {
       await signOut(auth);
     } catch (error) {
@@ -37,25 +30,50 @@ export default function Header() {
     }
   };
 
-  // 3. (OPCIONAL, mas resolve seu exemplo) Atualiza o TÍTULO da página
+  // EFEITO ATUALIZADO: Escuta em tempo real (Realtime Listener)
   useEffect(() => {
-    if (currentUser && currentUser.name) {
-      document.title = `CyberTech | ${getFirstName(currentUser.name)}`;
+    let unsubscribe = () => {};
+
+    if (currentUser && currentUser.uid) {
+      const docRef = doc(db, "users", currentUser.uid);
+      
+      // onSnapshot fica "ouvindo" o documento. 
+      // Sempre que ele mudar (cadastro, edição de perfil), esta função roda de novo.
+      unsubscribe = onSnapshot(docRef, (docSnap) => {
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          // Atualiza o estado com o nome encontrado
+          setUserName(data.name || ""); 
+        }
+      }, (error) => {
+        console.error("Erro ao buscar nome em tempo real:", error);
+      });
+    } else {
+      setUserName("");
+    }
+
+    // Limpa a "escuta" quando o componente desmonta ou o usuário desloga
+    return () => unsubscribe();
+  }, [currentUser]);
+
+  // Atualiza o título da aba
+  useEffect(() => {
+    if (userName) {
+      document.title = `CyberTech | ${getFirstName(userName)}`;
     } else {
       document.title = "CyberTech";
     }
-  }, [currentUser]); // Atualiza o título quando o usuário mudar
+  }, [userName]);
 
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
-        {/* 4. Altere o logo para exibir o nome de usuário */}
         <Link to="/">
-          {currentUser ? `Olá, ${getFirstName(currentUser.name)}!` : "CyberTech"}
+          {/* Exibe o nome ou o padrão */}
+          {currentUser && userName ? `Olá, ${getFirstName(userName)}!` : "CyberTech"}
         </Link>
       </div>
 
-      {/* Navegação */}
       <nav className={`${styles.nav} ${menuOpen ? styles.open : ""}`}>
         <Link to="/">Início</Link>
         <Link to="/blog">Blog</Link>
@@ -71,12 +89,10 @@ export default function Header() {
             </button>
           </>
         ) : (
-          
           <Link to="/login">Login</Link>
         )}
       </nav>
 
-      {/* Botão hamburguer */}
       <button
         className={`${styles.hamburger} ${menuOpen ? styles.active : ""}`}
         onClick={toggleMenu}
