@@ -1,7 +1,7 @@
 :root {
   --bg: #f1f1f1;
   --card: #ffffff;
-  --text: #1b1b1b;
+  --text: #233568;
   --primary: #007bff;
   --radius: 10px;
 }
@@ -9,7 +9,7 @@
 /* ===== ESTILOS GERAIS ===== */
 .pagina-desafios {
   font-family: "Poppins", sans-serif;
-  color: var(--text);
+  color: #233568;
   margin: 0;
   padding: 2rem;
   display: flex;
@@ -18,14 +18,14 @@
 }
 
 h1, h2 {
-  color: var(--primary);
+  color: #233568;
 }
 h1 {
-  color: var(--text);
+  color: #233568;
 }
 
 .subtitle {
-  color: var(--text);
+  color: #233568;
   margin-bottom: 2rem;
 }
 
@@ -59,6 +59,7 @@ pre {
   padding: 1rem;
   border-radius: var(--radius);
   overflow-x: auto;
+  color: #233568;
 }
 
 /* ===== SELECTS ===== */
@@ -97,7 +98,7 @@ select[disabled] {
 
 .alternativa-btn {
   background: var(--bg);
-  color: #000000;
+  color: #233568;
   border: 2px solid transparent;
   padding: 10px;
   border-radius: 8px;
@@ -170,3 +171,6 @@ select[disabled] {
   background: #0056c7;
 }
 
+.strong{
+  color: #233568;
+}

@@ -1,13 +1,11 @@
 /* ===== globals.css ===== */
-
-/* ===== RESET BÁSICO ===== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   scroll-behavior: smooth;
-  color: #ffffff;
+  color: #233568;
 }
 
 /* ===== VARIÁVEIS DE TEMA ===== */

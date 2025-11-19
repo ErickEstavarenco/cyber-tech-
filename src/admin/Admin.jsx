@@ -1,66 +1,84 @@
 import React from "react";
-import { Link, useNavigate, Outlet, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Admin.module.css";
 
-export default function Admin() {
+export default function Home({ username = "Alexandre", stats = {} }) {
+  const { media = "8.5/10", posts = 15, drafts = 3, pendingComments = 23 } = stats;
   const navigate = useNavigate();
-  const location = useLocation(); 
 
-  // Função para destacar o link ativo na sidebar
-  const isLinkActive = (path) => {
-    if (path === '/admin' && location.pathname === '/admin') return true;
-    if (path !== '/admin' && location.pathname.startsWith(path)) return true;
-    return false;
-  };
+  // Navegação dos cards
+  function gerirNotas() {
+    navigate("/admin/notas");
+  }
 
-  // Verifica se estamos exatamente na raiz '/admin' para mostrar o dashboard
-  const isDashboard = location.pathname === '/admin';
+  function gerirBlog() {
+    navigate("/admin/newblog");
+  }
+
+  function moderar() {
+    navigate("/admin/comentarios");
+  }
 
   return (
     <div className={styles.container}>
       {/* Sidebar */}
       <aside className={styles.sidebar}>
-        <h2>Admin Panel</h2>
+        <h2>Administrador</h2>
         <ul>
-          <li className={isLinkActive('/admin') ? styles.active : ''}>
+          <li className={styles.active}>
             <Link to="/admin">
-              <span>📊</span> Dashboard
-            </Link>
+              <span><img src="public/casa.png" alt="" /></span> Home
+            </Link>          
           </li>
-          <li className={isLinkActive('/admin/notas') ? styles.active : ''}>
+
+          <li>
             <Link to="/admin/notas">
-              <span>⭐</span> Notas
+              <span><img src="public/estrela.png" alt="" /></span> Notas
             </Link>
           </li>
-          <li className={isLinkActive('/admin/new-blog') ? styles.active : ''}>
-            <Link to="/admin/new-blog">
-              <span>📝</span> Blog
+
+          <li>
+            <Link to="/admin/newblog">
+              <span><img src="public/blog.png" alt="" /></span> Blog
             </Link>
           </li>
-          <li className={isLinkActive('/admin/comentarios') ? styles.active : ''}>
+
+          <li>
             <Link to="/admin/comentarios">
-              <span>💬</span> Comentários
+              <span><img src="public/comentarios.png" alt="" /></span> Comentários
             </Link>
           </li>
         </ul>
       </aside>
 
-      {/* Área Principal */}
+      {/* Conteúdo Principal */}
       <main className={styles.main}>
-        {/* Se estiver na rota exata '/admin', mostra o conteúdo do Dashboard.
-           Caso contrário, mostra o Outlet (as sub-páginas como Notas, Blog, etc.)
-        */}
-        {isDashboard ? (
-           <div className="dashboard-welcome">
-             <h1>Dashboard Administrativo</h1>
-             <p>Bem-vindo ao painel de controle do CyberTech.</p>
-             <p style={{ marginTop: '1rem', color: '#666' }}>
-               Selecione uma opção no menu lateral para gerenciar o conteúdo.
-             </p>
-           </div>
-        ) : (
-           <Outlet />
-        )}
+        <h1>
+          Bem-vindo, <span>{username}!</span>
+        </h1>
+
+        <div className={styles.cards}>
+          <div className={styles.card}>
+            <h3>Gestão de Notas</h3>
+            <p>Média geral: <strong>{media}</strong></p>
+            <p>Últimas notas submetidas hoje.</p>
+            <button onClick={gerirNotas}>Gerir Notas</button>
+          </div>
+
+          <div className={styles.card}>
+            <h3>Gestão de Blog</h3>
+            <p>Total de <strong>{posts} posts</strong></p>
+            <p>{drafts} rascunhos por publicar.</p>
+            <button onClick={gerirBlog}>Gerir Blog</button>
+          </div>
+
+          <div className={styles.card}>
+            <h3>Moderação de Comentários</h3>
+            <p><strong>{pendingComments}</strong> comentários pendentes</p>
+            <p className={styles.warning}>Moderação necessária.</p>
+            <button className={styles.red} onClick={moderar}>Moderar</button>
+          </div>
+        </div>
       </main>
     </div>
   );

@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom"; // 👈 importa o roteador
 import styles from "../Admin.module.css";
 
-export default function Admin({ username = "Victor", stats = {} }) {
+export default function Comentarios({ username = "Victor", stats = {} }) {
   const { media = "8.5/10", posts = 15, drafts = 3, pendingComments = 23 } = stats;
   const navigate = useNavigate(); // 👈 permite redirecionar via código
 
@@ -23,24 +23,29 @@ export default function Admin({ username = "Victor", stats = {} }) {
     <div className={styles.container}>
       {/* Sidebar */}
       <aside className={styles.sidebar}>
-        <h2>Admin Panel</h2>
+        <h2>Administrador</h2>
         <ul>
           <li className={styles.active}>
-            <span>📊</span> Dashboard
+            <Link to="/home">
+              <span><img src="/public/casa.png" alt="" /></span> Home
+            </Link>
           </li>
+
           <li>
             <Link to="/admin/notas">
-              <span>⭐</span> Notas
+              <span><img src="/public/estrela.png" alt="" /></span> Notas
             </Link>
           </li>
+
           <li>
             <Link to="/admin/newblog">
-              <span>📝</span> Blog
+              <span><img src="/public/blog.png" alt="" /></span> Blog
             </Link>
           </li>
+
           <li>
             <Link to="/admin/comentarios">
-              <span>💬</span> Comentários
+              <span><img src="/public/comentarios.png" alt="" /></span> Comentários
             </Link>
           </li>
         </ul>
