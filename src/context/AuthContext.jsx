@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 // Lembre-se de verificar este caminho de import:
-import { auth, db } from "../../FirebaseConfig.js"; 
+import { auth, db } from "../../FirebaseConfig"; 
 
 // 🔹 Criação do contexto
 const AuthContext = createContext();
