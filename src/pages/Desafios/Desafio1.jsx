@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Desafio.css";
+import { db, auth } from "../../../FirebaseConfig";
+import { collection, addDoc } from "firebase/firestore";
 
 export default function Desafio1() {
   const total = 6;
-
-  //Respostas corretas
   const corretas = ["b", "c", "c", "b", "b", "a"];
 
   const [pontuacao, setPontuacao] = useState(0);
   const [respondidas, setRespondidas] = useState(Array(total).fill(false));
   const [feedbacks, setFeedbacks] = useState(Array(total).fill(""));
   const [valores, setValores] = useState(Array(total).fill(""));
+  const [salvo, setSalvo] = useState(false);
 
   const atualizarPlacar = () => `Pontuação: ${pontuacao} / ${total}`;
 
@@ -42,7 +43,30 @@ export default function Desafio1() {
   if (porcentagem >= 85) msg = "Excelente!";
   else if (porcentagem >= 60) msg = "Bom trabalho!";
 
-  // Lista de desafios
+  // Salvar no Firebase
+  useEffect(() => {
+    if (verificarFim && !salvo && auth.currentUser) {
+      const salvarNoBanco = async () => {
+        try {
+          await addDoc(collection(db, "pontuacoes"), {
+            uid: auth.currentUser.uid,
+            email: auth.currentUser.email,
+            nome: auth.currentUser.displayName || "Usuário",
+            desafio: "Desafio 1 - Introdução",
+            nota: pontuacao,
+            total: total,
+            data: new Date().toISOString()
+          });
+          setSalvo(true);
+          console.log("Nota salva com sucesso!");
+        } catch (error) {
+          console.error("Erro ao salvar nota:", error);
+        }
+      };
+      salvarNoBanco();
+    }
+  }, [verificarFim, salvo, pontuacao]);
+
   const desafios = [
     {
       titulo: "O que é um algoritmo?",
@@ -126,17 +150,12 @@ resultado = a % b`,
   return (
     <div className="pagina-desafios">
       <div className="scoreboard">{atualizarPlacar()}</div>
-
       <h1>Desafios de Python</h1>
-      <p className="subtitle">
-        Clique na alternativa correta! (Apenas uma tentativa)
-      </p>
-
+      <p className="subtitle">Clique na alternativa correta! (Apenas uma tentativa)</p>
       {desafios.map((d, i) => (
         <div key={i} className="challenge-container">
           <h2>{`Desafio ${i + 1} — ${d.titulo}`}</h2>
           <pre>{d.codigo}</pre>
-
           <div className="alternativas">
             {Object.entries(d.alternativas).map(([letra, texto]) => (
               <button
@@ -151,20 +170,15 @@ resultado = a % b`,
               </button>
             ))}
           </div>
-
-          <div
-            className={`feedback ${
-              feedbacks[i].includes("Correto") ? "correct" : "incorrect"
-            }`}
-          >
+          <div className={`feedback ${feedbacks[i].includes("Correto") ? "correct" : "incorrect"}`}>
             {feedbacks[i]}
           </div>
         </div>
       ))}
-
       {verificarFim && (
         <div className="final-score">
           {msg} Sua nota final é {pontuacao}/{total} ({porcentagem}%).
+          {salvo && <p style={{fontSize: "0.9rem", color: "green", marginTop: "5px"}}>Nota salva com sucesso!</p>}
         </div>
       )}
     </div>

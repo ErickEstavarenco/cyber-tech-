@@ -1,13 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "../Admin.module.css";
+// Imports do Firebase
+import { db } from "../../../FirebaseConfig";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
 export default function Notas() {
-  const alunos = [
-    { nome: "Victor", notas: ["10", "5", "5", "7"] },
-    { nome: "Carlos", notas: ["", "", "", ""] },
-    { nome: "Guilherme", notas: ["", "", "", ""] }
-  ];
+  const [notas, setNotas] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const buscarNotas = async () => {
+      try {
+        const q = query(collection(db, "pontuacoes"), orderBy("data", "desc"));
+        const querySnapshot = await getDocs(q);
+        
+        const listaNotas = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        
+        setNotas(listaNotas);
+      } catch (error) {
+        console.error("Erro ao buscar notas:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    buscarNotas();
+  }, []);
+
+  // Função auxiliar para formatar data
+  const formatarData = (isoString) => {
+    if (!isoString) return "-";
+    const data = new Date(isoString);
+    return data.toLocaleDateString('pt-BR') + ' ' + data.toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'});
+  };
 
   return (
     <div className={styles.container}>
@@ -20,19 +49,16 @@ export default function Notas() {
               <span><img src="/public/casa.png" alt="" /></span> Home
             </Link>
           </li>
-
           <li>
             <Link to="/admin/notas">
               <span><img src="/public/estrela.png" alt="" /></span> Notas
             </Link>
           </li>
-
           <li>
             <Link to="/admin/newblog">
               <span><img src="/public/blog.png" alt="" /></span> Blog
             </Link>
           </li>
-
           <li>
             <Link to="/admin/comentarios">
               <span><img src="/public/comentarios.png" alt="" /></span> Comentários
@@ -43,21 +69,49 @@ export default function Notas() {
 
       {/* Conteúdo principal */}
       <main className={styles.main}>
-        <h1>Gestão de Notas</h1>
+        <h1>Histórico de Notas</h1>
 
-        {alunos.map((aluno, index) => (
-          <div key={index} className={styles.card}>
-            <h3>{aluno.nome}</h3>
-
-            <div className={styles.notasLinha}>
-              {aluno.notas.map((_, i) => (
-                <div key={i} className={styles.notaBox}></div>
-              ))}
-            </div>
-
-            <button className={styles.notaBtn}>Salvar</button>
+        {loading ? (
+          <p>Carregando notas...</p>
+        ) : notas.length === 0 ? (
+          <p>Nenhuma nota registrada ainda.</p>
+        ) : (
+          <div className={styles.card} style={{overflowX: 'auto'}}>
+            <table style={{width: '100%', borderCollapse: 'collapse', textAlign: 'left'}}>
+              <thead>
+                <tr style={{borderBottom: '1px solid #eee'}}>
+                  <th style={{padding: '10px'}}>Aluno (Email)</th>
+                  <th style={{padding: '10px'}}>Desafio</th>
+                  <th style={{padding: '10px'}}>Nota</th>
+                  <th style={{padding: '10px'}}>Data</th>
+                </tr>
+              </thead>
+              <tbody>
+                {notas.map((nota) => (
+                  <tr key={nota.id} style={{borderBottom: '1px solid #f5f5f5'}}>
+                    <td style={{padding: '10px'}}>
+                      <strong>{nota.nome || "Aluno"}</strong>
+                      <br/>
+                      <span style={{fontSize: '0.8rem', color: '#666'}}>{nota.email}</span>
+                    </td>
+                    <td style={{padding: '10px'}}>{nota.desafio}</td>
+                    <td style={{padding: '10px'}}>
+                      <span style={{
+                        fontWeight: 'bold',
+                        color: nota.nota / nota.total >= 0.6 ? 'green' : 'red'
+                      }}>
+                        {nota.nota} / {nota.total}
+                      </span>
+                    </td>
+                    <td style={{padding: '10px', fontSize: '0.9rem'}}>
+                      {formatarData(nota.data)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-        ))}
+        )}
       </main>
     </div>
   );

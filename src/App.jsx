@@ -118,7 +118,7 @@ function App() {
             <Route path="/admin" element={
               <ProtectedAdminRoute><AnimatedPage><Admin /></AnimatedPage></ProtectedAdminRoute>
             } />
-            <Route path="/admin/new-blog" element={
+            <Route path="/admin/newblog" element={
               <ProtectedAdminRoute><AnimatedPage><Newblog /></AnimatedPage></ProtectedAdminRoute>
             } />
             <Route path="/admin/comentarios" element={

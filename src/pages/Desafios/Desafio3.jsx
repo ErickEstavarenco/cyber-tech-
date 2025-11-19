@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Desafio.css";
+import { db, auth } from "../../../FirebaseConfig";
+import { collection, addDoc } from "firebase/firestore";
 
 export default function Desafio3() {
   const total = 5;
@@ -84,6 +86,7 @@ export default function Desafio3() {
   const [respostas, setRespostas] = useState(
     Array.from({ length: total }, () => [])
   );
+  const [salvo, setSalvo] = useState(false);
 
   function handleChange(num, selectIndex, value) {
     const novasRespostas = [...respostas];
@@ -114,10 +117,32 @@ export default function Desafio3() {
   if (porcentagem >= 85) msg = "Excelente!";
   else if (porcentagem >= 60) msg = "Bom trabalho!";
 
+  // Salvar no Firebase
+  useEffect(() => {
+    if (finalizado && !salvo && auth.currentUser) {
+      const salvarNoBanco = async () => {
+        try {
+          await addDoc(collection(db, "pontuacoes"), {
+            uid: auth.currentUser.uid,
+            email: auth.currentUser.email,
+            nome: auth.currentUser.displayName || "Usuário",
+            desafio: "Desafio 3 - Condicionais",
+            nota: pontuacao,
+            total: total,
+            data: new Date().toISOString()
+          });
+          setSalvo(true);
+        } catch (error) {
+          console.error("Erro ao salvar nota:", error);
+        }
+      };
+      salvarNoBanco();
+    }
+  }, [finalizado, salvo, pontuacao]);
+
   return (
     <div className="pagina-desafios">
       <div className="scoreboard">Pontuação: {pontuacao} / {total}</div>
-
       <h1>Desafios do Café da Manhã</h1>
       <p className="subtitle">
         Complete os espaços <b>____</b> com <b>if</b>, <b>elif</b> ou <b>else</b>.<br />
@@ -159,23 +184,13 @@ export default function Desafio3() {
             </pre>
 
             {respondidas[i] && (
-              <div
-                className={`feedback ${
-                  respostas[i].every((v, j) => v === corretas[i][j])
-                    ? "correct"
-                    : "incorrect"
-                }`}
-              >
-                {respostas[i].every((v, j) => v === corretas[i][j])
-                  ? "Correto!"
-                  : "Resposta incorreta. (sem nova tentativa)"}
+              <div className={`feedback ${respostas[i].every((v, j) => v === corretas[i][j]) ? "correct" : "incorrect"}`}>
+                {respostas[i].every((v, j) => v === corretas[i][j]) ? "Correto!" : "Resposta incorreta. (sem nova tentativa)"}
               </div>
             )}
 
             {!respondidas[i] && (
-              <button className="btn-verificar" onClick={() => verificar(i)}>
-                Verificar
-              </button>
+              <button className="btn-verificar" onClick={() => verificar(i)}>Verificar</button>
             )}
           </div>
         );
@@ -184,6 +199,7 @@ export default function Desafio3() {
       {finalizado && (
         <div className="final-score">
           {msg} Sua nota final é {pontuacao}/{total} ({porcentagem}%).
+          {salvo && <p style={{fontSize: "0.9rem", color: "green", marginTop: "5px"}}>Nota salva com sucesso!</p>}
         </div>
       )}
     </div>

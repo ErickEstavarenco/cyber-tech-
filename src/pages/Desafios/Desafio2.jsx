@@ -1,24 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Desafio.css";
+import { db, auth } from "../../../FirebaseConfig";
+import { collection, addDoc } from "firebase/firestore";
 
 export default function Desafio2() {
   const total = 7;
-
-  // Respostas corretas (em cada questão)
-  const corretas = [
-    ["+"],
-    ["-"],
-    ["*"],
-    ["/"],
-    ["%"],
-    ["**"],
-    ["and"]
-  ];
+  const corretas = [["+"], ["-"], ["*"], ["/"], ["%"], ["**"], ["and"]];
 
   const [pontuacao, setPontuacao] = useState(0);
   const [respondidas, setRespondidas] = useState(Array(total).fill(false));
   const [feedbacks, setFeedbacks] = useState(Array(total).fill(""));
   const [valores, setValores] = useState(Array.from({ length: total }, () => [""]));
+  const [salvo, setSalvo] = useState(false);
 
   const atualizarPlacar = () => `Pontuação: ${pontuacao} / ${total}`;
 
@@ -55,81 +48,54 @@ export default function Desafio2() {
 
   const verificarFim = respondidas.every((r) => r);
   const porcentagem = Math.round((pontuacao / total) * 100);
-
   let msg = "Precisa praticar mais...";
   if (porcentagem >= 85) msg = "Excelente!";
   else if (porcentagem >= 60) msg = "Bom trabalho!";
 
-  // Lista de desafios
-  const desafios = [
-    {
-      titulo: "Soma de valores",
-      codigo: `a = 10
-b = 5
-resultado = a ___ b
-print(resultado)  # Esperado: 15`
-    },
-    {
-      titulo: "Subtração simples",
-      codigo: `x = 20
-y = 8
-resultado = x ___ y
-print(resultado)  # Esperado: 12`
-    },
-    {
-      titulo: "Multiplicação de números",
-      codigo: `num1 = 4
-num2 = 3
-resultado = num1 ___ num2
-print(resultado)  # Esperado: 12`
-    },
-    {
-      titulo: "Divisão",
-      codigo: `valor = 10
-divisor = 2
-resultado = valor ___ divisor
-print(resultado)  # Esperado: 5.0`
-    },
-    {
-      titulo: "Resto da divisão",
-      codigo: `a = 9
-b = 4
-resultado = a ___ b
-print(resultado)  # Esperado: 1`
-    },
-    {
-      titulo: "Potência (exponenciação)",
-      codigo: `base = 2
-expoente = 4
-resultado = base ___ expoente
-print(resultado)  # Esperado: 16`
-    },
-    {
-      titulo: "Operador lógico AND",
-      codigo: `idade = 20
-carteira = True
-if idade >= 18 ___ carteira:
-    print("Pode dirigir")`
+  // Salvar no Firebase
+  useEffect(() => {
+    if (verificarFim && !salvo && auth.currentUser) {
+      const salvarNoBanco = async () => {
+        try {
+          await addDoc(collection(db, "pontuacoes"), {
+            uid: auth.currentUser.uid,
+            email: auth.currentUser.email,
+            nome: auth.currentUser.displayName || "Usuário",
+            desafio: "Desafio 2 - Operações",
+            nota: pontuacao,
+            total: total,
+            data: new Date().toISOString()
+          });
+          setSalvo(true);
+        } catch (error) {
+          console.error("Erro ao salvar nota:", error);
+        }
+      };
+      salvarNoBanco();
     }
+  }, [verificarFim, salvo, pontuacao]);
+
+  const desafios = [
+    { titulo: "Soma de valores", codigo: `a = 10\nb = 5\nresultado = a ___ b\nprint(resultado)  # Esperado: 15` },
+    { titulo: "Subtração simples", codigo: `x = 20\ny = 8\nresultado = x ___ y\nprint(resultado)  # Esperado: 12` },
+    { titulo: "Multiplicação de números", codigo: `num1 = 4\nnum2 = 3\nresultado = num1 ___ num2\nprint(resultado)  # Esperado: 12` },
+    { titulo: "Divisão", codigo: `valor = 10\ndivisor = 2\nresultado = valor ___ divisor\nprint(resultado)  # Esperado: 5.0` },
+    { titulo: "Resto da divisão", codigo: `a = 9\nb = 4\nresultado = a ___ b\nprint(resultado)  # Esperado: 1` },
+    { titulo: "Potência (exponenciação)", codigo: `base = 2\nexpoente = 4\nresultado = base ___ expoente\nprint(resultado)  # Esperado: 16` },
+    { titulo: "Operador lógico AND", codigo: `idade = 20\ncarteira = True\nif idade >= 18 ___ carteira:\n    print("Pode dirigir")` }
   ];
 
-  // Opções disponíveis
   const opcoes = ["+", "-", "*", "/", "%", "**", "and", "or", "not"];
 
   return (
     <div className="pagina-desafios">
       <div className="scoreboard">{atualizarPlacar()}</div>
-
       <h1>Desafios de Operações em Python</h1>
-      <p className="subtitle">
-        Escolha o operador correto para completar o código! (Apenas uma tentativa)
-      </p>
+      <p className="subtitle">Escolha o operador correto para completar o código! (Apenas uma tentativa)</p>
 
       {desafios.map((d, i) => (
         <div key={i} className="challenge-container">
           <h2>{`Desafio ${i + 1} — ${d.titulo}`}</h2>
-          
-          {/* O resultado final aparece dentro do espaço "___" */}
           <pre>
             {d.codigo.replace(
               "___",
@@ -138,7 +104,6 @@ if idade >= 18 ___ carteira:
                 : "___"
             )}
           </pre>
-
           <select
             value={valores[i][0]}
             onChange={(e) => handleChange(i, 0, e.target.value)}
@@ -149,24 +114,20 @@ if idade >= 18 ___ carteira:
               <option key={op} value={op}>{op}</option>
             ))}
           </select>
-
-          <div
-            className={`feedback ${
-              feedbacks[i].includes("Correto") ? "correct" : "incorrect"
-            }`}
-          >
+          <div className={`feedback ${feedbacks[i].includes("Correto") ? "correct" : "incorrect"}`}>
             {feedbacks[i]}
           </div>
-
           {!respondidas[i] && (
-            <button className="btn-verificar" onClick={() => verificar(i)}>
-              Verificar
-            </button>
+            <button className="btn-verificar" onClick={() => verificar(i)}>Verificar</button>
           )}
         </div>
       ))}
-
-      {/*Removido o bloco final fixo — agora o resultado aparece dentro do código */}
+      
+      {verificarFim && salvo && (
+         <div className="final-score">
+           <p style={{fontSize: "1rem", color: "green", textAlign: "center"}}>Nota salva com sucesso!</p>
+         </div>
+      )}
     </div>
   );
 }
