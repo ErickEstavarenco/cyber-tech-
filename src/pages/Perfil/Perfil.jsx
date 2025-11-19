@@ -3,7 +3,6 @@ import { useAuth } from "../../context/AuthContext";
 import styles from "./Perfil.module.css";
 import { motion } from "framer-motion";
 
-// Firebase imports
 import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { deleteUser } from "firebase/auth";
 import { db, auth } from "../../../FirebaseConfig"; 
@@ -12,14 +11,13 @@ import { useNavigate } from "react-router-dom";
 export default function Perfil() {
   const { currentUser } = useAuth();
   const [profile, setProfile] = useState(null);
-  const [editing, setEditing] = useState(false);
-  
-  // 1. CORREÇÃO: Nomes dos campos iguais ao banco (Cadastro.jsx)
+    
   const [form, setForm] = useState({
     name: "",
     dataNascimento: "", 
     telefone: "",       
-    apelido: "",        
+    apelido: "",
+    Escolaridade: "Ensino Fundamental",
   });
   
   const [saving, setSaving] = useState(false);
@@ -38,12 +36,12 @@ export default function Perfil() {
           const data = snap.data();
           setProfile(data);
           
-          // 2. CORREÇÃO: Preenche o form com os dados corretos do banco
           setForm({
             name: data.name || "",
             dataNascimento: data.dataNascimento || "", 
             telefone: data.telefone || "",       
-            apelido: data.apelido || "",        
+            apelido: data.apelido || "",
+            Escolaridade: data.Escolaridade || "Ensino Fundamental",
           });
         } else {
           setProfile({ email: currentUser.email, uid: currentUser.uid });
@@ -59,7 +57,7 @@ export default function Perfil() {
   if (!currentUser) {
     return (
       <div className={styles.container}>
-        <div className={styles.messageCard}>
+        <div className={styles.profileBox}>
           <h2>Você precisa estar logado para ver seu perfil.</h2>
         </div>
       </div>
@@ -70,19 +68,7 @@ export default function Perfil() {
     setForm((s) => ({ ...s, [e.target.name]: e.target.value }));
   };
 
-  const handleStartEdit = () => setEditing(true);
-
-  const handleCancelEdit = () => {
-    // 3. CORREÇÃO: Reseta usando os nomes corretos
-    setForm({
-      name: profile?.name || "",
-      dataNascimento: profile?.dataNascimento || "", 
-      telefone: profile?.telefone || "",       
-      apelido: profile?.apelido || "",        
-    });
-    setEditing(false);
-  };
-
+  //Lógica de Salvar Alterações
   const handleSave = async () => {
     if (!form.name.trim()) {
       alert("Por favor, informe o nome completo.");
@@ -92,17 +78,17 @@ export default function Perfil() {
     try {
       const userRef = doc(db, "users", currentUser.uid);
       
-      // 4. CORREÇÃO: Salva no banco com os nomes corretos
+      // Salva no banco com o campo apelido
       await updateDoc(userRef, {
         name: form.name,
-        apelido: form.apelido || "",        
         dataNascimento: form.dataNascimento || "", 
         telefone: form.telefone || "",       
+        apelido: form.apelido || "",
+        Escolaridade: form.Escolaridade,
         updatedAt: new Date(),
       });
 
       setProfile({ ...profile, ...form });
-      setEditing(false);
       alert("Perfil atualizado com sucesso!");
     } catch (err) {
       console.error("Erro ao salvar perfil:", err);
@@ -111,6 +97,11 @@ export default function Perfil() {
       setSaving(false);
     }
   };
+
+  // Para trabalhar aqui
+  const handleChangePassword = () => {
+    alert("Redirecionando para a tela de Alterar Senha (Funcionalidade de navegação simulada).");
+  }
 
   const handleDeleteAccount = async () => {
     const ok = window.confirm(
@@ -125,9 +116,7 @@ export default function Perfil() {
     }
 
     try {
-      // Deleta primeiro do Firestore (para não ter erro de permissão)
       await deleteDoc(doc(db, "users", user.uid));
-      // Depois deleta do Auth
       await deleteUser(user);
       
       alert("Conta excluída com sucesso.");
@@ -143,73 +132,98 @@ export default function Perfil() {
   };
 
   return (
-    <div className={styles.container}>
-      <motion.div className={styles.headerCard} initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }}>
-        <div>
-          <h1>Meu Perfil</h1>
-          <p className={styles.subtitle}>Visualize e edite suas informações</p>
+    <div className={styles.container}> 
+      <motion.div className={styles.profileBox} initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }}>
+        
+        <div className={styles.header}>
+          <h2>Meu Perfil</h2>
+          <div className={styles.tabs}>
+            <span className={styles.activeTab}>Dados do Usuário</span>
+          </div>
+        </div>
+
+        <div className={styles.content}>
+          <div className={styles.imageAndLogin}>
+            
+            {/* Login (Email) e Alterar Senha */}
+            <div className={styles.loginGroup}>
+                <div className={styles.inputGroup}>
+                    <label className={styles.required}>Login</label>
+                    <input 
+                        type="email" 
+                        value={profile?.email || currentUser.email} 
+                        readOnly 
+                        disabled
+                        className={styles.loginInput}
+                    />
+                </div>
+                {/* BOTÃO ALTERAR SENHA (Estilo Primário) */}
+                <button 
+                    className={`${styles.buttonBase} ${styles.primaryButton} ${styles.changePasswordButton}`} 
+                    onClick={handleChangePassword}
+                >
+                    Alterar senha
+                </button>
+            </div>
+          </div>
+
+          <div className={styles.formGrid}>
+            
+            {/* Linha 1 */}
+            <div className={styles.inputGroup}>
+              <label className={styles.required}>Nome*</label>
+              <input name="name" value={form.name} onChange={handleChange} />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>Apelido</label> 
+              <input name="apelido" value={form.apelido} onChange={handleChange} placeholder="Como prefere ser chamado" />
+            </div>
+            
+            
+            {/* Linha 2 */}
+            <div className={styles.inputGroup}>
+              <label>Telefone</label>
+              <input name="telefone" value={form.telefone} onChange={handleChange} placeholder="(xx) xxxx-xxxx" />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>Data de Nascimento</label>
+              <input name="dataNascimento" type="date" value={form.dataNascimento} onChange={handleChange} />
+            </div>
+
+            {/* Linha 3: Escolaridade (Ocupa a largura total na imagem) */}
+            <div className={styles.inputGroup + " " + styles.fullWidth}>
+                <label>Escolaridade</label>
+                <select name="escolaridad" value={form.escolaridad} onChange={handleChange}>
+                    <option value="ENSINO FUNDAMENTAL">Ensino Fundamental</option>
+                    <option value="ENSINO MEDIO">Ensino Medio</option>
+                    <option value="ENSINO SUPERIOR">Ensino Superior</option>
+                </select>
+            </div>
+
+          </div>
+
+          {/* Rodapé com botões Salvar e Excluir Conta */}
+          <div className={styles.actions}>
+            {/* BOTÃO SALVAR (Estilo Primário, como na imagem) */}
+            <button 
+                className={`${styles.buttonBase} ${styles.primaryButton}`} 
+                onClick={handleSave} 
+                disabled={saving}
+            >
+              {saving ? "Salvando..." : "Salvar"}
+            </button>
+            
+            {/* BOTÃO EXCLUIR CONTA (Funcionalidade que você quer manter) */}
+            <button 
+                className={`${styles.buttonBase} ${styles.dangerButton}`} 
+                onClick={handleDeleteAccount}
+            >
+                Excluir Conta
+            </button>
+          </div>
+
         </div>
       </motion.div>
-
-      <div className={styles.content}>
-        <motion.div className={styles.profileCard} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
-          {!editing ? (
-            // 5. CORREÇÃO: Exibição correta dos dados
-            <>
-              <div className={styles.row}>
-                <div className={styles.label}>Nome completo</div>
-                <div className={styles.value}>{profile?.name || "—"}</div>
-              </div>
-              <div className={styles.row}>
-                <div className={styles.label}>Apelido</div>
-                <div className={styles.value}>{profile?.apelido || "—"}</div>
-              </div>
-              <div className={styles.row}>
-                <div className={styles.label}>Data de nascimento</div>
-                <div className={styles.value}>{profile?.dataNascimento || "—"}</div>
-              </div>
-              <div className={styles.row}>
-                <div className={styles.label}>Email</div>
-                <div className={styles.value}>{profile?.email || currentUser.email}</div>
-              </div>
-              <div className={styles.row}>
-                <div className={styles.label}>Telefone</div>
-                <div className={styles.value}>{profile?.telefone || "—"}</div>
-              </div>
-              <div className={styles.actions}>
-                <button className="btn primary" onClick={handleStartEdit}>Editar perfil</button>
-                <button className="btn danger" onClick={handleDeleteAccount}>Excluir conta</button>
-              </div>
-            </>
-          ) : (
-            // 6. CORREÇÃO: Inputs ligados aos campos corretos
-            <>
-              <div className={styles.formRow}>
-                <label>Nome completo</label>
-                <input name="name" value={form.name} onChange={handleChange} />
-              </div>
-              <div className={styles.formRow}>
-                <label>Apelido</label>
-                <input name="apelido" value={form.apelido} onChange={handleChange} placeholder="Como prefere ser chamado" />
-              </div>
-              <div className={styles.formRow}>
-                <label>Data de nascimento</label>
-                <input name="dataNascimento" type="date" value={form.dataNascimento} onChange={handleChange} />
-              </div>
-              <div className={styles.formRow}>
-                <label>Telefone</label>
-                <input name="telefone" value={form.telefone} onChange={handleChange} placeholder="(xx) xxxxx-xxxx" />
-              </div>
-              <div className={styles.actions}>
-                <button className="btn primary" onClick={handleSave} disabled={saving}>
-                  {saving ? "Salvando..." : "Salvar"}
-                </button>
-                <button className="btn ghost" onClick={handleCancelEdit} disabled={saving}>Cancelar</button>
-              </div>
-            </>
-          )}
-        </motion.div>
-      </div>
     </div>
   );
 }

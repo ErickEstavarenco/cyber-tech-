@@ -1,119 +1,158 @@
-/* ======= Layout Geral ======= */
+/* ---------- Variáveis de Tema ---------- */
+:root {
+  --bg-light: #f9fafb;
+  --bg-white: #ffffff;
+  --text-dark: #111827;
+  --text-gray: #4b5563;
+  --text-gray-light: #6b7280;
+  --primary-light: #eef2ff;
+  --danger: #dc2626;
+  --danger-light: #f87171;
+  --border: #e5e7eb;
+  --radius-lg: 16px;
+  --radius-md: 10px;
+  --radius-sm: 8px;
+  --transition: 0.25s ease;
+}
+
+/* ======================================================== */
+/*                 LAYOUT GERAL (Mobile-first)             */
+/* ======================================================== */
 .container {
   display: flex;
+  flex-direction: row;   /* 👈 mantém sidebar AO LADO sempre */
   min-height: 100vh;
-  background-color: #f9fafb; /* fundo cinza claro */
+  background-color: var(--bg-light);
   font-family: "Inter", sans-serif;
 }
 
-/* ======= Sidebar ======= */
+/* ======================================================== */
+/*                        SIDEBAR                          */
+/* ======================================================== */
 .sidebar {
-  width: 250px;
-  background-color: #ffffff;
-  border-right: 1px solid #e5e7eb;
-  padding: 24px;
+  width: 260px;
+  min-height: 100vh;
+  background: #1565c0;
+  border-right: 1px solid #e6e6e6;
+  padding: 30px 20px;
+
+  /* CORREÇÃO */
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;   /* garante topo */
+  gap: 25px;
 }
 
 .sidebar h2 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 600;
-  margin-bottom: 24px;
-  color: #111827;
+  color: var(--text-dark);
 }
 
 .sidebar ul {
   list-style: none;
+  margin-top: 10px;   /* deixa espaço suave */
   padding: 0;
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.sidebar li {
+
+.sidebar li,
+.sidebar a {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 1rem;
-  color: #4b5563;
-  padding: 10px 12px;
-  border-radius: 8px;
+  gap: 8px;
+  font-size: 0.95rem;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  color: var(--text-gray);
+  transition: var(--transition);
   cursor: pointer;
-  transition: all 0.2s ease;
+  text-decoration: none;
 }
 
-.sidebar li:hover {
-  background-color: #f3f4f6;
-  color: #111827;
+
+.sidebar a:hover {
+  background-color:#2d72c0;
+   transform: scale(1.2);
+   width: 1500px;
 }
 
-.active {
-  background-color: #eef2ff;
-  color: #4338ca;
-  font-weight: 600;
+img {
+  width: 30px;
+  height: 30px;
 }
 
-/* ======= Conteúdo Principal ======= */
+/* ======================================================== */
+/*                    CONTEÚDO PRINCIPAL                   */
+/* ======================================================== */
 .main {
   flex: 1;
-  padding: 40px;
+  padding: 24px;
+  transition: var(--transition);
 }
 
 .main h1 {
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 700;
-  margin-bottom: 32px;
-  color: #111827;
+  margin-bottom: 24px;
+  color: var(--text-dark);
 }
 
 .main h1 span {
-  color: #2563eb; /* azul para o nome */
+  color: var(--primary);
 }
 
-/* ======= Cards ======= */
+/* ======================================================== */
+/*                           CARDS                         */
+/* ======================================================== */
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
+  grid-template-columns: 1fr;
+  gap: 20px;
 }
 
 .card {
-  background-color: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  transition: transform var(--transition), box-shadow var(--transition);
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
 }
 
 .card h3 {
-  font-size: 1.125rem;
+  font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 8px;
-  color: #111827;
+  color: var(--text-dark);
 }
 
 .card p {
   font-size: 0.9rem;
-  color: #6b7280;
-  margin-bottom: 6px;
+  color: var(--text-gray-light);
 }
 
-/* ======= Botões ======= */
+/* ======================================================== */
+/*                          BOTÕES                         */
+/* ======================================================== */
 .card button {
   margin-top: 12px;
-  padding: 8px 16px;
-  border-radius: 10px;
-  border: 1px solid #d1d5db;
-  background-color: #ffffff;
-  color: #111827;
-  cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background-color: var(--bg-white);
+  color: var(--text-dark);
   font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
 }
 
 .card button:hover {
@@ -121,28 +160,165 @@
 }
 
 .red {
-  border-color: #f87171;
-  background-color: #ef4444;
+  background-color: var(--danger);
   color: #fff;
+  border-color: var(--danger-light);
 }
 
 .red:hover {
-  background-color: #dc2626;
+  background-color: #b91c1c;
 }
 
 .warning {
-  color: #dc2626;
+  color: var(--danger);
   font-weight: 500;
 }
 
-/* ======= Responsividade ======= */
-@media (max-width: 768px) {
-  .sidebar {
-    width: 200px;
-    padding: 16px;
-  }
+.main {
+  padding: 40px 20px;
+  max-width: 800px;
+  margin: 0 auto; 
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  background-color: #c0dcee; 
+}
 
-  .main {
+/* Título principal da página */
+.main h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 2.5em;
+  border-bottom: 3px solid #007bff; /* Linha de destaque */
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+/*
+ * O nome 'styles.card' refere-se à classe 'card' no seu código React.
+ * <div className={styles.card}>
+ */
+.card {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Sombra suave para efeito de "card" */
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Espaçamento entre os elementos do formulário */
+}
+
+/* Estilo para todos os rótulos (labels) */
+.card label {
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 5px;
+  display: block; /* Garante que o rótulo ocupe sua própria linha */
+  font-size: 1.1em;
+}
+
+/* Estilo base para inputs de texto e textarea */
+.input,
+.textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1em;
+  box-sizing: border-box; /* Garante que padding e border não aumentem a largura total */
+  transition: border-color 0.3s ease;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: #007bff;
+  outline: none; /* Remove o contorno padrão */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Estilo específico para a textarea de descrição */
+.textarea {
+  min-height: 150px; /* Altura mínima maior para a descrição */
+  resize: vertical; /* Permite redimensionamento apenas na vertical */
+}
+
+/* Estilo para o input de arquivo (Imagens) */
+.inputFile {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+}
+
+/*
+ * O nome 'styles.notaBtn' refere-se à classe 'notaBtn' no seu código React.
+ * <button className={styles.notaBtn} onClick={salvarPost}>
+ */
+.notaBtn {
+  background-color: #007bff; /* Cor primária do botão */
+  color: white;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  margin-top: 15px; /* Espaçamento acima do botão */
+}
+
+.notaBtn:hover {
+  background-color: #0056b3; /* Cor mais escura ao passar o mouse */
+}
+
+.notaBtn:active {
+  transform: scale(0.99); /* Pequeno efeito de clique */
+}
+
+/* ======================================================== */
+/*                    RESPONSIVIDADE TOTAL                 */
+/* ======================================================== */
+
+/* 🔹 480px */
+@media (min-width: 480px) {
+  .sidebar li { font-size: 1rem; }
+}
+
+/* 🔹 640px */
+@media (min-width: 640px) {
+  .main h1 { font-size: 1.8rem; }
+}
+
+/* 🔹 768px (tablets) */
+/*@media (min-width: 768px) {
+  .container { flex-direction: row; }
+
+  .sidebar {
+    width: 300px !important;
+    flex-direction: column;
+    align-items: flex-start;
+    border-right: 1px solid var(--border);
+    border-bottom: none;
     padding: 24px;
   }
+
+  .sidebar ul {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .cards { grid-template-columns: repeat(2, 1fr); }
+}*/
+
+/* 1024px (desktop médio) */
+@media (min-width: 1024px) {
+  .main { padding: 32px; }
+  .sidebar { width: 300px !important; }
+  .cards { grid-template-columns: repeat(3, 1fr); }
+  .main h1 { font-size: 2rem; }
+}
+
+/* 1280px (desktop grande) */
+@media (min-width: 1280px) {
+  .main { padding: 40px; }
 }
