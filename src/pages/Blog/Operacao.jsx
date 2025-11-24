@@ -100,7 +100,12 @@ const Operacao = () => {
                 </div>
                 </div>
                 <br></br>
-                <a href="/blog" className="back-link">← Voltar</a>
+                 <div className="navigation-links">
+            <a href="/blog" className="back-link">
+                ← Voltar
+            </a>
+            
+        </div>
         </div>
      </div>       
     ) 

@@ -80,13 +80,16 @@ const Variavel = () => {
                    <img src='/variaveis.png' className="fotos"></img>
                 </div>
             </article>
+             <div className="navigation-links">
             <a href="/blog" className="back-link">
-          ← Voltar
-        </a>
-        &nbsp;&nbsp;&nbsp;
-         <a href="/tipo" className="back-link">
-          Próximo →
-        </a>
+                ← Voltar
+            </a>
+            <a href="/tipo" className="back-link">
+                Próximo →
+            </a>
+        </div>
+            
+       
         </section>
     </main>
   );

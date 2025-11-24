@@ -9,8 +9,22 @@ const Algoritmo = () => {
   const somar = () => {
     // Usando Number() garante que a soma será matemática, e não concatenação de strings.
     setResultado(Number(a) + Number(b));
-  };
 
+    
+  };
+  // 1. Hook de Estado para controlar a ampliação
+    const [isAmpliada, setIsAmpliada] = useState(false);
+
+    // 2. Função para alternar o estado ao clicar
+    const handleClick = () => {
+        setIsAmpliada(!isAmpliada);
+    };
+
+    // 3. Aplica a classe 'ampliada' se o estado for true
+    const imageClasses = `flowchart-image ${isAmpliada ? 'ampliada' : ''}`;
+ 
+    
+   
   return (
     <div className="algoritmo">
       <h1 className="ritmo">O que é um Algoritmo?</h1>
@@ -20,26 +34,27 @@ const Algoritmo = () => {
         
         {/* Descrição Principal do Algoritmo */}
         <p>
-          Um algoritmo é uma **sequência finita de ações executáveis** que visam obter uma solução para um determinado tipo de problema.
+          Um algoritmo é uma <strong>sequência finita de ações executáveis</strong> que visam obter uma solução para um determinado tipo de problema.
         </p>
 
         {/* --- Blocos de Propriedades (Lógico, Finitivo, Eficiência) --- */}
         <div className="properties-container">
           
           <div className="property-box">
-            <div className="property-icon">💡</div> {/* Icone de Lógico */}
+          < img  src="/lampada.png"  className="property-icon"></img> {/* Icone de Lógico */}
             <h3 className="property-title">Lógico</h3>
             <p className="property-description">Os passos são lógicos e fazem sentido sequencialmente.</p>
           </div>
 
           <div className="property-box">
-            <div className="property-icon">⏳</div> {/* Icone de Finitivo */}
+           < img  src="/ampulheta.png"  className="property-icon"></img>{/* Icone de Finitivo */}
             <h3 className="property-title">Finitivo</h3>
             <p className="property-description">O algoritmo deve sempre terminar após um número finito de passos.</p>
           </div>
 
           <div className="property-box">
-            <div className="property-icon">⚡</div> {/* Icone de Eficiência */}
+           < img  src="/luz.png"  className="property-icon"></img>{/* Icone de Finitivo */}
+
             <h3 className="property-title">Eficiência</h3>
             <p className="property-description">Resolver o problema usando a menor quantidade de recursos possível.</p>
           </div>
@@ -51,16 +66,14 @@ const Algoritmo = () => {
           Um fluxograma representa visualmente os passos de um algoritmo. Ajuda a entender a lógica e o fluxo de controle de um processo.
         </p>
 
-        {/* Fluxograma (A imagem na imagem é o fluxo de soma) */}
         <div className="flowchart-image-container">
-          {/* O fluxograma do "início, ler A, ler B, Soma=A+B, Escrever Soma" na imagem screen.png é o que está aqui */}
-          {/* Como você não forneceu a imagem real, o nome é uma suposição. */}
-          <img
-            src="/fluxograma.png" 
-            alt="Fluxograma do algoritmo de soma"
-            className="flowchart-image"
-          />
-          
+            <img
+                src="/fluxograma.png" 
+                alt="Fluxograma do algoritmo de soma"
+                // Aplica classes dinâmicas e o evento de clique
+                className={imageClasses} 
+                onClick={handleClick} 
+            />
         </div>
         
         <h2 className="section-title">Exemplo em Python</h2>

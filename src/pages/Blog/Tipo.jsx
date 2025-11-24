@@ -81,14 +81,16 @@ const Tipo = () => {
                     </div>
                 </div>
             </section>
+             <div className="navigation-links">
+            <a href="/blog" className="back-link">
+                ← Voltar
+            </a>
+            <a href="/condicionais" className="back-link">
+                Próximo →
+            </a>
+        </div>
             
-             <a href="/blog" className="back-link">
-          ← Voltar
-        </a>
-        &nbsp;&nbsp;&nbsp;
-         <a href="/condicionais" className="back-link">
-          Próximo →
-        </a>
+        
         </main>
     </div>
 

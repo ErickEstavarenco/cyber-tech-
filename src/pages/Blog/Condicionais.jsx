@@ -60,13 +60,14 @@ export default function Condicionais() {
             </section>
 
             
-  <a href="/blog" className="back-link">
-          ← Voltar
-        </a>
-        &nbsp;&nbsp;&nbsp;
-         <a href="/funcoes" className="back-link">
-          Próximo →
-        </a>
+   <div className="navigation-links">
+            <a href="/blog" className="back-link">
+                ← Voltar
+            </a>
+            <a href="/funcoes" className="back-link">
+                Próximo →
+            </a>
+        </div>
         </div>
     </div>
     )
