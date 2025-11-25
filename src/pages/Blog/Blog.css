@@ -119,17 +119,13 @@
   background-color: #c0dcee;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
-  padding: 1rem; /* Reduzindo o padding interno */
+  padding: 20px; /* Reduzindo o padding interno */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  flex: 1 1 calc(25% - 1rem); /* Reduzindo a largura dos cards */
+  flex: 200px; /* Reduzindo a largura dos cards */
   box-sizing: border-box;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 25px;
 }
 
-.post-card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
 
 .post-card h2 {
   font-size: 1.5rem; /* Diminui o tamanho do título */
@@ -147,8 +143,8 @@
 
 @media (max-width: 768px) {
   .post-card {
-    flex: 1 1 100%; /* Em telas menores, os cards ocupam 100% da largura */
-    padding: 0.8rem; /* Reduz o padding para dispositivos móveis */
+    /* Em telas menores, os cards ocupam 100% da largura */
+    padding: 20px; /* Reduz o padding para dispositivos móveis */
   }
 }
 
@@ -173,7 +169,7 @@
   color: white;
   border: none;
   border-radius: 6px;
-  padding: 0.5rem 1rem;
+  padding:20px;
   margin-top: 1rem;
   cursor: pointer;
   font-weight: 500;
