@@ -3,8 +3,8 @@
    ========================================================== */
 :root {
   /* Dimensões */
-  --sidebar-width-open: 260px;
-  --sidebar-width-collapsed: 72px;
+  --sidebar-width-open: 200px;
+  --sidebar-width-collapsed: 70px;
   --transition-speed: 260ms;
   --transition-ease: cubic-bezier(.2, .9, .3, 1);
 
@@ -110,10 +110,10 @@ p, strong, label, th, td {
   width: 22px;
   height: 22px;
   /* Filter simplificado e padronizado */
-  filter: invert(1);
 }
 
 .title {
+  color: #ffffff;
   font-size: 1.25rem;
   font-weight: 700;
   margin: 4px 0 6px 0;
@@ -154,6 +154,7 @@ p, strong, label, th, td {
 }
 
 .linkText {
+  color: #ffffff;
   opacity: 1;
   transform: translateX(0);
   transition: opacity 220ms var(--transition-ease), transform 220ms var(--transition-ease);

@@ -1,53 +1,51 @@
 import React from "react";
+import "./Funcoes.css";
+
+
 
 
 const Funcoes = () => {
     return (
-  <div className="blog-page-dados">
-      <h1 className="page-title"> Funções</h1> <br></br>
-      <div className="pense">
-          <h3 className="borda"> Funções em Python</h3>
-         <p>
-          As <strong>funções</strong> são blocos de código criados para
-           executar uma tarefa específica dentro de um programa. 
-           Elas permitem<strong> organizar, reutilizar e simplificar</strong> o código, tornando o desenvolvimento mais eficiente e fácil de entender. Com funções, é possível evitar repetições e manter o código mais limpo e modular.
-         </p><br></br>
-         <p>
-          Em Python, uma função é definida com a palavra-chave def, 
-          seguida pelo nome da função e, entre parênteses, os 
-          <strong>parâmetros</strong> (ou argumentos) que ela pode receber. Depois, dentro do bloco indentado, vem o conjunto de instruções que a função deve realizar.
-         </p>
-         <p>Exemplo:</p>
-         <img src="/funcaoex1.png" alt="Imagem sobre Funções" className="posta-img" />
-         <p>
-          Ao chamar saudacao("João"), o programa exibirá <strong>“Olá, João!”</strong>.
-          </p><br></br>
-          <p>
-            As funções podem <strong> retornar valores </strong>utilizando a palavra-chave return. Isso permite que o resultado de um cálculo ou operação seja guardado ou usado em outra parte do código.
-          </p>
-          <p>Exemplo:</p>
-          <img src="/funcaoex2.png" alt="Imagem sobre Funções" className="posta-img" />
-          <p>
-            Além das funções criadas pelo programador, o Python possui várias <strong>funções embutidas </strong><strong>(</strong>como print(), len(), type(), int(), entre outras<strong>)</strong> que facilitam tarefas do dia a dia.
-          </p><br></br>
-          <p>
-            No geral, aprender a usar funções é fundamental para 
-            quem deseja escrever códigos bem estruturados, eficientes 
-            e de fácil manutenção. Elas são uma das bases da <strong>programação estruturada e modular.</strong>
-          </p>
-
+  <div class="content-wrapper">
+        <div class="blog-article">
+           
+            <h1 class="article-title">O que é uma função?</h1>
+            <p>
+             Em Python, uma função é um bloco de código reutilizável que executa uma tarefa específica. Você pode chamá-la sempre que precisar executar essa tarefa, o que ajuda a tornar seu código mais organizado, legível e eficiente.
+            </p>
+           
+           <div className="pop"> 
+            <h2 class="topic-title">Definindo uma função</h2>
+            <p>
+              Você define uma função usando a defpalavra-chave, seguida pelo nome da função, parênteses () e dois pontos:. O bloco de código dentro da função é indentado.
+            </p>
+             <img src="/funex1.png" alt="Imagem sobre Funções" className="posta-img" />
+             </div>
+ <div className="pop"> 
+<h2 class="topic-title">Chamando uma função</h2>
+            <p>
+Uma vez que uma função esteja definida, você pode "chamá-la" ou executá-la escrevendo seu nome seguido de parênteses.            </p>
+             <img src="/funex2.png" alt="Imagem sobre Funções" className="posta-img" />
          
-       
+</div>
+ <div className="pop"> 
+          <h2 class="topic-title">Retornando valores</h2>
+            <p>
+As funções também podem enviar um valor de volta para quem as chamou usando a returninstrução. Isso é útil para cálculos ou para obter resultados de uma tarefa.            </p>
+             <img src="/funex3.png" alt="Imagem sobre Funções" className="posta-img" />
+ </div>
+    <div className="navigation-links">
+            <a href="/blog" className="back-link">
+                ← Voltar
+            </a>
+            <a href="/operacao" className="back-link">
+                Próximo →
+            </a>
+        </div>
+        </div>
+     </div>       
       
        
-       <a href="/blog" className="back-link">← Voltar</a>
-        &nbsp;&nbsp;&nbsp;
-         <a href="/condicionais" className="back-link">
-          Próximo →
-        </a>
-       
-      </div>
-      </div>
     );
 };
 export default Funcoes;

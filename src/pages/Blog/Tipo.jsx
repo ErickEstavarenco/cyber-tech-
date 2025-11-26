@@ -3,82 +3,101 @@ import './Tipo.css'
 
 const Tipo = () => {
   return (
-    <div className="blog-page-dados">
-      <h1 className="page-title"> Tipo de Dados</h1> <br></br>
-      <div className="pense">
-        <h3 className="borda">Entendendo os tipos de dados em Python:</h3>
-        <p >
-          Os <strong>tipos de dados</strong> definem que tipo de valor uma variável pode armazenar e quais operações podem ser realizadas com ela.
-          </p>
-          <p>
-            Em Python (e em muitas outras linguagens de programação), cada tipo de dado possui <strong>características específicas </strong>, sendo usados de acordo com o tipo de informação que queremos representar.
-        </p>
-         <br></br>
-        <p>Os principais tipos de dados básicos são:</p>
-        <p>
-          <strong>- Inteiros (int) </strong>
-        </p>
-        <p>
-            Representam <strong>números inteiros</strong>, positivos ou negativos, sem casas decimais.
-        </p>
-        <p>
-        <strong>
-            Exemplo:
-        </strong>
-        </p>
-        <img src="/inteiros.png" alt="Imagem sobre Variável" className="posta-img" />
-        <p>
-          <strong>-Pontos Flutuantes (float)</strong>
-        </p>
-        <p>
-            Usados para representar<strong> números decimais</strong> (com casas após o ponto).
+    <div class="content-container">
+        <nav class="sidebar">
+            <h4 class="nav-title"> Tipos de Dados</h4>
+            <ul class="nav-list">
+                <li><a href="#int-section" class="active">Inteiros</a></li>
+                <li><a href="#float-section">Pontos Flutuantes</a></li>
+                <li><a href="#str-section">Cadeias</a></li>
+                <li><a href="#bool-section">Booleanos</a></li>
+            </ul>
+        </nav>
 
-        </p>
-         <p>
-        <strong>
-            Exemplo:
-        </strong>
-        </p>
-       <img src="/pontos.png" alt="Imagem sobre Variável" className="posta-img" />
+        <main class="main-content">
+            <div class="header">
+                <h1 class="page-title">Introdução aos Tipos de Dados em Python</h1>
+                <p>
+                 Aqui estão os tipos de dados fundamentais em <strong>Python</strong>. Cada seção abaixo fornece uma descrição detalhada de como utilizar os <strong>Inteiros, Pontos Flutuantes, Cadeias e Booleanos</strong>.
+                 </p>
+            </div>
 
-        <p>
-            <strong>- Strings (str)</strong>
-        </p>
-        <p>
-            São <strong>sequências de caracteres</strong> que representam <strong>textos</strong>. <br></br>
-            Os textos ficam entre aspas simples (') ou duplas (").
-        </p>
-      <img src="/strings.png" alt="Imagem sobre Variável" className="posta-img" />
+            <section id="int-section" class="data-type-section">
+                <h2 class="section-title">Inteiros (int)</h2>
+                <p>Inteiros são números inteiros, positivos ou negativos, sem casas decimais. Em Python, a dimensão do inteiro é ilimitada, o que o torna apto para grandes operações.</p>
+                <div class="code-example-block">
+                    <h3 class="code-title">Como usar inteiros</h3>
+                    <div class="code-block">
+                    <img src='/inteiros.png' className="fotos"></img>
+                    <div className="linhas"></div>
+                    <h3>Saída</h3>
+                    <img src='/inteirossaida.png' className="fotos"></img>
+                    
+                    </div>
+                </div>
+            </section>
 
-      <p>
-        <strong> - Booleanos(bool)</strong>
-      </p>
-      <p>
-        Representam valores <strong>lógicos</strong>: verdadeiro (True) ou falso (False).
-        São muito usados em <strong>condições e decisões</strong> dentro dos programas.
-      </p>
-           <img src="/booleano.png" alt="Imagem sobre Booleanos" className="posta-img" />
-          <h3 className="tipo">
-            <strong> Representação dos Tipos de Dados em Python:</strong>
-          </h3><br></br>
+            <section id="float-section" class="data-type-section">
+                <h2 class="section-title">Pontos Flutuantes (float)</h2>
+                <p>Pontos flutuantes, ou floats, são os números que contêm uma parte fracionária, separados por um ponto decimal. Eles podem ser expressos em notação científica.</p>
+                <div class="code-example-block">
+                    <h3 class="code-title">Como usar pontos flutuantes</h3>
+                    <div class="code-block">
+                        <img src='/float.png' className="fotos"></img>
+                    <div className="linhas"></div>
+                    <h3>Saída</h3>
+                    <img src='/floatsaida.png' className="fotos"></img>
+                    
+                    </div>
+                </div>
+            </section>
 
-           <img src="/dados.png" alt="Imagem sobre Booleanos" className="postar-img" />
-           <p>
-            A imagem mostra <strong>os principais tipos de dados do Python</strong> — inteiros, floats, strings e booleanos — representados como <strong>caixas diferentes</strong>, cada uma com um exemplo de valor.
-            Isso ilustra como o computador <strong>organiza e reconhece diferentes tipos de informações </strong>, permitindo que cada uma seja usada de forma correta em operações específicas.
-           </p>
+            <section id="str-section" class="data-type-section">
+                <h2 class="section-title">Cadeias (str)</h2>
+                <p>Cadeias, ou <strong>strings</strong>, são sequências de caracteres usadas para armazenar texto. Em Python, as cadeias são imutáveis e podem ser definidas com aspas simples ou duplas.</p>
+                <div class="code-example-block">
+                    <h3 class="code-title">Como usar cadeias</h3>
+                    <div class="code-block">
+                       
+                        <img src='/string.png' className="fotos"></img>
+                    <div className="linhas"></div>
+                    <h3>Saída</h3>
+                    <img src='/stringsaida.png' className="fotos"></img>
+                    </div>
+                </div>
+            </section>
 
-      <a href="/blog" className="back-link">← Voltar</a>
-        &nbsp;&nbsp;&nbsp;
-         <a href="/condicionais" className="back-link">
-          Próximo →
-        </a>
+            <section id="bool-section" class="data-type-section">
+                <h2 class="section-title">Booleanos (bool)</h2>
+                <p>Booleanos são o tipo de dado de dois valores: <strong>'True'</strong> (verdadeiro) ou <strong>'False'</strong> (falso). Eles são essenciais para a lógica condicional e o controle de fluxo em programas.</p>
+                <div class="code-example-block">
+                    <h3 class="code-title">Como usar booleanos</h3>
+                    <div class="code-block">
+                        
+                        <img src='/bool.png' className="fotos"></img>
+                    <div className="linhas"></div>
+                    <h3>Saída</h3>
+                    <img src='/boolsaida.png' className="fotos"></img>
+                    </div>
+                </div>
+            </section>
+             <div className="navigation-links">
+            <a href="/blog" className="back-link">
+                ← Voltar
+            </a>
+            <a href="/condicionais" className="back-link">
+                Próximo →
+            </a>
         </div>
-
-
+            
         
-        
+        </main>
     </div>
+
+
+        
+        
+ 
   );
 };
 
