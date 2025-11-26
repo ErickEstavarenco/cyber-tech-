@@ -36,6 +36,7 @@ const AlgorithmIcon = () => (
 
 function Home() {
   // mapping simples de ícones (mantido por compatibilidade)
+  //
   const iconMap = {
     person: iconPerson,
     food: iconFood,

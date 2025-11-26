@@ -17,7 +17,7 @@
   --color-bg-light: #f4f9ff;          /* Fundo claro */
   --color-text-dark: #ffffff;         /* Texto principal */
   --color-text-light: #000000;        /* Texto claro */
-  --header-height: 90px;              /* Cabeçalho maior */
+  --header-height: 60px;              /* Cabeçalho maior */
   --color-shadow: rgba(0, 0, 0, 0.15);
 }
 
@@ -86,7 +86,7 @@ main {
   max-width: 1200px;
   margin: 0 auto;
   padding-top: var(--header-height);
-  padding-bottom: 40px;
+  padding-bottom: 0px;
 }
 
 /* ===== CONTAINER ===== */
@@ -113,8 +113,8 @@ footer {
 /* ===== RESPONSIVIDADE ===== */
 @media (max-width: 768px) {
   main {
-    padding-top: 110px; /* compensa o header maior */
-    padding-bottom: 30px;
+    padding-top: 70px; /* compensa o header maior */
+    padding-bottom: 0px;
   }
 
   .container {

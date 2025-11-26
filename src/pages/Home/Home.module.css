@@ -2,191 +2,199 @@
 
 /* ---------- Cores base ---------- */
 :root {
-    --primary-blue: #095e8b;
-    --dark-blue: #003bb5;
-    --light-blue: #e8f0ff;
-    --text-color: #222;
-  }
-  
-  /* ---------- Página ---------- */
-  .home {
-   
-    color: var(--text-color);
-    min-height: 100vh;
-    padding-bottom: 4rem;
-  }
-  
-  /* ---------- Seção Hero ---------- */
-.heroSection {
-    padding: 0;
-    text-align: center;
-    margin: 0 auto 30px;
-    width: 100%;
-    max-width: 900px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 24px;
+  --primary-blue: #095e8b;
+  --dark-blue: #003bb5;
+  --light-blue: #e8f0ff;
+  --text-color: #222;
 }
-  
-  .mainTitle {
-    font-size: 2.8rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-  }
-  
-  .subtitle {
-    color: var(--primary-blue);
-    font-size: 1.2rem;
-    opacity: 0.9;
-  }
-  
-  /* ---------- Seção "O que é um algoritmo?" ---------- */
-  .algorithmSection {
-    display: flex;
-    justify-content: center;
-    margin: 3rem auto;
-  }
-  
+
+/* ---------- Página ---------- */
+.home {
+
+  color: var(--text-color);
+  min-height: 100vh;
+  padding-bottom: 4rem;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 75px;
+  padding-bottom: 5px;
+}
+
+/* ---------- Seção Hero ---------- */
+.heroSection {
+  padding: 0;
+  text-align: center;
+  margin: 0 auto 30px;
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 24px;
+}
+
+.mainTitle {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  color: var(--primary-blue);
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* ---------- Seção "O que é um algoritmo?" ---------- */
+.algorithmSection {
+  display: flex;
+  justify-content: center;
+  margin: 3rem auto;
+}
+
+.infoCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--light-blue);
+  border-radius: 20px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 900px;
+  gap: 2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.infoCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.infoVideo {
+  width: 320px;
+  height: 180px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 2px solid var(--primary-blue);
+  flex-shrink: 0;
+}
+
+.infoText {
+  flex: 1;
+}
+
+.infoText h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-blue);
+  margin-bottom: 0.5rem;
+}
+
+.infoText p {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+.btn-primary {
+  background-color: var(--dark-blue);
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-blue);
+}
+
+/* ---------- Seção Desafios ---------- */
+.challengesSection {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.challengesSection h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--primary-blue);
+}
+
+.challengesSection p {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  color: #444;
+}
+
+/* ---------- Cards ---------- */
+.challengeCardsList {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 0 1rem;
+}
+
+.challengeCard {
+  margin-bottom: 0rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--light-blue);
+  border-radius: 16px;
+  width: 260px;
+  text-align: center;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--text-color);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.challengeCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 87, 255, 0.15);
+}
+
+.challengeCard video,
+.challengeCard img {
+  width: 100%;
+  height: 150px;
+  object-fit: fill;
+}
+
+.challengeCard p {
+  margin: 0.8rem 0 1rem;
+  font-weight: 600;
+  color: var(--primary-blue);
+  font-size: 1.1rem;
+}
+
+/* ---------- Responsividade ---------- */
+@media (max-width: 768px) {
   .infoCard {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: var(--light-blue);
-    border-radius: 20px;
-    padding: 2rem;
-    width: 90%;
-    max-width: 900px;
-    gap: 2rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  
-  .infoCard:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-  }
-  
-  .infoVideo {
-    width: 320px;
-    height: 180px;
-    border-radius: 12px;
-    object-fit: cover;
-    border: 2px solid var(--primary-blue);
-    flex-shrink: 0;
-  }
-  
-  .infoText {
-    flex: 1;
-  }
-  
-  .infoText h3 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--primary-blue);
-    margin-bottom: 0.5rem;
-  }
-  
-  .infoText p {
-    font-size: 1.05rem;
-    line-height: 1.5;
-    color: var(--text-color);
-    margin-bottom: 1rem;
-  }
-  
-  .btn-primary {
-    background-color: var(--dark-blue);
-    color: #fff;
-    padding: 0.6rem 1.2rem;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background-color 0.2s ease;
-  }
-  
-  .btn-primary:hover {
-    background-color: var(--primary-blue);
-  }
-  
-  /* ---------- Seção Desafios ---------- */
-  .challengesSection {
-    text-align: center;
-    margin-top: 3rem;
-  }
-  
-  .challengesSection h2 {
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: var(--primary-blue);
-  }
-  
-  .challengesSection p {
-    font-size: 1rem;
-    margin-bottom: 2rem;
-    color: #444;
-  }
-  
-  /* ---------- Cards ---------- */
-  .challengeCardsList {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 2rem;
-    padding: 0 1rem;
-  }
-  
-  .challengeCard {
-    margin-bottom: 4rem;
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: var(--light-blue);
-    border-radius: 16px;
-    width: 260px;
     text-align: center;
-    overflow: hidden;
-    text-decoration: none;
-    color: var(--text-color);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
-  
-  .challengeCard:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0, 87, 255, 0.15);
-  }
-  
-  .challengeCard video,
-  .challengeCard img {
+
+  .infoVideo {
     width: 100%;
-    height: 150px;
-    object-fit: fill;
+    height: 200px;
   }
-  
-  .challengeCard p {
-    margin: 0.8rem 0 1rem;
-    font-weight: 600;
-    color: var(--primary-blue);
-    font-size: 1.1rem;
+
+  .infoText h3 {
+    font-size: 1.5rem;
   }
-  
-  /* ---------- Responsividade ---------- */
-  @media (max-width: 768px) {
-    .infoCard {
-      flex-direction: column;
-      text-align: center;
-    }
-  
-    .infoVideo {
-      width: 100%;
-      height: 200px;
-    }
-  
-    .infoText h3 {
-      font-size: 1.5rem;
-    }
-  
-    .mainTitle {
-      font-size: 2rem;
-    }
+
+  .mainTitle {
+    font-size: 2rem;
   }
-  
+}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Desafio.css";
 import { db, auth } from "../../../FirebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
+import {Link} from "react-router-dom";
 
 export default function Desafio1() {
   const total = 6;
@@ -160,9 +161,8 @@ resultado = a % b`,
             {Object.entries(d.alternativas).map(([letra, texto]) => (
               <button
                 key={letra}
-                className={`alternativa-btn ${
-                  valores[i] === letra ? "selecionada" : ""
-                } ${respondidas[i] ? "bloqueada" : ""}`}
+                className={`alternativa-btn ${valores[i] === letra ? "selecionada" : ""
+                  } ${respondidas[i] ? "bloqueada" : ""}`}
                 onClick={() => verificar(i, letra)}
                 disabled={respondidas[i]}
               >
@@ -178,9 +178,23 @@ resultado = a % b`,
       {verificarFim && (
         <div className="final-score">
           {msg} Sua nota final é {pontuacao}/{total} ({porcentagem}%).
-          {salvo && <p style={{fontSize: "0.9rem", color: "green", marginTop: "5px"}}>Nota salva com sucesso!</p>}
+          {salvo && <p style={{ fontSize: "0.9rem", color: "green", marginTop: "5px" }}>Nota salva com sucesso!</p>}
         </div>
       )}
+
+      
+      <div className="navigation-links">
+        <Link to="/desafios" className="back-link">
+          <img src="/flecha1.png" alt="Voltar" className="logo-img" />
+          Voltar
+        </Link>
+
+        <Link to="/desafios/desafio2" className="next-link">
+          Próximo
+          <img src="/flecha2.png" alt="Próximo" className="logo-img" />
+        </Link>
+      </div>
+
     </div>
   );
 }

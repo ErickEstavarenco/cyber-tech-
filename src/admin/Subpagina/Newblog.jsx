@@ -4,8 +4,11 @@ import styles from "../Admin.module.css";
 
 export default function NewBlog() {
   const [titulo, setTitulo] = useState("");
+  const [subTitulo, setSubTitulo] = useState("");
   const [descricao, setDescricao] = useState("");
   const [imagens, setImagens] = useState([]);
+
+  const [collapsed, setCollapsed] = useState(false); // mesmo padrão das outras páginas
 
   function handleUpload(e) {
     setImagens([...e.target.files]);
@@ -16,42 +19,60 @@ export default function NewBlog() {
       alert("Preencha tudo antes de salvar.");
       return;
     }
-    console.log("Post salvo:", { titulo, descricao, imagens });
-    alert("Post salvo (só no console por enquanto).");
+
+    console.log("Post salvo:", { titulo, subTitulo, descricao, imagens });
+    alert("Post salvo (apenas no console por enquanto).");
   }
 
   return (
     <div className={styles.container}>
-      {/* Sidebar */}
-      <aside className={styles.sidebar}>
-        <h2>Administrador</h2>
-        <ul>
-          <li className={styles.active}>
-            <Link to="/admin">
-              <span><img src="/public/casa.png" alt="" /></span> Home
+      
+      {/* SIDEBAR — mesma lógica das outras telas */}
+      <aside className={`${styles.sidebar} ${collapsed ? styles.sidebarCollapsed : ""}`}>
+
+        {/* Botão hambúrguer — SOMENTE EM TELAS GRANDES */}
+        <button
+          className={styles.toggleBtn}
+          onClick={() => setCollapsed(prev => !prev)}
+          aria-label={collapsed ? "Abrir menu" : "Fechar menu"}
+        >
+          <img src="/menu.png" alt="menu" />
+        </button>
+
+        <h2 className={styles.title}>Administrador</h2>
+
+        <ul className={styles.navList}>
+          <li>
+            <Link to="/admin" data-tooltip="Home" className={styles.navLink}>
+              <img src="/casa.png" alt="Home" />
+              <span className={styles.linkText}>Home</span>
             </Link>
           </li>
 
           <li>
-            <Link to="/admin/notas">
-              <span><img src="/public/estrela.png" alt="" /></span> Notas
+            <Link to="/admin/notas" data-tooltip="Notas" className={styles.navLink}>
+              <img src="/estrela.png" alt="Notas" />
+              <span className={styles.linkText}>Notas</span>
             </Link>
           </li>
 
           <li>
-            <Link to="/admin/newblog">
-              <span><img src="/public/blog.png" alt="" /></span> Blog
+            <Link to="/admin/newblog" data-tooltip="Blog" className={styles.navLink}>
+              <img src="/blog.png" alt="Blog" />
+              <span className={styles.linkText}>Blog</span>
             </Link>
           </li>
 
           <li>
-            <Link to="/admin/comentarios">
-              <span><img src="/public/comentarios.png" alt="" /></span> Comentários
+            <Link to="/admin/comentarios" data-tooltip="Comentários" className={styles.navLink}>
+              <img src="/comentarios.png" alt="Comentários" />
+              <span className={styles.linkText}>Comentários</span>
             </Link>
           </li>
         </ul>
       </aside>
-      {/* Conteúdo */}
+
+      {/* Main */}
       <main className={styles.main}>
         <h1>Novo Post</h1>
 
@@ -65,13 +86,13 @@ export default function NewBlog() {
             placeholder="Digite o título do post"
           />
 
-          <label>Sub titulo:</label>
+          <label>Subtítulo:</label>
           <input
             type="text"
-            value={titulo}
+            value={subTitulo}
             onChange={(e) => setSubTitulo(e.target.value)}
             className={styles.input}
-            placeholder="Digite o sub título do post"
+            placeholder="Digite o subtítulo do post"
           />
 
           <label>Descrição:</label>

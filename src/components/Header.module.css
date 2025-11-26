@@ -1,4 +1,4 @@
-/* ===== CABEÇALHO ===== */
+/*  CABEÇALHO  */
 .header {
   position: fixed;
   top: 0;
@@ -10,12 +10,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 30px;
+  padding: 0 20px;
   z-index: 1000;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* ===== LOGO ===== */
+/*  LOGO  */
 .logo a {
   font-size: 1.6rem;
   font-weight: 700;
@@ -23,7 +23,7 @@
   text-decoration: none;
 }
 
-/* ===== SEÇÃO DIREITA (menu + botões) ===== */
+/*  SEÇÃO DIREITA  */
 .rightSection {
   display: flex;
   align-items: center;
@@ -31,7 +31,7 @@
   position: relative;
 }
 
-/* ===== BOTÃO HAMBURGUER ===== */
+/*  BOTÃO HAMBURGUER  */
 .hamburger {
   display: flex;
   flex-direction: column;
@@ -54,7 +54,7 @@
   transition: 0.3s;
 }
 
-/* Animação do ícone */
+/* Ícone animado */
 .hamburger.active span:nth-child(1) {
   transform: rotate(45deg) translateY(10px);
 }
@@ -62,61 +62,56 @@
   opacity: 0;
 }
 .hamburger.active span:nth-child(3) {
-  transform: rotate(-43deg) translateY(-13px);
+  transform: rotate(-45deg) translateY(-10px);
 }
 
-/* ===== NAVEGAÇÃO ===== */
+/*  NAVEGAÇÃO (MOBILE)  */
 .nav {
-  display: flex;
-  gap: 18px;
-  align-items: center;
   position: absolute;
-  right: 60px; /* ao lado esquerdo do botão hamburguer */
-  top: 50%;
-  transform: translateY(-50%) translateX(30px);
+  top: 70px;
+  right: 0;
+  width: 210px;
+  background: #0c4464;
+  padding: 18px;
+  border-radius: 0 0 0 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  transform: translateX(100%);
   opacity: 0;
   pointer-events: none;
-  transition: all 0.4s ease;
-  z-index: 1001;
+  transition: all 0.35s ease;
 }
 
-/* Quando o menu é aberto */
+/* Quando abre */
 .nav.open {
+  transform: translateX(0);
   opacity: 1;
   pointer-events: auto;
-  transform: translateY(-50%) translateX(-24px);
-  z-index: 2002;
 }
 
-/* ===== LINKS ===== */
+/*  LINKS  */
 .nav a {
   color: white;
   font-weight: 500;
   text-decoration: none;
-  padding: 8px 14px;
+  padding: 10px 14px;
   border-radius: 6px;
   background: transparent;
   transition: all 0.3s ease;
-  transform: translateY(-10px);
-  opacity: 0;
-}
-
-.nav.open a {
-  transform: translateY(0);
-  opacity: 1;
 }
 
 .nav a:hover {
   background: rgba(255, 255, 255, 0.15);
-  color: #e3f2fd;
 }
 
-/* ===== BOTÃO SAIR (vermelho) ===== */
+/*  BOTÃO SAIR  */
 .logoutButton {
   background-color: #e53935;
   color: white !important;
   border: none;
-  padding: 8px 14px;
+  padding: 10px 14px;
   border-radius: 6px;
   font-weight: 500;
   cursor: pointer;
@@ -128,11 +123,11 @@
   transform: scale(1.05);
 }
 
-/* ===== BOTÃO PERFIL ===== */
+/*  BOTÃO PERFIL  */
 .profileButton {
   background: rgba(255, 255, 255, 0.15);
   color: white;
-  padding: 8px 14px;
+  padding: 10px 14px;
   border-radius: 6px;
   text-decoration: none;
   font-weight: 500;
@@ -144,14 +139,44 @@
   transform: scale(1.05);
 }
 
-/* ===== DESKTOP ===== */
+/* Responsividade */
+
 @media (min-width: 769px) {
+
   .hamburger {
+    display: none;
+  }
+
+  .rightSection {
     display: flex;
+    align-items: center;
+    margin-left: auto;
   }
 
   .nav {
-    right: 60px;
-    gap: 18px;
+    position: relative; 
+    top: 0;
+    right: 0;
+
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 20px;
+    background: transparent;
+
+    padding: 0;
+    margin: 0;
+    height: 70px;
+  }
+
+  .nav a {
+    opacity: 1;
+    transform: none;
   }
 }

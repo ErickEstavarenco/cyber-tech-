@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./Desafio.css";
 import { db, auth } from "../../../FirebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
+import {Link} from "react-router-dom";
+
 
 export default function Desafio3() {
   const total = 5;
@@ -202,6 +204,19 @@ export default function Desafio3() {
           {salvo && <p style={{fontSize: "0.9rem", color: "green", marginTop: "5px"}}>Nota salva com sucesso!</p>}
         </div>
       )}
+
+      <div className="navigation-links">
+              <Link to="/desafios" className="back-link">
+                <img src="/flecha1.png" alt="Voltar" className="logo-img" />
+                Voltar
+              </Link>
+      
+              <Link to="/desafios/desafio4" className="next-link">
+                Próximo
+                <img src="/flecha2.png" alt="Próximo" className="logo-img" />
+              </Link>
+            </div>
+
     </div>
   );
 }
