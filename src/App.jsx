@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; 
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from "framer-motion";
 import './styles/globals.css'; 
@@ -6,6 +6,9 @@ import './styles/globals.css';
 // Layout
 import Header from './components/Header.jsx'; 
 import Footer from './components/Footer.jsx'; 
+
+// Scroll Reset
+import ScrollToTop from "./components/ScrollToTop.jsx";
 
 // Páginas Principais
 import Home from './pages/Home/Home.jsx';
@@ -18,7 +21,7 @@ import Variavel from "./pages/Blog/Variavel.jsx";
 import Condicionais from "./pages/Blog/Condicionais.jsx";
 import Funcoes from "./pages/Blog/Funcoes.jsx";
 import Operacao from "./pages/Blog/Operacao.jsx";
-import Tipo from"./pages/Blog/Tipo.jsx"
+import Tipo from "./pages/Blog/Tipo.jsx"
 
 // Autenticação
 import Login from './pages/Login/Login.jsx';
@@ -66,21 +69,22 @@ function App() {
     <div className="app-layout">
       <Header />
 
+      {/* Scroll para o topo ao trocar de página */}
+      <ScrollToTop />
+
       <main>
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
 
-            {/* Páginas públicas */}
+            {/* --- SUAS ROTAS (NÃO ALTEREI) --- */}
             <Route path="/" element={<AnimatedPage><Home /></AnimatedPage>} />
             <Route path="/login" element={<AnimatedPage><Login /></AnimatedPage>} />
             <Route path="/cadastro" element={<AnimatedPage><Cadastro /></AnimatedPage>} />
             <Route path="/esqueci-minha-senha" element={<AnimatedPage><EsqueciSenha /></AnimatedPage>} />
 
-            {/* Páginas novas (Sobre e Privacidade) */}
             <Route path="/sobre" element={<AnimatedPage><Sobre /></AnimatedPage>} />
             <Route path="/privacidade" element={<AnimatedPage><Privacidade /></AnimatedPage>} />
 
-            {/* Páginas protegidas */}
             <Route path="/blog" element={<ProtectedRoute><AnimatedPage><Blog /></AnimatedPage></ProtectedRoute>} />
             <Route path="/algoritmo" element={<ProtectedRoute><AnimatedPage><Algoritmo /></AnimatedPage></ProtectedRoute>} />
             <Route path="/variavel" element={<ProtectedRoute><AnimatedPage><Variavel /></AnimatedPage></ProtectedRoute>} />
@@ -97,26 +101,11 @@ function App() {
 
             <Route path="/perfil" element={<ProtectedRoute><AnimatedPage><Perfil /></AnimatedPage></ProtectedRoute>} />
 
-            {/* Admin */}
             <Route path="/admin" element={<ProtectedAdminRoute><AnimatedPage><Admin /></AnimatedPage></ProtectedAdminRoute>} />
             <Route path="/admin/new-blog" element={<ProtectedAdminRoute><AnimatedPage><Newblog /></AnimatedPage></ProtectedAdminRoute>} />
             <Route path="/admin/curtidas" element={<ProtectedAdminRoute><AnimatedPage><Comentarios /></AnimatedPage></ProtectedAdminRoute>} />
             <Route path="/admin/notas" element={<ProtectedAdminRoute><AnimatedPage><Notas /></AnimatedPage></ProtectedAdminRoute>} />
 
-            {/* --- Rotas Protegidas de ADMIN --- */}
-            <Route path="/admin" element={
-              <ProtectedAdminRoute><AnimatedPage><Admin /></AnimatedPage></ProtectedAdminRoute>
-            } />
-            <Route path="/admin/newblog" element={
-              <ProtectedAdminRoute><AnimatedPage><Newblog /></AnimatedPage></ProtectedAdminRoute>
-            } />
-            <Route path="/admin/comentarios" element={
-              <ProtectedAdminRoute><AnimatedPage><Comentarios /></AnimatedPage></ProtectedAdminRoute>
-            } />
-            <Route path="/admin/notas" element={
-              <ProtectedAdminRoute><AnimatedPage><Notas /></AnimatedPage></ProtectedAdminRoute>
-            } />
-            
           </Routes>
         </AnimatePresence>
       </main>

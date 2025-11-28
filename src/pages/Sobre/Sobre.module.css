@@ -1,56 +1,93 @@
+/* ===== CONTAINER GERAL ===== */
 .sobreContainer {
   max-width: 900px;
   margin: 2rem auto;
   padding: 1.5rem;
+  color: #000;
+  line-height: 1.7;
+}
+
+/* ===== TÍTULO PRINCIPAL ===== */
+.sobreTitle {
+  font-size: 2.3rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
   text-align: center;
   color: #000;
 }
 
-.sobreTitle {
-  font-size: 2.2rem;
-  font-weight: bold;
-  margin-bottom: 1.2rem;
-  color: #000;
-}
-
+/* ===== CARD SOBRE ===== */
 .sobreCard {
-  background-color: #d9e0f8fb;
-  padding: 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  margin-bottom: 2rem;
+  background: #e7ecfb;
+  padding: 1.7rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-bottom: 2.5rem;
   text-align: left;
 }
 
 .sobreCard p {
-  margin-bottom: 1rem;
-  line-height: 1.6;
+  margin-bottom: 1.2rem;
+  font-size: 1.05rem;
   color: #000;
 }
 
+/* ===== SUBTÍTULO ===== */
 .sobreSubtitle {
-  font-size: 1.7rem;
-  margin: 1rem 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 1.8rem 0 1rem;
   color: #000;
+  text-align: left;
 }
 
+/* ===== LISTA ===== */
 .sobreList {
   list-style: none;
-  padding: 0;
-  max-width: 600px;
-  margin: auto;
+  padding-left: 0;
+  max-width: 650px;
+  margin: 0 auto 1.5rem;
   text-align: left;
-  color: #000;
 }
 
 .sobreList li {
+  font-size: 1.05rem;
   padding: 0.5rem 0;
-  font-size: 1.1rem;
+  border-left: 4px solid #4a63db;
+  padding-left: 10px;
+  background: #f5f7ff;
+  margin-bottom: 6px;
+  border-radius: 4px;
 }
 
+/* ===== TEXTO FINAL ===== */
 .sobreFinal {
   margin-top: 2rem;
-  font-size: 1.2rem;
-  line-height: 1.6;
+  font-size: 1.15rem;
+  text-align: center;
+  font-weight: 500;
   color: #000;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 600px) {
+  .sobreTitle {
+    font-size: 1.9rem;
+  }
+
+  .sobreSubtitle {
+    font-size: 1.35rem;
+  }
+
+  .sobreCard {
+    padding: 1.2rem;
+  }
+
+  .sobreList li {
+    font-size: 1rem;
+  }
+
+  .sobreFinal {
+    font-size: 1.05rem;
+  }
 }

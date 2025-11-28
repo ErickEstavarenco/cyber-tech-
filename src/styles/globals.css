@@ -5,9 +5,10 @@
   font-family: "Poppins", "Segoe UI", sans-serif;
 }
 
-html {
+a[href^="#"] {
   scroll-behavior: smooth;
 }
+
 
 /* VARIÁVEIS DE TEMA */
 :root {

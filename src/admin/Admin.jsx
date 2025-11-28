@@ -65,7 +65,7 @@ export default function Home({ username = "Alexandre", stats = {} }) {
 
           <li>
             <Link to="/admin/curtidas" data-tooltip="like" className={styles.navLink}>
-              <img src="/curti.png" alt="Blog" />
+              <img src="/curti.png" alt="curti" />
               <span className={styles.linkText}>like</span>
             </Link>
           </li>

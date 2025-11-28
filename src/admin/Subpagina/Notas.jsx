@@ -107,15 +107,12 @@ export default function Notas() {
           </li>
 
           <li>
-            <Link
-              to="/admin/comentarios"
-              data-tooltip="Comentários"
-              className={styles.navLink}
-            >
-              <img src="/curti.png" alt="Comentários" />
-              <span className={styles.linkText}>Comentários</span>
+            <Link to="/admin/curtidas" data-tooltip="like" className={styles.navLink}>
+              <img src="/curti.png" alt="curti" />
+              <span className={styles.linkText}>like</span>
             </Link>
           </li>
+          
         </ul>
       </aside>
 

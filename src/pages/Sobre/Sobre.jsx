@@ -8,36 +8,36 @@ export default function Sobre() {
 
       <div className={styles.sobreCard}>
         <p>
-          O <strong>CyberTech</strong> é uma plataforma criada para introduzir pessoas
-          ao mundo da programação de forma simples, direta e prática.
+          O <strong>CyberTech</strong> é uma plataforma criada para introduzir
+          iniciantes ao universo da programação de forma simples, objetiva e
+          totalmente prática.
         </p>
 
         <p>
-          Nosso objetivo é ajudar iniciantes a aprender lógica de programação,
-          desenvolver habilidades essenciais e se preparar para desafios e
-          oportunidades no universo da tecnologia.
+          Nosso propósito é oferecer conteúdos acessíveis que ajudem você a
+          desenvolver lógica de programação, estruturar raciocínio e evoluir seus
+          conhecimentos de maneira clara e didática.
         </p>
 
         <p>
-          Acreditamos que <strong>qualquer pessoa pode aprender programação</strong> — basta
-          ter acesso ao conteúdo certo, orientação e motivação. Por isso, criamos
-          um ambiente seguro, didático e totalmente gratuito para quem deseja
-          começar.
+          Acreditamos que <strong>qualquer pessoa pode aprender programação</strong>.
+          Por isso, criamos um ambiente seguro, gratuito e pensado para quem está
+          dando os primeiros passos no mundo da tecnologia.
         </p>
       </div>
 
-      <h2 className={styles.sobreSubtitle}>O que você encontra aqui?</h2>
+      <h2 className={styles.sobreSubtitle}>O que você encontra por aqui?</h2>
       <ul className={styles.sobreList}>
-        <li>✔ Aulas práticas de lógica e pensamento computacional</li>
-        <li>✔ Conteúdos explicados de forma simples e visual</li>
-        <li>✔ Desafios para treinar o aprendizado</li>
-        <li>✔ Um espaço para acompanhar seu progresso</li>
+        <li>✔ Conteúdos diretos e explicados de forma visual</li>
+        <li>✔ Aulas e materiais práticos sobre lógica de programação</li>
+        <li>✔ Desafios para aplicar o que você aprendeu</li>
+        <li>✔ Área personalizada para acompanhar sua evolução</li>
       </ul>
 
       <p className={styles.sobreFinal}>
-        Estamos em constante evolução, sempre adicionando novos conteúdos.
+        O CyberTech está em constante evolução, sempre recebendo novos conteúdos.
         <br />
-        <strong>Seja bem-vindo(a) ao CyberTech!</strong>
+        <strong>Ficamos felizes em ter você aqui com a gente.</strong>
       </p>
     </div>
   );

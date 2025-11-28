@@ -65,10 +65,11 @@ export default function NewBlog() {
 
           <li>
             <Link to="/admin/curtidas" data-tooltip="like" className={styles.navLink}>
-              <img src="/curti.png" alt="Blog" />
+              <img src="/curti.png" alt="curti" />
               <span className={styles.linkText}>like</span>
             </Link>
           </li>
+
         </ul>
       </aside>
 
