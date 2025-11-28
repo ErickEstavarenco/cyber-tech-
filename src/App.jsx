@@ -41,7 +41,7 @@ import Desafio2 from './pages/Desafios/Desafio2.jsx';
 import Desafio3 from './pages/Desafios/Desafio3.jsx';
 import Desafio4 from './pages/Desafios/Desafio4.jsx';
 
-// ⚠️ Novas páginas
+//  Novas páginas
 import Sobre from './pages/Sobre/Sobre.jsx';
 import Privacidade from './pages/Privacidade/Privacidade.jsx';
 
@@ -75,7 +75,7 @@ function App() {
             <Route path="/cadastro" element={<AnimatedPage><Cadastro /></AnimatedPage>} />
             <Route path="/esqueci-minha-senha" element={<AnimatedPage><EsqueciSenha /></AnimatedPage>} />
 
-            {/* ⚠️ Páginas novas (Sobre e Privacidade) */}
+            {/* Páginas novas (Sobre e Privacidade) */}
             <Route path="/sobre" element={<AnimatedPage><Sobre /></AnimatedPage>} />
             <Route path="/privacidade" element={<AnimatedPage><Privacidade /></AnimatedPage>} />
 
@@ -100,20 +100,6 @@ function App() {
             <Route path="/admin/new-blog" element={<ProtectedAdminRoute><AnimatedPage><Newblog /></AnimatedPage></ProtectedAdminRoute>} />
             <Route path="/admin/comentarios" element={<ProtectedAdminRoute><AnimatedPage><Comentarios /></AnimatedPage></ProtectedAdminRoute>} />
             <Route path="/admin/notas" element={<ProtectedAdminRoute><AnimatedPage><Notas /></AnimatedPage></ProtectedAdminRoute>} />
-
-            {/* --- Rotas Protegidas de ADMIN --- */}
-            <Route path="/admin" element={
-              <ProtectedAdminRoute><AnimatedPage><Admin /></AnimatedPage></ProtectedAdminRoute>
-            } />
-            <Route path="/admin/newblog" element={
-              <ProtectedAdminRoute><AnimatedPage><Newblog /></AnimatedPage></ProtectedAdminRoute>
-            } />
-            <Route path="/admin/comentarios" element={
-              <ProtectedAdminRoute><AnimatedPage><Comentarios /></AnimatedPage></ProtectedAdminRoute>
-            } />
-            <Route path="/admin/notas" element={
-              <ProtectedAdminRoute><AnimatedPage><Notas /></AnimatedPage></ProtectedAdminRoute>
-            } />
             
           </Routes>
         </AnimatePresence>

@@ -572,7 +572,6 @@ ul{
   /* opcional — deixa redondo, estilo avatar */
   margin-right: 8px;  /* espaço entre a imagem e o texto */
   object-fit: cover;
-  align: center;
 }
 .post-image{
    width: 100%;
@@ -582,7 +581,7 @@ ul{
 }
 
 .hero-section {
-  background: linear-gradient(to bottom, #054161, #0541617c ), url('../../public/Desing-blog.png');
+  background: linear-gradient(to bottom, #095e8b, #0541617c ), url('../../public/Desing-blog.png');
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;

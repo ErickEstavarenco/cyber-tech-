@@ -46,7 +46,7 @@
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 500;
-  color: var(--color-text-dark);
+  color: #ffffff;
 }
 
 .formGroup input {
@@ -76,6 +76,7 @@
   box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.25);
   outline: none;
 }
+
 
 .loginButton {
   width: 100%;

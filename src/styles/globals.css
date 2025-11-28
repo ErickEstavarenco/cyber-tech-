@@ -1,27 +1,37 @@
-/* ===== globals.css ===== */
+/* ============================
+        GLOBAL RESET
+============================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-  scroll-behavior: smooth;
-  color: #233568;
+  font-family: "Poppins", "Segoe UI", sans-serif;
 }
 
-/* ===== VARIÁVEIS DE TEMA ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ============================
+        VARIÁVEIS DE TEMA
+============================= */
 :root {
-  --color-primary: #0d6efd;           /* Azul padrão */
-  --color-primary-light: #3b9dff;     /* Azul claro */
-  --color-gradient-start: #F0F0EC;    /* Gradiente início (azul) */
-  --color-gradient-end: #1565c0;      /* Gradiente final (azul escuro) */
-  --color-bg-light: #f4f9ff;          /* Fundo claro */
-  --color-text-dark: #ffffff;         /* Texto principal */
-  --color-text-light: #000000;        /* Texto claro */
-  --header-height: 60px;              /* Cabeçalho maior */
+  --color-primary: #0d6efd;
+  --color-primary-light: #3b9dff;
+
+  --color-gradient-start: #f0f0ec;
+  --color-gradient-end: #1565c0;
+
+  --text-dark: #111827;   /* texto escuro */
+  --text-light: #ffffff;  /* texto claro */
+
+  --header-height: 60px;
   --color-shadow: rgba(0, 0, 0, 0.15);
 }
 
-/* ===== FUNDO GERAL ===== */
+/* ============================
+      FUNDO GERAL / LAYOUT
+============================= */
 html,
 body {
   width: 100%;
@@ -30,10 +40,10 @@ body {
 }
 
 body {
-  background:var(--color-gradient-start);
-  color: var(--color-text-dark);
-  min-height: 100vh;
+  background: var(--color-gradient-start);
+  color: var(--text-dark);
   line-height: 1.6;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -46,9 +56,11 @@ body {
   flex-direction: column;
 }
 
-/* ===== LINKS ===== */
+/* ============================
+            LINKS
+============================= */
 a {
-  color: var(--color-text-light);
+  color: var(--color-primary);
   text-decoration: none;
   transition: 0.2s;
 }
@@ -58,13 +70,15 @@ a:hover {
   text-decoration: underline;
 }
 
-/* ===== BOTÕES GLOBAIS ===== */
+/* ============================
+            BOTÕES
+============================= */
 button {
   cursor: pointer;
   border: none;
   outline: none;
   background: var(--color-primary);
-  color: var(--color-text-light);
+  color: var(--text-light);
   padding: 10px 20px;
   border-radius: 6px;
   font-weight: 500;
@@ -79,42 +93,50 @@ button:active {
   transform: scale(0.97);
 }
 
-/* ===== MAIN (Conteúdo) ===== */
+/* ============================
+        MAIN (CONTEÚDO)
+============================= */
 main {
   flex: 1;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding-top: var(--header-height);
-  padding-bottom: 0px;
 }
 
-/* ===== CONTAINER ===== */
+/* ============================
+        CONTAINER GLOBAL
+============================= */
 .container {
   padding: 1.25rem;
   border-radius: 12px;
-  background: #c0dcee;/* ===========================AQUI*=========================*/
+
+  /* Glassmorphism Moderno */
+  background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(6px);
+
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  
 }
 
-/* ===== RODAPÉ ===== */
+/* ============================
+            RODAPÉ
+============================= */
 footer {
   text-align: center;
   padding: 20px;
-  color: #ffffff;
+  color: var(--text-light);
   background: rgba(13, 110, 253, 0.2);
   backdrop-filter: blur(8px);
   font-size: 0.9rem;
   border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-/* ===== RESPONSIVIDADE ===== */
+/* ============================
+        RESPONSIVIDADE
+============================= */
 @media (max-width: 768px) {
   main {
-    padding-top: 70px; /* compensa o header maior */
-    padding-bottom: 0px;
+    padding-top: 70px;
   }
 
   .container {
