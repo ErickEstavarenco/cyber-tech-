@@ -6,45 +6,39 @@ import styles from "../Admin.module.css";
 import { db } from "../../../FirebaseConfig";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
-export default function Notas() {
-  const [notas, setNotas] = useState([]);
+export default function Curtidas() {
+  const [curtidas, setCurtidas] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [collapsed, setCollapsed] = useState(false); // controla sidebar no desktop
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // NOVO ESTADO AQUI
+  const [collapsed, setCollapsed] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
-    // Listener para redimensionamento de tela
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
-
     window.addEventListener("resize", handleResize);
 
-    // Função para buscar as notas
-    const buscarNotas = async () => {
+    const buscarCurtidas = async () => {
       try {
-        const q = query(collection(db, "pontuacoes"), orderBy("data", "desc"));
+        const q = query(collection(db, "curtidas"), orderBy("data", "desc"));
         const snapshot = await getDocs(q);
 
-        const listaNotas = snapshot.docs.map((doc) => ({
+        const listaCurtidas = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
 
-        setNotas(listaNotas);
+        setCurtidas(listaCurtidas);
       } catch (error) {
-        console.error("Erro ao buscar notas:", error);
+        console.error("Erro ao buscar curtidas:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    buscarNotas();
+    buscarCurtidas();
 
-    // Limpeza do listener ao desmontar o componente
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const formatarData = (isoString) => {
@@ -61,11 +55,9 @@ export default function Notas() {
     <div className={styles.container}>
       {/* SIDEBAR */}
       <aside
-        className={`${styles.sidebar} ${
-          collapsed ? styles.sidebarCollapsed : ""
-        }`}
+        className={`${styles.sidebar} ${collapsed ? styles.sidebarCollapsed : ""
+          }`}
       >
-        {/* Botão só existe no desktop */}
         <button
           className={styles.toggleBtn}
           onClick={() => setCollapsed((prev) => !prev)}
@@ -85,22 +77,14 @@ export default function Notas() {
           </li>
 
           <li>
-            <Link
-              to="/admin/notas"
-              data-tooltip="Notas"
-              className={styles.navLink}
-            >
+            <Link to="/admin/notas" data-tooltip="Notas" className={styles.navLink}>
               <img src="/estrela.png" alt="Notas" />
               <span className={styles.linkText}>Notas</span>
             </Link>
           </li>
 
           <li>
-            <Link
-              to="/admin/newblog"
-              data-tooltip="Blog"
-              className={styles.navLink}
-            >
+            <Link to="/admin/newblog" data-tooltip="Blog" className={styles.navLink}>
               <img src="/blog.png" alt="Blog" />
               <span className={styles.linkText}>Blog</span>
             </Link>
@@ -119,96 +103,74 @@ export default function Notas() {
         </ul>
       </aside>
 
-      {/* CONTEÚDO PRINCIPAL */}
+      {/* CONTEÚDO */}
       <main className={styles.main}>
-        <h1>Histórico de Notas</h1>
+        <h1>Histórico de Curtidas</h1>
 
         {loading ? (
-          <p>Carregando notas...</p>
-        ) : notas.length === 0 ? (
-          <p>Nenhuma nota registrada ainda.</p>
+          <p>Carregando curtidas...</p>
+        ) : curtidas.length === 0 ? (
+          <p>Nenhuma curtida registrada ainda.</p>
         ) : (
           <>
             {isMobile ? (
-              /* =======================================
-                 VISUALIZAÇÃO MOBILE (CARDS EMPILHADOS)
-                 ======================================= */
-              <div className={styles.mobileCardsContainer}> {/* Renomeado para melhor clareza */}
-                {notas.map((n) => (
-                  <div key={n.id} className={styles.notaCard}>
+              /* =======================
+                 MOBILE (CARDS)
+                 ======================= */
+              <div className={styles.mobileCardsContainer}>
+                {curtidas.map((c) => (
+                  <div key={c.id} className={styles.notaCard}>
                     <div className={styles.cardHeader}>
-                      <span className={styles.alunoNome}>
-                        {n.nome || "Aluno"}
-                      </span>
-                      <span className={styles.alunoEmail}>
-                        {n.email}
-                      </span>
-                      <span
-                        className={styles.notaScore}
-                        style={{
-                          color: n.nota / n.total >= 0.6 ? "green" : "red",
-                        }}
-                      >
-                        {n.nota} / {n.total}
-                      </span>
+                      <span className={styles.alunoNome}>{c.nome}</span>
+                      <span className={styles.alunoEmail}>{c.email}</span>
                     </div>
+
                     <div className={styles.cardDetail}>
-                      <strong>Desafio:</strong> {n.desafio}
+                      <strong>Post curtido:</strong> {c.post}
                     </div>
+
                     <div className={styles.cardDetail}>
-                      <strong>Data:</strong> {formatarData(n.data)}
+                      <strong>Data:</strong> {formatarData(c.data)}
                     </div>
                   </div>
                 ))}
               </div>
             ) : (
-              /* =======================================
-                 VISUALIZAÇÃO DESKTOP (TABELA) - ORIGINAL
-                 ======================================= */
+              /* =======================
+                 DESKTOP (TABELA)
+                 ======================= */
               <div className={styles.card} style={{ overflowX: "auto" }}>
                 <table
                   style={{
                     width: "100%",
                     borderCollapse: "collapse",
                     textAlign: "left",
-                    minWidth: "600px", /* Adicionei um min-width para desktop */
+                    minWidth: "600px",
                   }}
                 >
                   <thead>
                     <tr style={{ borderBottom: "1px solid #eee" }}>
-                      <th style={{ padding: "10px" }}>Aluno (Email)</th>
-                      <th style={{ padding: "10px" }}>Desafio</th>
-                      <th style={{ padding: "10px" }}>Nota</th>
+                      <th style={{ padding: "10px" }}>Usuário (Email)</th>
+                      <th style={{ padding: "10px" }}>Post</th>
                       <th style={{ padding: "10px" }}>Data</th>
                     </tr>
                   </thead>
 
                   <tbody>
-                    {notas.map((n) => (
-                      <tr key={n.id} style={{ borderBottom: "1px solid #f5f5f5" }}>
+                    {curtidas.map((c) => (
+                      <tr key={c.id} style={{ borderBottom: "1px solid #f5f5f5" }}>
                         <td style={{ padding: "10px" }}>
-                          <strong>{n.nome || "Aluno"}</strong>
+                          <strong>{c.nome}</strong>
                           <br />
                           <span style={{ fontSize: "0.8rem", color: "#666" }}>
-                            {n.email}
+                            {c.email}
                           </span>
                         </td>
 
-                        <td style={{ padding: "10px" }}>{n.desafio}</td>
-
-                        <td style={{ padding: "10px" }}>
-                          <span
-                            style={{
-                              fontWeight: "bold",
-                              color: n.nota / n.total >= 0.6 ? "green" : "red",
-                            }}
-                          >
-                            {n.nota} / {n.total}
-                          </span>
-                        </td>
+                        <td style={{ padding: "10px" }}>{c.post}</td>
 
                         <td style={{ padding: "10px", fontSize: "0.9rem" }}>
-                          {formatarData(n.data)}
+                          {formatarData(c.data)}
                         </td>
                       </tr>
                     ))}

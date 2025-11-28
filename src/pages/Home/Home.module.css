@@ -145,7 +145,8 @@ main {
 }
 
 .challengeCard {
-  margin-bottom: 0rem;
+  outline: 3px solid #095d8b6c;
+  outline-offset: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;

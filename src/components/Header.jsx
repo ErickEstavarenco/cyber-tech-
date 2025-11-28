@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom"; // ⬅ add useLocation
 import styles from "./Header.module.css";
 import { useAuth } from "../context/AuthContext";
 import { auth, db } from "../../FirebaseConfig"; 
 import { signOut } from "firebase/auth";
-// MUDANÇA: Importamos 'onSnapshot' em vez de 'getDoc' para atualizações em tempo real
 import { doc, onSnapshot } from "firebase/firestore"; 
 
 const getFirstName = (fullName) => {
@@ -18,6 +17,7 @@ export default function Header() {
   const [userName, setUserName] = useState(""); 
   const { currentUser } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation(); // ⬅ add
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
@@ -30,33 +30,37 @@ export default function Header() {
     }
   };
 
-  // EFEITO ATUALIZADO: Escuta em tempo real (Realtime Listener)
+  // ⬅ Função que faz o scroll quando clica no mesmo link
+  const handleNavClick = (path) => {
+    if (location.pathname === path) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   useEffect(() => {
     let unsubscribe = () => {};
 
     if (currentUser && currentUser.uid) {
       const docRef = doc(db, "users", currentUser.uid);
-      
-      // onSnapshot fica "ouvindo" o documento. 
-      // Sempre que ele mudar (cadastro, edição de perfil), esta função roda de novo.
-      unsubscribe = onSnapshot(docRef, (docSnap) => {
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          // Atualiza o estado com o nome encontrado
-          setUserName(data.name || ""); 
+      unsubscribe = onSnapshot(
+        docRef,
+        (docSnap) => {
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            setUserName(data.name || ""); 
+          }
+        },
+        (error) => {
+          console.error("Erro ao buscar nome em tempo real:", error);
         }
-      }, (error) => {
-        console.error("Erro ao buscar nome em tempo real:", error);
-      });
+      );
     } else {
       setUserName("");
     }
 
-    // Limpa a "escuta" quando o componente desmonta ou o usuário desloga
     return () => unsubscribe();
   }, [currentUser]);
 
-  // Atualiza o título da aba
   useEffect(() => {
     if (userName) {
       document.title = `CyberTech | ${getFirstName(userName)}`;
@@ -66,30 +70,38 @@ export default function Header() {
   }, [userName]);
 
   return (
-    <header className={styles.header}>
+    <header id="site-header" className={styles.header}>
       <div className={styles.logo}>
-        <Link to="/">
-          {/* Exibe o nome ou o padrão */}
+        <Link to="/" onClick={() => handleNavClick("/")}>
           {currentUser && userName ? `Olá, ${getFirstName(userName)}!` : "CyberTech"}
         </Link>
       </div>
 
       <nav className={`${styles.nav} ${menuOpen ? styles.open : ""}`}>
-        <Link to="/">Início</Link>
-        <Link to="/blog">Blog</Link>
-        <Link to="/desafios">Desafios</Link>
+        <Link to="/" onClick={() => handleNavClick("/")}>Início</Link>
+
+        <Link to="/blog" onClick={() => handleNavClick("/blog")}>Blog</Link>
+
+        <Link to="/desafios" onClick={() => handleNavClick("/desafios")}>Desafios</Link>
 
         {currentUser ? (
           <>
-            <Link to="/perfil" className={styles.profileButton}>
+            <Link 
+              to="/perfil" 
+              className={styles.profileButton}
+              onClick={() => handleNavClick("/perfil")}
+            >
               Perfil
             </Link>
+
             <button onClick={handleLogout} className={styles.logoutButton}>
               Sair
             </button>
           </>
         ) : (
-          <Link to="/login">Login</Link>
+          <Link to="/login" onClick={() => handleNavClick("/login")}>
+            Login
+          </Link>
         )}
       </nav>
 

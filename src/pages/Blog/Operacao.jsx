@@ -12,6 +12,7 @@ const Operacao = () => {
               Operadores são símbolos especiais em Python que realizam computações aritméticas ou lógicas. Vamos explorar os principais tipos.
 
             </p>
+            <br></br>
               <div class="layout-columns">
                 <div class="column-left">
                     <article >

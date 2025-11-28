@@ -1,6 +1,3 @@
-/* ============================
-        GLOBAL RESET
-============================= */
 * {
   margin: 0;
   padding: 0;
@@ -12,9 +9,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/* ============================
-        VARIÁVEIS DE TEMA
-============================= */
+/* VARIÁVEIS DE TEMA */
 :root {
   --color-primary: #0d6efd;
   --color-primary-light: #3b9dff;
@@ -29,9 +24,7 @@ html {
   --color-shadow: rgba(0, 0, 0, 0.15);
 }
 
-/* ============================
-      FUNDO GERAL / LAYOUT
-============================= */
+/* FUNDO GERAL / LAYOUT */
 html,
 body {
   width: 100%;
@@ -56,9 +49,7 @@ body {
   flex-direction: column;
 }
 
-/* ============================
-            LINKS
-============================= */
+/* LINKS */
 a {
   color: var(--color-primary);
   text-decoration: none;
@@ -70,9 +61,7 @@ a:hover {
   text-decoration: underline;
 }
 
-/* ============================
-            BOTÕES
-============================= */
+/* =BOTÕES */
 button {
   cursor: pointer;
   border: none;
@@ -93,9 +82,7 @@ button:active {
   transform: scale(0.97);
 }
 
-/* ============================
-        MAIN (CONTEÚDO)
-============================= */
+/* MAIN (CONTEÚDO) */
 main {
   flex: 1;
   width: 100%;
@@ -104,9 +91,7 @@ main {
   padding-top: var(--header-height);
 }
 
-/* ============================
-        CONTAINER GLOBAL
-============================= */
+/* CONTAINER GLOBAL */
 .container {
   padding: 1.25rem;
   border-radius: 12px;
@@ -118,9 +103,7 @@ main {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
-/* ============================
-            RODAPÉ
-============================= */
+/* RODAPÉ */
 footer {
   text-align: center;
   padding: 20px;
@@ -131,9 +114,7 @@ footer {
   border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-/* ============================
-        RESPONSIVIDADE
-============================= */
+/* RESPONSIVIDADE */
 @media (max-width: 768px) {
   main {
     padding-top: 70px;

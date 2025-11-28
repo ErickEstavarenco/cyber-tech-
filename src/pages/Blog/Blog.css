@@ -572,6 +572,7 @@ ul{
   /* opcional — deixa redondo, estilo avatar */
   margin-right: 8px;  /* espaço entre a imagem e o texto */
   object-fit: cover;
+  align: center;
 }
 .post-image{
    width: 100%;
@@ -580,13 +581,28 @@ ul{
   display: block;
 }
 
+/* Remove qualquer margem global */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Hero ajustado */
 .hero-section {
-  background: linear-gradient(to bottom, #095e8b, #0541617c ), url('../../public/Desing-blog.png');
-  background-position: center center;
+  width: 100vw;                      /* garante largura total da tela */
+  height: 250px;
+  margin: 0 !important;              /* remove qualquer margem */
+  padding: 0;
+
+  background: linear-gradient(to bottom, #095e8b, #0541617c),
+              url('../../public/Desing-blog.png');
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  width: 100%;
-  height: 250px;
+
+  display: block;
 }
+
+
 
 

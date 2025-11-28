@@ -18,6 +18,7 @@ import Variavel from "./pages/Blog/Variavel.jsx";
 import Condicionais from "./pages/Blog/Condicionais.jsx";
 import Funcoes from "./pages/Blog/Funcoes.jsx";
 import Operacao from "./pages/Blog/Operacao.jsx";
+import Tipo from"./pages/Blog/Tipo.jsx"
 
 // Autenticação
 import Login from './pages/Login/Login.jsx';
@@ -28,7 +29,7 @@ import Perfil from './pages/Perfil/Perfil.jsx';
 // Admin
 import Admin from './admin/Admin.jsx';
 import Newblog from './admin/Subpagina/Newblog.jsx';
-import Comentarios from './admin/Subpagina/Comentarios.jsx';
+import Comentarios from './admin/Subpagina/Curtidas.jsx';
 import Notas from './admin/Subpagina/Notas.jsx';
 
 // Rotas protegidas
@@ -86,6 +87,7 @@ function App() {
             <Route path="/condicionais" element={<ProtectedRoute><AnimatedPage><Condicionais /></AnimatedPage></ProtectedRoute>} />
             <Route path="/funcoes" element={<ProtectedRoute><AnimatedPage><Funcoes /></AnimatedPage></ProtectedRoute>} />
             <Route path="/operacao" element={<ProtectedRoute><AnimatedPage><Operacao /></AnimatedPage></ProtectedRoute>} />
+            <Route path="/tipo" element={<ProtectedRoute><AnimatedPage><Tipo /></AnimatedPage></ProtectedRoute>} />
 
             <Route path="/desafios" element={<ProtectedRoute><AnimatedPage><ChallengeList /></AnimatedPage></ProtectedRoute>} />
             <Route path="/desafios/desafio1" element={<ProtectedRoute><AnimatedPage><Desafio1 /></AnimatedPage></ProtectedRoute>} />
@@ -98,14 +100,28 @@ function App() {
             {/* Admin */}
             <Route path="/admin" element={<ProtectedAdminRoute><AnimatedPage><Admin /></AnimatedPage></ProtectedAdminRoute>} />
             <Route path="/admin/new-blog" element={<ProtectedAdminRoute><AnimatedPage><Newblog /></AnimatedPage></ProtectedAdminRoute>} />
-            <Route path="/admin/comentarios" element={<ProtectedAdminRoute><AnimatedPage><Comentarios /></AnimatedPage></ProtectedAdminRoute>} />
+            <Route path="/admin/curtidas" element={<ProtectedAdminRoute><AnimatedPage><Comentarios /></AnimatedPage></ProtectedAdminRoute>} />
             <Route path="/admin/notas" element={<ProtectedAdminRoute><AnimatedPage><Notas /></AnimatedPage></ProtectedAdminRoute>} />
+
+            {/* --- Rotas Protegidas de ADMIN --- */}
+            <Route path="/admin" element={
+              <ProtectedAdminRoute><AnimatedPage><Admin /></AnimatedPage></ProtectedAdminRoute>
+            } />
+            <Route path="/admin/newblog" element={
+              <ProtectedAdminRoute><AnimatedPage><Newblog /></AnimatedPage></ProtectedAdminRoute>
+            } />
+            <Route path="/admin/comentarios" element={
+              <ProtectedAdminRoute><AnimatedPage><Comentarios /></AnimatedPage></ProtectedAdminRoute>
+            } />
+            <Route path="/admin/notas" element={
+              <ProtectedAdminRoute><AnimatedPage><Notas /></AnimatedPage></ProtectedAdminRoute>
+            } />
             
           </Routes>
         </AnimatePresence>
       </main>
 
-      <Footer />
+      <Footer/>
     </div>
   );
 }

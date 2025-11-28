@@ -26,7 +26,7 @@ export default function NewBlog() {
 
   return (
     <div className={styles.container}>
-      
+
       {/* SIDEBAR — mesma lógica das outras telas */}
       <aside className={`${styles.sidebar} ${collapsed ? styles.sidebarCollapsed : ""}`}>
 
@@ -64,9 +64,9 @@ export default function NewBlog() {
           </li>
 
           <li>
-            <Link to="/admin/comentarios" data-tooltip="Comentários" className={styles.navLink}>
-              <img src="/comentarios.png" alt="Comentários" />
-              <span className={styles.linkText}>Comentários</span>
+            <Link to="/admin/curtidas" data-tooltip="like" className={styles.navLink}>
+              <img src="/curti.png" alt="Blog" />
+              <span className={styles.linkText}>like</span>
             </Link>
           </li>
         </ul>
