@@ -31,6 +31,20 @@ function Blog() {
         </div>
       </div>
     </Link>
+     <div className="post-feedback">
+            {/* O atributo data-post-id é útil para o JavaScript */}
+            <button 
+                className="like-btn" 
+                data-post-id="123" 
+                //onClick={handleLikeClick} 
+                aria-label="Curtir esta postagem"
+            >
+                {/* Ícone de coração (preenchido se estiver curtido, vazado se não) */}
+                <span className="heart-icon">❤️</span> 
+                
+               
+            </button>
+        </div>
   </div>
   
    <div className="post-card-alg">
@@ -51,6 +65,20 @@ function Blog() {
         </div>
       </div>
     </Link>
+     <div className="post-feedback">
+            {/* O atributo data-post-id é útil para o JavaScript */}
+            <button 
+                className="like-btn" 
+                data-post-id="123" 
+                //onClick={handleLikeClick} 
+                aria-label="Curtir esta postagem"
+            >
+                {/* Ícone de coração (preenchido se estiver curtido, vazado se não) */}
+                <span className="heart-icon">❤️</span> 
+                
+               
+            </button>
+        </div>
   </div>
          
          <div className="post-card-alg">
@@ -71,6 +99,20 @@ function Blog() {
         </div>
       </div>
     </Link>
+     <div className="post-feedback">
+            {/* O atributo data-post-id é útil para o JavaScript */}
+            <button 
+                className="like-btn" 
+                data-post-id="123" 
+                //onClick={handleLikeClick} 
+                aria-label="Curtir esta postagem"
+            >
+                {/* Ícone de coração (preenchido se estiver curtido, vazado se não) */}
+                <span className="heart-icon">❤️</span> 
+                
+               
+            </button>
+        </div>
   </div>
         <div className="post-card-alg">
     <Link to="/condicionais" className="read-more-link">
@@ -90,6 +132,20 @@ function Blog() {
         </div>
       </div>
     </Link>
+     <div className="post-feedback">
+            {/* O atributo data-post-id é útil para o JavaScript */}
+            <button 
+                className="like-btn" 
+                data-post-id="123" 
+                //onClick={handleLikeClick} 
+                aria-label="Curtir esta postagem"
+            >
+                {/* Ícone de coração (preenchido se estiver curtido, vazado se não) */}
+                <span className="heart-icon">❤️</span> 
+                
+               
+            </button>
+        </div>
   </div>
             <div className="post-card-alg">
     <Link to="/funcoes" className="read-more-link">
@@ -109,6 +165,20 @@ function Blog() {
         </div>
       </div>
     </Link>
+     <div className="post-feedback">
+            {/* O atributo data-post-id é útil para o JavaScript */}
+            <button 
+                className="like-btn" 
+                data-post-id="123" 
+                //onClick={handleLikeClick} 
+                aria-label="Curtir esta postagem"
+            >
+                {/* Ícone de coração (preenchido se estiver curtido, vazado se não) */}
+                <span className="heart-icon">❤️</span> 
+                
+               
+            </button>
+        </div>
   </div>
 
             <div className="post-card-alg">
@@ -129,6 +199,20 @@ function Blog() {
         </div>
       </div>
     </Link>
+     <div className="post-feedback">
+            {/* O atributo data-post-id é útil para o JavaScript */}
+            <button 
+                className="like-btn" 
+                data-post-id="123" 
+                //onClick={handleLikeClick} 
+                aria-label="Curtir esta postagem"
+            >
+                {/* Ícone de coração (preenchido se estiver curtido, vazado se não) */}
+                <span className="heart-icon">❤️</span> 
+                
+               
+            </button>
+        </div>
   </div>
 
 

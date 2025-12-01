@@ -104,3 +104,33 @@ j.btn-ver-mais {
   from { opacity: 0; transform: translateY(-5px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* Container para os botões de feedback */
+.post-feedback {
+    display: flex; /* Alinha os botões lado a lado */
+    gap: 10px; /* Espaço entre os botões */
+    margin-top: 10px; /* Espaço acima dos botões */
+    padding-top: 5px;
+    border-top: 1px solid #eee; /* Linha divisória sutil */
+}
+
+/* Estilo base para os botões de like/dislike */
+.like-btn
+ {
+    background-color: #ebeff3;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+/* Efeito ao passar o mouse */
+.like-btn:hover{
+    background-color: #233568;
+}
+
+
+
