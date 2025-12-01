@@ -18,8 +18,10 @@ a[href^="#"] {
   --color-gradient-start: #f0f0ec;
   --color-gradient-end: #1565c0;
 
-  --text-dark: #111827;   /* texto escuro */
-  --text-light: #ffffff;  /* texto claro */
+  --text-dark: #111827;
+  /* texto escuro */
+  --text-light: #ffffff;
+  /* texto claro */
 
   --header-height: 60px;
   --color-shadow: rgba(0, 0, 0, 0.15);
@@ -84,19 +86,47 @@ button:active {
 }
 
 /* MAIN (CONTEÚDO) */
-main {
+/*main {
   flex: 1;
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0 auto;    
   padding-top: var(--header-height);
+  padding-bottom: 40px;
+}*/
+/* Regras gerais para a tag main (preenchimento do header, etc) */
+main {
+  flex: 1;
+  width: 100%;
+  padding-top: var(--header-height);
+  padding-bottom: 0px;
+}
+
+/*  CONFIGURAÇÃO PARA PÁGINAS PÚBLICAS (Home, Login, Blog...)  */
+.public-main {
+   flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;    
+  padding-top: var(--header-height);
+  padding-bottom: 10px;     
+}
+
+/*  CONFIGURAÇÃO PARA O ADMIN  */
+.admin-main {
+  flex: 1;
+  padding: 0px;
+  width: 100%;
+  transition: padding-left var(--transition-speed) var(--transition-ease);
+  box-sizing: border-box;
+  margin: 0 auto;     
 }
 
 /* CONTAINER GLOBAL */
 .container {
   padding: 1.25rem;
   border-radius: 12px;
-
+  margin: 0 90px;
   /* Glassmorphism Moderno */
   background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(6px);

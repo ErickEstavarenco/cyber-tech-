@@ -73,42 +73,7 @@ export default function Home({ username = "Alexandre", stats = {} }) {
         </ul>
       </aside>
 
-      <main className={styles.main}>
-        <h1>
-          Bem-vindo, <span>{username}!</span>
-        </h1>
-
-        <div className={styles.cards}>
-          <div className={styles.card}>
-            <h3>Gestão de Notas</h3>
-            <p>
-              Média geral: <strong>{media}</strong>
-            </p>
-            <p>Últimas notas submetidas hoje.</p>
-            <button onClick={gerirNotas}>Gerir Notas</button>
-          </div>
-
-          <div className={styles.card}>
-            <h3>Gestão de Blog</h3>
-            <p>
-              Total de <strong>{posts} posts</strong>
-            </p>
-            <p>{drafts} rascunhos por publicar.</p>
-            <button onClick={gerirBlog}>Gerir Blog</button>
-          </div>
-
-          <div className={styles.card}>
-            <h3>Moderação de Comentários</h3>
-            <p>
-              <strong>{pendingComments}</strong> comentários pendentes
-            </p>
-            <p className={styles.warning}>Moderação necessária.</p>
-            <button className={styles.red} onClick={moderar}>
-              Moderar
-            </button>
-          </div>
-        </div>
-      </main>
+      
     </div>
   );
 }

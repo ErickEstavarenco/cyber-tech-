@@ -111,9 +111,8 @@ export default function Curtidas() {
         ) : (
           <>
             {isMobile ? (
-              /* =======================
-                 MOBILE (CARDS)
-                 ======================= */
+              /* MOBILE (CARDS)*/
+                  
               <div className={styles.mobileCardsContainer}>
                 {curtidas.map((c) => (
                   <div key={c.id} className={styles.notaCard}>
@@ -133,9 +132,8 @@ export default function Curtidas() {
                 ))}
               </div>
             ) : (
-              /* =======================
-                 DESKTOP (TABELA)
-                 ======================= */
+              /*DESKTOP (TABELA)*/
+                  
               <div className={styles.card} style={{ overflowX: "auto" }}>
                 <table
                   style={{

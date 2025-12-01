@@ -9,18 +9,16 @@ import { collection, getDocs, orderBy, query } from "firebase/firestore";
 export default function Notas() {
   const [notas, setNotas] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [collapsed, setCollapsed] = useState(false); // controla sidebar no desktop
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // NOVO ESTADO AQUI
+  const [collapsed, setCollapsed] = useState(false); 
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); 
 
   useEffect(() => {
-    // Listener para redimensionamento de tela
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
 
     window.addEventListener("resize", handleResize);
 
-    // Função para buscar as notas
     const buscarNotas = async () => {
       try {
         const q = query(collection(db, "pontuacoes"), orderBy("data", "desc"));
@@ -41,7 +39,6 @@ export default function Notas() {
 
     buscarNotas();
 
-    // Limpeza do listener ao desmontar o componente
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -65,7 +62,6 @@ export default function Notas() {
           collapsed ? styles.sidebarCollapsed : ""
         }`}
       >
-        {/* Botão só existe no desktop */}
         <button
           className={styles.toggleBtn}
           onClick={() => setCollapsed((prev) => !prev)}
@@ -127,10 +123,7 @@ export default function Notas() {
         ) : (
           <>
             {isMobile ? (
-              /* =======================================
-                 VISUALIZAÇÃO MOBILE (CARDS EMPILHADOS)
-                 ======================================= */
-              <div className={styles.mobileCardsContainer}> {/* Renomeado para melhor clareza */}
+              <div className={styles.mobileCardsContainer}> 
                 {notas.map((n) => (
                   <div key={n.id} className={styles.notaCard}>
                     <div className={styles.cardHeader}>
@@ -159,16 +152,14 @@ export default function Notas() {
                 ))}
               </div>
             ) : (
-              /* =======================================
-                 VISUALIZAÇÃO DESKTOP (TABELA) - ORIGINAL
-                 ======================================= */
+             
               <div className={styles.card} style={{ overflowX: "auto" }}>
                 <table
                   style={{
                     width: "100%",
                     borderCollapse: "collapse",
                     textAlign: "left",
-                    minWidth: "600px", /* Adicionei um min-width para desktop */
+                    minWidth: "600px", 
                   }}
                 >
                   <thead>

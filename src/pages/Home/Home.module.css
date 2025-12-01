@@ -16,14 +16,7 @@
   padding-bottom: 4rem;
 }
 
-main {
-  flex: 1;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-top: 65px;
-  padding-bottom: 0px;
-}
+
 
 /* ---------- Seção Hero ---------- */
 .heroSection {

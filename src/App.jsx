@@ -32,6 +32,7 @@ import Perfil from './pages/Perfil/Perfil.jsx';
 // Admin
 import Admin from './admin/Admin.jsx';
 import Newblog from './admin/Subpagina/Newblog.jsx';
+
 import Comentarios from './admin/Subpagina/Curtidas.jsx';
 import Notas from './admin/Subpagina/Notas.jsx';
 
@@ -65,11 +66,12 @@ function App() {
     </motion.div>
   );
 
+  const isAdminRoute = location.pathname.startsWith('/admin');
+
   return (
     <div className="app-layout">
       <Header />
 
-      {/* Scroll para o topo ao trocar de página */}
       <ScrollToTop />
 
       <main>
@@ -106,6 +108,13 @@ function App() {
             <Route path="/admin/curtidas" element={<ProtectedAdminRoute><AnimatedPage><Comentarios /></AnimatedPage></ProtectedAdminRoute>} />
             <Route path="/admin/notas" element={<ProtectedAdminRoute><AnimatedPage><Notas /></AnimatedPage></ProtectedAdminRoute>} />
 
+          </Routes>
+        </AnimatePresence>
+      </main>
+      <main className={isAdminRoute ? 'admin-main' : 'public-main'}>
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+             {/* ... suas rotas ... */}
           </Routes>
         </AnimatePresence>
       </main>

@@ -8,7 +8,7 @@ export default function NewBlog() {
   const [descricao, setDescricao] = useState("");
   const [imagens, setImagens] = useState([]);
 
-  const [collapsed, setCollapsed] = useState(false); // mesmo padrão das outras páginas
+  const [collapsed, setCollapsed] = useState(false); 
 
   function handleUpload(e) {
     setImagens([...e.target.files]);
@@ -27,10 +27,9 @@ export default function NewBlog() {
   return (
     <div className={styles.container}>
 
-      {/* SIDEBAR — mesma lógica das outras telas */}
+      {/* SIDEBAR*/}
       <aside className={`${styles.sidebar} ${collapsed ? styles.sidebarCollapsed : ""}`}>
 
-        {/* Botão hambúrguer — SOMENTE EM TELAS GRANDES */}
         <button
           className={styles.toggleBtn}
           onClick={() => setCollapsed(prev => !prev)}

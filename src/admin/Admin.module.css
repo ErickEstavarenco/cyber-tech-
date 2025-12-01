@@ -8,66 +8,59 @@
   --transition-speed: 260ms;
   --transition-ease: cubic-bezier(.2, .9, .3, 1);
 
-  /* Cores */
+  /*Color*/
   --color-dark-bg: #000000;
   --color-text-light: #e6e7ea;
-  --color-text-dark: #333333; /* Adicionado para clareza */
-  --color-text-muted: #666666; /* Adicionado para clareza */
-  --color-primary-blue: #4a82f3; /* Cor primária do botão */
-  --color-primary-hover: #3a71e2; /* Cor hover do botão */
+  --color-text-dark: #333333;
+  --color-text-muted: #666666;
+  --color-primary-blue: #4a82f3;
+  --color-primary-hover: #3a71e2;
   --color-text-warning: #ff4757;
-  --color-light-bg: #f5f5f5; /* Cor de fundo claro (para linhas da tabela) */
-  --color-primary-light: #bcd9ff; /* Cor clara do gradiente */
-  --color-gradient-start: #d6e7ff; /* Cor inicial do gradiente */
+  --color-light-bg: #f5f5f5;
+  --color-primary-light: #bcd9ff;
+  --color-gradient-start: #d6e7ff;
 }
 
-/* Reset Básico */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   scroll-behavior: smooth;
-  /* Define a cor de texto padrão para o corpo (fundo escuro) */
   color: #ffffff;
 }
 
-/* Sobrescrita de Cor para Conteúdo Claro */
-p, strong, label, th, td {
-  color: var(--color-dark-bg); /* Garante que o conteúdo principal seja preto/escuro */
+p,
+strong,
+label,
+th,
+td {
+  color: var(--color-dark-bg);
 }
 
 /* LAYOUT PRINCIPAL */
 .container {
   display: flex;
   min-height: 100vh;
-  /* Usando variáveis para o gradiente */
   background: linear-gradient(135deg, var(--color-gradient-start), var(--color-primary-light));
   font-family: 'Inter', sans-serif;
 }
 
-/* ==========================================================
-   ➡️ CONTEÚDO PRINCIPAL (MAIN)
-   ========================================================== */
-.main {
-  flex: 1;
-  padding: 20px; /* Aumentei um pouco o padding para melhor espaçamento */
-  transition: padding-left var(--transition-speed) var(--transition-ease);
-  box-sizing: border-box;
-}
+/* CONTEÚDO PRINCIPAL (MAIN)*/
+
 
 .main h1 {
   margin-bottom: 24px;
-  font-size: 2rem; /* Tamanho mais definido */
-  color: var(--color-dark-bg); /* Garantindo a cor */
+  font-size: 2rem;
+  color: var(--color-dark-bg);
 }
 
-/* Removido o seletor 'h1 span' pois não é padrão e não está no seu React */
+h1,p{
+  margin: 20px;
+}
 
 
-/* ==========================================================
-   🔗 SIDEBAR — DESKTOP (PADRÃO ABERTO)
-   ========================================================== */
+/* SIDEBAR — DESKTOP (PADRÃO ABERTO) */
 .sidebar {
   width: var(--sidebar-width-open);
   min-height: 100vh;
@@ -78,10 +71,9 @@ p, strong, label, th, td {
   gap: 18px;
   padding: 18px;
   box-shadow: 4px 0 18px rgba(0, 0, 0, 0.25);
-  /* Usando uma cor mais suave para a borda */
   border-right: 1px solid rgba(255, 255, 255, 0.05);
   transition: width var(--transition-speed) var(--transition-ease),
-              padding var(--transition-speed) var(--transition-ease);
+    padding var(--transition-speed) var(--transition-ease);
   overflow: hidden;
   white-space: nowrap;
   box-sizing: border-box;
@@ -109,7 +101,6 @@ p, strong, label, th, td {
 .toggleBtn img {
   width: 22px;
   height: 22px;
-  /* Filter simplificado e padronizado */
 }
 
 .title {
@@ -142,7 +133,7 @@ p, strong, label, th, td {
 }
 
 .navLink:hover {
-  background: #27282f; /* Cor de hover ligeiramente mais clara */
+  background: #27282f;
   color: #fff;
 }
 
@@ -150,7 +141,7 @@ p, strong, label, th, td {
   width: 22px;
   height: 22px;
   flex-shrink: 0;
-  filter: invert(1); /* Filter simplificado e padronizado */
+  filter: invert(1);
 }
 
 
@@ -161,11 +152,8 @@ p, strong, label, th, td {
   transition: opacity 220ms var(--transition-ease), transform 220ms var(--transition-ease);
 }
 
-/* ==========================================================
-   ➖ SIDE BAR COLAPSADA (DESKTOP)
-   ========================================================== */
+/* SIDE BAR COLAPSADA (DESKTOP) */
 .sidebarCollapsed {
-  /* Mantido o seu ajuste via !important, mas idealmente deve ser via CSS specificity */
   width: var(--sidebar-width-collapsed) !important;
   padding-left: 10px !important;
   padding-right: 10px !important;
@@ -193,14 +181,13 @@ p, strong, label, th, td {
   padding: 10px;
 }
 
-/* Tooltip quando colapsado */
 .sidebarCollapsed .navLink:hover::after {
   content: attr(data-tooltip);
   position: absolute;
   left: calc(100% + 14px);
   top: 50%;
   transform: translateY(-50%);
-  background: var(--color-dark-bg); /* Usando variável */
+  background: var(--color-dark-bg);
   color: #fff;
   padding: 7px 12px;
   border-radius: 8px;
@@ -211,9 +198,7 @@ p, strong, label, th, td {
   opacity: 1;
 }
 
-/* ==========================================================
-   ✏️ FORMULÁRIO — NEWBLOG
-   ========================================================== */
+/* FORMULÁRIO — NEWBLOG */
 
 .card label {
   font-size: 0.95rem;
@@ -251,7 +236,6 @@ p, strong, label, th, td {
   line-height: 1.5;
 }
 
-/* Input de arquivo */
 .inputFile {
   padding: 12px;
   cursor: pointer;
@@ -262,7 +246,6 @@ p, strong, label, th, td {
   border-color: #b6b6b6;
 }
 
-/* Botão salvar */
 .notaBtn {
   padding: 12px 18px;
   margin-top: 8px;
@@ -307,11 +290,8 @@ p, strong, label, th, td {
   }
 }
 
-/* ==========================================================
-   📦 CARTÕES E COMPONENTES DE CONTEÚDO
-   ========================================================== */
+/* CARTOES E COMPONENTES DE CONTEUDO */
 .cards {
-  /* Renomeado para 'cards-grid' para maior clareza de propósito */
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
@@ -320,20 +300,20 @@ p, strong, label, th, td {
 .card {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 12px;
-  padding: 20px; /* Aumentei o padding interno */
+  padding: 20px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
+  margin: 20px;
 }
 
 .card h3 {
   margin-top: 0;
   font-size: 1.35rem;
   color: var(--color-dark-bg);
-  margin-bottom: 15px; /* Adicionado margem inferior para separar do conteúdo */
+  margin-bottom: 15px;
 }
 
-/* Estilos de Botão Comum */
 .card button {
   margin-top: auto;
   padding: 10px 16px;
@@ -354,7 +334,6 @@ p, strong, label, th, td {
   transform: translateY(-1px);
 }
 
-/* Modificadores de Botão */
 .red {
   background: var(--color-text-warning) !important;
 }
@@ -368,14 +347,12 @@ p, strong, label, th, td {
   font-weight: 600;
 }
 
-/* ==========================================================
-   📱 AJUSTES MOBILE (CARDS DE NOTAS)
-   ========================================================== */
+/* AJUSTES MOBILE (CARDS DE NOTAS) */
 .mobileCardsContainer {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  padding: 0; /* Removido padding, já que o main tem 20px, mas mantive se for necessário um ajuste fino */
+  padding: 0;
 }
 
 .notaCard {
@@ -391,7 +368,7 @@ p, strong, label, th, td {
 .notaCard .cardHeader {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start; /* Alinhamento superior para multiline */
+  align-items: flex-start;
   flex-wrap: wrap;
   padding-bottom: 8px;
   border-bottom: 1px solid #eee;
@@ -408,7 +385,7 @@ p, strong, label, th, td {
 
 .notaCard .alunoEmail {
   font-size: 0.85em;
-  color: var(--color-text-muted); /* Usando variável */
+  color: var(--color-text-muted);
   word-break: break-all;
   flex-grow: 1;
   margin-right: 10px;
@@ -417,12 +394,11 @@ p, strong, label, th, td {
 .notaCard .notaScore {
   font-weight: bold;
   font-size: 1.1em;
-  /* Cor definida inline no React */
 }
 
 .notaCard .cardDetail {
   font-size: 0.9em;
-  color: var(--color-text-dark); /* Usando variável */
+  color: var(--color-text-dark);
 }
 
 .notaCard .cardDetail strong {
@@ -430,9 +406,7 @@ p, strong, label, th, td {
   margin-right: 5px;
 }
 
-/* ==========================================================
-   🖥️ MEDIA QUERIES
-   ========================================================== */
+/*  MEDIA QUERI */
 
 /* DESKTOP LARGO (Aumento da Sidebar) */
 @media (min-width: 1024px) {
@@ -444,21 +418,17 @@ p, strong, label, th, td {
 /* MOBILE (Abaixo de 768px) */
 @media (max-width: 768px) {
 
-  /* Ajustes de Layout Principal */
   .main {
-    padding: 15px; /* Ajustando padding para mobile */
+    padding: 15px;
   }
 
-  /* SIDEBAR MOBILE (Colapsada) */
   .sidebar {
-    /* Mantido o seu ajuste para não ficar muito curto (54px) */
     width: 54px !important;
     padding-left: 5px !important;
     padding-right: 5px !important;
     align-items: center;
   }
 
-  /* Elementos escondidos no mobile */
   .toggleBtn,
   .sidebar .title,
   .sidebar .linkText {
@@ -469,14 +439,12 @@ p, strong, label, th, td {
     overflow: hidden;
     pointer-events: none;
   }
-  
-  /* Ajuste no NavLink */
+
   .sidebar .navLink {
     justify-content: center;
     padding: 12px 0;
   }
 
-  /* Tooltip Mobile (mantido) */
   .sidebar .navLink:hover::after {
     content: attr(data-tooltip);
     opacity: 1;
