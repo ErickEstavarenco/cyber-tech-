@@ -1,11 +1,11 @@
-import React from 'react'; 
+import React from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from "framer-motion";
-import './styles/globals.css'; 
+import './styles/globals.css';
 
 // Layout
-import Header from './components/Header.jsx'; 
-import Footer from './components/Footer.jsx'; 
+import Header from './components/Header.jsx';
+import Footer from './components/Footer.jsx';
 
 // Scroll Reset
 import ScrollToTop from "./components/ScrollToTop.jsx";
@@ -22,6 +22,7 @@ import Condicionais from "./pages/Blog/Condicionais.jsx";
 import Funcoes from "./pages/Blog/Funcoes.jsx";
 import Operacao from "./pages/Blog/Operacao.jsx";
 import Tipo from "./pages/Blog/Tipo.jsx"
+const PostDinamico = React.lazy(() => import("./pages/Blog/PostDinamico"));
 
 // Autenticação
 import Login from './pages/Login/Login.jsx';
@@ -37,8 +38,8 @@ import Comentarios from './admin/Subpagina/Curtidas.jsx';
 import Notas from './admin/Subpagina/Notas.jsx';
 
 // Rotas protegidas
-import ProtectedRoute from './context/ProtectedRoute.jsx'; 
-import ProtectedAdminRoute from './context/ProtectedAdminRoute.jsx'; 
+import ProtectedRoute from './context/ProtectedRoute.jsx';
+import ProtectedAdminRoute from './context/ProtectedAdminRoute.jsx';
 
 // Desafios
 import Desafio1 from './pages/Desafios/Desafio1.jsx';
@@ -94,6 +95,11 @@ function App() {
             <Route path="/funcoes" element={<ProtectedRoute><AnimatedPage><Funcoes /></AnimatedPage></ProtectedRoute>} />
             <Route path="/operacao" element={<ProtectedRoute><AnimatedPage><Operacao /></AnimatedPage></ProtectedRoute>} />
             <Route path="/tipo" element={<ProtectedRoute><AnimatedPage><Tipo /></AnimatedPage></ProtectedRoute>} />
+            
+            {/* Rota para posts dinâmicos */}
+            <Route path="/blog/post/:id" element={
+              <ProtectedRoute><AnimatedPage><PostDinamico /></AnimatedPage></ProtectedRoute>
+            } />
 
             <Route path="/desafios" element={<ProtectedRoute><AnimatedPage><ChallengeList /></AnimatedPage></ProtectedRoute>} />
             <Route path="/desafios/desafio1" element={<ProtectedRoute><AnimatedPage><Desafio1 /></AnimatedPage></ProtectedRoute>} />
@@ -104,7 +110,7 @@ function App() {
             <Route path="/perfil" element={<ProtectedRoute><AnimatedPage><Perfil /></AnimatedPage></ProtectedRoute>} />
 
             <Route path="/admin" element={<ProtectedAdminRoute><AnimatedPage><Admin /></AnimatedPage></ProtectedAdminRoute>} />
-            <Route path="/admin/new-blog" element={<ProtectedAdminRoute><AnimatedPage><Newblog /></AnimatedPage></ProtectedAdminRoute>} />
+            <Route path="/admin/newblog" element={<ProtectedAdminRoute><AnimatedPage><Newblog /></AnimatedPage></ProtectedAdminRoute>} />
             <Route path="/admin/curtidas" element={<ProtectedAdminRoute><AnimatedPage><Comentarios /></AnimatedPage></ProtectedAdminRoute>} />
             <Route path="/admin/notas" element={<ProtectedAdminRoute><AnimatedPage><Notas /></AnimatedPage></ProtectedAdminRoute>} />
 
@@ -114,12 +120,12 @@ function App() {
       <main className={isAdminRoute ? 'admin-main' : 'public-main'}>
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
-             {/* ... suas rotas ... */}
+            {/* ... suas rotas ... */}
           </Routes>
         </AnimatePresence>
       </main>
 
-      <Footer/>
+      <Footer />
     </div>
   );
 }
