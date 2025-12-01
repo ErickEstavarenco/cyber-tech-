@@ -13,7 +13,7 @@
 .profileBox {
     width: 100%;
     max-width: 650px; 
-    background-color: #095e8b;
+    background-color: #c0dcee;
     border: 1px solid #ccc;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
@@ -31,7 +31,7 @@
     margin-bottom: 5px;
     font-size: 1.5em;
     font-weight: 400;
-    color: #ffffff;
+    color: #000000;
 }
 
 .tabs {
@@ -42,8 +42,8 @@
 .activeTab {
     padding: 8px 0;
     font-size: 0.9em;
-    border-bottom: 2px solid #ffffff; /* Cor da aba ativa */
-    color: #ffffff;
+    border-bottom: 2px solid #000000; /* Cor da aba ativa */
+    color: #000000;
     font-weight: 500;
 }
 
@@ -69,7 +69,7 @@
 
 /* Estilo para o campo de Login desabilitado */
 .loginInput {
-    background-color: #f7f7f7;
+    background-color: #ffffff;
     color: #095e8b;
     cursor: default;
 }
@@ -91,7 +91,7 @@
 
 .inputGroup label {
     font-size: 0.8em;
-    color: #fffdfd;
+    color: #000000;
     margin-bottom: 4px;
 }
 
