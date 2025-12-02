@@ -20,7 +20,8 @@ export default function Curtidas() {
 
     const buscarCurtidas = async () => {
       try {
-        const q = query(collection(db, "curtidas"), orderBy("data", "desc"));
+        // Busca na coleção 'likes' criada pelo Blog.jsx
+        const q = query(collection(db, "likes"), orderBy("data", "desc"));
         const snapshot = await getDocs(q);
 
         const listaCurtidas = snapshot.docs.map((doc) => ({
@@ -54,10 +55,7 @@ export default function Curtidas() {
   return (
     <div className={styles.container}>
       {/* SIDEBAR */}
-      <aside
-        className={`${styles.sidebar} ${collapsed ? styles.sidebarCollapsed : ""
-          }`}
-      >
+      <aside className={`${styles.sidebar} ${collapsed ? styles.sidebarCollapsed : ""}`}>
         <button
           className={styles.toggleBtn}
           onClick={() => setCollapsed((prev) => !prev)}
@@ -96,7 +94,6 @@ export default function Curtidas() {
               <span className={styles.linkText}>like</span>
             </Link>
           </li>
-          
         </ul>
       </aside>
 
@@ -111,18 +108,17 @@ export default function Curtidas() {
         ) : (
           <>
             {isMobile ? (
-              /* MOBILE (CARDS)*/
-                  
+              /* MOBILE (CARDS) */
               <div className={styles.mobileCardsContainer}>
                 {curtidas.map((c) => (
                   <div key={c.id} className={styles.notaCard}>
                     <div className={styles.cardHeader}>
-                      <span className={styles.alunoNome}>{c.nome}</span>
-                      <span className={styles.alunoEmail}>{c.email}</span>
+                      <span className={styles.alunoNome}>{c.userName || "Usuário"}</span>
+                      <span className={styles.alunoEmail}>{c.userEmail}</span>
                     </div>
 
                     <div className={styles.cardDetail}>
-                      <strong>Post curtido:</strong> {c.post}
+                      <strong>Post curtido:</strong> {c.postTitle || c.postId}
                     </div>
 
                     <div className={styles.cardDetail}>
@@ -132,8 +128,7 @@ export default function Curtidas() {
                 ))}
               </div>
             ) : (
-              /*DESKTOP (TABELA)*/
-                  
+              /* DESKTOP (TABELA) */
               <div className={styles.card} style={{ overflowX: "auto" }}>
                 <table
                   style={{
@@ -155,14 +150,14 @@ export default function Curtidas() {
                     {curtidas.map((c) => (
                       <tr key={c.id} style={{ borderBottom: "1px solid #f5f5f5" }}>
                         <td style={{ padding: "10px" }}>
-                          <strong>{c.nome}</strong>
+                          <strong>{c.userName || "Usuário"}</strong>
                           <br />
                           <span style={{ fontSize: "0.8rem", color: "#666" }}>
-                            {c.email}
+                            {c.userEmail}
                           </span>
                         </td>
 
-                        <td style={{ padding: "10px" }}>{c.post}</td>
+                        <td style={{ padding: "10px" }}>{c.postTitle || c.postId}</td>
 
                         <td style={{ padding: "10px", fontSize: "0.9rem" }}>
                           {formatarData(c.data)}

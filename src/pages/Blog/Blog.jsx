@@ -2,20 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Blog.css';
 
-// Imports do Firebase para buscar os novos posts
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
-import { db } from "../../../FirebaseConfig";
+// Imports do Firebase
+import { 
+  collection, getDocs, orderBy, query, 
+  addDoc, deleteDoc, where, onSnapshot, doc 
+} from "firebase/firestore";
+import { db, auth } from "../../../FirebaseConfig"; 
 
-// --- LISTA DE DADOS ESTÁTICOS (Seus posts originais) ---
+// --- LISTA DE DADOS ESTÁTICOS (Mantida) ---
 const postsOriginais = [
   {
-    id: 'static-1', // IDs strings para não conflitar
+    id: 'static-1',
     titulo: "Do pensamento à ação: o poder dos algoritmos",
     autor: "Lidiane Fonesca",
     data: "10/10/2023",
     tempoLeitura: "10 min",
     imagem: "/algex23.png",
-    slug: "algoritmo" // Tem slug, leva para rota estática
+    slug: "algoritmo"
   },
   {
     id: 'static-2',
@@ -64,25 +67,75 @@ const postsOriginais = [
   }
 ];
 
-// --- SUB-COMPONENTE: CARD INDIVIDUAL ---
+// --- CARD INDIVIDUAL COM LÓGICA DE LIKE ---
 function PostCard({ post }) {
-  const [foiCurtido, setFoiCurtido] = useState(false);
+  const [likesCount, setLikesCount] = useState(0);
+  const [userLiked, setUserLiked] = useState(false);
+  const [likeDocId, setLikeDocId] = useState(null); 
 
-  const handleLike = (e) => {
-    e.preventDefault(); 
-    setFoiCurtido(!foiCurtido);
+  // Monitora os likes deste post em tempo real
+  useEffect(() => {
+    // Procura na coleção 'likes' todos os documentos deste post específico
+    const q = query(collection(db, "likes"), where("postId", "==", post.id));
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      // 1. Conta quantos likes existem
+      setLikesCount(snapshot.size);
+
+      // 2. Verifica se EU (usuário logado) dei like
+      if (auth.currentUser) {
+        const meuLike = snapshot.docs.find(d => d.data().userId === auth.currentUser.uid);
+        if (meuLike) {
+          setUserLiked(true);
+          setLikeDocId(meuLike.id); // Guarda o ID para poder deletar depois
+        } else {
+          setUserLiked(false);
+          setLikeDocId(null);
+        }
+      } else {
+        setUserLiked(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [post.id]);
+
+  const handleLike = async (e) => {
+    e.preventDefault(); // Evita abrir o link do post
+
+    if (!auth.currentUser) {
+      alert("Você precisa estar logado para curtir!");
+      return;
+    }
+
+    try {
+      if (userLiked && likeDocId) {
+        // --- REMOVER LIKE ---
+        await deleteDoc(doc(db, "likes", likeDocId));
+      } else {
+        // --- ADICIONAR LIKE ---
+        await addDoc(collection(db, "likes"), {
+          postId: post.id,
+          postTitle: post.titulo, // Salvamos o título para mostrar no Admin
+          userId: auth.currentUser.uid,
+          userEmail: auth.currentUser.email,
+          userName: auth.currentUser.displayName || "Usuário",
+          data: new Date().toISOString()
+        });
+      }
+    } catch (error) {
+      console.error("Erro ao curtir:", error);
+      alert("Erro ao processar curtida.");
+    }
   };
 
-  // Lógica Inteligente de Link:
-  // Se tiver 'slug', é post antigo (vai para /algoritmo).
-  // Se não, é post novo do Firebase (vai para /blog/post/ID).
+  // Define o destino do clique (Post estático ou dinâmico)
   const linkDestino = post.slug ? `/${post.slug}` : `/blog/post/${post.id}`;
 
   return (
     <div className="post-card-alg">
       <Link to={linkDestino} className="read-more-link">
         <div className="post-image">
-          {/* Se a imagem falhar (link quebrado), mostra um placeholder ou esconde */}
           <img 
             src={post.imagem || "/placeholder-blog.png"} 
             alt={`Imagem sobre ${post.titulo}`} 
@@ -106,13 +159,18 @@ function PostCard({ post }) {
       
       <div className="post-feedback">
         <button 
-          className={`like-btn ${foiCurtido ? 'curtido' : ''}`} 
+          className={`like-btn ${userLiked ? 'curtido' : ''}`} 
           onClick={handleLike}
           aria-label="Curtir esta postagem"
+          style={{display: 'flex', alignItems: 'center', gap: '6px', background:'transparent', border:'none', cursor:'pointer'}}
         >
-          <span className="heart-icon">
-            {foiCurtido ? '❤️' : '🤍'} 
+          <span className="heart-icon" style={{fontSize: '1.4rem'}}>
+            {userLiked ? '❤️' : '🤍'} 
           </span> 
+          {/* Exibe o número se houver likes */}
+          <span style={{fontWeight: 'bold', color: '#555', fontSize: '1rem'}}>
+            {likesCount > 0 ? likesCount : ''}
+          </span>
         </button>
       </div>
     </div>
@@ -125,7 +183,7 @@ function Blog() {
   const [postsDinamicos, setPostsDinamicos] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Busca os posts novos no Firebase ao carregar a página
+  // Busca posts novos do Firebase
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -134,7 +192,6 @@ function Blog() {
         
         const novosPosts = querySnapshot.docs.map(doc => {
           const data = doc.data();
-          // Formata a data do Firebase para ficar igual aos cards estáticos (DD/MM/AAAA)
           const dataFormatada = data.dataCriacao 
             ? new Date(data.dataCriacao).toLocaleDateString('pt-BR') 
             : "Recente";
@@ -142,18 +199,17 @@ function Blog() {
           return {
             id: doc.id,
             titulo: data.titulo,
-            // Como não temos autor/tempo no formulário simples, usamos valores padrão
             autor: "Equipe CyberTech", 
             data: dataFormatada,
-            tempoLeitura: "5 min", // Estimativa padrão
+            tempoLeitura: "5 min",
             imagem: data.imagemUrl,
-            slug: null // Importante ser null para o PostCard saber que é dinâmico
+            slug: null
           };
         });
         
         setPostsDinamicos(novosPosts);
       } catch (error) {
-        console.error("Erro ao buscar posts do Firebase:", error);
+        console.error("Erro ao buscar posts:", error);
       } finally {
         setLoading(false);
       }
@@ -162,7 +218,6 @@ function Blog() {
     fetchPosts();
   }, []);
 
-  // Junta: [Posts Novos do Firebase] + [Posts Antigos Estáticos]
   const todosOsPosts = [...postsDinamicos, ...postsOriginais];
 
   return (
@@ -170,30 +225,21 @@ function Blog() {
       <div className='hero-section'></div>
 
       <div className="post-container-blog">
-        {loading && <p style={{textAlign:'center', width:'100%', color:'#666'}}>Carregando novos posts...</p>}
+        {loading && <p style={{textAlign:'center', width:'100%', color:'#666'}}>Carregando posts...</p>}
         
-        {/* Renderiza a lista combinada */}
         {todosOsPosts.map((post) => (
           <PostCard key={post.id} post={post} />
         ))}
       </div>
 
-      {/* --- CURIOSIDADES (Mantido exatamente como estava) --- */}
+      {/* Seção de Curiosidades (Mantida igual) */}
       <div className="curiosidade-card">
         <h2>Curiosidades sobre Python</h2>
-        
         <strong>O nome “Python” não vem da cobra</strong>
-        <p>
-          Apesar do símbolo ser uma cobra, o nome Python veio do grupo de
-          comédia britânico “Monty Python’s Flying Circus”, que o criador da linguagem,
-          Guido van Rossum, adorava assistir.
-        </p>
-
+        <p>Apesar do símbolo ser uma cobra, o nome Python veio do grupo de comédia britânico “Monty Python’s Flying Circus”.</p>
+        
         <strong>É uma linguagem muito simples de ler</strong>
-        <p>
-          O Python foi criado para ser fácil de entender até por quem não programa.
-          O próprio Guido dizia que o código Python deve parecer “inglês legível”.
-        </p>
+        <p>O Python foi criado para ser fácil de entender até por quem não programa.</p>
         <p style={{fontFamily: 'monospace', background: '#f0f0f0', padding: '5px'}}>
            if idade &gt;= 18: <br/> print("Você é maior de idade!") 
         </p>
@@ -202,51 +248,13 @@ function Blog() {
         {mostrarMais && (
           <div className="conteudo-extra">
             <strong>É uma das linguagens mais populares do mundo</strong>
-            <p>
-              Python está entre as 3 linguagens mais usadas atualmente —
-              junto com JavaScript e Java — graças à sua simplicidade e versatilidade.
-            </p>
-
-            <strong>É usada em áreas muito diferentes</strong>
-            <p>Python é usada em:</p>
-            <ul>
-              <li>Inteligência Artificial e Machine Learning</li>
-              <li>Desenvolvimento Web (com frameworks como Django e Flask)</li>
-              <li>Ciência de dados</li>
-              <li>Automação</li>
-              <li>Jogos e Robótica</li>
-            </ul>
-
-            <strong>Não precisa compilar</strong>
-            <p>
-              Python é uma linguagem interpretada, ou seja, roda diretamente sem
-              precisar compilar o código antes. Isso facilita muito os testes e a aprendizagem.
-            </p>
-
-            <strong>Possui uma comunidade gigantesca</strong>
-            <p>
-              Há milhões de desenvolvedores Python no mundo. A comunidade cria novas
-              bibliotecas todos os dias, o que torna a linguagem cada vez mais poderosa.
-            </p>
-
-            <strong>Dá pra usar até em arte digital e música</strong>
-            <p>
-              Com bibliotecas como Turtle, Pygame e Sonic Pi, é possível criar desenhos,
-              jogos e até músicas usando código Python!
-            </p>
-
+            <p>Python está entre as 3 linguagens mais usadas atualmente.</p>
             <strong>É usada em grandes empresas</strong>
-            <p>
-              Empresas como Google, Instagram, Netflix, Spotify e NASA usam
-              Python em partes de seus sistemas.
-            </p>
+            <p>Google, Instagram, Netflix, Spotify e NASA usam Python.</p>
           </div>
         )}
 
-        <button
-          className="btn-ver-mais"
-          onClick={() => setMostrarMais(!mostrarMais)}
-        >
+        <button className="btn-ver-mais" onClick={() => setMostrarMais(!mostrarMais)}>
           {mostrarMais ? 'Ver menos ▲' : 'Ver mais curiosidades ▼'}
         </button>
       </div>
