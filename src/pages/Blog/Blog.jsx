@@ -1,20 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Blog.css';
 
-// --- LISTA DE DADOS (Seus posts originais estão aqui) ---
+// Imports do Firebase para buscar os novos posts
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { db } from "../../../FirebaseConfig";
+
+// --- LISTA DE DADOS ESTÁTICOS (Seus posts originais) ---
 const postsOriginais = [
   {
-    id: 1,
+    id: 'static-1', // IDs strings para não conflitar
     titulo: "Do pensamento à ação: o poder dos algoritmos",
     autor: "Lidiane Fonesca",
     data: "10/10/2023",
     tempoLeitura: "10 min",
     imagem: "/algex23.png",
-    slug: "algoritmo"
+    slug: "algoritmo" // Tem slug, leva para rota estática
   },
   {
-    id: 2,
+    id: 'static-2',
     titulo: "Entenda onde os dados vivem dentro do computador",
     autor: "Augusto da Silva",
     data: "12/04/2020",
@@ -23,7 +27,7 @@ const postsOriginais = [
     slug: "variavel"
   },
   {
-    id: 3,
+    id: 'static-3',
     titulo: "Aprenda o que são e para que servem os tipos básicos de dados",
     autor: "Julia Mariana Reinalda",
     data: "20/06/2022",
@@ -32,7 +36,7 @@ const postsOriginais = [
     slug: "tipo"
   },
   {
-    id: 4,
+    id: 'static-4',
     titulo: "Quando o 'se' muda tudo na programação",
     autor: "Luiz Inácio de Almeida",
     data: "17/06/2019",
@@ -41,7 +45,7 @@ const postsOriginais = [
     slug: "condicionais"
   },
   {
-    id: 5,
+    id: 'static-5',
     titulo: "Aprenda o que são funções e por que elas tornam a programação mais simples",
     autor: "Roberto Souza",
     data: "09/11/2024",
@@ -50,7 +54,7 @@ const postsOriginais = [
     slug: "funcoes"
   },
   {
-    id: 6,
+    id: 'static-6',
     titulo: "Entenda o papel dos operadores na manipulação de dados",
     autor: "Paulo Ferreira",
     data: "14/01/2021",
@@ -60,23 +64,30 @@ const postsOriginais = [
   }
 ];
 
-// --- SUB-COMPONENTE: CARD INDIVIDUAL (Cuida do Like) ---
+// --- SUB-COMPONENTE: CARD INDIVIDUAL ---
 function PostCard({ post }) {
   const [foiCurtido, setFoiCurtido] = useState(false);
 
   const handleLike = (e) => {
-    e.preventDefault(); // Impede que o clique no botão abra o link
+    e.preventDefault(); 
     setFoiCurtido(!foiCurtido);
   };
 
+  // Lógica Inteligente de Link:
+  // Se tiver 'slug', é post antigo (vai para /algoritmo).
+  // Se não, é post novo do Firebase (vai para /blog/post/ID).
+  const linkDestino = post.slug ? `/${post.slug}` : `/blog/post/${post.id}`;
+
   return (
     <div className="post-card-alg">
-      <Link to={`/${post.slug}`} className="read-more-link">
+      <Link to={linkDestino} className="read-more-link">
         <div className="post-image">
+          {/* Se a imagem falhar (link quebrado), mostra um placeholder ou esconde */}
           <img 
-            src={post.imagem} 
+            src={post.imagem || "/placeholder-blog.png"} 
             alt={`Imagem sobre ${post.titulo}`} 
-            className="post-img-blog" 
+            className="post-img-blog"
+            onError={(e) => e.target.src = "https://placehold.co/600x400?text=Blog+CyberTech"}
           />
         </div>
 
@@ -111,19 +122,63 @@ function PostCard({ post }) {
 // --- COMPONENTE PRINCIPAL ---
 function Blog() {
   const [mostrarMais, setMostrarMais] = useState(false);
+  const [postsDinamicos, setPostsDinamicos] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Busca os posts novos no Firebase ao carregar a página
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const q = query(collection(db, "blog"), orderBy("dataCriacao", "desc"));
+        const querySnapshot = await getDocs(q);
+        
+        const novosPosts = querySnapshot.docs.map(doc => {
+          const data = doc.data();
+          // Formata a data do Firebase para ficar igual aos cards estáticos (DD/MM/AAAA)
+          const dataFormatada = data.dataCriacao 
+            ? new Date(data.dataCriacao).toLocaleDateString('pt-BR') 
+            : "Recente";
+
+          return {
+            id: doc.id,
+            titulo: data.titulo,
+            // Como não temos autor/tempo no formulário simples, usamos valores padrão
+            autor: "Equipe CyberTech", 
+            data: dataFormatada,
+            tempoLeitura: "5 min", // Estimativa padrão
+            imagem: data.imagemUrl,
+            slug: null // Importante ser null para o PostCard saber que é dinâmico
+          };
+        });
+        
+        setPostsDinamicos(novosPosts);
+      } catch (error) {
+        console.error("Erro ao buscar posts do Firebase:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
+  // Junta: [Posts Novos do Firebase] + [Posts Antigos Estáticos]
+  const todosOsPosts = [...postsDinamicos, ...postsOriginais];
 
   return (
     <div className="blog-page">
       <div className='hero-section'></div>
 
       <div className="post-container-blog">
-        {/* Gera todos os seus 6 posts automaticamente */}
-        {postsOriginais.map((post) => (
+        {loading && <p style={{textAlign:'center', width:'100%', color:'#666'}}>Carregando novos posts...</p>}
+        
+        {/* Renderiza a lista combinada */}
+        {todosOsPosts.map((post) => (
           <PostCard key={post.id} post={post} />
         ))}
       </div>
 
-      {/* --- CURIOSIDADES (Conteúdo Completo) --- */}
+      {/* --- CURIOSIDADES (Mantido exatamente como estava) --- */}
       <div className="curiosidade-card">
         <h2>Curiosidades sobre Python</h2>
         

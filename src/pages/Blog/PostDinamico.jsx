@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../FirebaseConfig";
+import { db } from "../../../FirebaseConfig";
 import "./Funcoes.css"; // Reutiliza o estilo visual existente
 
 const PostDinamico = () => {
