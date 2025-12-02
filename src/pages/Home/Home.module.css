@@ -151,6 +151,8 @@
   text-decoration: none;
   color: var(--text-color);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .challengeCard:hover {
