@@ -1,100 +1,58 @@
 import React from "react";
-import "./variavel.css";
+import "./BlogPost.css"; // Reutiliza o mesmo CSS
 
-const Variavel = () => {
-    return (
-        <main class="container">
-            <section class="content-section">
-                <h1 class="main-title">O que são Variáveis?</h1>
-                <p class="subtitle">As variáveis são um dos blocos de construção mais fundamentais na programação. Elas nos permitem armazenar e gerenciar dados em nossos programas.</p>
+export default function Variavel() {
+  return (
+    <div className="blog-post-container">
+      <header className="blog-post-header">
+        <h1 className="blog-title">Variáveis</h1>
+        <p className="blog-subtitle">Como o computador armazena informações</p>
+      </header>
 
-                <div class="layout-columns">
-                    <div class="column-left">
-                        <article class="topic-box">
-                            <h2 class="topic-title">Uma Caixa na Memória</h2>
-                            <p className="Letra">Pense em uma variável como uma <strong>caixa com uma etiqueta</strong>. Você pode guardar algo dentro dessa caixa e, sempre que precisar, pode usar a etiqueta para encontrá-la e ver o que está dentro. Em termos de programação, essa "caixa" é um espaço na memória do computador, a "etiqueta" é o nome da variável, e o que está dentro é o seu valor.</p>
-                        </article>
+      <section>
+        <h2 className="blog-section-title">O que é uma variável?</h2>
+        <p className="blog-text">
+          Uma <strong>variável</strong> é como uma <strong>caixa etiquetada</strong> na memória do computador, 
+          usada para armazenar dados temporariamente. Esses dados podem ser alterados durante a execução do programa.
+        </p>
 
-                        <article class="topic-box">
-                            <h2 class="topic-title">Componentes de uma Variável</h2>
-                            <p>Toda variável possui três componentes principais:</p>
-                            <ul class="components-list">
-                                <li>
-                                    <div class="component-item">
-                                        <p><i className="fa fa-pasta"></i> <img src='/user.png' className='user'></img></p>
-                                        <div class="component-details">
-                                            <strong>Nome</strong>
-                                            <p>Um identificador único que usamos para nos referir à variável. Por exemplo: <code>idade</code>, <code>nome</code>, <code>preco</code>, <code>total</code>.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="component-item">
-                                        <p><i className="fa fa-azulejos"></i> <img src='/azulejos.png' className='user'></img></p>
+        <div className="blog-highlight-box">
+          <h3 className="blog-highlight-title">Analogia da Caixa</h3>
+          <p className="blog-text">
+            Imagine que você está organizando uma mudança. Você pega uma caixa e escreve "Livros" nela. 
+            No computador:
+          </p>
+          <ul className="blog-list">
+            <li>A <strong>Caixa</strong> é o espaço na memória.</li>
+            <li>A <strong>Etiqueta "Livros"</strong> é o nome da variável.</li>
+            <li>O <strong>Conteúdo</strong> são os dados guardados.</li>
+          </ul>
+        </div>
+      </section>
 
-                                        <div class="component-details">
-                                            <strong>Tipo de Dado</strong>
-                                            <p>Define que tipo de informação a variável pode armazenar. Pode ser um número (<code>inteiro</code>), texto (<code>string</code>), verdadeiro/falso (<code>booleano</code>), etc.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="component-item">
-                                        <p><i className="fa fa-pasta"></i> <img src='/pasta.png' className='user'></img></p>
-                                        <div class="component-details">
-                                            <strong>Valor</strong>
-                                            <p>A informação real que está armazenada na variável. Por exemplo: <code>30</code>, <code>"Maria"</code>, <code>true</code>.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </article>
-                    </div>
+      <section>
+        <h2 className="blog-section-title">Exemplo em Python</h2>
+        <p className="blog-text">Veja como declaramos variáveis na prática:</p>
+        
+        <div className="blog-image-container">
+          <img src="/variavelex1.png" alt="Código Python" className="blog-img" />
+          <span className="blog-img-caption">Declarando strings e inteiros.</span>
+        </div>
 
-                    <div class="column-right">
-                        <aside class="visual-representation">
-                            <h3 class="visual-title">Representação Visual</h3>
+        <p className="blog-text">
+          A imagem acima ilustra que a variável <code>nome</code> recebe o texto "João" e a variável 
+          <code>idade</code> recebe o número 25.
+        </p>
+      </section>
 
-                            <div class="var-box">
-                                <p class="var-meta">Nome: <strong>nome</strong></p>
-                                <p class="var-meta">Tipo: String</p>
-                                <p class="var-label">VALOR</p>
-                                <div class="var-value-text">"Alice"</div>
-                            </div>
-
-                            <div class="var-box">
-                                <p class="var-meta">Nome: <strong>idade</strong></p>
-                                <p class="var-meta">Tipo: Inteiro</p>
-                                <p class="var-label">VALOR</p>
-                                <div class="var-value-number">30</div>
-                            </div>
-                        </aside>
-                    </div>
-                </div>
-
-                <article class="topic-box full-width">
-                    <h2 class="topic-title">Exemplo em Python</h2>
-                    <p>Vamos ver como isso funciona na prática com um exemplo em Python. Aqui, criamos duas variáveis: uma para armazenar um nome e outra para uma idade.</p>
-
-                    <div class="code-block">
-                        <img src='/variaveis.png' className="fotos"></img>
-                    </div>
-                </article>
-
-                <div className="navigation-links">
-                    <a href="/blog" className="back-link">
-                        <img src="/flecha1.png" alt="Voltar" className="logo-img" />
-                        Voltar
-                    </a>
-                    <a href="/tipo" className="back-link">
-                        Próximo
-                        <img src="/flecha2.png" alt="Próximo" className="logo-img" />
-                    </a>
-                </div>
-
-            </section>
-        </main>
-    );
-};
-
-export default Variavel;
+      <nav className="blog-navigation">
+        <a href="/algoritmo" className="blog-nav-link">
+          <img src="/flecha1.png" alt="" className="nav-icon" /> Anterior
+        </a>
+        <a href="/tipo" className="blog-nav-link">
+          Próximo: Tipos de Dados <img src="/flecha2.png" alt="" className="nav-icon" />
+        </a>
+      </nav>
+    </div>
+  );
+}

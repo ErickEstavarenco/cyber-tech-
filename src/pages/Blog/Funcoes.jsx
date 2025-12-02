@@ -1,55 +1,68 @@
 import React from "react";
-import "./Funcoes.css";
-
-
-
+import "./BlogPost.css";
 
 const Funcoes = () => {
   return (
-    <div class="content-wrapper">
-      <div class="blog-article">
+    <div className="blog-post-container">
+      <header className="blog-post-header">
+        <h1 className="blog-title">Funções</h1>
+        <p className="blog-subtitle">Organizando e reutilizando seu código</p>
+      </header>
 
-        <h1 class="article-title">O que é uma função?</h1>
-        <p>
-          Em Python, uma função é um bloco de código reutilizável que executa uma tarefa específica. Você pode chamá-la sempre que precisar executar essa tarefa, o que ajuda a tornar seu código mais organizado, legível e eficiente.
+      <section>
+        <p className="blog-text">
+          As <strong>funções</strong> são blocos de código nomeados, criados para realizar uma tarefa específica. 
+          Elas permitem <strong>organizar, reutilizar e simplificar</strong> o desenvolvimento, evitando repetições desnecessárias.
         </p>
 
-        <div className="pop">
-          <h2 class="topic-title">Definindo uma função</h2>
-          <p>
-            Você define uma função usando a defpalavra-chave, seguida pelo nome da função, parênteses () e dois pontos:. O bloco de código dentro da função é indentado.
+        <div className="blog-highlight-box">
+          <h3 className="blog-highlight-title">Definindo uma função</h3>
+          <p className="blog-text">
+            Em Python, usamos a palavra-chave <code>def</code>, seguida pelo nome da função e parênteses.
           </p>
-          <img src="/funex1.png" alt="Imagem sobre Funções" className="posta-img" />
+          <div className="blog-image-container">
+            <img src="/funex1.png" alt="Definição de função" className="blog-img" />
+          </div>
         </div>
-        <div className="pop">
-          <h2 class="topic-title">Chamando uma função</h2>
-          <p>
-            Uma vez que uma função esteja definida, você pode "chamá-la" ou executá-la escrevendo seu nome seguido de parênteses.            </p>
-          <img src="/funex2.png" alt="Imagem sobre Funções" className="posta-img" />
+      </section>
 
+      <section>
+        <h2 className="blog-section-title">Parâmetros e Argumentos</h2>
+        <p className="blog-text">
+          Funções podem receber dados para processar, chamados de <strong>parâmetros</strong>. 
+          No exemplo abaixo, a função <code>saudacao</code> recebe o nome de uma pessoa para personalizar a mensagem.
+        </p>
+        <div className="blog-image-container">
+          <img src="/funcaoex1.png" alt="Função com parâmetros" className="blog-img" />
         </div>
-        <div className="pop">
-          <h2 class="topic-title">Retornando valores</h2>
-          <p>
-            As funções também podem enviar um valor de volta para quem as chamou usando a returninstrução. Isso é útil para cálculos ou para obter resultados de uma tarefa.            </p>
-          <img src="/funex3.png" alt="Imagem sobre Funções" className="posta-img" />
-        </div>
+        <p className="blog-text">
+          Ao chamar <code>saudacao("João")</code>, o programa exibirá: <strong>"Olá, João!"</strong>.
+        </p>
+      </section>
 
-        <div className="navigation-links">
-          <a href="/blog" className="back-link">
-            <img src="/flecha1.png" alt="Voltar" className="logo-img" />
-            Voltar
-          </a>
-          <a href="/operacao" className="back-link">
-            Próximo
-            <img src="/flecha2.png" alt="Próximo" className="logo-img" />
-          </a>
+      <section>
+        <h2 className="blog-section-title">Retorno de Valores</h2>
+        <p className="blog-text">
+          Muitas vezes queremos que a função calcule algo e nos devolva o resultado. Para isso, usamos a instrução <code>return</code>.
+        </p>
+        <div className="blog-image-container">
+          <img src="/funcaoex2.png" alt="Função com return" className="blog-img" />
         </div>
+        <p className="blog-text">
+          Isso permite armazenar o resultado em uma variável para ser usado posteriormente no programa.
+        </p>
+      </section>
 
-      </div>
+      <nav className="blog-navigation">
+        <a href="/condicionais" className="blog-nav-link">
+          <img src="/flecha1.png" alt="" className="nav-icon" /> Anterior
+        </a>
+        <a href="/operacao" className="blog-nav-link">
+          Próximo: Operações <img src="/flecha2.png" alt="" className="nav-icon" />
+        </a>
+      </nav>
     </div>
-
-
   );
 };
+
 export default Funcoes;
