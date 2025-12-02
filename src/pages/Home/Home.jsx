@@ -1,42 +1,16 @@
-// src/pages/Home/Home.jsx
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import styles from "./Home.module.css";
 import challenges from "../../data/challenges.json";
 
-// Ícones (mantém o padrão dos desafios)
+// Ícones
 import iconAlgoritmo from "../../assets/icons/icon-algoritmo.png";
 import iconPerson from "../../assets/icons/icon-person.png";
 import iconFood from "../../assets/icons/icon-food.png";
 import iconSunMoon from "../../assets/icons/icon-sun-moon.png";
 
-/**
- * Observações:
- * - Os vídeos devem estar em public/videos/
- *   /videos/algoritmo.mp4
- *   /videos/menino.mp4
- *   /videos/comida.mp4
- *   /videos/sollua.mp4
- *
- * - Este componente usa classes existentes no seu Home.module.css,
- *   mas aplica dimensões mínimas inline nos <video> para evitar "quebra".
- */
-
-const AlgorithmIcon = () => (
-  <motion.img
-    src={iconAlgoritmo}
-    alt="Ícone de algoritmo"
-    className={styles.infoCardIcon}
-    initial={{ opacity: 0, y: 12 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6, ease: "easeOut" }}
-  />
-);
-
 function Home() {
-  // mapping simples de ícones (mantido por compatibilidade)
-  //
   const iconMap = {
     person: iconPerson,
     food: iconFood,
@@ -44,7 +18,6 @@ function Home() {
     algoritmo: iconAlgoritmo,
   };
 
-  // mapeamento de vídeos para cada slug (ajuste se quiser outros nomes)
   const videoMap = {
     "o-que-e-algoritmo": "/videos/algoritmo.mp4",
     "estudar-ou-descansar": "/videos/menino.mp4",
@@ -52,21 +25,31 @@ function Home() {
     "dia-ou-noite": "/videos/sollua.mp4",
   };
 
-  // Pegar os 3 desafios (exceto algoritmo) mantendo a ordem do arquivo JSON
+  const slugToRoute = {
+    "o-que-e-algoritmo": "/desafios/desafio1",
+    "estudar-ou-descansar": "/desafios/desafio1",
+    "fome": "/desafios/desafio2",
+    "dia-ou-noite": "/desafios/desafio3",
+  };
+
+  const customTitles = {
+    "estudar-ou-descansar": "Operações",  
+    "fome": "Condicionais",                
+    "dia-ou-noite": "Funções"    
+  };
+
   const featuredChallenges = challenges
     .filter((c) => c.slug !== "o-que-e-algoritmo")
     .slice(0, 3);
 
-  // estilo inline mínimo para os vídeos dos cards (evita que quebrem layout)
   const cardVideoStyle = {
     width: "100%",
     height: "140px",
     display: "block",
-    objectFit: "fill", // você preferiu 'fill' antes; ajuste para 'contain' se quiser
+    objectFit: "fill",
     background: "#f0f6ff",
   };
 
-  // estilo inline para o vídeo do algoritmo (info card)
   const algoVideoStyle = {
     width: "300px",
     height: "170px",
@@ -106,7 +89,7 @@ function Home() {
       </section>
 
       <div className="container">
-        {/* O QUE É UM ALGORITMO? */}
+        {/* DESTAQUE */}
         <motion.section
           className={styles.algorithmSection}
           initial={{ opacity: 0, x: -30 }}
@@ -114,7 +97,6 @@ function Home() {
           transition={{ delay: 0.25 }}
         >
           <div className={styles.infoCard}>
-            {/* Vídeo do algoritmo (tamanho controlado inline para estabilidade) */}
             <motion.video
               src={videoMap["o-que-e-algoritmo"]}
               className={styles.infoVideo}
@@ -133,7 +115,7 @@ function Home() {
                 computacional.
               </p>
               <motion.div whileHover={{ scale: 1.03 }}>
-                <Link to="/blog" className="btn-primary">
+                <Link to="/algoritmo" className="btn-primary">
                   Ler mais
                 </Link>
               </motion.div>
@@ -141,7 +123,7 @@ function Home() {
           </div>
         </motion.section>
 
-        {/* DESAFIOS PRÁTICOS */}
+        {/* LISTA DE CARDS */}
         <motion.section
           className={styles.challengesSection}
           initial={{ opacity: 0, y: 18 }}
@@ -154,6 +136,11 @@ function Home() {
           <div className={styles.challengeCardsList}>
             {featuredChallenges.map((challenge) => {
               const videoSrc = videoMap[challenge.slug] || null;
+              const linkRoute = slugToRoute[challenge.slug] || "/desafios";
+
+              // Busca o título customizado ou usa o original
+              const tituloExibido = customTitles[challenge.slug] || challenge.title;
+
               return (
                 <motion.div
                   key={challenge.id}
@@ -162,7 +149,7 @@ function Home() {
                   transition={{ type: "spring", stiffness: 260 }}
                 >
                   <Link
-                    to={`/desafios/${challenge.slug}`}
+                    to={linkRoute}
                     className={styles.challengeCard}
                   >
                     {videoSrc ? (
@@ -176,7 +163,6 @@ function Home() {
                         style={cardVideoStyle}
                       />
                     ) : (
-                      // fallback para ícone quando não há vídeo
                       <img
                         src={iconMap[challenge.icon] || iconAlgoritmo}
                         alt={challenge.title}
@@ -185,7 +171,8 @@ function Home() {
                       />
                     )}
 
-                    <p>{challenge.title}</p>
+                    {/* Exibe o título customizado */}
+                    <p>{tituloExibido}</p>
                   </Link>
                 </motion.div>
               );

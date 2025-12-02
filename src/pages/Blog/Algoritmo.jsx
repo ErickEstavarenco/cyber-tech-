@@ -89,7 +89,7 @@ export default function Algoritmo() {
           <img src="/flecha1.png" alt="" className="nav-icon" /> Voltar ao Blog
         </a>
         <a href="/variavel" className="blog-nav-link">
-          Próximo: Variáveis <img src="/flecha2.png" alt="" className="nav-icon" />
+          Próximo <img src="/flecha2.png" alt="" className="nav-icon" />
         </a>
       </nav>
     </div>

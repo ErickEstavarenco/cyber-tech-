@@ -58,7 +58,7 @@ const Funcoes = () => {
           <img src="/flecha1.png" alt="" className="nav-icon" /> Anterior
         </a>
         <a href="/operacao" className="blog-nav-link">
-          Próximo: Operações <img src="/flecha2.png" alt="" className="nav-icon" />
+          Próximo <img src="/flecha2.png" alt="" className="nav-icon" />
         </a>
       </nav>
     </div>

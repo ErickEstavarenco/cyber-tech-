@@ -82,7 +82,7 @@ const Tipo = () => {
           <img src="/flecha1.png" alt="" className="nav-icon" /> Anterior
         </a>
         <a href="/condicionais" className="blog-nav-link">
-          Próximo: Condicionais <img src="/flecha2.png" alt="" className="nav-icon" />
+          Próximo <img src="/flecha2.png" alt="" className="nav-icon" />
         </a>
       </nav>
     </div>
