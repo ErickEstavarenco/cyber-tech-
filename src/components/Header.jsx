@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom"; // ⬅ add useLocation
+import { Link, useNavigate, useLocation } from "react-router-dom"; 
 import styles from "./Header.module.css";
 import { useAuth } from "../context/AuthContext";
 import { auth, db } from "../../FirebaseConfig"; 
 import { signOut } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore"; 
+
+// --- CONFIGURAÇÃO DE SEGURANÇA ---
+// Cole aqui o MESMO UID que você usou no ProtectedAdminRoute e nas Regras do Firebase
+const ADMIN_UID = "SswilmG3ZQPAfIfCaA4NohaKZzM2"; 
 
 const getFirstName = (fullName) => {
   if (!fullName) return '';
@@ -17,7 +21,10 @@ export default function Header() {
   const [userName, setUserName] = useState(""); 
   const { currentUser } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation(); // ⬅ add
+  const location = useLocation(); 
+
+  // Verifica se o usuário logado é o administrador
+  const isAdmin = currentUser && currentUser.uid === ADMIN_UID;
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
@@ -30,7 +37,6 @@ export default function Header() {
     }
   };
 
-  // ⬅ Função que faz o scroll quando clica no mesmo link
   const handleNavClick = (path) => {
     if (location.pathname === path) {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -78,11 +84,41 @@ export default function Header() {
       </div>
 
       <nav className={`${styles.nav} ${menuOpen ? styles.open : ""}`}>
-        <Link to="/" onClick={() => handleNavClick("/")}>Início</Link>
+        <Link to="/" onClick={() => handleNavClick("/")}
+        style={{
+              fontWeight: 'bold',
+            }}>Início</Link>
 
-        <Link to="/blog" onClick={() => handleNavClick("/blog")}>Blog</Link>
+        <Link to="/blog" onClick={() => handleNavClick("/blog")}
+        style={{
+              fontWeight: 'bold',
+            }}>Blog</Link>
 
-        <Link to="/desafios" onClick={() => handleNavClick("/desafios")}>Desafios</Link>
+        <Link to="/desafios" onClick={() => handleNavClick("/desafios")}
+        style={{
+              fontWeight: 'bold',
+            }}>Desafios</Link>
+
+        {/* --- BOTÃO DE ADMIN (Visível apenas para o Admin logado) --- */}
+        {isAdmin && (
+          <Link 
+            to="/admin" 
+            onClick={() => handleNavClick("/admin")}
+            style={{
+              color: '#F0F0F0', 
+              fontWeight: 'bold',
+              padding: '5px 10px',
+              borderRadius: '5px',
+              marginRight: '10px'
+            }}
+          >
+            Dashboard
+          </Link>
+        )}
+
+       {/*style={{
+              fontWeight: 'bold',
+            }}*/}
 
         {currentUser ? (
           <>
@@ -90,6 +126,10 @@ export default function Header() {
               to="/perfil" 
               className={styles.profileButton}
               onClick={() => handleNavClick("/perfil")}
+            
+              style={{
+              fontWeight: 'bold',
+            }}
             >
               Perfil
             </Link>
