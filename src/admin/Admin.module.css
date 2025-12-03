@@ -31,7 +31,7 @@ strong,
 label,
 th,
 td {
-  color: var(--color-dark-bg);
+  color: #000000;
 }
 
 /* LAYOUT PRINCIPAL */
