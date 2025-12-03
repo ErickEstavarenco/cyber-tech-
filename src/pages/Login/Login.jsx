@@ -78,7 +78,10 @@ const Login = () => {
 
         <div className={styles.switchAuth}>
           <p>
-            Não tem uma conta? <Link to="/cadastro">Cadastre-se</Link>
+            <span style={{
+              fontWeight: 'bold',
+              color: "white",
+            }}>Não tem uma conta?</span> <Link to="/cadastro">Cadastre-se</Link>
           </p>
         </div>
 

@@ -140,7 +140,10 @@ export default function Header() {
             </button>
           </>
         ) : (
-          <Link to="/login" onClick={() => handleNavClick("/login")}>
+          <Link to="/login" onClick={() => handleNavClick("/login")}
+          style={{
+              fontWeight: 'bold',
+            }}>
             Login
           </Link>
         )}
