@@ -190,7 +190,7 @@ export default function Perfil() {
               <input name="dataNascimento" type="date" value={form.dataNascimento} onChange={handleChange} />
             </div>
 
-            {/* Linha 3: Escolaridade (Ocupa a largura total na imagem) 
+            {/*Linha 3: Escolaridade (Ocupa a largura total na imagem)*/}
             <div className={styles.inputGroup + " " + styles.fullWidth}>
                 <label>Escolaridade</label>
                 <select name="escolaridad" value={form.escolaridad} onChange={handleChange}>
@@ -198,7 +198,7 @@ export default function Perfil() {
                     <option value="ENSINO MEDIO">Ensino Medio</option>
                     <option value="ENSINO SUPERIOR">Ensino Superior</option>
                 </select>
-            </div> */}
+            </div>
 
           </div>
 

@@ -175,22 +175,45 @@
 }
 
 /* ---------- Responsividade ---------- */
-@media (max-width: 768px) {
+/* --- ATUALIZAÇÃO DE RESPONSIVIDADE --- */
+
+/* Tablet (2 colunas, se couber) */
+@media (max-width: 900px) {
   .infoCard {
     flex-direction: column;
     text-align: center;
+    padding: 1.5rem;
   }
 
   .infoVideo {
     width: 100%;
-    height: 200px;
+    height: auto;
+    margin-bottom: 1.5rem;
   }
+}
 
-  .infoText h3 {
-    font-size: 1.5rem;
+/* Mobile (1 coluna, textos menores) */
+@media (max-width: 600px) {
+  .heroSection {
+    padding-top: 10px;
   }
 
   .mainTitle {
     font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+
+  .challengeCardsList {
+    gap: 1.5rem;
+  }
+
+  .challengeCard {
+    width: 220; 
+    max-width: 320px; 
   }
 }

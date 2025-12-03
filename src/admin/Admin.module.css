@@ -1,14 +1,10 @@
-/* ==========================================================
-   🎨 VARIÁVEIS GERAIS & SETUP
-   ========================================================== */
+
 :root {
-  /* Dimensões */
   --sidebar-width-open: 200px;
   --sidebar-width-collapsed: 70px;
   --transition-speed: 260ms;
   --transition-ease: cubic-bezier(.2, .9, .3, 1);
 
-  /*Color*/
   --color-dark-bg: #000000;
   --color-text-light: #e6e7ea;
   --color-text-dark: #333333;
@@ -47,8 +43,6 @@ td {
 }
 
 /* CONTEÚDO PRINCIPAL (MAIN)*/
-
-
 .main h1 {
   margin-bottom: 24px;
   font-size: 2rem;
@@ -58,7 +52,6 @@ td {
 h1,p{
   margin: 20px;
 }
-
 
 /* SIDEBAR — DESKTOP (PADRÃO ABERTO) */
 .sidebar {
@@ -199,7 +192,6 @@ h1,p{
 }
 
 /* FORMULÁRIO — NEWBLOG */
-
 .card label {
   font-size: 0.95rem;
   font-weight: 600;
@@ -462,3 +454,4 @@ h1,p{
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
   }
 }
+
