@@ -81,13 +81,20 @@ const Login = () => {
             <span style={{
               fontWeight: 'bold',
               color: "white",
-            }}>Não tem uma conta?</span> <Link to="/cadastro">Cadastre-se</Link>
+            }}>Não tem uma conta?</span> <Link to="/cadastro"><span style={{ 
+              fontWeight: "normal",
+              color: "lightgray",
+            }}>Cadastre-se</span></Link>
           </p>
         </div>
 
         <div className={styles.passwordReset}>
           <Link to="/esqueci-minha-senha" className={styles.passwordResetLink}>
-            Esqueci minha senha
+            <span
+            style={{ 
+              fontWeight: "normal",
+              color: "lightgray",
+            }}>Esqueci minha senha</span>
           </Link>
         </div>
       </div>
