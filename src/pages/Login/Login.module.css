@@ -135,7 +135,7 @@
 
 .passwordResetLink {
   /* Estilos do Login.css, adaptados para as variáveis do front-end */
-  color: var(--color-primary-start); /* Cor primária do front-end */
+  color: 0F0F0F; /* Cor primária do front-end */
   font-size: 0.9rem;
   text-decoration: none;
 }

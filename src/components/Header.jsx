@@ -105,6 +105,7 @@ export default function Header() {
             to="/admin" 
             onClick={() => handleNavClick("/admin")}
             style={{
+              textAlign: 'center',
               color: '#F0F0F0', 
               fontWeight: 'bold',
               padding: '5px 10px',
@@ -112,7 +113,7 @@ export default function Header() {
               marginRight: '10px'
             }}
           >
-            Dashboard
+           Administrativo
           </Link>
         )}
 
