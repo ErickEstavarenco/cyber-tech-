@@ -156,3 +156,28 @@
   box-shadow: 0 2px 8px rgba(220, 38, 38, 0.1);
   text-align: center;
 }
+
+/* --- RESPONSIVIDADE PARA FORMULÁRIOS --- */
+
+@media (max-width: 600px) {
+  .loginContainer {
+    padding: 10px;
+    align-items: flex-start; /* Começa do topo */
+    padding-top: 100px; /* Espaço para o header */
+  }
+
+  .loginCard {
+    padding: 1rem;
+    max-width: 100%;
+    border-radius: 8px;
+  }
+
+  .formGroup input {
+    font-size: 16px; /* Evita zoom automático no iOS */
+    padding: 12px;
+  }
+
+  .loginButton {
+    padding: 12px;
+  }
+}

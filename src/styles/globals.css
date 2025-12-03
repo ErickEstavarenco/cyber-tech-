@@ -155,3 +155,19 @@ footer {
     padding: 1rem;
   }
 }
+
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+    margin: 0px 10px; 
+    width: auto;
+  }
+  
+  h1 { font-size: 1.8rem; }
+  h2 { font-size: 1.5rem; }
+}
