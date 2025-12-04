@@ -86,7 +86,7 @@ export default function Admin() {
 
   return (
     <div className={styles.container}>
-      {/* --- NOVA SIDEBAR INSERIDA AQUI --- */}
+
       <aside
         className={`${styles.sidebar} ${
           collapsed ? styles.sidebarCollapsed : ""
