@@ -1,3 +1,5 @@
+/* src/styles/globals.css */
+
 * {
   margin: 0;
   padding: 0;
@@ -5,54 +7,47 @@
   font-family: "Poppins", "Segoe UI", sans-serif;
 }
 
-a[href^="#"] {
-  scroll-behavior: smooth;
-}
-
-
-/* VARIÁVEIS DE TEMA */
 :root {
-  --color-primary: #0d6efd;
-  --color-primary-light: #3b9dff;
-
-  --color-gradient-start: #f0f0ec;
-  --color-gradient-end: #1565c0;
-
-  --text-dark: #111827;
-  /* texto escuro */
-  --text-light: #ffffff;
-  /* texto claro */
-
-  --header-height: 60px;
-  --color-shadow: rgba(0, 0, 0, 0.15);
+  /* --- PALETA DE CORES GLOBAL --- */
+  --color-primary: #095e8b;       /* Azul principal da marca */
+  --color-primary-light: #3b9dff; /* Azul claro para hover/detalhes */
+  --color-secondary: #003bb5;     /* Azul escuro */
+  
+  --color-bg-body: #f0f2f5;       /* Fundo geral da página (cinza bem claro) */
+  --color-surface: #ffffff;       /* Fundo de cards e containers */
+  
+  /* --- CORES DE TEXTO PADRONIZADAS --- */
+  --text-main: #1f2937;           /* Cinza muito escuro (quase preto) para textos principais */
+  --text-muted: #4b5563;          /* Cinza médio para subtítulos/parágrafos secundários */
+  --text-inverse: #ffffff;        /* Branco para usar sobre fundos azuis/escuros */
+  
+  --header-height: 69px;
+  --color-shadow: rgba(0, 0, 0, 0.1);
 }
 
-/* FUNDO GERAL / LAYOUT */
-html,
-body {
+html, body {
   width: 100%;
   height: 100%;
   overflow-x: hidden;
 }
 
 body {
-  background: var(--color-gradient-start);
-  color: var(--text-dark);
+  background-color: var(--color-bg-body);
+  color: var(--text-main); /* Aplica a cor padrão em todo o site */
   line-height: 1.6;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-#root,
-.app-layout {
+#root, .app-layout {
   width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-/* LINKS */
+/* Links herdam a cor primária */
 a {
   color: var(--color-primary);
   text-decoration: none;
@@ -61,24 +56,42 @@ a {
 
 a:hover {
   color: var(--color-primary-light);
-  text-decoration: underline;
 }
 
-/* =BOTÕES */
+/* Títulos globais */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+/* Container padrão (Glassmorphism ajustado) */
+.container {
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 1200px;
+  width: 90%;
+  margin: 40px auto;
+  background: rgba(255, 255, 255, 0.7); /* Mais transparente */
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Botões */
 button {
   cursor: pointer;
   border: none;
-  outline: none;
   background: var(--color-primary);
-  color: var(--text-light);
+  color: var(--text-inverse);
   padding: 10px 20px;
   border-radius: 6px;
   font-weight: 500;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 button:hover {
-  background-color: var(--color-primary-light);
+  background-color: var(--color-secondary);
+  transform: translateY(-2px);
 }
 
 button:active {
@@ -94,6 +107,7 @@ button:active {
   padding-top: var(--header-height);
   padding-bottom: 40px;
 }*/
+
 /* Regras gerais para a tag main (preenchimento do header, etc) */
 main {
   flex: 1;
