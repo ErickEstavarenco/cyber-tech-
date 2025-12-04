@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation, Outlet } from "react-router-dom";
 import styles from "./Admin.module.css";
-// Imports do Firebase
+
 import { db } from "../../FirebaseConfig";
 import { collection, getCountFromServer, getDocs, query } from "firebase/firestore";
-// Import dos Gráficos
+
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
 export default function Admin() {
@@ -16,7 +16,6 @@ export default function Admin() {
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState(null);
 
-  // Estado para controlar se a sidebar está recolhida ou não
   const [collapsed, setCollapsed] = useState(false);
 
   const isDashboard = location.pathname === '/admin';
@@ -29,7 +28,7 @@ export default function Admin() {
       setErrorMsg(null);
       
       try {
-        // 1. Buscando Contagens
+        //Buscando Contagens
         const usersColl = collection(db, "users");
         const blogColl = collection(db, "blog");
         
@@ -43,7 +42,7 @@ export default function Admin() {
           posts: blogSnap.data().count,
         });
 
-        // 2. Buscando Dados do Gráfico
+        //Buscando Dados do Gráfico
         const pontuacoesRef = collection(db, "pontuacoes");
         const querySnapshot = await getDocs(query(pontuacoesRef));
         
@@ -154,19 +153,22 @@ export default function Admin() {
                <>
                  <div className={styles.cards} style={{marginBottom: '30px', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))'}}>
                    <div className={styles.card}>
-                     <h3>👥 Alunos</h3>
+                    <img src="/ialuno.png" alt="iconealuno" />
+                     <h3>Alunos</h3>
                      <p style={{fontSize: '2.5rem', fontWeight: 'bold', color: '#095e8b', margin: '10px 0'}}>{stats.users}</p>
                      <p>Cadastrados</p>
                    </div>
                    <div className={styles.card}>
-                     <h3>📝 Posts</h3>
+                    <img src="/iblog.png" alt="iconeblog" />
+                     <h3>Posts</h3>
                      <p style={{fontSize: '2.5rem', fontWeight: 'bold', color: '#095e8b', margin: '10px 0'}}>{stats.posts}</p>
                      <p>Publicados</p>
                    </div>
                  </div>
 
                  <div className={styles.card} style={{ minHeight: '400px' }}>
-                    <h3>📊 Média de Notas</h3>
+                  <img src="/igrafico.png" alt="iconegrafico" />
+                    <h3>Média de Notas</h3>
                     {chartData.length > 0 ? (
                       <div style={{ width: '100%', height: 300, marginTop: '20px' }}>
                         <ResponsiveContainer>
