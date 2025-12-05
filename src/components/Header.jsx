@@ -28,7 +28,6 @@ export default function Header() {
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
-  // --- FUNÇÃO DE LOGOUT CORRIGIDA ---
   const handleLogout = async () => {
     try {
       await signOut(auth); // 1. Desloga do Firebase
@@ -44,6 +43,19 @@ export default function Header() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
     setMenuOpen(false);
+  };
+
+  // Alerta para as rotas blog e desafios
+  const handleProtectedClick = (e, path) => {
+    if (!currentUser) {
+      e.preventDefault(); 
+      alert("Você precisa realizar o login para acessar esta área!");
+      navigate("/login"); 
+      setMenuOpen(false); 
+    } else {
+      
+      handleNavClick(path);
+    }
   };
 
   // Efeito para buscar o nome do usuário em tempo real
@@ -87,8 +99,23 @@ export default function Header() {
 
       <nav className={`${styles.nav} ${menuOpen ? styles.open : ""}`}>
         <Link to="/" onClick={() => handleNavClick("/")} style={{fontWeight: 'bold'}}>Início</Link>
-        <Link to="/blog" onClick={() => handleNavClick("/blog")} style={{fontWeight: 'bold'}}>Blog</Link>
-        <Link to="/desafios" onClick={() => handleNavClick("/desafios")} style={{fontWeight: 'bold'}}>Desafios</Link>
+        
+        {/* --- LINKS PROTEGIDOS COM ALERTA --- */}
+        <Link 
+          to="/blog" 
+          onClick={(e) => handleProtectedClick(e, "/blog")} 
+          style={{fontWeight: 'bold'}}
+        >
+          Blog
+        </Link>
+        
+        <Link 
+          to="/desafios" 
+          onClick={(e) => handleProtectedClick(e, "/desafios")} 
+          style={{fontWeight: 'bold'}}
+        >
+          Desafios
+        </Link>
 
         {/* Botão Admin só aparece para o admin */}
         {isAdmin && (

@@ -174,10 +174,9 @@
 /* ---------- Cards ---------- */
 .challengeCardsList {
   display: flex;
-  justify-content: center;
+  justify-content: center; /* Garante que os cards fiquem no centro do container */
   flex-wrap: wrap;
   gap: 2rem;
-  padding: 0 1rem;
 }
 
 .challengeCard {

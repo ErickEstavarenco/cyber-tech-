@@ -33,7 +33,7 @@ html, body {
 
 body {
   background-color: var(--color-bg-body);
-  color: var(--text-main); /* Aplica a cor padrão em todo o site */
+  color: var(--text-main);
   line-height: 1.6;
   min-height: 100vh;
   display: flex;
@@ -64,17 +64,20 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
 }
 
-/* Container padrão (Glassmorphism ajustado) */
+/* --- CONTAINER GLOBAL (CORRIGIDO) --- */
 .container {
-  padding: 2rem;
+  padding: 1.25rem;
   border-radius: 12px;
-  max-width: 1200px;
-  width: 90%;
-  margin: 40px auto;
-  background: rgba(255, 255, 255, 0.7); /* Mais transparente */
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  
+  /* Centralização */
+  width: 90%;             /* Ocupa 90% da largura disponível */
+  max-width: 1200px;      /* Trava a largura máxima */
+  margin: 50px auto;      /* 50px em cima/baixo, AUTO nas laterais para centralizar */
+
+  /* Glassmorphism Moderno */
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
 /* Botões */
@@ -98,17 +101,7 @@ button:active {
   transform: scale(0.97);
 }
 
-/* MAIN (CONTEÚDO) */
-/*main {
-  flex: 1;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;    
-  padding-top: var(--header-height);
-  padding-bottom: 40px;
-}*/
-
-/* Regras gerais para a tag main (preenchimento do header, etc) */
+/* Regras gerais para a tag main */
 main {
   flex: 1;
   width: 100%;
@@ -116,9 +109,9 @@ main {
   padding-bottom: 0px;
 }
 
-/*  CONFIGURAÇÃO PARA PÁGINAS PÚBLICAS (Home, Login, Blog...)  */
+/* CONFIGURAÇÃO PARA PÁGINAS PÚBLICAS */
 .public-main {
-   flex: 1;
+  flex: 1;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;    
@@ -126,7 +119,7 @@ main {
   padding-bottom: 10px;     
 }
 
-/*  CONFIGURAÇÃO PARA O ADMIN  */
+/* CONFIGURAÇÃO PARA O ADMIN */
 .admin-main {
   flex: 1;
   padding: 0px;
@@ -134,18 +127,6 @@ main {
   transition: padding-left var(--transition-speed) var(--transition-ease);
   box-sizing: border-box;
   margin: 0 auto;     
-}
-
-/* CONTAINER GLOBAL */
-.container {
-  padding: 1.25rem;
-  border-radius: 12px;
-  margin: 0 90px;
-  /* Glassmorphism Moderno */
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(6px);
-  margin-top: 50px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
 /* RODAPÉ */
@@ -167,21 +148,15 @@ footer {
 
   .container {
     padding: 1rem;
+    margin: 20px auto; /* Ajuste para mobile */
+    width: 95%;
   }
+  
+  h1 { font-size: 1.8rem; }
+  h2 { font-size: 1.5rem; }
 }
 
 img, video, iframe {
   max-width: 100%;
   height: auto;
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 1rem;
-    margin: 0px 10px; 
-    width: auto;
-  }
-  
-  h1 { font-size: 1.8rem; }
-  h2 { font-size: 1.5rem; }
 }
