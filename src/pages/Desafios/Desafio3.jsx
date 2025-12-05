@@ -210,6 +210,11 @@ export default function Desafio3() {
                 <img src="/flecha1.png" alt="Voltar" className="logo-img" />
                 Voltar
               </Link>
+
+              <Link to="/desafios" className="menu-link">
+                        <img src="/azulejos.png" alt="Menu" className="logo-img" />
+                      </Link>
+              
       
               <Link to="/desafios/desafio4" className="next-link">
                 Próximo

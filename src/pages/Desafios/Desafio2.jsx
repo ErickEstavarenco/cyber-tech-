@@ -137,6 +137,11 @@ export default function Desafio2() {
           Voltar
         </Link>
 
+        <Link to="/desafios" className="menu-link">
+                  <img src="/azulejos.png" alt="Menu" className="logo-img" />
+                </Link>
+        
+
         <Link to="/desafios/desafio3" className="next-link">
           Próximo
           <img src="/flecha2.png" alt="Próximo" className="logo-img" />
