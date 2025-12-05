@@ -7,29 +7,47 @@ import { db } from "../../../FirebaseConfig";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
 export default function Notas() {
-  const [notas, setNotas] = useState([]);
+  const [alunos, setAlunos] = useState([]); // Agora guardamos a lista de alunos agrupados
   const [loading, setLoading] = useState(true);
   const [collapsed, setCollapsed] = useState(false); 
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); 
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    window.addEventListener("resize", handleResize);
-
     const buscarNotas = async () => {
       try {
+        // Busca todas as notas ordenadas por data (da mais recente para a mais antiga)
         const q = query(collection(db, "pontuacoes"), orderBy("data", "desc"));
         const snapshot = await getDocs(q);
 
-        const listaNotas = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+        const agrupamento = {};
 
-        setNotas(listaNotas);
+        snapshot.docs.forEach((doc) => {
+          const dados = doc.data();
+          const emailAluno = dados.email;
+
+          // Se o aluno ainda não existe no agrupamento, cria o objeto dele
+          if (!agrupamento[emailAluno]) {
+            agrupamento[emailAluno] = {
+              uid: dados.uid,
+              nome: dados.nome || "Aluno sem nome",
+              email: dados.email,
+              respostas: [] // Array para guardar as provas deste aluno
+            };
+          }
+
+          // Adiciona a resposta atual à lista desse aluno
+          agrupamento[emailAluno].respostas.push({
+            id: doc.id,
+            desafio: dados.desafio,
+            nota: dados.nota,
+            total: dados.total,
+            data: dados.data
+          });
+        });
+
+        // Transforma o objeto de agrupamento em um array para facilitar o map() no React
+        const listaAgrupada = Object.values(agrupamento);
+        
+        setAlunos(listaAgrupada);
       } catch (error) {
         console.error("Erro ao buscar notas:", error);
       } finally {
@@ -38,30 +56,18 @@ export default function Notas() {
     };
 
     buscarNotas();
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
   }, []);
 
   const formatarData = (isoString) => {
     if (!isoString) return "-";
     const d = new Date(isoString);
-    return (
-      d.toLocaleDateString("pt-BR") +
-      " " +
-      d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })
-    );
+    return d.toLocaleDateString("pt-BR") + " às " + d.toLocaleTimeString("pt-BR", { hour: '2-digit', minute: '2-digit' });
   };
 
   return (
     <div className={styles.container}>
-      {/* SIDEBAR */}
-      <aside
-        className={`${styles.sidebar} ${
-          collapsed ? styles.sidebarCollapsed : ""
-        }`}
-      >
+      {/* SIDEBAR (Mantida igual ao padrão) */}
+      <aside className={`${styles.sidebar} ${collapsed ? styles.sidebarCollapsed : ""}`}>
         <button
           className={styles.toggleBtn}
           onClick={() => setCollapsed((prev) => !prev)}
@@ -79,132 +85,100 @@ export default function Notas() {
               <span className={styles.linkText}>Home</span>
             </Link>
           </li>
-
           <li>
-            <Link
-              to="/admin/notas"
-              data-tooltip="Notas"
-              className={styles.navLink}
-            >
+            <Link to="/admin/notas" data-tooltip="Notas" className={styles.navLink}>
               <img src="/estrela.png" alt="Notas" />
               <span className={styles.linkText}>Notas</span>
             </Link>
           </li>
-
           <li>
-            <Link
-              to="/admin/newblog"
-              data-tooltip="Blog"
-              className={styles.navLink}
-            >
+            <Link to="/admin/newblog" data-tooltip="Blog" className={styles.navLink}>
               <img src="/blog.png" alt="Blog" />
               <span className={styles.linkText}>Blog</span>
             </Link>
           </li>
-
           <li>
             <Link to="/admin/curtidas" data-tooltip="like" className={styles.navLink}>
               <img src="/curti.png" alt="curti" />
               <span className={styles.linkText}>like</span>
             </Link>
           </li>
-          
         </ul>
       </aside>
 
       {/* CONTEÚDO PRINCIPAL */}
       <main className={styles.main}>
-        <h1>Histórico de Notas</h1>
+        <h1>Desempenho por Aluno</h1>
 
         {loading ? (
           <p>Carregando notas...</p>
-        ) : notas.length === 0 ? (
+        ) : alunos.length === 0 ? (
           <p>Nenhuma nota registrada ainda.</p>
         ) : (
-          <>
-            {isMobile ? (
-              <div className={styles.mobileCardsContainer}> 
-                {notas.map((n) => (
-                  <div key={n.id} className={styles.notaCard}>
-                    <div className={styles.cardHeader}>
-                      <span className={styles.alunoNome}>
-                        {n.nome || "Aluno"}
-                      </span>
-                      <span className={styles.alunoEmail}>
-                        {n.email}
-                      </span>
-                      <span
-                        className={styles.notaScore}
-                        style={{
-                          color: n.nota / n.total >= 0.6 ? "green" : "red",
-                        }}
-                      >
-                        {n.nota} / {n.total}
-                      </span>
-                    </div>
-                    <div className={styles.cardDetail}>
-                      <strong>Desafio:</strong> {n.desafio}
-                    </div>
-                    <div className={styles.cardDetail}>
-                      <strong>Data:</strong> {formatarData(n.data)}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-             
-              <div className={styles.card} style={{ overflowX: "auto" }}>
-                <table
-                  style={{
-                    width: "100%",
-                    borderCollapse: "collapse",
-                    textAlign: "left",
-                    minWidth: "600px", 
-                  }}
-                >
-                  <thead>
-                    <tr style={{ borderBottom: "1px solid #eee" }}>
-                      <th style={{ padding: "10px" }}>Aluno (Email)</th>
-                      <th style={{ padding: "10px" }}>Desafio</th>
-                      <th style={{ padding: "10px" }}>Nota</th>
-                      <th style={{ padding: "10px" }}>Data</th>
-                    </tr>
-                  </thead>
+          /* Renderiza os Cards agrupados por Aluno */
+          <div className={styles.cards}> 
+            {alunos.map((aluno) => (
+              <div key={aluno.email} className={styles.card} style={{ display: 'block' }}>
+                {/* Cabeçalho do Card do Aluno */}
+                <div style={{ 
+                  borderBottom: '2px solid #f0f0f0', 
+                  paddingBottom: '15px', 
+                  marginBottom: '15px' 
+                }}>
+                  <h3 style={{ color: '#095e8b', marginBottom: '5px' }}>{aluno.nome}</h3>
+                  <p style={{ fontSize: '0.9rem', color: '#666' }}>{aluno.email}</p>
+                  <p style={{ fontSize: '0.8rem', fontWeight: 'bold', marginTop: '5px' }}>
+                    Total de tentativas: {aluno.respostas.length}
+                  </p>
+                </div>
 
-                  <tbody>
-                    {notas.map((n) => (
-                      <tr key={n.id} style={{ borderBottom: "1px solid #f5f5f5" }}>
-                        <td style={{ padding: "10px" }}>
-                          <strong>{n.nome || "Aluno"}</strong>
-                          <br />
-                          <span style={{ fontSize: "0.8rem", color: "#666" }}>
-                            {n.email}
-                          </span>
-                        </td>
-
-                        <td style={{ padding: "10px" }}>{n.desafio}</td>
-
-                        <td style={{ padding: "10px" }}>
-                          <span
-                            style={{
-                              fontWeight: "bold",
-                              color: n.nota / n.total >= 0.6 ? "green" : "red",
-                            }}
-                          >
-                            {n.nota} / {n.total}
-                          </span>
-                        </td>
-
-                        <td style={{ padding: "10px", fontSize: "0.9rem" }}>
-                          {formatarData(n.data)}
-                        </td>
+                {/* Lista de Respostas desse Aluno */}
+                <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
+                  <table style={{ width: '100%', fontSize: '0.9rem', borderCollapse: 'collapse' }}>
+                    <thead>
+                      <tr style={{ textAlign: 'left', color: '#999', borderBottom: '1px solid #eee' }}>
+                        <th style={{ padding: '8px' }}>Desafio</th>
+                        <th style={{ padding: '8px' }}>Nota</th>
+                        <th style={{ padding: '8px' }}>Data</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {aluno.respostas.map((item) => {
+                        const porcentagem = item.nota / item.total;
+                        const aprovado = porcentagem >= 0.6;
+
+                        return (
+                          <tr key={item.id} style={{ borderBottom: '1px solid #f9f9f9' }}>
+                            <td style={{ padding: '8px', color: '#333' }}>
+                              {item.desafio.replace("Desafio ", "")}
+                            </td>
+                            <td style={{ padding: '8px' }}>
+                              <span
+                                style={{
+                                  fontWeight: "bold",
+                                  color: aprovado ? "green" : "red",
+                                  backgroundColor: aprovado ? "#e6fffa" : "#fff5f5",
+                                  padding: "2px 6px",
+                                  borderRadius: "4px"
+                                }}
+                              >
+                                {item.nota} / {item.total}
+                              </span>
+                            </td>
+                            <td style={{ padding: '8px', fontSize: '0.75rem', color: '#777' }}>
+                              {formatarData(item.data).split(' às ')[0]}
+                              <br/>
+                              {formatarData(item.data).split(' às ')[1]}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
               </div>
-            )}
-          </>
+            ))}
+          </div>
         )}
       </main>
     </div>

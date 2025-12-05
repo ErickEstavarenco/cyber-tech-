@@ -1,3 +1,4 @@
+// src/components/Header.jsx
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom"; 
 import styles from "./Header.module.css";
@@ -6,8 +7,7 @@ import { auth, db } from "../../FirebaseConfig";
 import { signOut } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore"; 
 
-// --- CONFIGURAÇÃO DE SEGURANÇA ---
-// Cole aqui o MESMO UID que você usou no ProtectedAdminRoute e nas Regras do Firebase
+// UID do Admin para mostrar o botão extra no menu
 const ADMIN_UID = "SswilmG3ZQPAfIfCaA4NohaKZzM2"; 
 
 const getFirstName = (fullName) => {
@@ -23,15 +23,17 @@ export default function Header() {
   const navigate = useNavigate();
   const location = useLocation(); 
 
-  // Verifica se o usuário logado é o administrador
+  // Verifica se é admin
   const isAdmin = currentUser && currentUser.uid === ADMIN_UID;
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
+  // --- FUNÇÃO DE LOGOUT CORRIGIDA ---
   const handleLogout = async () => {
-    navigate("/login");
     try {
-      await signOut(auth);
+      await signOut(auth); // 1. Desloga do Firebase
+      navigate("/login");  // 2. Força a ida para a tela de login
+      setMenuOpen(false);  // 3. Fecha o menu mobile se estiver aberto
     } catch (error) {
       console.error("Erro ao fazer logout:", error);
     }
@@ -41,8 +43,10 @@ export default function Header() {
     if (location.pathname === path) {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
+    setMenuOpen(false);
   };
 
+  // Efeito para buscar o nome do usuário em tempo real
   useEffect(() => {
     let unsubscribe = () => {};
 
@@ -56,17 +60,15 @@ export default function Header() {
             setUserName(data.name || ""); 
           }
         },
-        (error) => {
-          console.error("Erro ao buscar nome em tempo real:", error);
-        }
+        (error) => console.error("Erro:", error)
       );
     } else {
       setUserName("");
     }
-
     return () => unsubscribe();
   }, [currentUser]);
 
+  // Atualiza o título da aba
   useEffect(() => {
     if (userName) {
       document.title = `CyberTech | ${getFirstName(userName)}`;
@@ -84,22 +86,11 @@ export default function Header() {
       </div>
 
       <nav className={`${styles.nav} ${menuOpen ? styles.open : ""}`}>
-        <Link to="/" onClick={() => handleNavClick("/")}
-        style={{
-              fontWeight: 'bold',
-            }}>Início</Link>
+        <Link to="/" onClick={() => handleNavClick("/")} style={{fontWeight: 'bold'}}>Início</Link>
+        <Link to="/blog" onClick={() => handleNavClick("/blog")} style={{fontWeight: 'bold'}}>Blog</Link>
+        <Link to="/desafios" onClick={() => handleNavClick("/desafios")} style={{fontWeight: 'bold'}}>Desafios</Link>
 
-        <Link to="/blog" onClick={() => handleNavClick("/blog")}
-        style={{
-              fontWeight: 'bold',
-            }}>Blog</Link>
-
-        <Link to="/desafios" onClick={() => handleNavClick("/desafios")}
-        style={{
-              fontWeight: 'bold',
-            }}>Desafios</Link>
-
-        {/* --- BOTÃO DE ADMIN (Visível apenas para o Admin logado) --- */}
+        {/* Botão Admin só aparece para o admin */}
         {isAdmin && (
           <Link 
             to="/admin" 
@@ -117,20 +108,13 @@ export default function Header() {
           </Link>
         )}
 
-       {/*style={{
-              fontWeight: 'bold',
-            }}*/}
-
         {currentUser ? (
           <>
             <Link 
               to="/perfil" 
               className={styles.profileButton}
               onClick={() => handleNavClick("/perfil")}
-            
-              style={{
-              fontWeight: 'bold',
-            }}
+              style={{fontWeight: 'bold'}}
             >
               Perfil
             </Link>
@@ -140,10 +124,7 @@ export default function Header() {
             </button>
           </>
         ) : (
-          <Link to="/login" onClick={() => handleNavClick("/login")}
-          style={{
-              fontWeight: 'bold',
-            }}>
+          <Link to="/login" onClick={() => handleNavClick("/login")} style={{fontWeight: 'bold'}}>
             Login
           </Link>
         )}
