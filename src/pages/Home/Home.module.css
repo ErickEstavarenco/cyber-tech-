@@ -1,5 +1,3 @@
-/* src/pages/Home/Home.module.css */
-
 /* ---------- Cores base ---------- */
 :root {
   --primary-blue: #095e8b;
@@ -8,27 +6,22 @@
   --text-color: #222;
 }
 
-/* ---------- Página ---------- */
-/* src/pages/Home/Home.module.css */
 
 .home {
-  /* Removemos a redefinição de --text-color */
-  color: var(--text-main); /* Usa a global */
+  color: var(--text-main);
   min-height: 100vh;
-  padding-bottom: 4rem;
+  /*padding-bottom: 4rem;*/
 }
-
-/* ... mantenha o heroSection igual ... */
 
 .mainTitle {
   font-size: 2.8rem;
   font-weight: 800;
   margin-bottom: 1rem;
-  color: var(--color-primary); /* Garante o azul da marca */
+  color: var(--color-primary); 
 }
 
 .subtitle {
-  color: var(--text-muted); /* Cinza suave */
+  color: var(--text-muted); 
   font-size: 1.2rem;
   font-weight: 500;
 }
@@ -43,13 +36,12 @@
 .infoText p {
   font-size: 1.05rem;
   line-height: 1.5;
-  color: var(--text-main); /* Cor padrão */
+  color: var(--text-main); 
   margin-bottom: 1rem;
 }
 
 .challengeCard {
-  /* ... outros estilos ... */
-  background-color: var(--color-surface); /* Branco puro */
+  background-color: var(--color-surface); 
   color: var(--text-main);
   border: 1px solid #e5e7eb;
 }
@@ -174,7 +166,7 @@
 /* ---------- Cards ---------- */
 .challengeCardsList {
   display: flex;
-  justify-content: center; /* Garante que os cards fiquem no centro do container */
+  justify-content: center; 
   flex-wrap: wrap;
   gap: 2rem;
 }
@@ -217,7 +209,6 @@
 }
 
 /* ---------- Responsividade ---------- */
-/* --- ATUALIZAÇÃO DE RESPONSIVIDADE --- */
 
 /* Tablet (2 colunas, se couber) */
 @media (max-width: 900px) {

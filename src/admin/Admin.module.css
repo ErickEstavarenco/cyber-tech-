@@ -15,7 +15,7 @@
   --color-primary-hover: #3a71e2;
   --color-text-warning: #ff4757;
   --color-light-bg: #f5f5f5;
-  --color-primary-light: #095e8b;
+  --color-primary-light: #095d8bd5;
   --color-gradient-start: #d6e7ff;
 }
 
@@ -55,7 +55,7 @@
 /* SIDEBAR */
 .sidebar {
   width: var(--sidebar-width-open);
-  background: var(--color-dark-bg);
+  background: var(--color-primary-light);
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -70,7 +70,7 @@
   position: sticky;
   top: var(--header-height); 
   
-  z-index: 900;
+  /*z-index: 900;*/
 }
 
 /* Botão Toggle */
@@ -93,7 +93,7 @@
 }
 
 .toggleBtn:hover {
-  background: rgba(255,255,255,0.1);
+  background: rgba(182, 57, 57, 0.1);
 }
 
 .title {
@@ -124,7 +124,7 @@
 }
 
 .navLink:hover {
-  background: #27282f;
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .navLink img {
@@ -154,7 +154,7 @@
 
 .sidebarCollapsed .navLink {
   justify-content: center;
-  padding: 12px 0;
+  
 }
 
 /* Tooltip */
