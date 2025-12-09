@@ -91,7 +91,7 @@ html, body {
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 20px;
-  margin: 0 3rem auto;
+  margin: 0 3rem auto; /* Mantido conforme seu pedido para Desktop */
   width: 95%;
   max-width: 100%;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -164,4 +164,24 @@ html, body {
   border: 1px solid #000000;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   transform: scale(1.12);
+}
+
+/* --- CORREÇÃO DE RESPONSIVIDADE (MOBILE) --- */
+@media (max-width: 768px) {
+  /* Ajusta margens apenas no celular para não cortar a tela */
+  .curiosidade-card {
+    margin: 20px auto; 
+    width: 90%;
+  }
+
+  /* Ajusta container para não ter padding excessivo nas laterais */
+  .post-container-blog {
+    padding: 20px 10px;
+  }
+
+  /* Garante que os cards não estourem a largura no mobile */
+  .post-card-alg {
+    width: 100%;
+    max-width: 320px;
+  }
 }

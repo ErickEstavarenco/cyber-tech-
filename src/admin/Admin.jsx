@@ -5,7 +5,9 @@ import styles from "./Admin.module.css";
 import { db } from "../../FirebaseConfig";
 import { collection, getCountFromServer, getDocs, query } from "firebase/firestore";
 
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import { 
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell 
+} from 'recharts';
 
 export default function Admin() {
   const navigate = useNavigate();
@@ -20,6 +22,22 @@ export default function Admin() {
 
   const isDashboard = location.pathname === '/admin';
 
+  // Cores para o gráfico
+  const COLORS = {
+    'Desafio 1': '#0088FE',
+    'Desafio 2': '#00C49F',
+    'Desafio 3': '#FFBB28',
+    'Desafio 4': '#FF8042',
+    'Geral': '#8884d8'
+  };
+
+  const GABARITO_TOTAIS = {
+    "Desafio 1": 6,
+    "Desafio 2": 7,
+    "Desafio 3": 5,
+    "Desafio 4": 5
+  };
+
   useEffect(() => {
     if (!isDashboard) return;
 
@@ -28,7 +46,7 @@ export default function Admin() {
       setErrorMsg(null);
       
       try {
-        //Buscando Contagens
+        // 1. Buscando Contagens
         const usersColl = collection(db, "users");
         const blogColl = collection(db, "blog");
         
@@ -42,38 +60,68 @@ export default function Admin() {
           posts: blogSnap.data().count,
         });
 
-        //Buscando Dados do Gráfico
+        // 2. Buscando Dados do Gráfico
         const pontuacoesRef = collection(db, "pontuacoes");
         const querySnapshot = await getDocs(query(pontuacoesRef));
         
-        const desafiosMap = {};
+        const agrupamento = {
+          "Geral": { somaNotas: 0, quantidade: 0 }
+        };
 
         querySnapshot.forEach((doc) => {
           const data = doc.data();
-          const nomeDesafio = data.desafio ? data.desafio.split(" - ")[0].trim() : "Geral"; 
           
-          if (!desafiosMap[nomeDesafio]) {
-            desafiosMap[nomeDesafio] = { name: nomeDesafio, totalNotas: 0, count: 0 };
+          // Se não tiver nome, cai em 'Outros', mas vamos filtrar depois
+          const nomeDesafio = data.desafio ? data.desafio.split(" - ")[0].trim() : "Outros"; 
+          
+          if (!agrupamento[nomeDesafio]) {
+            agrupamento[nomeDesafio] = { somaNotas: 0, quantidade: 0 };
           }
-          desafiosMap[nomeDesafio].totalNotas += Number(data.nota || 0);
-          desafiosMap[nomeDesafio].count += 1;
+
+          // Cálculo da nota 0-10
+          const notaBruta = Number(data.nota || 0);
+          let totalQuestoes = Number(data.total);
+          if (!totalQuestoes || totalQuestoes === 0) {
+             totalQuestoes = GABARITO_TOTAIS[nomeDesafio] || 1; 
+          }
+
+          const nota0a10 = (notaBruta / totalQuestoes) * 10;
+
+          // Soma no desafio específico
+          agrupamento[nomeDesafio].somaNotas += nota0a10;
+          agrupamento[nomeDesafio].quantidade += 1;
+
+          // Soma no Geral
+          agrupamento["Geral"].somaNotas += nota0a10;
+          agrupamento["Geral"].quantidade += 1;
         });
 
-        const dataFormatada = Object.values(desafiosMap).map(item => ({
-          name: item.name,
-          media: Number((item.totalNotas / item.count).toFixed(1)),
-          tentativas: item.count
-        })).sort((a, b) => a.name.localeCompare(b.name));
+        // Transforma em array e FILTRA "Outros"
+        const dadosGrafico = Object.keys(agrupamento)
+          .filter(chave => chave !== "Outros") // <--- FILTRO ADICIONADO AQUI
+          .map(chave => {
+            const item = agrupamento[chave];
+            const media = item.quantidade > 0 ? (item.somaNotas / item.quantidade) : 0;
+            
+            return {
+              name: chave,
+              media: Number(media.toFixed(1)),
+              qtd: item.quantidade
+            };
+          });
 
-        setChartData(dataFormatada);
+        // Ordenação
+        dadosGrafico.sort((a, b) => {
+            if (a.name === 'Geral') return 1;
+            if (b.name === 'Geral') return -1;
+            return a.name.localeCompare(b.name);
+        });
+
+        setChartData(dadosGrafico);
 
       } catch (error) {
         console.error("Erro Dashboard:", error);
-        if (error.code === 'permission-denied') {
-            setErrorMsg("Acesso negado. Verifique as regras do Firestore.");
-        } else {
-            setErrorMsg("Erro ao carregar dados.");
-        }
+        setErrorMsg("Erro ao carregar dados.");
       } finally {
         setLoading(false);
       }
@@ -82,16 +130,10 @@ export default function Admin() {
     fetchDashboardData();
   }, [isDashboard]);
 
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
-
   return (
     <div className={styles.container}>
 
-      <aside
-        className={`${styles.sidebar} ${
-          collapsed ? styles.sidebarCollapsed : ""
-        }`}
-      >
+      <aside className={`${styles.sidebar} ${collapsed ? styles.sidebarCollapsed : ""}`}>
         <button
           className={styles.toggleBtn}
           onClick={() => setCollapsed((prev) => !prev)}
@@ -109,29 +151,18 @@ export default function Admin() {
               <span className={styles.linkText}>Home</span>
             </Link>
           </li>
-
           <li>
-            <Link
-              to="/admin/notas"
-              data-tooltip="Notas"
-              className={styles.navLink}
-            >
+            <Link to="/admin/notas" data-tooltip="Notas" className={styles.navLink}>
               <img src="/estrela.png" alt="Notas" />
               <span className={styles.linkText}>Notas</span>
             </Link>
           </li>
-
           <li>
-            <Link
-              to="/admin/newblog"
-              data-tooltip="Blog"
-              className={styles.navLink}
-            >
+            <Link to="/admin/newblog" data-tooltip="Blog" className={styles.navLink}>
               <img src="/blog.png" alt="Blog" />
               <span className={styles.linkText}>Blog</span>
             </Link>
           </li>
-
           <li>
             <Link to="/admin/curtidas" data-tooltip="like" className={styles.navLink}>
               <img src="/curti.png" alt="curti" />
@@ -140,7 +171,6 @@ export default function Admin() {
           </li>
         </ul>
       </aside>
-      {/* ---------------------------------- */}
 
       <main className={styles.main}>
         {isDashboard ? (
@@ -168,18 +198,26 @@ export default function Admin() {
 
                  <div className={styles.card} style={{ minHeight: '400px' }}>
                   <img src="/igrafico.png" alt="iconegrafico" />
-                    <h3>Média de Notas</h3>
+                    <h3>Média de Notas (0 - 10)</h3>
                     {chartData.length > 0 ? (
                       <div style={{ width: '100%', height: 300, marginTop: '20px' }}>
                         <ResponsiveContainer>
                           <BarChart data={chartData}>
                             <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                            <XAxis dataKey="name" stroke="#666" fontSize={12} />
-                            <YAxis domain={[0, 10]} stroke="#666" fontSize={12} />
-                            <Tooltip cursor={{fill: '#f3f4f6'}} />
+                            <XAxis dataKey="name" stroke="#666" fontSize={12} tick={{ fill: '#333' }} />
+                            <YAxis domain={[0, 10]} stroke="#666" fontSize={12} allowDecimals={false} />
+                            <Tooltip 
+                              cursor={{fill: '#f3f4f6'}} 
+                              formatter={(value) => [value, "Média"]}
+                              labelStyle={{ color: '#333' }}
+                              contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}
+                            />
                             <Bar dataKey="media" name="Média" radius={[6, 6, 0, 0]} barSize={50}>
                               {chartData.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                <Cell 
+                                  key={`cell-${index}`} 
+                                  fill={COLORS[entry.name] || '#8884d8'} 
+                                />
                               ))}
                             </Bar>
                           </BarChart>

@@ -129,12 +129,12 @@
 
 /* Estilo para o botão primário (Azul) - Usado em 'Salvar' e 'Alterar senha' */
 .primaryButton {
-    background-color: #007bff; 
+    background-color: #095e8b; 
     color: white;
 }
 
 .primaryButton:hover:not(:disabled) {
-    background-color: #0056b3;
+    background-color: #5f9cda;
 }
 
 .primaryButton:disabled {
@@ -150,7 +150,7 @@
 
 /* Estilo do botão de Excluir Conta */
 .dangerButton {
-    background-color: #dc3545; /* Vermelho */
+    background-color: #095e8b; /* Vermelho */
     color: white;
     margin-left: 10px; /* Separa do botão salvar */
 }

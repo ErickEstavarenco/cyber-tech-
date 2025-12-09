@@ -5,21 +5,21 @@ import { motion } from "framer-motion";
 
 import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { deleteUser } from "firebase/auth";
-import { db, auth } from "../../../FirebaseConfig"; 
-import { useNavigate } from "react-router-dom";
+import { db, auth } from "../../../FirebaseConfig";
+import { useNavigate } from "react-router-dom"; // Import necessário
 
 export default function Perfil() {
   const { currentUser } = useAuth();
   const [profile, setProfile] = useState(null);
-    
+
   const [form, setForm] = useState({
     name: "",
-    dataNascimento: "", 
-    telefone: "",       
+    dataNascimento: "",
+    telefone: "",
     apelido: "",
     Escolaridade: "Ensino Fundamental",
   });
-  
+
   const [saving, setSaving] = useState(false);
   const navigate = useNavigate();
 
@@ -35,11 +35,11 @@ export default function Perfil() {
         if (snap.exists()) {
           const data = snap.data();
           setProfile(data);
-          
+
           setForm({
             name: data.name || "",
-            dataNascimento: data.dataNascimento || "", 
-            telefone: data.telefone || "",       
+            dataNascimento: data.dataNascimento || "",
+            telefone: data.telefone || "",
             apelido: data.apelido || "",
             Escolaridade: data.Escolaridade || "Ensino Fundamental",
           });
@@ -68,7 +68,6 @@ export default function Perfil() {
     setForm((s) => ({ ...s, [e.target.name]: e.target.value }));
   };
 
-  //Lógica de Salvar Alterações
   const handleSave = async () => {
     if (!form.name.trim()) {
       alert("Por favor, informe o nome completo.");
@@ -77,12 +76,11 @@ export default function Perfil() {
     setSaving(true);
     try {
       const userRef = doc(db, "users", currentUser.uid);
-      
-      // Salva no banco com o campo apelido
+
       await updateDoc(userRef, {
         name: form.name,
-        dataNascimento: form.dataNascimento || "", 
-        telefone: form.telefone || "",       
+        dataNascimento: form.dataNascimento || "",
+        telefone: form.telefone || "",
         apelido: form.apelido || "",
         //Escolaridade: form.Escolaridade,
         updatedAt: new Date(),
@@ -98,11 +96,12 @@ export default function Perfil() {
     }
   };
 
-  // Para trabalhar aqui
-  const handleChangePassword = () => {
-    alert("Redirecionando para a tela de Alterar Senha (Funcionalidade de navegação simulada).");
-  }
+  // Função para o botão "Alterar Senha" (antigo botão de excluir)
+  const handleNavigateToChangePassword = () => {
+    navigate("/alterar-senha");
+  };
 
+  // Mantive a função caso queira usar em outro lugar, mas o botão agora usa a navegação acima
   const handleDeleteAccount = async () => {
     const ok = window.confirm(
       "Tem certeza que deseja excluir sua conta? Esta ação é irreversível."
@@ -118,7 +117,7 @@ export default function Perfil() {
     try {
       await deleteDoc(doc(db, "users", user.uid));
       await deleteUser(user);
-      
+
       alert("Conta excluída com sucesso.");
       navigate("/");
     } catch (err) {
@@ -132,9 +131,9 @@ export default function Perfil() {
   };
 
   return (
-    <div className={styles.container}> 
+    <div className={styles.container}>
       <motion.div className={styles.profileBox} initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }}>
-        
+
         <div className={styles.header}>
           <h2>Meu Perfil</h2>
           <div className={styles.tabs}>
@@ -144,42 +143,40 @@ export default function Perfil() {
 
         <div className={styles.content}>
           <div className={styles.imageAndLogin}>
-            
-            {/* Login (Email) e Alterar Senha */}
+
             <div className={styles.loginGroup}>
-                <div className={styles.inputGroup}>
-                    <label className={styles.required}>Login</label>
-                    <input 
-                        type="email" 
-                        value={profile?.email || currentUser.email} 
-                        readOnly 
-                        disabled
-                        className={styles.loginInput}
-                    />
-                </div>
-                {/* BOTÃO ALTERAR SENHA (Estilo Primário) */}
-                <button 
-                    className={`${styles.buttonBase} ${styles.primaryButton} ${styles.changePasswordButton}`} 
-                    onClick={handleChangePassword}
-                >
-                    Alterar senha
-                </button>
+              <div className={styles.inputGroup}>
+                <label className={styles.required}>Login</label>
+                <input
+                  type="email"
+                  value={profile?.email || currentUser.email}
+                  readOnly
+                  disabled
+                  className={styles.loginInput}
+                />
+              </div>
+
+              <button
+                className={`${styles.buttonBase} ${styles.dangerButton}`}
+                onClick={handleNavigateToChangePassword}
+              >
+                Alterar Senha
+              </button>
             </div>
           </div>
 
           <div className={styles.formGrid}>
-            
+
             {/* Linha 1 */}
             <div className={styles.inputGroup}>
               <label className={styles.required}>Nome*</label>
               <input name="name" value={form.name} onChange={handleChange} />
             </div>
             <div className={styles.inputGroup}>
-              <label>Apelido</label> 
+              <label>Apelido</label>
               <input name="apelido" value={form.apelido} onChange={handleChange} placeholder="Como prefere ser chamado" />
             </div>
-            
-            
+
             {/* Linha 2 */}
             <div className={styles.inputGroup}>
               <label>Telefone</label>
@@ -190,36 +187,39 @@ export default function Perfil() {
               <input name="dataNascimento" type="date" value={form.dataNascimento} onChange={handleChange} />
             </div>
 
-            {/*Linha 3: Escolaridade (Ocupa a largura total na imagem)*/}
-            <div className={styles.inputGroup + " " + styles.fullWidth}>
-                <label>Escolaridade</label>
-                <select name="escolaridad" value={form.escolaridad} onChange={handleChange}>
-                    <option value="ENSINO FUNDAMENTAL">Ensino Fundamental</option>
-                    <option value="ENSINO MEDIO">Ensino Medio</option>
-                    <option value="ENSINO SUPERIOR">Ensino Superior</option>
-                </select>
+            {/* Linha 3 */}
+            <div className={`${styles.inputGroup} ${styles.fullWidth}`}>
+              <label>Escolaridade</label>
+              <select name="Escolaridade" value={form.Escolaridade} onChange={handleChange}>
+                <option value="ENSINO FUNDAMENTAL">Ensino Fundamental</option>
+                <option value="ENSINO MEDIO">Ensino Médio</option>
+                <option value="ENSINO SUPERIOR">Ensino Superior</option>
+              </select>
             </div>
 
           </div>
 
-          {/* Rodapé com botões Salvar e Excluir Conta */}
+          {/* Rodapé com botões */}
           <div className={styles.actions}>
-            {/* BOTÃO SALVAR (Estilo Primário, como na imagem) */}
-            <button 
-                className={`${styles.buttonBase} ${styles.primaryButton}`} 
-                onClick={handleSave} 
-                disabled={saving}
+            <button
+              className={`${styles.buttonBase} ${styles.primaryButton}`}
+              onClick={handleSave}
+              disabled={saving}
             >
               {saving ? "Salvando..." : "Salvar"}
             </button>
-            
-            {/* BOTÃO EXCLUIR CONTA (Funcionalidade que você quer manter) */}
-            <button 
-                className={`${styles.buttonBase} ${styles.dangerButton}`} 
-                onClick={handleDeleteAccount}
+
+            {/* --- BOTÃO MODIFICADO AQUI --- */}
+            {/* Usa o estilo dangerButton mas navega para alterar senha */}
+
+
+            <button
+              className={`${styles.buttonBase} ${styles.dangerButton}`}
+              onClick={handleDeleteAccount}
             >
-                Excluir Conta
+              Excluir Conta
             </button>
+
           </div>
 
         </div>

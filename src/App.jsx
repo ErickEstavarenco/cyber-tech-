@@ -28,12 +28,12 @@ const PostDinamico = React.lazy(() => import("./pages/Blog/PostDinamico"));
 import Login from './pages/Login/Login.jsx';
 import Cadastro from './pages/Cadastro/Cadastro.jsx';
 import EsqueciSenha from './pages/EsqueciSenha/EsqueciSenha.jsx';
+import EsqueciSenhaPerfil from './pages/EsqueciSenha/EsqueciSenhaPerfil.jsx'; // <--- IMPORT NOVO
 import Perfil from './pages/Perfil/Perfil.jsx';
 
 // Admin
 import Admin from './admin/Admin.jsx';
 import Newblog from './admin/Subpagina/Newblog.jsx';
-
 import Comentarios from './admin/Subpagina/Curtidas.jsx';
 import Notas from './admin/Subpagina/Notas.jsx';
 
@@ -47,7 +47,7 @@ import Desafio2 from './pages/Desafios/Desafio2.jsx';
 import Desafio3 from './pages/Desafios/Desafio3.jsx';
 import Desafio4 from './pages/Desafios/Desafio4.jsx';
 
-//  Novas páginas
+// Novas páginas
 import Sobre from './pages/Sobre/Sobre.jsx';
 import Privacidade from './pages/Privacidade/Privacidade.jsx';
 
@@ -79,7 +79,7 @@ function App() {
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
 
-            {/* --- SUAS ROTAS (NÃO ALTEREI) --- */}
+            {/* --- Rotas Públicas --- */}
             <Route path="/" element={<AnimatedPage><Home /></AnimatedPage>} />
             <Route path="/login" element={<AnimatedPage><Login /></AnimatedPage>} />
             <Route path="/cadastro" element={<AnimatedPage><Cadastro /></AnimatedPage>} />
@@ -88,6 +88,7 @@ function App() {
             <Route path="/sobre" element={<AnimatedPage><Sobre /></AnimatedPage>} />
             <Route path="/privacidade" element={<AnimatedPage><Privacidade /></AnimatedPage>} />
 
+            {/* --- Rotas Protegidas --- */}
             <Route path="/blog" element={<ProtectedRoute><AnimatedPage><Blog /></AnimatedPage></ProtectedRoute>} />
             <Route path="/algoritmo" element={<ProtectedRoute><AnimatedPage><Algoritmo /></AnimatedPage></ProtectedRoute>} />
             <Route path="/variavel" element={<ProtectedRoute><AnimatedPage><Variavel /></AnimatedPage></ProtectedRoute>} />
@@ -96,7 +97,6 @@ function App() {
             <Route path="/operacao" element={<ProtectedRoute><AnimatedPage><Operacao /></AnimatedPage></ProtectedRoute>} />
             <Route path="/tipo" element={<ProtectedRoute><AnimatedPage><Tipo /></AnimatedPage></ProtectedRoute>} />
             
-            {/* Rota para posts dinâmicos */}
             <Route path="/blog/post/:id" element={
               <ProtectedRoute><AnimatedPage><PostDinamico /></AnimatedPage></ProtectedRoute>
             } />
@@ -109,6 +109,16 @@ function App() {
 
             <Route path="/perfil" element={<ProtectedRoute><AnimatedPage><Perfil /></AnimatedPage></ProtectedRoute>} />
 
+            {/* --- NOVA ROTA ADICIONADA --- */}
+            <Route path="/alterar-senha" element={
+              <ProtectedRoute>
+                <AnimatedPage>
+                  <EsqueciSenhaPerfil />
+                </AnimatedPage>
+              </ProtectedRoute>
+            } />
+
+            {/* --- Rotas Admin --- */}
             <Route path="/admin" element={<ProtectedAdminRoute><AnimatedPage><Admin /></AnimatedPage></ProtectedAdminRoute>} />
             <Route path="/admin/newblog" element={<ProtectedAdminRoute><AnimatedPage><Newblog /></AnimatedPage></ProtectedAdminRoute>} />
             <Route path="/admin/curtidas" element={<ProtectedAdminRoute><AnimatedPage><Comentarios /></AnimatedPage></ProtectedAdminRoute>} />
@@ -117,12 +127,10 @@ function App() {
           </Routes>
         </AnimatePresence>
       </main>
+      
       <main className={isAdminRoute ? 'admin-main' : 'public-main'}>
-        <AnimatePresence mode="wait">
-          <Routes location={location} key={location.pathname}>
-            {/* ... suas rotas ... */}
-          </Routes>
-        </AnimatePresence>
+         {/* Este bloco main extra parece redundante se você já tem o main acima com as rotas, 
+             mas mantive conforme seu arquivo original para não quebrar layout */}
       </main>
 
       <Footer />

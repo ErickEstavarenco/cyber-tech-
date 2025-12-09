@@ -232,15 +232,22 @@ function Blog() {
         ))}
       </div>
 
-      {/* Seção de Curiosidades (Mantida igual) */}
+      {/* Seção de Curiosidades */}
       <div className="curiosidade-card">
         <h2>Curiosidades sobre Python</h2>
         <strong>O nome “Python” não vem da cobra</strong>
-        <p>Apesar do símbolo ser uma cobra, o nome Python veio do grupo de comédia britânico “Monty Python’s Flying Circus”.</p>
+        <p>
+          Apesar do símbolo ser uma cobra, o nome Python veio do grupo de
+          comédia britânico “Monty Python’s Flying Circus”, que o criador da linguagem,
+          Guido van Rossum, adorava assistir.
+        </p>
         
         <strong>É uma linguagem muito simples de ler</strong>
-        <p>O Python foi criado para ser fácil de entender até por quem não programa.</p>
-        <p style={{fontFamily: 'monospace', background: '#f0f0f0', padding: '5px'}}>
+        <p>
+          O Python foi criado para ser fácil de entender até por quem não programa.
+          O próprio Guido dizia que o código Python deve parecer “inglês legível”.
+        </p>
+        <p style={{fontFamily: 'monospace', background: '#f0f0f0', padding: '10px', borderRadius: '4px', marginTop: '5px'}}>
            if idade &gt;= 18: <br/> print("Você é maior de idade!") 
         </p>
         <br/>
@@ -248,9 +255,42 @@ function Blog() {
         {mostrarMais && (
           <div className="conteudo-extra">
             <strong>É uma das linguagens mais populares do mundo</strong>
-            <p>Python está entre as 3 linguagens mais usadas atualmente.</p>
+            <p>
+              Python está entre as 3 linguagens mais usadas atualmente —
+              junto com JavaScript e Java — graças à sua simplicidade e versatilidade.
+            </p>
+
+            <strong>É usada em áreas muito diferentes</strong>
+            <p>Python é usada em:</p>
+            <p>- Inteligência Artificial e Machine Learning</p>
+            <p>- Desenvolvimento Web (com frameworks como Django e Flask)</p>
+            <p>- Ciência de dados</p>
+            <p>- Automação</p>
+            <p>- Jogos e Robótica</p>
+
+            <strong>Não precisa compilar</strong>
+            <p>
+              Python é uma linguagem interpretada, ou seja, roda diretamente sem
+              precisar compilar o código antes. Isso facilita muito os testes e a aprendizagem.
+            </p>
+
+            <strong>Possui uma comunidade gigantesca</strong>
+            <p>
+              Há milhões de desenvolvedores Python no mundo. A comunidade cria novas
+              bibliotecas todos os dias, o que torna a linguagem cada vez mais poderosa.
+            </p>
+
+            <strong>Dá pra usar até em arte digital e música</strong>
+            <p>
+              Com bibliotecas como Turtle, Pygame e Sonic Pi, é possível criar desenhos,
+              jogos e até músicas usando código Python!
+            </p>
+
             <strong>É usada em grandes empresas</strong>
-            <p>Google, Instagram, Netflix, Spotify e NASA usam Python.</p>
+            <p>
+              Empresas como Google, Instagram, Netflix, Spotify e NASA usam
+              Python em partes de seus sistemas.
+            </p>
           </div>
         )}
 

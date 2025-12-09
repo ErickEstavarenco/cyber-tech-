@@ -31,6 +31,10 @@
   letter-spacing: -0.02em;
 }
 
+.loginCard p {
+  color: #ffffff; 
+}
+
 .loginSubtitle {
   text-align: center;
   color: #ffffff; /* Cinza mais escuro para melhor legibilidade */
