@@ -1,8 +1,9 @@
 :root {
   --sidebar-width-open: 250px;
   --sidebar-width-collapsed: 70px;
-  --header-height: 65px;
-  
+
+  --header-height: 70px;
+
   --transition-speed: 260ms;
   --transition-ease: cubic-bezier(.2, .9, .3, 1);
 
@@ -16,8 +17,7 @@
   --color-light-bg: #f5f5f5;
   --color-primary-light: #095d8bd5;
   --color-gradient-start: #d6e7ff;
-  
-  /* Cores novas para o editor */
+
   --color-success: #2ecc71;
   --color-success-hover: #27ae60;
   --color-border: #e2e8f0;
@@ -32,9 +32,7 @@
   scroll-behavior: smooth;
 }
 
-/* ===========================
-   LAYOUT PRINCIPAL
-   =========================== */
+/* LAYOUT PRINCIPAL*/
 .container {
   display: flex;
   min-height: 100vh;
@@ -43,17 +41,44 @@
   overflow-x: hidden;
 }
 
-/* ÁREA PRINCIPAL */
+/* SIDEBAR (Barra Lateral)*/
+.sidebar {
+  width: var(--sidebar-width-open);
+  background: var(--color-primary-light);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 18px;
+  /* Mantido seu padding origin*/
+  box-shadow: 4px 0 18px rgba(0, 0, 0, 0.25);
+  transition: width var(--transition-speed), padding var(--transition-speed);
+  overflow: hidden;
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  bottom: 0;
+  height: auto;
+  z-index: 90;
+  margin: 0 !important;
+}
+
+/* ÁREA PRINCIPAL (Conteúdo)*/
 .main {
   flex: 1;
   padding: 30px;
-  min-height: 100vh;
   width: 100%;
   box-sizing: border-box;
-  /* Limita a largura em telas muito grandes para não esticar demais */
-  max-width: 1600px;
-  margin: 0 auto;
+  margin-left: var(--sidebar-width-open);
+  margin-top: 1rem;
+
   transition: margin-left var(--transition-speed);
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  min-height: calc(100vh - var(--header-height) - 40px);
 }
 
 .main h1 {
@@ -63,41 +88,70 @@
   font-weight: 700;
 }
 
-/* ===========================
-   SIDEBAR (Barra Lateral)
-   =========================== */
-.sidebar {
-  width: var(--sidebar-width-open);
-  background: var(--color-primary-light);
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  padding: 18px;
-  box-shadow: 4px 0 18px rgba(0, 0, 0, 0.25);
-  transition: width var(--transition-speed), padding var(--transition-speed);
-  overflow: hidden;
-  white-space: nowrap;
-  flex-shrink: 0;
-  
-  position: sticky;
-  top: var(--header-height);
-  height: calc(100vh - var(--header-height));
-  z-index: 100;
+/* ESTADO COLAPSADO*/
+.sidebarCollapsed {
+  width: var(--sidebar-width-collapsed) !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  align-items: center;
 }
 
-/* Botão Toggle */
+.container:has(.sidebarCollapsed) .main {
+  margin-left: var(--sidebar-width-collapsed);
+}
+
+.sidebarCollapsed .title,
+.sidebarCollapsed .linkText {
+  display: none;
+  opacity: 0;
+}
+
+/* Centraliza os links quando fecha*/
+.sidebarCollapsed .navLink {
+  justify-content: center;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* BOTÃO HAMBURGUER NO MODO COLAPSA*/
+.sidebarCollapsed .toggleBtn {
+  justify-content: center;
+  padding-left: 0;
+}
+
+
+.sidebarCollapsed .navLink:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: calc(100% + 10px);
+  background: #111;
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: #fff;
+  white-space: nowrap;
+  font-size: 0.85rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+/* ELEMENTOS DA SIDEBAR */
+
 .toggleBtn {
   background: transparent;
   border: none;
   cursor: pointer;
-  width: 70px;
+  width: 100%;
   height: 44px;
   display: flex;
   align-items: center;
-  justify-content: center;
+
+  justify-content: flex-start;
+  padding-left: 12px;
+
   border-radius: 8px;
   transition: background 160ms;
+  margin-bottom: 10px;
 }
 
 .toggleBtn img {
@@ -106,7 +160,7 @@
 }
 
 .toggleBtn:hover {
-  background: rgba(182, 57, 57, 0.1);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .title {
@@ -116,12 +170,13 @@
   margin-left: 10px;
 }
 
-/* Navegação */
+/* Navegaçao */
 .navList {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  padding: 0;
 }
 
 .navLink {
@@ -136,57 +191,100 @@
   width: 100%;
 }
 
-.navLink:hover, .active {
+.navLink:hover,
+.active {
   background: rgba(255, 255, 255, 0.15);
 }
 
 .navLink img {
   width: 22px;
   height: 22px;
-  filter: invert(1); 
+  filter: invert(1);
 }
 
-/* ESTADO COLAPSADO */
-.sidebarCollapsed {
-  width: var(--sidebar-width-collapsed) !important;
-  padding-left: 10px !important;
-  padding-right: 10px !important;
-  align-items: center;
+/*CARDS (Dashboard)*/
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
 }
 
-.sidebarCollapsed .title,
-.sidebarCollapsed .linkText {
-  opacity: 0;
-  width: 0;
-  display: none;
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
 }
 
-.sidebarCollapsed .toggleBtn,
-.sidebarCollapsed .navLink {
-  justify-content: center;
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
 }
 
-/* Tooltip do menu colapsado */
-.sidebarCollapsed .navLink:hover::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  left: calc(100% + 10px);
-  background: #111;
-  padding: 6px 12px;
-  border-radius: 6px;
-  color: #fff;
-  white-space: nowrap;
-  font-size: 0.85rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  z-index: 1000;
-  pointer-events: none;
+.card img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  margin-bottom: 15px;
+  display: block;
+  margin-left: 0;
 }
 
-/* ===========================
-   EDITOR DE BLOG (NewBlog)
-   =========================== */
+.card h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #111827;
+}
 
-/* Cabeçalho do Editor */
+.card p {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.card button {
+  margin-top: 15px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  background-color: #ffffff;
+  color: #111827;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  width: 100%;
+}
+
+.card button:hover {
+  background-color: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.red {
+  border-color: #f87171 !important;
+  background-color: #ef4444 !important;
+  color: #fff !important;
+}
+
+.red:hover {
+  background-color: #dc2626 !important;
+  border-color: #b91c1c !important;
+}
+
+.warning {
+  color: #dc2626;
+  font-weight: 500;
+}
+
+/* EDITOR DE BLOG (NewBlog)*/
+
 .headerFlex {
   display: flex;
   justify-content: space-between;
@@ -196,7 +294,7 @@
 }
 
 .headerFlex h1 {
-  margin: 0; 
+  margin: 0;
 }
 
 .publishBtn {
@@ -209,7 +307,7 @@
   cursor: pointer;
   font-size: 1rem;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 6px rgba(46, 204, 113, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -217,9 +315,9 @@
 }
 
 .publishBtn:hover {
-  background-color: #5f9cda;
+  background-color: #357abd;
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(46, 204, 113, 0.3);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .publishBtn:disabled {
@@ -229,7 +327,6 @@
   box-shadow: none;
 }
 
-/* Container do Editor */
 .editorContainer {
   display: flex;
   flex-direction: column;
@@ -241,11 +338,10 @@
   background: white;
   border-radius: 12px;
   padding: 30px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   border: 1px solid var(--color-border);
 }
 
-/* Metadados (Inputs topo) */
 .metaBox {
   display: flex;
   flex-direction: column;
@@ -268,6 +364,7 @@
   font-size: 1rem;
   background-color: #f9fafb;
   transition: all 0.2s ease;
+  color: #333;
 }
 
 .inputField:focus {
@@ -284,7 +381,6 @@
   margin: 30px 0;
 }
 
-/* Lista de Blocos */
 .blocksList {
   display: flex;
   flex-direction: column;
@@ -301,7 +397,7 @@
 }
 
 .blockItem:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   border-color: #cbd5e1;
   background: #fff;
 }
@@ -313,7 +409,7 @@
   margin-bottom: 12px;
   padding-bottom: 10px;
   border-bottom: 1px dashed #cbd5e1;
-  flex-wrap: wrap; /* Importante para não quebrar em mobile */
+  flex-wrap: wrap;
   gap: 10px;
 }
 
@@ -337,7 +433,7 @@
   background: #fff;
   border: 1px solid #095e8b;
   cursor: pointer;
-  width: 60px;
+  /*width: 40p*/
   height: 30px;
   border-radius: 6px;
   transition: all 0.2s;
@@ -362,8 +458,8 @@
   opacity: 1;
 }
 
-/* Campos dentro dos blocos */
-.inputBlock, .textAreaBlock {
+.inputBlock,
+.textAreaBlock {
   width: 100%;
   border: 1px solid #d1d5db;
   border-radius: 8px;
@@ -372,6 +468,7 @@
   font-family: inherit;
   resize: vertical;
   background: #fff;
+  color: #333;
 }
 
 .textAreaBlock {
@@ -379,13 +476,13 @@
   line-height: 1.6;
 }
 
-.inputBlock:focus, .textAreaBlock:focus {
+.inputBlock:focus,
+.textAreaBlock:focus {
   outline: none;
   border-color: var(--color-primary-blue);
   box-shadow: 0 0 0 2px rgba(74, 130, 243, 0.1);
 }
 
-/* Botões de Adicionar Novo Bloco */
 .addButtons {
   display: flex;
   gap: 15px;
@@ -415,29 +512,62 @@
   color: var(--color-primary-blue);
   background-color: #eff6ff;
   transform: translateY(-2px);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
-/* =========================================
-   RESPONSIVIDADE (BREAKPOINTS)
-   ========================================= */
+/* ESTILOS PARA MOBILE CARDS (Curtidas)*/
+.mobileCardsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 
-/* --- 1. TABLET (até 900px) --- */
+.notaCard {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 8px;
+}
+
+.alunoNome {
+  font-weight: 700;
+  color: #095e8b;
+  font-size: 1.1rem;
+}
+
+.alunoEmail {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.cardDetail {
+  font-size: 0.95rem;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+/* ESPONSIVIDADE */
+
+/* --- TABLET (até 900px) -*/
 @media (max-width: 900px) {
-  /* Sidebar vira fixa e recolhida na esquerda */
   .sidebar {
     width: 60px !important;
     padding: 10px 5px !important;
     align-items: center;
-    position: fixed; 
-    left: 0;
-    top: var(--header-height);
-    height: calc(100% - var(--header-height));
-    z-index: 99;
   }
 
-  /* Esconde textos da sidebar */
-  .toggleBtn, .title, .linkText {
+  .toggleBtn,
+  .title,
+  .linkText {
     display: none !important;
   }
 
@@ -446,33 +576,33 @@
     padding: 12px;
   }
 
-  /* Conteúdo Principal compensa a sidebar fixa */
   .main {
-    padding: 20px 15px;
-    margin-left: 60px; 
-    width: calc(100% - 60px);
+    margin-left: 60px;
+    margin-right: 10px;
+    padding: 20px;
   }
 
-  /* Ajuste do botão de publicar */
   .publishBtn {
     padding: 10px 20px;
     font-size: 0.95rem;
   }
 }
 
-/* --- 2. MOBILE (até 600px) --- */
+/* --- MOBILE (até 600px) -*/
 @media (max-width: 600px) {
   .main {
     padding: 15px;
+    margin-right: 10px;
+    margin-left: 60px;
+    transform: none;
   }
 
-  /* Cabeçalho do Editor empilha Título e Botão */
   .headerFlex {
     flex-direction: column;
-    align-items: stretch; /* Botão ocupa largura total */
+    align-items: stretch;
     gap: 15px;
   }
-  
+
   .headerFlex h1 {
     text-align: center;
     font-size: 1.5rem;
@@ -481,12 +611,11 @@
   .publishBtn {
     width: 100%;
   }
-  
+
   .formColumn {
-    padding: 20px 15px; /* Menos padding lateral no card */
+    padding: 20px 15px;
   }
-  
-  /* Bloco dentro do editor */
+
   .blockHeader {
     flex-direction: column;
     align-items: flex-start;
@@ -495,14 +624,13 @@
 
   .blockActions {
     width: 100%;
-    justify-content: flex-end; /* Botões alinham à direita */
+    justify-content: flex-end;
   }
 
-  /* Botões de Adicionar Bloco empilhados */
   .addButtons {
     flex-direction: column;
   }
-  
+
   .btnAdd {
     width: 100%;
     justify-content: center;
