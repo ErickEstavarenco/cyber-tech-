@@ -1,4 +1,3 @@
-
 :root {
   --sidebar-width-open: 250px;
   --sidebar-width-collapsed: 70px;
@@ -17,6 +16,12 @@
   --color-light-bg: #f5f5f5;
   --color-primary-light: #095d8bd5;
   --color-gradient-start: #d6e7ff;
+  
+  /* Cores novas para o editor */
+  --color-success: #2ecc71;
+  --color-success-hover: #27ae60;
+  --color-border: #e2e8f0;
+  --color-bg-block: #f8fafc;
 }
 
 * {
@@ -27,7 +32,9 @@
   scroll-behavior: smooth;
 }
 
-/* LAYOUT PRINCIPAL */
+/* ===========================
+   LAYOUT PRINCIPAL
+   =========================== */
 .container {
   display: flex;
   min-height: 100vh;
@@ -40,9 +47,13 @@
 .main {
   flex: 1;
   padding: 30px;
-  min-height: 100vh; /* Garante altura total */
+  min-height: 100vh;
   width: 100%;
   box-sizing: border-box;
+  /* Limita a largura em telas muito grandes para não esticar demais */
+  max-width: 1600px;
+  margin: 0 auto;
+  transition: margin-left var(--transition-speed);
 }
 
 .main h1 {
@@ -52,7 +63,9 @@
   font-weight: 700;
 }
 
-/* SIDEBAR */
+/* ===========================
+   SIDEBAR (Barra Lateral)
+   =========================== */
 .sidebar {
   width: var(--sidebar-width-open);
   background: var(--color-primary-light);
@@ -68,9 +81,9 @@
   flex-shrink: 0;
   
   position: sticky;
-  top: var(--header-height); 
-  
-  /*z-index: 900;*/
+  top: var(--header-height);
+  height: calc(100vh - var(--header-height));
+  z-index: 100;
 }
 
 /* Botão Toggle */
@@ -123,7 +136,7 @@
   width: 100%;
 }
 
-.navLink:hover {
+.navLink:hover, .active {
   background: rgba(255, 255, 255, 0.15);
 }
 
@@ -148,16 +161,12 @@
   display: none;
 }
 
-.sidebarCollapsed .toggleBtn {
-  justify-content: center;
-}
-
+.sidebarCollapsed .toggleBtn,
 .sidebarCollapsed .navLink {
   justify-content: center;
-  
 }
 
-/* Tooltip */
+/* Tooltip do menu colapsado */
 .sidebarCollapsed .navLink:hover::after {
   content: attr(data-tooltip);
   position: absolute;
@@ -173,169 +182,249 @@
   pointer-events: none;
 }
 
-/* CARDS E CONTEÚDO (Dashboard) */
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
-  width: 100%;
-  margin-top: 20px;
-}
+/* ===========================
+   EDITOR DE BLOG (NewBlog)
+   =========================== */
 
-.card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  border: 1px solid #e5e7eb;
+/* Cabeçalho do Editor */
+.headerFlex {
   display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  gap: 20px;
 }
 
-/* FIX: ÍCONES DO DASHBOARD */
-.card img {
-  width: 48px;  
-  height: 48px;
-  object-fit: contain;
-  margin-bottom: 15px;
+.headerFlex h1 {
+  margin: 0; 
 }
 
-.card h3 {
-  font-size: 1.25rem;
-  color: var(--color-text-dark);
-  margin-bottom: 8px;
-  font-weight: 600;
-}
-
-.card p {
-  color: var(--color-text-muted);
-  line-height: 1.5;
-  margin-bottom: 5px;
-}
-
-/*ESTILOS DE FORMULÁRIO */
-.card label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: var(--color-text-dark);
-  font-size: 0.95rem;
-  margin-top: 20px;
-}
-
-.card label:first-child {
-  margin-top: 0;
-}
-
-.input, .textarea {
-  width: 100%;
-  padding: 12px 15px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  font-size: 1rem;
-  background-color: #f9f9f9;
-  color: #333;
-  transition: all 0.2s ease;
-  box-sizing: border-box;
-}
-
-.textarea {
-  min-height: 150px;
-  resize: vertical;
-}
-
-.input:focus, .textarea:focus {
-  outline: none;
-  border-color: var(--color-primary-blue);
-  background-color: #fff;
-  box-shadow: 0 0 0 3px rgba(74, 130, 243, 0.15);
-}
-
-.notaBtn {
-  background-color: var(--color-primary-blue);
-  color: #fff;
+.publishBtn {
+  background-color: var(--color-primary-light);
+  color: white;
   padding: 12px 28px;
   border: none;
   border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  margin-top: 25px;
-  transition: background 0.2s;
-  align-self: flex-start;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px rgba(46, 204, 113, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
 }
 
-.notaBtn:hover {
-  background-color: var(--color-primary-hover);
+.publishBtn:hover {
+  background-color: #5f9cda;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(46, 204, 113, 0.3);
 }
 
-.notaBtn:disabled {
-  background-color: #a0a0a0;
+.publishBtn:disabled {
+  background-color: #95a5a6;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
-/* LISTAS MOBILE */
-.mobileCardsContainer {
+/* Container do Editor */
+.editorContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.formColumn {
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  border: 1px solid var(--color-border);
+}
+
+/* Metadados (Inputs topo) */
+.metaBox {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  width: 100%;
+  margin-bottom: 20px;
 }
 
-.notaCard {
+.metaBox h3 {
+  margin-bottom: 5px;
+  color: var(--color-text-dark);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.inputField {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #f9fafb;
+  transition: all 0.2s ease;
+}
+
+.inputField:focus {
+  outline: none;
+  border-color: var(--color-primary-blue);
   background-color: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  border: 1px solid #e5e7eb;
+  box-shadow: 0 0 0 3px rgba(74, 130, 243, 0.1);
+}
+
+.divider {
+  border: 0;
+  height: 1px;
+  background: #e5e7eb;
+  margin: 30px 0;
+}
+
+/* Lista de Blocos */
+.blocksList {
   display: flex;
   flex-direction: column;
+  gap: 20px;
+}
+
+.blockItem {
+  background: var(--color-bg-block);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 20px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.blockItem:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  border-color: #cbd5e1;
+  background: #fff;
+}
+
+.blockHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #cbd5e1;
+  flex-wrap: wrap; /* Importante para não quebrar em mobile */
   gap: 10px;
 }
 
-.cardHeader {
-  display: flex;
-  flex-direction: column;
-  border-bottom: 1px solid #f0f0f0;
-  padding-bottom: 10px;
-  margin-bottom: 5px;
-}
-
-.alunoNome {
-  font-weight: 700;
-  font-size: 1.1rem;
-  color: var(--color-text-dark);
-}
-
-.alunoEmail {
+.blockLabel {
   font-size: 0.85rem;
-  color: var(--color-text-muted);
+  font-weight: 700;
+  color: var(--color-dark-bg);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: rgba(74, 130, 243, 0.1);
+  padding: 4px 8px;
+  border-radius: 4px;
 }
 
-.notaScore {
-  font-weight: 800;
-  font-size: 1.1rem;
-  margin-top: 5px;
-  align-self: flex-start;
-  padding: 4px 10px;
+.blockActions {
+  display: flex;
+  gap: 8px;
+}
+
+.btnIcon {
+  background: #fff;
+  border: 1px solid #095e8b;
+  cursor: pointer;
+  width: 60px;
+  height: 30px;
   border-radius: 6px;
-  background-color: #f9fafb;
-  border: 1px solid #e5e7eb;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.cardDetail {
-  font-size: 0.9rem;
-  color: var(--color-text-dark);
+.btnIcon:hover {
+  background-color: #5f9cda;
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
 }
 
-.cardDetail strong {
+.btnIcon img {
+  width: 16px;
+  height: 16px;
+  opacity: 0.7;
+}
+
+.btnIcon:hover img {
+  opacity: 1;
+}
+
+/* Campos dentro dos blocos */
+.inputBlock, .textAreaBlock {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  background: #fff;
+}
+
+.textAreaBlock {
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+.inputBlock:focus, .textAreaBlock:focus {
+  outline: none;
+  border-color: var(--color-primary-blue);
+  box-shadow: 0 0 0 2px rgba(74, 130, 243, 0.1);
+}
+
+/* Botões de Adicionar Novo Bloco */
+.addButtons {
+  display: flex;
+  gap: 15px;
+  margin-top: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.btnAdd {
+  background-color: #fff;
+  border: 1px dashed #94a3b8;
+  color: #64748b;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btnAdd:hover {
+  border-color: var(--color-primary-blue);
   color: var(--color-primary-blue);
-  margin-right: 5px;
+  background-color: #eff6ff;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-/* RESPONSIVIDADE */
+/* =========================================
+   RESPONSIVIDADE (BREAKPOINTS)
+   ========================================= */
+
+/* --- 1. TABLET (até 900px) --- */
 @media (max-width: 900px) {
+  /* Sidebar vira fixa e recolhida na esquerda */
   .sidebar {
     width: 60px !important;
     padding: 10px 5px !important;
@@ -344,8 +433,10 @@
     left: 0;
     top: var(--header-height);
     height: calc(100% - var(--header-height));
+    z-index: 99;
   }
 
+  /* Esconde textos da sidebar */
   .toggleBtn, .title, .linkText {
     display: none !important;
   }
@@ -355,32 +446,65 @@
     padding: 12px;
   }
 
-  .navLink:hover::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    left: 65px; 
-    background: #000;
-    padding: 6px 10px;
-    border-radius: 6px;
-    color: #fff;
-    font-size: 0.75rem;
-    z-index: 2000;
-  }
-
-  /* Ajuste Main */
+  /* Conteúdo Principal compensa a sidebar fixa */
   .main {
     padding: 20px 15px;
     margin-left: 60px; 
     width: calc(100% - 60px);
   }
 
-  /* Ajuste Formulários */
-  .input, .textarea {
-    font-size: 16px;
+  /* Ajuste do botão de publicar */
+  .publishBtn {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
+}
+
+/* --- 2. MOBILE (até 600px) --- */
+@media (max-width: 600px) {
+  .main {
+    padding: 15px;
+  }
+
+  /* Cabeçalho do Editor empilha Título e Botão */
+  .headerFlex {
+    flex-direction: column;
+    align-items: stretch; /* Botão ocupa largura total */
+    gap: 15px;
   }
   
-  .notaBtn {
-    width: 100%;
+  .headerFlex h1 {
     text-align: center;
+    font-size: 1.5rem;
+  }
+
+  .publishBtn {
+    width: 100%;
+  }
+  
+  .formColumn {
+    padding: 20px 15px; /* Menos padding lateral no card */
+  }
+  
+  /* Bloco dentro do editor */
+  .blockHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .blockActions {
+    width: 100%;
+    justify-content: flex-end; /* Botões alinham à direita */
+  }
+
+  /* Botões de Adicionar Bloco empilhados */
+  .addButtons {
+    flex-direction: column;
+  }
+  
+  .btnAdd {
+    width: 100%;
+    justify-content: center;
   }
 }
