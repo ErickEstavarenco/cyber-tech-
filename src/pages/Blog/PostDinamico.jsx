@@ -60,7 +60,6 @@ const PostDinamico = () => {
       )}
 
       <section>
-        {/* LÓGICA INTELIGENTE: Suporta tanto o formato ANTIGO (string) quanto o NOVO (blocos) */}
         {Array.isArray(post.conteudo) ? (
           // NOVO FORMATO (BLOCOS)
           post.conteudo.map((bloco, index) => (

@@ -75,14 +75,11 @@ function PostCard({ post }) {
 
   // Monitora os likes deste post em tempo real
   useEffect(() => {
-    // Procura na coleção 'likes' todos os documentos deste post específico
     const q = query(collection(db, "likes"), where("postId", "==", post.id));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      // 1. Conta quantos likes existem
       setLikesCount(snapshot.size);
 
-      // 2. Verifica se EU (usuário logado) dei like
       if (auth.currentUser) {
         const meuLike = snapshot.docs.find(d => d.data().userId === auth.currentUser.uid);
         if (meuLike) {

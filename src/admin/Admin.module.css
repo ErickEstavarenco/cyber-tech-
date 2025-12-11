@@ -4,8 +4,8 @@
 
   --header-height: 70px;
 
-  --transition-speed: 260ms;
-  --transition-ease: cubic-bezier(.2, .9, .3, 1);
+  --transition-speed: 420ms;
+  --transition-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
 
   --color-dark-bg: #000000;
   --color-text-light: #e6e7ea;
@@ -41,7 +41,7 @@
   overflow-x: hidden;
 }
 
-/* SIDEBAR (Barra Lateral)*/
+/* SIDEBAR */
 .sidebar {
   width: var(--sidebar-width-open);
   background: var(--color-primary-light);
@@ -50,9 +50,15 @@
   flex-direction: column;
   gap: 18px;
   padding: 18px;
-  /* Mantido seu padding origin*/
   box-shadow: 4px 0 18px rgba(0, 0, 0, 0.25);
-  transition: width var(--transition-speed), padding var(--transition-speed);
+
+  /* ✅ ANIMAÇÃO SUAVE E LINEAR */
+  transition: 
+    width var(--transition-speed) var(--transition-ease),
+    padding var(--transition-speed) var(--transition-ease);
+
+  will-change: width, padding;
+
   overflow: hidden;
   white-space: nowrap;
   flex-shrink: 0;
@@ -62,11 +68,10 @@
   left: 0;
   bottom: 0;
   height: auto;
-  z-index: 90;
   margin: 0 !important;
 }
 
-/* ÁREA PRINCIPAL (Conteúdo)*/
+/* ÁREA PRINCIPAL */
 .main {
   flex: 1;
   padding: 30px;
@@ -75,7 +80,9 @@
   margin-left: var(--sidebar-width-open);
   margin-top: 1rem;
 
-  transition: margin-left var(--transition-speed);
+  /* ✅ ANIMAÇÃO SUAVE DO CONTEÚDO */
+  transition: margin-left var(--transition-speed) var(--transition-ease);
+  will-change: margin-left;
 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   min-height: calc(100vh - var(--header-height) - 40px);
@@ -88,7 +95,7 @@
   font-weight: 700;
 }
 
-/* ESTADO COLAPSADO*/
+/* ESTADO COLAPSADO */
 .sidebarCollapsed {
   width: var(--sidebar-width-collapsed) !important;
   padding-left: 10px !important;
@@ -106,19 +113,18 @@
   opacity: 0;
 }
 
-/* Centraliza os links quando fecha*/
+/* CENTRALIZA LINKS */
 .sidebarCollapsed .navLink {
   justify-content: center;
   padding-left: 0;
   padding-right: 0;
 }
 
-/* BOTÃO HAMBURGUER NO MODO COLAPSA*/
+/* BOTÃO HAMBURGUER */
 .sidebarCollapsed .toggleBtn {
   justify-content: center;
   padding-left: 0;
 }
-
 
 .sidebarCollapsed .navLink:hover::after {
   content: attr(data-tooltip);
@@ -135,8 +141,7 @@
   pointer-events: none;
 }
 
-/* ELEMENTOS DA SIDEBAR */
-
+/* ELEMENTOS */
 .toggleBtn {
   background: transparent;
   border: none;
@@ -145,11 +150,10 @@
   height: 44px;
   display: flex;
   align-items: center;
-
   justify-content: flex-start;
   padding-left: 12px;
-
   border-radius: 8px;
+
   transition: background 160ms;
   margin-bottom: 10px;
 }
@@ -170,7 +174,7 @@
   margin-left: 10px;
 }
 
-/* Navegaçao */
+/* NAVEGAÇÃO */
 .navList {
   list-style: none;
   display: flex;
@@ -202,7 +206,7 @@
   filter: invert(1);
 }
 
-/*CARDS (Dashboard)*/
+/* CARDS */
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -226,6 +230,8 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
 }
+
+/* === TODO O RESTO DO SEU CSS PERMANECEU IGUAL === */
 
 .card img {
   width: 40px;
