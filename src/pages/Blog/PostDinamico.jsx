@@ -52,12 +52,7 @@ const PostDinamico = () => {
         {post.resumo && <p className="blog-subtitle">{post.resumo}</p>}
       </header>
 
-      {/* Capa Principal */}
-      {post.imagemUrl && (
-        <div className="blog-image-container">
-          <img src={post.imagemUrl} alt={post.titulo} className="blog-img" />
-        </div>
-      )}
+      {/* A imagem de capa foi removida daqui conforme solicitado */}
 
       <section>
         {Array.isArray(post.conteudo) ? (

@@ -13,7 +13,6 @@ export default function NewBlog() {
   const [capa, setCapa] = useState("");
 
   // O "Corpo" do post agora é uma lista de blocos
-  // Ex: [{ type: 'paragraph', content: '...' }, { type: 'image', url: '...' }]
   const [secoes, setSecoes] = useState([
     { id: 1, type: "paragraph", content: "" }
   ]);
@@ -63,7 +62,6 @@ export default function NewBlog() {
         titulo: titulo,
         resumo: resumo,
         imagemUrl: capa || "https://placehold.co/600x400?text=Capa",
-        // Salvamos as seções estruturadas para renderizar corretamente depois
         conteudo: secoes,
         dataCriacao: new Date().toISOString()
       });
@@ -83,8 +81,6 @@ export default function NewBlog() {
       setLoading(false);
     }
   }
-
-  const dataHoje = new Date().toLocaleDateString('pt-BR');
 
   return (
     <div className={styles.container}>
@@ -136,6 +132,20 @@ export default function NewBlog() {
                 value={capa}
                 onChange={e => setCapa(e.target.value)}
               />
+              
+              {/* --- ALTERAÇÃO 1: PRÉ-VISUALIZAÇÃO DA CAPA --- */}
+              {capa && (
+                <div style={{ marginTop: '10px' }}>
+                  <p style={{fontSize: '0.8rem', color: '#666', marginBottom: '5px'}}>Pré-visualização da Capa:</p>
+                  <img 
+                    src={capa} 
+                    alt="Pré-visualização da capa" 
+                    style={{ maxWidth: '100%', maxHeight: '300px', borderRadius: '8px', objectFit: 'cover' }} 
+                    onError={(e) => e.target.style.display = 'none'} // Esconde se o link for inválido
+                  />
+                </div>
+              )}
+
             </div>
 
             <hr className={styles.divider} />
@@ -185,12 +195,26 @@ export default function NewBlog() {
                   )}
 
                   {secao.type === 'image' && (
-                    <input
-                      className={styles.inputBlock}
-                      placeholder="Cole o link da imagem aqui..."
-                      value={secao.content}
-                      onChange={e => atualizarBloco(secao.id, e.target.value)}
-                    />
+                    <>
+                      <input
+                        className={styles.inputBlock}
+                        placeholder="Cole o link da imagem aqui..."
+                        value={secao.content}
+                        onChange={e => atualizarBloco(secao.id, e.target.value)}
+                      />
+                      
+                      {/* --- ALTERAÇÃO 2: PRÉ-VISUALIZAÇÃO DO BLOCO DE IMAGEM --- */}
+                      {secao.content && (
+                        <div style={{ marginTop: '10px' }}>
+                          <img 
+                            src={secao.content} 
+                            alt="Pré-visualização" 
+                            style={{ maxWidth: '100%', borderRadius: '8px' }}
+                            onError={(e) => e.target.style.display = 'none'} 
+                          />
+                        </div>
+                      )}
+                    </>
                   )}
                 </div>
               ))}

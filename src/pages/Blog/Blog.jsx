@@ -11,51 +11,8 @@ import { db, auth } from "../../../FirebaseConfig";
 
 // --- LISTA DE DADOS ESTÁTICOS (Mantida) ---
 const postsOriginais = [
-  {
-    id: 'static-1',
-    titulo: "Do pensamento à ação: o poder dos algoritmos",
-    autor: "Lidiane Fonesca",
-    data: "10/10/2023",
-    tempoLeitura: "10 min",
-    imagem: "/algex23.png",
-    slug: "algoritmo"
-  },
-  {
-    id: 'static-2',
-    titulo: "Entenda onde os dados vivem dentro do computador",
-    autor: "Augusto da Silva",
-    data: "12/04/2020",
-    tempoLeitura: "10 min",
-    imagem: "/variblog.png",
-    slug: "variavel"
-  },
-  {
-    id: 'static-3',
-    titulo: "Aprenda o que são e para que servem os tipos básicos de dados",
-    autor: "Julia Mariana Reinalda",
-    data: "20/06/2022",
-    tempoLeitura: "10 min",
-    imagem: "/tipoblog.png",
-    slug: "tipo"
-  },
-  {
-    id: 'static-4',
-    titulo: "Quando o 'se' muda tudo na programação",
-    autor: "Luiz Inácio de Almeida",
-    data: "17/06/2019",
-    tempoLeitura: "10 min",
-    imagem: "/condblog.png",
-    slug: "condicionais"
-  },
-  {
-    id: 'static-5',
-    titulo: "Aprenda o que são funções e por que elas tornam a programação mais simples",
-    autor: "Roberto Souza",
-    data: "09/11/2024",
-    tempoLeitura: "10 min",
-    imagem: "/funblog.png",
-    slug: "funcoes"
-  },
+  
+  
   {
     id: 'static-6',
     titulo: "Entenda o papel dos operadores na manipulação de dados",
