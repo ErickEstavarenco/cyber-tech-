@@ -12,16 +12,6 @@ import { db, auth } from "../../../FirebaseConfig";
 // --- LISTA DE DADOS ESTÁTICOS (Mantida) ---
 const postsOriginais = [
   
-  
-  {
-    id: 'static-6',
-    titulo: "Entenda o papel dos operadores na manipulação de dados",
-    autor: "Paulo Ferreira",
-    data: "14/01/2021",
-    tempoLeitura: "10 min",
-    imagem: "/operablog.png",
-    slug: "operacao"
-  }
 ];
 
 // --- CARD INDIVIDUAL COM LÓGICA DE LIKE ---
@@ -41,7 +31,7 @@ function PostCard({ post }) {
         const meuLike = snapshot.docs.find(d => d.data().userId === auth.currentUser.uid);
         if (meuLike) {
           setUserLiked(true);
-          setLikeDocId(meuLike.id); // Guarda o ID para poder deletar depois
+          setLikeDocId(meuLike.id); 
         } else {
           setUserLiked(false);
           setLikeDocId(null);
@@ -55,7 +45,7 @@ function PostCard({ post }) {
   }, [post.id]);
 
   const handleLike = async (e) => {
-    e.preventDefault(); // Evita abrir o link do post
+    e.preventDefault(); 
 
     if (!auth.currentUser) {
       alert("Você precisa estar logado para curtir!");
@@ -64,13 +54,11 @@ function PostCard({ post }) {
 
     try {
       if (userLiked && likeDocId) {
-        // --- REMOVER LIKE ---
         await deleteDoc(doc(db, "likes", likeDocId));
       } else {
-        // --- ADICIONAR LIKE ---
         await addDoc(collection(db, "likes"), {
           postId: post.id,
-          postTitle: post.titulo, // Salvamos o título para mostrar no Admin
+          postTitle: post.titulo,
           userId: auth.currentUser.uid,
           userEmail: auth.currentUser.email,
           userName: auth.currentUser.displayName || "Usuário",
@@ -83,7 +71,6 @@ function PostCard({ post }) {
     }
   };
 
-  // Define o destino do clique (Post estático ou dinâmico)
   const linkDestino = post.slug ? `/${post.slug}` : `/blog/post/${post.id}`;
 
   return (
@@ -101,7 +88,8 @@ function PostCard({ post }) {
         <div className="post-info">
           <h3 className="post-title">{post.titulo}</h3>
           <div className="post-meta">
-            <p><img src='/user.png' className='user' alt="Autor" /> {post.autor}</p>
+            {/* CORREÇÃO VISUAL: Se não tiver autor, usa um padrão */}
+            <p><img src='/user.png' className='user' alt="Autor" /> {post.autor || "Autor Desconhecido"}</p>
             <p><img src='/calendar.png' alt="Data" className='user' /> {post.data}</p>
             <p>
               <img src='/time-left.png' className='user' alt="Tempo" /> 
@@ -121,7 +109,6 @@ function PostCard({ post }) {
           <span className="heart-icon" style={{fontSize: '1.4rem'}}>
             {userLiked ? '❤️' : '🤍'} 
           </span> 
-          {/* Exibe o número se houver likes */}
           <span style={{fontWeight: 'bold', color: '#555', fontSize: '1rem'}}>
             {likesCount > 0 ? likesCount : ''}
           </span>
@@ -150,12 +137,15 @@ function Blog() {
             ? new Date(data.dataCriacao).toLocaleDateString('pt-BR') 
             : "Recente";
 
+          // --- AQUI ESTAVA O ERRO ---
+          // Antes estava fixo "Equipe CyberTech" e "5 min".
+          // Agora puxamos data.autor e data.tempoLeitura do banco.
           return {
             id: doc.id,
             titulo: data.titulo,
-            autor: "Equipe CyberTech", 
+            autor: data.autor || "Equipe CyberTech", // Usa o do banco ou fallback
             data: dataFormatada,
-            tempoLeitura: "5 min",
+            tempoLeitura: data.tempoLeitura ? `${data.tempoLeitura} min` : "Leitura rápida", // Formata o tempo
             imagem: data.imagemUrl,
             slug: null
           };
@@ -186,7 +176,7 @@ function Blog() {
         ))}
       </div>
 
-      {/* Seção de Curiosidades */}
+      {/* Seção de Curiosidades - Mantida igual */}
       <div className="curiosidade-card">
         <h2>Curiosidades sobre Python</h2>
         <strong>O nome “Python” não vem da cobra</strong>
