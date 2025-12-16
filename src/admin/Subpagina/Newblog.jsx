@@ -11,8 +11,12 @@ export default function NewBlog() {
   const [titulo, setTitulo] = useState("");
   const [resumo, setResumo] = useState("");
   const [capa, setCapa] = useState("");
+  
+  // --- NOVOS ESTADOS ---
+  const [autor, setAutor] = useState("");
+  const [tempoLeitura, setTempoLeitura] = useState("");
 
-  // O "Corpo" do post agora é uma lista de blocos
+  // O "Corpo" do post é uma lista de blocos
   const [secoes, setSecoes] = useState([
     { id: 1, type: "paragraph", content: "" }
   ]);
@@ -50,8 +54,9 @@ export default function NewBlog() {
   // --- SALVAR NO FIREBASE ---
 
   async function salvarPost() {
-    if (!titulo || !resumo) {
-      alert("Preencha o Título e o Resumo.");
+    // Validação completa
+    if (!titulo || !resumo || !autor || !tempoLeitura) {
+      alert("Preencha o Título, Resumo, Autor e Tempo de Leitura.");
       return;
     }
 
@@ -61,6 +66,8 @@ export default function NewBlog() {
       await addDoc(collection(db, "blog"), {
         titulo: titulo,
         resumo: resumo,
+        autor: autor,
+        tempoLeitura: tempoLeitura, // Salva o tempo no banco
         imagemUrl: capa || "https://placehold.co/600x400?text=Capa",
         conteudo: secoes,
         dataCriacao: new Date().toISOString()
@@ -68,10 +75,12 @@ export default function NewBlog() {
 
       alert("Post publicado com sucesso!");
 
-      // Resetar
+      // Resetar formulário
       setTitulo("");
       setResumo("");
       setCapa("");
+      setAutor("");
+      setTempoLeitura("");
       setSecoes([{ id: Date.now(), type: "paragraph", content: "" }]);
 
     } catch (error) {
@@ -114,12 +123,41 @@ export default function NewBlog() {
             {/* Metadados */}
             <div className={styles.metaBox}>
               <h3>Informações da Capa</h3>
+              
               <input
                 className={styles.inputField}
                 placeholder="Título Principal"
                 value={titulo}
                 onChange={e => setTitulo(e.target.value)}
               />
+
+              {/* --- NOVOS INPUTS: AUTOR E TEMPO --- */}
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <input
+                  className={styles.inputField}
+                  placeholder="Nome do Autor"
+                  value={autor}
+                  onChange={e => setAutor(e.target.value)}
+                  style={{ flex: 1 }}
+                />
+                
+                <input
+                  className={styles.inputField}
+                  placeholder="Tempo (minutos)"
+                  value={tempoLeitura}
+                  type="number"
+                  min="0" // Impede descer abaixo de 0 pelas setas
+                  onChange={(e) => {
+                    const valor = e.target.value;
+                    // Só atualiza se for vazio (para permitir apagar) ou se for positivo
+                    if (valor === "" || parseInt(valor) >= 0) {
+                      setTempoLeitura(valor);
+                    }
+                  }}
+                  style={{ flex: 1 }}
+                />
+              </div>
+
               <input
                 className={styles.inputField}
                 placeholder="Resumo curto (aparece no card)"
@@ -133,7 +171,7 @@ export default function NewBlog() {
                 onChange={e => setCapa(e.target.value)}
               />
               
-              {/* --- ALTERAÇÃO 1: PRÉ-VISUALIZAÇÃO DA CAPA --- */}
+              {/* Pré-visualização da Capa */}
               {capa && (
                 <div style={{ marginTop: '10px' }}>
                   <p style={{fontSize: '0.8rem', color: '#666', marginBottom: '5px'}}>Pré-visualização da Capa:</p>
@@ -141,7 +179,7 @@ export default function NewBlog() {
                     src={capa} 
                     alt="Pré-visualização da capa" 
                     style={{ maxWidth: '100%', maxHeight: '300px', borderRadius: '8px', objectFit: 'cover' }} 
-                    onError={(e) => e.target.style.display = 'none'} // Esconde se o link for inválido
+                    onError={(e) => e.target.style.display = 'none'} 
                   />
                 </div>
               )}
@@ -203,7 +241,7 @@ export default function NewBlog() {
                         onChange={e => atualizarBloco(secao.id, e.target.value)}
                       />
                       
-                      {/* --- ALTERAÇÃO 2: PRÉ-VISUALIZAÇÃO DO BLOCO DE IMAGEM --- */}
+                      {/* Pré-visualização do Bloco de Imagem */}
                       {secao.content && (
                         <div style={{ marginTop: '10px' }}>
                           <img 
