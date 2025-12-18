@@ -17,7 +17,7 @@ export default function Perfil() {
     dataNascimento: "",
     telefone: "",
     apelido: "",
-    Escolaridade: "Ensino Fundamental",
+    //Escolaridade: "Ensino Fundamental",
   });
 
   const [saving, setSaving] = useState(false);
@@ -41,7 +41,7 @@ export default function Perfil() {
             dataNascimento: data.dataNascimento || "",
             telefone: data.telefone || "",
             apelido: data.apelido || "",
-            Escolaridade: data.Escolaridade || "Ensino Fundamental",
+            //Escolaridade: data.Escolaridade || "Ensino Fundamental",
           });
         } else {
           setProfile({ email: currentUser.email, uid: currentUser.uid });
@@ -78,13 +78,12 @@ export default function Perfil() {
       const userRef = doc(db, "users", currentUser.uid);
 
       await updateDoc(userRef, {
-        name: form.name,
-        dataNascimento: form.dataNascimento || "",
-        telefone: form.telefone || "",
-        apelido: form.apelido || "",
-        //Escolaridade: form.Escolaridade,
-        updatedAt: new Date(),
-      });
+      name: form.name, // Garante que está salvando como 'name'
+      dataNascimento: form.dataNascimento || "",
+      telefone: form.telefone || "",
+      apelido: form.apelido || "",
+      updatedAt: new Date(),
+    });
 
       setProfile({ ...profile, ...form });
       alert("Perfil atualizado com sucesso!");
@@ -187,7 +186,7 @@ export default function Perfil() {
               <input name="dataNascimento" type="date" value={form.dataNascimento} onChange={handleChange} />
             </div>
 
-            {/* Linha 3 */}
+            {/* Linha 3 
             <div className={`${styles.inputGroup} ${styles.fullWidth}`}>
               <label>Escolaridade</label>
               <select name="Escolaridade" value={form.Escolaridade} onChange={handleChange}>
@@ -195,7 +194,7 @@ export default function Perfil() {
                 <option value="ENSINO MEDIO">Ensino Médio</option>
                 <option value="ENSINO SUPERIOR">Ensino Superior</option>
               </select>
-            </div>
+            </div> */}
 
           </div>
 

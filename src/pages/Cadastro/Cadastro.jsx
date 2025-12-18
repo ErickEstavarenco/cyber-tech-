@@ -1,9 +1,7 @@
-// src/pages/Cadastro/Cadastro.jsx
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Cadastro.module.css";
 
-// ✅ Caminho ajustado (FirebaseConfig está fora da pasta src)
 import { auth, db } from "../../../FirebaseConfig.js";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -23,7 +21,7 @@ const Cadastro = () => {
 
   const navigate = useNavigate();
 
-  // ===== Função principal de cadastro =====
+  // Função principal de cadastro
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
@@ -41,14 +39,14 @@ const Cadastro = () => {
     setLoading(true);
 
     try {
-      // 1️⃣ Cria o usuário no Firebase Authentication
+      //Cria o usuário no Firebase Authentication
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // 2️⃣ Salva os dados no Firestore
+      //Salva os dados no Firestore
       await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,
-        nome,
+        name: nome, 
         apelido,
         dataNascimento,
         telefone,
@@ -56,7 +54,7 @@ const Cadastro = () => {
         criadoEm: new Date().toISOString(),
       });
 
-      console.log("✅ Usuário cadastrado com sucesso:", user.uid);
+      console.log(" Usuário cadastrado com sucesso:", user.uid);
       setLoading(false);
 
       // Redireciona após o sucesso
@@ -65,7 +63,7 @@ const Cadastro = () => {
     } catch (err) {
       setLoading(false);
 
-      console.error("❌ Erro detalhado no cadastro:", err);
+      console.error(" Erro detalhado no cadastro:", err);
 
       if (err.code === "auth/email-already-in-use") {
         setError("Este e-mail já está em uso.");
