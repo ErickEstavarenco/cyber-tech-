@@ -9,18 +9,17 @@ import {
 } from "firebase/firestore";
 import { db, auth } from "../../../FirebaseConfig"; 
 
-// --- LISTA DE DADOS ESTÁTICOS (Mantida) ---
 const postsOriginais = [
   
 ];
 
-// --- CARD INDIVIDUAL COM LÓGICA DE LIKE ---
+// CARD INDIVIDUAL DE LIKE
 function PostCard({ post }) {
   const [likesCount, setLikesCount] = useState(0);
   const [userLiked, setUserLiked] = useState(false);
   const [likeDocId, setLikeDocId] = useState(null); 
 
-  // Monitora os likes deste post em tempo real
+  // Monitora os likes deste post 
   useEffect(() => {
     const q = query(collection(db, "likes"), where("postId", "==", post.id));
 
@@ -118,7 +117,7 @@ function PostCard({ post }) {
   );
 }
 
-// --- COMPONENTE PRINCIPAL ---
+// COMPONENTE PRINCIPAL
 function Blog() {
   const [mostrarMais, setMostrarMais] = useState(false);
   const [postsDinamicos, setPostsDinamicos] = useState([]);
@@ -137,13 +136,10 @@ function Blog() {
             ? new Date(data.dataCriacao).toLocaleDateString('pt-BR') 
             : "Recente";
 
-          // --- AQUI ESTAVA O ERRO ---
-          // Antes estava fixo "Equipe CyberTech" e "5 min".
-          // Agora puxamos data.autor e data.tempoLeitura do banco.
           return {
             id: doc.id,
             titulo: data.titulo,
-            autor: data.autor || "Equipe CyberTech", // Usa o do banco ou fallback
+            autor: data.autor || "Equipe CyberTech",
             data: dataFormatada,
             tempoLeitura: data.tempoLeitura ? `${data.tempoLeitura} min` : "Leitura rápida", // Formata o tempo
             imagem: data.imagemUrl,
@@ -176,7 +172,7 @@ function Blog() {
         ))}
       </div>
 
-      {/* Seção de Curiosidades - Mantida igual */}
+      {/* Seção de Curiosidades */}
       <div className="curiosidade-card">
         <h2>Curiosidades sobre Python</h2>
         <strong>O nome “Python” não vem da cobra</strong>
