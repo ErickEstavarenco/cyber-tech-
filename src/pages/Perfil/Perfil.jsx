@@ -78,7 +78,7 @@ export default function Perfil() {
       const userRef = doc(db, "users", currentUser.uid);
 
       await updateDoc(userRef, {
-      name: form.name, // Garante que está salvando como 'name'
+      name: form.name, 
       dataNascimento: form.dataNascimento || "",
       telefone: form.telefone || "",
       apelido: form.apelido || "",
@@ -95,12 +95,11 @@ export default function Perfil() {
     }
   };
 
-  // Função para o botão "Alterar Senha" (antigo botão de excluir)
+  // Função para o botão "Alterar Senha"
   const handleNavigateToChangePassword = () => {
     navigate("/alterar-senha");
   };
 
-  // Mantive a função caso queira usar em outro lugar, mas o botão agora usa a navegação acima
   const handleDeleteAccount = async () => {
     const ok = window.confirm(
       "Tem certeza que deseja excluir sua conta? Esta ação é irreversível."
@@ -207,10 +206,6 @@ export default function Perfil() {
             >
               {saving ? "Salvando..." : "Salvar"}
             </button>
-
-            {/* --- BOTÃO MODIFICADO AQUI --- */}
-            {/* Usa o estilo dangerButton mas navega para alterar senha */}
-
 
             <button
               className={`${styles.buttonBase} ${styles.dangerButton}`}
