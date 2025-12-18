@@ -150,12 +150,13 @@
   font-weight: 600;
   color: #095e8b;
   padding: 12px 24px;
-  
+
   border: 1px solid #bcdaf0;
   border-radius: 8px;
-  
+
   transition: 0.25s ease;
-  min-width: 120px; /* Garante tamanho uniforme */
+  min-width: 120px;
+  /* Garante tamanho uniforme */
 }
 
 .blog-nav-link:hover {
@@ -180,11 +181,17 @@
 }
 
 /* Estilo para o botão MENU central */
-.menu-link {
-  background-color: #f8fafc;
-  border-color: #e2e8f0;
-  padding: 12px !important; 
-  min-width: auto !important; /* Permite ser quadrado */
+.menu-link2 {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  object-fit: contain;
+}
+
+:hover .menu-link2 {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: #007bff;
 }
 
 /* ===============================
@@ -224,7 +231,7 @@
 
   /* Força a navegação a ficar em linha (row) */
   .blog-navigation {
-    flex-direction: row; 
+    flex-direction: row;
     gap: 8px;
     margin-top: 40px;
   }
@@ -236,7 +243,8 @@
     padding: 10px 5px;
     font-size: 0.85rem;
     height: 45px;
-    min-width: 0; /* Permite encolher */
+    min-width: 0;
+    /* Permite encolher */
   }
 
   /* Botão central não estica */

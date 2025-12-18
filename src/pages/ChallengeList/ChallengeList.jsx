@@ -21,11 +21,23 @@ function ChallengeList() {
             muted
             playsInline
           ></video>
-          <p>Operações</p>
+          <p>O que é um algoritmo?</p>
         </Link>
 
         {/* Desafio 2 */}
         <Link to="/desafios/desafio2" className={styles.challengeCard}>
+          <video
+            src="/videos/algoritmo.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+          ></video>
+          <p>Operações</p>
+        </Link>
+
+        {/* Desafio 3 */}
+        <Link to="/desafios/desafio3" className={styles.challengeCard}>
           <video
             src="/videos/comida.mp4"
             autoPlay
@@ -36,8 +48,8 @@ function ChallengeList() {
           <p>Condicionais</p>
         </Link>
 
-        {/* Desafio 3 */}
-        <Link to="/desafios/desafio3" className={styles.challengeCard}>
+        {/* Desafio 4 */}
+        <Link to="/desafios/desafio4" className={styles.challengeCard}>
           <video
             src="/videos/sollua.mp4"
             autoPlay
@@ -46,18 +58,6 @@ function ChallengeList() {
             playsInline
           ></video>
           <p>Funções</p>
-        </Link>
-
-        {/* Desafio 4 */}
-        <Link to="/desafios/desafio4" className={styles.challengeCard}>
-          <video
-            src="/videos/algoritmo.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-          ></video>
-          <p>O que é um algoritmo?</p>
         </Link>
       </div>
     </div>

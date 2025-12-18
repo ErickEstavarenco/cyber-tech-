@@ -28,12 +28,12 @@ function Home() {
   const slugToRoute = {
     "o-que-e-algoritmo": "/desafios/desafio1",
     "estudar-ou-descansar": "/desafios/desafio1",
-    "fome": "/desafios/desafio2",
-    "dia-ou-noite": "/desafios/desafio3",
+    "fome": "/desafios/desafio3",
+    "dia-ou-noite": "/desafios/desafio4",
   };
 
   const customTitles = {
-    "estudar-ou-descansar": "Operações",  
+    "estudar-ou-descansar": "O que é um algoritmo?",  
     "fome": "Condicionais",                
     "dia-ou-noite": "Funções"    
   };

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { doc, getDoc, collection, query, where, orderBy, limit, getDocs } from "firebase/firestore";
 import { db } from "../../../FirebaseConfig";
-import "./BlogPost.css"; 
+import "./BlogPost.css";
 
 const PostDinamico = () => {
   const { id } = useParams();
@@ -21,13 +21,13 @@ const PostDinamico = () => {
         if (docSnap.exists()) {
           const currentData = docSnap.data();
           setPost(currentData);
-          
+
           // Navegação (Anterior/Próximo)
           if (currentData.dataCriacao) {
             const blogRef = collection(db, "blog");
             const prevQuery = query(blogRef, where("dataCriacao", ">", currentData.dataCriacao), orderBy("dataCriacao", "asc"), limit(1));
             const nextQuery = query(blogRef, where("dataCriacao", "<", currentData.dataCriacao), orderBy("dataCriacao", "desc"), limit(1));
-            
+
             const [prevSnap, nextSnap] = await Promise.all([getDocs(prevQuery), getDocs(nextQuery)]);
             if (!prevSnap.empty) setPrevId(prevSnap.docs[0].id);
             if (!nextSnap.empty) setNextId(nextSnap.docs[0].id);
@@ -69,7 +69,6 @@ const PostDinamico = () => {
             </div>
           ))
         ) : (
-          // FORMATO ANTIGO (Texto Simples) - Mantém compatibilidade com posts velhos
           post.conteudo && post.conteudo.split("\n").map((paragrafo, index) => (
             paragrafo.trim() !== "" && <p key={index} className="blog-text">{paragrafo}</p>
           ))
@@ -78,6 +77,9 @@ const PostDinamico = () => {
 
       <nav className="blog-navigation">
         {prevId ? <Link to={`/blog/post/${prevId}`} className="blog-nav-link">← Anterior</Link> : <span className="blog-nav-link disabled">← Anterior</span>}
+        <Link to="/blog" className="menu-link2">
+          <img src="/azulejos.png" alt="Menu" className="logo-img" />
+        </Link>
         {nextId ? <Link to={`/blog/post/${nextId}`} className="blog-nav-link">Próximo →</Link> : <span className="blog-nav-link disabled">Próximo →</span>}
       </nav>
     </div>

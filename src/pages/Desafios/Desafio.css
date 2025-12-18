@@ -45,7 +45,7 @@ h1, h2 {
 .challenge-container {
   background: var(--card);
   border-radius: var(--radius);
-  padding: 3rem; /* Ajustado para melhor espaçamento */
+  padding: 3rem; 
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
   margin-bottom: 3rem;
   width: 100%;
