@@ -54,7 +54,6 @@ export default function NewBlog() {
   // --- SALVAR NO FIREBASE ---
 
   async function salvarPost() {
-    // Validação completa
     if (!titulo || !resumo || !autor || !tempoLeitura) {
       alert("Preencha o Título, Resumo, Autor e Tempo de Leitura.");
       return;
@@ -67,7 +66,7 @@ export default function NewBlog() {
         titulo: titulo,
         resumo: resumo,
         autor: autor,
-        tempoLeitura: tempoLeitura, // Salva o tempo no banco
+        tempoLeitura: tempoLeitura,
         imagemUrl: capa || "https://placehold.co/600x400?text=Capa",
         conteudo: secoes,
         dataCriacao: new Date().toISOString()
@@ -75,7 +74,6 @@ export default function NewBlog() {
 
       alert("Post publicado com sucesso!");
 
-      // Resetar formulário
       setTitulo("");
       setResumo("");
       setCapa("");
@@ -116,62 +114,71 @@ export default function NewBlog() {
         </div>
 
         <div className={styles.editorContainer}>
-
-          {/* --- COLUNA ESQUERDA: CONSTRUTOR --- */}
           <div className={styles.formColumn}>
-
-            {/* Metadados */}
+            
+            {/* Metadados com Labels */}
             <div className={styles.metaBox}>
               <h3>Informações da Capa</h3>
               
-              <input
-                className={styles.inputField}
-                placeholder="Título Principal"
-                value={titulo}
-                onChange={e => setTitulo(e.target.value)}
-              />
-
-              {/* --- NOVOS INPUTS: AUTOR E TEMPO --- */}
-              <div style={{ display: 'flex', gap: '10px' }}>
+              <div className={styles.inputGroup}>
+                <label className={styles.fieldLabel}>Título Principal</label>
                 <input
                   className={styles.inputField}
-                  placeholder="Nome do Autor"
-                  value={autor}
-                  onChange={e => setAutor(e.target.value)}
-                  style={{ flex: 1 }}
-                />
-                
-                <input
-                  className={styles.inputField}
-                  placeholder="Tempo (minutos)"
-                  value={tempoLeitura}
-                  type="number"
-                  min="0" // Impede descer abaixo de 0 pelas setas
-                  onChange={(e) => {
-                    const valor = e.target.value;
-                    // Só atualiza se for vazio (para permitir apagar) ou se for positivo
-                    if (valor === "" || parseInt(valor) >= 0) {
-                      setTempoLeitura(valor);
-                    }
-                  }}
-                  style={{ flex: 1 }}
+                  placeholder="Título Principal"
+                  value={titulo}
+                  onChange={e => setTitulo(e.target.value)}
                 />
               </div>
 
-              <input
-                className={styles.inputField}
-                placeholder="Resumo curto (aparece no card)"
-                value={resumo}
-                onChange={e => setResumo(e.target.value)}
-              />
-              <input
-                className={styles.inputField}
-                placeholder="Link da Imagem de Capa (URL)"
-                value={capa}
-                onChange={e => setCapa(e.target.value)}
-              />
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <div className={styles.inputGroup} style={{ flex: 1 }}>
+                  <label className={styles.fieldLabel}>Nome do Autor</label>
+                  <input
+                    className={styles.inputField}
+                    placeholder="Nome do Autor"
+                    value={autor}
+                    onChange={e => setAutor(e.target.value)}
+                  />
+                </div>
+                
+                <div className={styles.inputGroup} style={{ flex: 1 }}>
+                  <label className={styles.fieldLabel}>Tempo (minutos)</label>
+                  <input
+                    className={styles.inputField}
+                    placeholder="Ex: 5"
+                    value={tempoLeitura}
+                    type="number"
+                    min="0"
+                    onChange={(e) => {
+                      const valor = e.target.value;
+                      if (valor === "" || parseInt(valor) >= 0) {
+                        setTempoLeitura(valor);
+                      }
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className={styles.inputGroup}>
+                <label className={styles.fieldLabel}>Resumo Curto</label>
+                <input
+                  className={styles.inputField}
+                  placeholder="Resumo curto (aparece no card)"
+                  value={resumo}
+                  onChange={e => setResumo(e.target.value)}
+                />
+              </div>
+
+              <div className={styles.inputGroup}>
+                <label className={styles.fieldLabel}>Link da Imagem de Capa (URL)</label>
+                <input
+                  className={styles.inputField}
+                  placeholder="Link da Imagem de Capa (URL)"
+                  value={capa}
+                  onChange={e => setCapa(e.target.value)}
+                />
+              </div>
               
-              {/* Pré-visualização da Capa */}
               {capa && (
                 <div style={{ marginTop: '10px' }}>
                   <p style={{fontSize: '0.8rem', color: '#666', marginBottom: '5px'}}>Pré-visualização da Capa:</p>
@@ -183,12 +190,10 @@ export default function NewBlog() {
                   />
                 </div>
               )}
-
             </div>
 
             <hr className={styles.divider} />
 
-            {/* Lista de Blocos */}
             <h3 style={{ marginBottom: '15px', color: '#333' }}>Conteúdo do Post</h3>
 
             <div className={styles.blocksList}>
@@ -214,34 +219,40 @@ export default function NewBlog() {
                     </div>
                   </div>
 
+                  {/* Labels dinâmicos para os blocos */}
                   {secao.type === 'paragraph' && (
-                    <textarea
-                      className={styles.textAreaBlock}
-                      placeholder="Escreva seu parágrafo..."
-                      value={secao.content}
-                      onChange={e => atualizarBloco(secao.id, e.target.value)}
-                    />
+                    <div className={styles.inputGroup}>
+                      <label className={styles.fieldLabel}>Texto do Parágrafo</label>
+                      <textarea
+                        className={styles.textAreaBlock}
+                        placeholder="Escreva seu parágrafo..."
+                        value={secao.content}
+                        onChange={e => atualizarBloco(secao.id, e.target.value)}
+                      />
+                    </div>
                   )}
 
                   {secao.type === 'subtitle' && (
-                    <input
-                      className={styles.inputBlock}
-                      placeholder="Digite um subtítulo..."
-                      value={secao.content}
-                      onChange={e => atualizarBloco(secao.id, e.target.value)}
-                    />
+                    <div className={styles.inputGroup}>
+                      <label className={styles.fieldLabel}>Título do Subtítulo</label>
+                      <input
+                        className={styles.inputBlock}
+                        placeholder="Digite um subtítulo..."
+                        value={secao.content}
+                        onChange={e => atualizarBloco(secao.id, e.target.value)}
+                      />
+                    </div>
                   )}
 
                   {secao.type === 'image' && (
-                    <>
+                    <div className={styles.inputGroup}>
+                      <label className={styles.fieldLabel}>Caminho da Imagem (URL)</label>
                       <input
                         className={styles.inputBlock}
                         placeholder="Cole o link da imagem aqui..."
                         value={secao.content}
                         onChange={e => atualizarBloco(secao.id, e.target.value)}
                       />
-                      
-                      {/* Pré-visualização do Bloco de Imagem */}
                       {secao.content && (
                         <div style={{ marginTop: '10px' }}>
                           <img 
@@ -252,19 +263,17 @@ export default function NewBlog() {
                           />
                         </div>
                       )}
-                    </>
+                    </div>
                   )}
                 </div>
               ))}
             </div>
 
-            {/* Botões de Adicionar */}
             <div className={styles.addButtons}>
               <button onClick={() => adicionarBloco('subtitle')} className={styles.btnAdd}>+ Subtítulo</button>
               <button onClick={() => adicionarBloco('paragraph')} className={styles.btnAdd}>+ Parágrafo</button>
               <button onClick={() => adicionarBloco('image')} className={styles.btnAdd}>+ Imagem</button>
             </div>
-
           </div>
         </div>
       </main>
